@@ -1,5 +1,0 @@
-D:\airShopp\AirShopp\airShopp\airShopp.Common\bin\Debug\airShopp.Common.dll
-D:\airShopp\AirShopp\airShopp\airShopp.Common\bin\Debug\airShopp.Common.pdb
-D:\airShopp\AirShopp\airShopp\airShopp.Common\obj\Debug\airShopp.Common.csprojResolveAssemblyReference.cache
-D:\airShopp\AirShopp\airShopp\airShopp.Common\obj\Debug\airShopp.Common.dll
-D:\airShopp\AirShopp\airShopp\airShopp.Common\obj\Debug\airShopp.Common.pdb
