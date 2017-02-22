@@ -1,0 +1,5 @@
+D:\airShopp\AirShopp\airShopp\airShopp.Data\bin\Debug\airShopp.Data.dll
+D:\airShopp\AirShopp\airShopp\airShopp.Data\bin\Debug\airShopp.Data.pdb
+D:\airShopp\AirShopp\airShopp\airShopp.Data\obj\Debug\airShopp.Data.csprojResolveAssemblyReference.cache
+D:\airShopp\AirShopp\airShopp\airShopp.Data\obj\Debug\airShopp.Data.dll
+D:\airShopp\AirShopp\airShopp\airShopp.Data\obj\Debug\airShopp.Data.pdb

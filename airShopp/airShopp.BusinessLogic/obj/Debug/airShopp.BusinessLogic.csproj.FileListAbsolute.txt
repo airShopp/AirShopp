@@ -1,0 +1,11 @@
+D:\airShopp\AirShopp\airShopp\airShopp.BusinessLogic\bin\Debug\airShopp.BusinessLogic.dll
+D:\airShopp\AirShopp\airShopp\airShopp.BusinessLogic\bin\Debug\airShopp.BusinessLogic.pdb
+D:\airShopp\AirShopp\airShopp\airShopp.BusinessLogic\bin\Debug\airShopp.Common.dll
+D:\airShopp\AirShopp\airShopp\airShopp.BusinessLogic\bin\Debug\airShopp.Data.dll
+D:\airShopp\AirShopp\airShopp\airShopp.BusinessLogic\bin\Debug\airShopp.Model.dll
+D:\airShopp\AirShopp\airShopp\airShopp.BusinessLogic\bin\Debug\airShopp.Common.pdb
+D:\airShopp\AirShopp\airShopp\airShopp.BusinessLogic\bin\Debug\airShopp.Data.pdb
+D:\airShopp\AirShopp\airShopp\airShopp.BusinessLogic\bin\Debug\airShopp.Model.pdb
+D:\airShopp\AirShopp\airShopp\airShopp.BusinessLogic\obj\Debug\airShopp.BusinessLogic.csprojResolveAssemblyReference.cache
+D:\airShopp\AirShopp\airShopp\airShopp.BusinessLogic\obj\Debug\airShopp.BusinessLogic.dll
+D:\airShopp\AirShopp\airShopp\airShopp.BusinessLogic\obj\Debug\airShopp.BusinessLogic.pdb
