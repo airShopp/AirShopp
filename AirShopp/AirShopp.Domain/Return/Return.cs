@@ -21,5 +21,6 @@ namespace AirShopp.Domain
 
         [ForeignKey("OrderId")]
         public virtual Order order { get; set; }
+		
     }
 }
