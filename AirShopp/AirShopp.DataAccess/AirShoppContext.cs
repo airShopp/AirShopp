@@ -13,6 +13,19 @@ namespace AirShopp.DataAccess
         public AirShoppContext() : base("name = AirContext")
         {
         }
-        public DbSet<User> User { get; set; }
+
+        public DbSet<Customer> Customer { get; set; }
+        public DbSet<Discount> Discount { get; set; }
+        public DbSet<Category> Category { get; set; }
+        public DbSet<Provider> Provider { get; set; }
+        public DbSet<Product> Product { get; set; }
+        public DbSet<Cart> Cart { get; set; }
+
+        public DbSet<Order> Order { get; set; }
+        public DbSet<Delivery> Delivery { get; set; }
+        public DbSet<OrderItem> OrderItem { get; set; }
+        public DbSet<Return> Return { get; set; }
+
+        public DbSet<Admin> Admin { get; set; }
     }
 }

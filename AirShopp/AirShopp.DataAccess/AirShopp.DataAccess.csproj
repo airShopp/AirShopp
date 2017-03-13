@@ -50,9 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AirShoppContext.cs" />
-    <Compile Include="Migrations\201703130212035_Test.cs" />
-    <Compile Include="Migrations\201703130212035_Test.Designer.cs">
-      <DependentUpon>201703130212035_Test.cs</DependentUpon>
+    <Compile Include="Migrations\201703130618517_shopp.cs" />
+    <Compile Include="Migrations\201703130618517_shopp.Designer.cs">
+      <DependentUpon>201703130618517_shopp.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,8 +68,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703130212035_Test.resx">
-      <DependentUpon>201703130212035_Test.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703130618517_shopp.resx">
+      <DependentUpon>201703130618517_shopp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
