@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AirShopp.Domain
 {
     public class Product
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         public string ProductName { get; set; }
         public long CategoryId { get; set; }
@@ -22,9 +17,11 @@ namespace AirShopp.Domain
         public int Supply { get; set; }
 
         [ForeignKey("CategoryId")]
+        [Required()]
         public virtual Category category { get; set; }
 
         [ForeignKey("ProviderId")]
+        [Required()]
         public virtual Provider provider { get; set; }
     }
 }

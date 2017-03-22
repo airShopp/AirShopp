@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AirShopp.Domain
 {
     public class Cart
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         public long CustomerId { get; set; }
         public long ProductId { get; set; }
@@ -21,9 +15,11 @@ namespace AirShopp.Domain
         public decimal ProductTotalAmount { get; set; }
 
         [ForeignKey("CustomerId")]
+        [Required()]
         public virtual Customer customer { get; set; }
 
         [ForeignKey("ProductId")]
+        [Required()]
         public virtual Product product { get; set; }
     }
 }

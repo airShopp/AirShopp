@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AirShopp.Domain
 {
     public class OrderItem
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         public long OrderId { get; set; }
         public long ProductId { get; set; }
@@ -20,9 +15,11 @@ namespace AirShopp.Domain
         public DateTime OrderDate { get; set; }
 
         [ForeignKey("OrderId")]
+        [Required()]
         public virtual Order order { get; set; }
 
         [ForeignKey("ProductId")]
+        [Required()]
         public virtual Product product { get; set; }
     }
 }

@@ -12,11 +12,13 @@ namespace DbDiagram
     using System;
     using System.Collections.Generic;
     
-    public partial class C__MigrationHistory
+    public partial class ProductOut
     {
-        public string MigrationId { get; set; }
-        public string ContextKey { get; set; }
-        public byte[] Model { get; set; }
-        public string ProductVersion { get; set; }
+        public int Id { get; set; }
+        public string ProductId { get; set; }
+        public string Amount { get; set; }
+        public string OutDate { get; set; }
+    
+        public virtual Products Products { get; set; }
     }
 }

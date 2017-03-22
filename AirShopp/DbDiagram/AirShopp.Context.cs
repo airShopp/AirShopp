@@ -25,7 +25,6 @@ namespace DbDiagram
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Admins> Admins { get; set; }
         public virtual DbSet<Carts> Carts { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
@@ -37,5 +36,7 @@ namespace DbDiagram
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Providers> Providers { get; set; }
         public virtual DbSet<Returns> Returns { get; set; }
+        public virtual DbSet<ProductIn> ProductInSet { get; set; }
+        public virtual DbSet<ProductOut> ProductOutSet { get; set; }
     }
 }

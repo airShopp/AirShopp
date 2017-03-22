@@ -51,17 +51,61 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admins.cs">
+      <DependentUpon>AirShopp.tt</DependentUpon>
+    </Compile>
     <Compile Include="AirShopp.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AirShopp.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AirShopp.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AirShopp.tt</DependentUpon>
     </Compile>
     <Compile Include="AirShopp.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AirShopp.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Carts.cs">
+      <DependentUpon>AirShopp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Categories.cs">
+      <DependentUpon>AirShopp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customers.cs">
+      <DependentUpon>AirShopp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Deliveries.cs">
+      <DependentUpon>AirShopp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Discounts.cs">
+      <DependentUpon>AirShopp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderItems.cs">
+      <DependentUpon>AirShopp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Orders.cs">
+      <DependentUpon>AirShopp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductIn.cs">
+      <DependentUpon>AirShopp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductOut.cs">
+      <DependentUpon>AirShopp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Products.cs">
+      <DependentUpon>AirShopp.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers.cs">
+      <DependentUpon>AirShopp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Returns.cs">
+      <DependentUpon>AirShopp.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="AirShopp.edmx">
@@ -80,6 +124,12 @@
     <Content Include="AirShopp.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AirShopp.Context.cs</LastGenOutput>
+      <DependentUpon>AirShopp.edmx</DependentUpon>
+    </Content>
+    <Content Include="AirShopp.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AirShopp.cs</LastGenOutput>
+      <DependentUpon>AirShopp.edmx</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

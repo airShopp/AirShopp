@@ -5,16 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="AirShopp.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
         <EntityType Name="Admins">
           <Key>
             <PropertyRef Name="Id" />
@@ -282,7 +272,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="AirShoppStoreContainer">
-          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Carts" EntityType="Self.Carts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
@@ -340,7 +329,6 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="AirShopp" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="AirShoppContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="AirShopp.C__MigrationHistory" />
           <EntitySet Name="Admins" EntityType="AirShopp.Admins" />
           <EntitySet Name="Carts" EntityType="AirShopp.Carts" />
           <EntitySet Name="Categories" EntityType="AirShopp.Categories" />
@@ -392,17 +380,17 @@
             <End Role="Providers" EntitySet="Providers" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
+          <EntitySet Name="ProductInSet" EntityType="AirShopp.ProductIn" />
+          <EntitySet Name="ProductOutSet" EntityType="AirShopp.ProductOut" />
+          <AssociationSet Name="ProductsProductOut" Association="AirShopp.ProductsProductOut">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductOut" EntitySet="ProductOutSet" />
+          </AssociationSet>
+          <AssociationSet Name="ProductsProductIn" Association="AirShopp.ProductsProductIn">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductIn" EntitySet="ProductInSet" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Admins">
           <Key>
             <PropertyRef Name="Id" />
@@ -527,6 +515,8 @@
           <NavigationProperty Name="Deliveries" Relationship="AirShopp.FK_dbo_Deliveries_dbo_Products_ProductId" FromRole="Products" ToRole="Deliveries" />
           <NavigationProperty Name="OrderItems" Relationship="AirShopp.FK_dbo_OrderItems_dbo_Products_ProductId" FromRole="Products" ToRole="OrderItems" />
           <NavigationProperty Name="Providers" Relationship="AirShopp.FK_dbo_Products_dbo_Providers_ProviderId" FromRole="Products" ToRole="Providers" />
+          <NavigationProperty Name="ProductOut" Relationship="AirShopp.ProductsProductOut" FromRole="Products" ToRole="ProductOut" />
+          <NavigationProperty Name="ProductIn" Relationship="AirShopp.ProductsProductIn" FromRole="Products" ToRole="ProductIn" />
         </EntityType>
         <EntityType Name="Providers">
           <Key>
@@ -689,6 +679,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ProductIn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="String" Nullable="false" />
+          <Property Name="Amount" Type="String" Nullable="false" />
+          <Property Name="Price" Type="String" Nullable="false" />
+          <Property Name="InDate" Type="String" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="AirShopp.ProductsProductIn" FromRole="ProductIn" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="ProductOut">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="String" Nullable="false" />
+          <Property Name="Amount" Type="String" Nullable="false" />
+          <Property Name="OutDate" Type="String" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="AirShopp.ProductsProductOut" FromRole="ProductOut" ToRole="Products" />
+        </EntityType>
+        <Association Name="ProductsProductOut">
+          <End Type="AirShopp.Products" Role="Products" Multiplicity="1" />
+          <End Type="AirShopp.ProductOut" Role="ProductOut" Multiplicity="*" />
+        </Association>
+        <Association Name="ProductsProductIn">
+          <End Type="AirShopp.Products" Role="Products" Multiplicity="1" />
+          <End Type="AirShopp.ProductIn" Role="ProductIn" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -697,16 +716,6 @@
         <Alias Key="Model" Value="AirShopp" />
         <Alias Key="Target" Value="AirShopp.Store" />
         <EntityContainerMapping CdmEntityContainer="AirShoppContainer" StorageEntityContainer="AirShoppStoreContainer">
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="AirShopp.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="AirShopp.Admins">
               <MappingFragment StoreEntitySet="Admins">

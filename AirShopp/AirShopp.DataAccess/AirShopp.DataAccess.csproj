@@ -50,9 +50,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AirShoppContext.cs" />
-    <Compile Include="Migrations\201703130618517_shopp.cs" />
-    <Compile Include="Migrations\201703130618517_shopp.Designer.cs">
-      <DependentUpon>201703130618517_shopp.cs</DependentUpon>
+    <Compile Include="Mapping\AdminMapping.cs" />
+    <Compile Include="Mapping\CartMapping.cs" />
+    <Compile Include="Mapping\CategoryMapping.cs" />
+    <Compile Include="Mapping\CustomerMapping.cs" />
+    <Compile Include="Mapping\DeliveryMapping.cs" />
+    <Compile Include="Mapping\DiscountMapping.cs" />
+    <Compile Include="Mapping\OrderItemMapping.cs" />
+    <Compile Include="Mapping\OrderMapping.cs" />
+    <Compile Include="Mapping\ProductMapping.cs" />
+    <Compile Include="Mapping\ProviderMapping.cs" />
+    <Compile Include="Mapping\ReturnMapping.cs" />
+    <Compile Include="Migrations\201703220826280_InitialAirShoppTable.cs" />
+    <Compile Include="Migrations\201703220826280_InitialAirShoppTable.Designer.cs">
+      <DependentUpon>201703220826280_InitialAirShoppTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,8 +79,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703130618517_shopp.resx">
-      <DependentUpon>201703130618517_shopp.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703220826280_InitialAirShoppTable.resx">
+      <DependentUpon>201703220826280_InitialAirShoppTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

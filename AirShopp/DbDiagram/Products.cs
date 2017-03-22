@@ -20,6 +20,8 @@ namespace DbDiagram
             this.Carts = new HashSet<Carts>();
             this.Deliveries = new HashSet<Deliveries>();
             this.OrderItems = new HashSet<OrderItems>();
+            this.ProductOut = new HashSet<ProductOut>();
+            this.ProductIn = new HashSet<ProductIn>();
         }
     
         public long Id { get; set; }
@@ -40,5 +42,9 @@ namespace DbDiagram
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItems> OrderItems { get; set; }
         public virtual Providers Providers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductOut> ProductOut { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductIn> ProductIn { get; set; }
     }
 }
