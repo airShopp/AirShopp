@@ -50,6 +50,8 @@
     <Compile Include="OrderItem\OrderItem.cs" />
     <Compile Include="Order\Order.cs" />
     <Compile Include="Product\Product.cs" />
+    <Compile Include="Product\ProductIn.cs" />
+    <Compile Include="Product\ProductOut.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\Provider.cs" />
     <Compile Include="Return\Return.cs" />

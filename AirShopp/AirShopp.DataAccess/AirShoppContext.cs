@@ -3,6 +3,7 @@ using AirShopp.Domain;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,8 +30,16 @@ namespace AirShopp.DataAccess
 
         public DbSet<Admin> Admin { get; set; }
 
+        public DbSet<ProductIn> ProductIn { get; set; }
+        public DbSet<ProductOut> ProductOut { get; set; }
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+
             modelBuilder.Configurations.Add(new CustomerMapping());
             modelBuilder.Configurations.Add(new DiscountMapping());
             modelBuilder.Configurations.Add(new CategoryMapping());
@@ -42,6 +51,9 @@ namespace AirShopp.DataAccess
             modelBuilder.Configurations.Add(new OrderItemMapping());
             modelBuilder.Configurations.Add(new ReturnMapping());
             modelBuilder.Configurations.Add(new AdminMapping());
+
+            modelBuilder.Configurations.Add(new ProductInMapping());
+            modelBuilder.Configurations.Add(new ProductOutMapping());
         }
     }
 }
