@@ -8,7 +8,7 @@ namespace AirShopp.DataAccess.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Admins",
+                "dbo.Admin",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -18,7 +18,7 @@ namespace AirShopp.DataAccess.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Carts",
+                "dbo.Cart",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -31,13 +31,13 @@ namespace AirShopp.DataAccess.Migrations
                         ProductTotalAmount = c.Decimal(nullable: false, precision: 18, scale: 2),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
-                .ForeignKey("dbo.Products", t => t.ProductId, cascadeDelete: true)
+                .ForeignKey("dbo.Customer", t => t.CustomerId)
+                .ForeignKey("dbo.Product", t => t.ProductId)
                 .Index(t => t.CustomerId)
                 .Index(t => t.ProductId);
             
             CreateTable(
-                "dbo.Customers",
+                "dbo.Customer",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -56,7 +56,7 @@ namespace AirShopp.DataAccess.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Products",
+                "dbo.Product",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -70,13 +70,13 @@ namespace AirShopp.DataAccess.Migrations
                         Supply = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
-                .ForeignKey("dbo.Providers", t => t.ProviderId, cascadeDelete: true)
+                .ForeignKey("dbo.Category", t => t.CategoryId)
+                .ForeignKey("dbo.Provider", t => t.ProviderId)
                 .Index(t => t.CategoryId)
                 .Index(t => t.ProviderId);
             
             CreateTable(
-                "dbo.Categories",
+                "dbo.Category",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -85,7 +85,7 @@ namespace AirShopp.DataAccess.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Providers",
+                "dbo.Provider",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -94,7 +94,7 @@ namespace AirShopp.DataAccess.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Deliveries",
+                "dbo.Delivery",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -110,13 +110,13 @@ namespace AirShopp.DataAccess.Migrations
                         CustomerName = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Orders", t => t.OrderId, cascadeDelete: true)
-                .ForeignKey("dbo.Products", t => t.ProductId, cascadeDelete: true)
+                .ForeignKey("dbo.Order", t => t.OrderId)
+                .ForeignKey("dbo.Product", t => t.ProductId)
                 .Index(t => t.OrderId)
                 .Index(t => t.ProductId);
             
             CreateTable(
-                "dbo.Orders",
+                "dbo.Order",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -127,11 +127,11 @@ namespace AirShopp.DataAccess.Migrations
                         DeliveryDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
+                .ForeignKey("dbo.Customer", t => t.CustomerId)
                 .Index(t => t.CustomerId);
             
             CreateTable(
-                "dbo.Discounts",
+                "dbo.Discount",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -142,7 +142,7 @@ namespace AirShopp.DataAccess.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.OrderItems",
+                "dbo.OrderItem",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -154,13 +154,40 @@ namespace AirShopp.DataAccess.Migrations
                         OrderDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Orders", t => t.OrderId, cascadeDelete: true)
-                .ForeignKey("dbo.Products", t => t.ProductId, cascadeDelete: true)
+                .ForeignKey("dbo.Order", t => t.OrderId)
+                .ForeignKey("dbo.Product", t => t.ProductId)
                 .Index(t => t.OrderId)
                 .Index(t => t.ProductId);
             
             CreateTable(
-                "dbo.Returns",
+                "dbo.ProductIn",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        ProductId = c.Long(nullable: false),
+                        Amount = c.Int(nullable: false),
+                        Price = c.String(nullable: false),
+                        InDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Product", t => t.ProductId)
+                .Index(t => t.ProductId);
+            
+            CreateTable(
+                "dbo.ProductOut",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        ProductId = c.Long(nullable: false),
+                        Amount = c.Int(nullable: false),
+                        OutDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Product", t => t.ProductId)
+                .Index(t => t.ProductId);
+            
+            CreateTable(
+                "dbo.Return",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
@@ -172,44 +199,50 @@ namespace AirShopp.DataAccess.Migrations
                         CustomerName = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Orders", t => t.OrderId, cascadeDelete: true)
+                .ForeignKey("dbo.Order", t => t.OrderId)
                 .Index(t => t.OrderId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Returns", "OrderId", "dbo.Orders");
-            DropForeignKey("dbo.OrderItems", "ProductId", "dbo.Products");
-            DropForeignKey("dbo.OrderItems", "OrderId", "dbo.Orders");
-            DropForeignKey("dbo.Deliveries", "ProductId", "dbo.Products");
-            DropForeignKey("dbo.Deliveries", "OrderId", "dbo.Orders");
-            DropForeignKey("dbo.Orders", "CustomerId", "dbo.Customers");
-            DropForeignKey("dbo.Carts", "ProductId", "dbo.Products");
-            DropForeignKey("dbo.Products", "ProviderId", "dbo.Providers");
-            DropForeignKey("dbo.Products", "CategoryId", "dbo.Categories");
-            DropForeignKey("dbo.Carts", "CustomerId", "dbo.Customers");
-            DropIndex("dbo.Returns", new[] { "OrderId" });
-            DropIndex("dbo.OrderItems", new[] { "ProductId" });
-            DropIndex("dbo.OrderItems", new[] { "OrderId" });
-            DropIndex("dbo.Orders", new[] { "CustomerId" });
-            DropIndex("dbo.Deliveries", new[] { "ProductId" });
-            DropIndex("dbo.Deliveries", new[] { "OrderId" });
-            DropIndex("dbo.Products", new[] { "ProviderId" });
-            DropIndex("dbo.Products", new[] { "CategoryId" });
-            DropIndex("dbo.Carts", new[] { "ProductId" });
-            DropIndex("dbo.Carts", new[] { "CustomerId" });
-            DropTable("dbo.Returns");
-            DropTable("dbo.OrderItems");
-            DropTable("dbo.Discounts");
-            DropTable("dbo.Orders");
-            DropTable("dbo.Deliveries");
-            DropTable("dbo.Providers");
-            DropTable("dbo.Categories");
-            DropTable("dbo.Products");
-            DropTable("dbo.Customers");
-            DropTable("dbo.Carts");
-            DropTable("dbo.Admins");
+            DropForeignKey("dbo.Return", "OrderId", "dbo.Order");
+            DropForeignKey("dbo.ProductOut", "ProductId", "dbo.Product");
+            DropForeignKey("dbo.ProductIn", "ProductId", "dbo.Product");
+            DropForeignKey("dbo.OrderItem", "ProductId", "dbo.Product");
+            DropForeignKey("dbo.OrderItem", "OrderId", "dbo.Order");
+            DropForeignKey("dbo.Delivery", "ProductId", "dbo.Product");
+            DropForeignKey("dbo.Delivery", "OrderId", "dbo.Order");
+            DropForeignKey("dbo.Order", "CustomerId", "dbo.Customer");
+            DropForeignKey("dbo.Cart", "ProductId", "dbo.Product");
+            DropForeignKey("dbo.Product", "ProviderId", "dbo.Provider");
+            DropForeignKey("dbo.Product", "CategoryId", "dbo.Category");
+            DropForeignKey("dbo.Cart", "CustomerId", "dbo.Customer");
+            DropIndex("dbo.Return", new[] { "OrderId" });
+            DropIndex("dbo.ProductOut", new[] { "ProductId" });
+            DropIndex("dbo.ProductIn", new[] { "ProductId" });
+            DropIndex("dbo.OrderItem", new[] { "ProductId" });
+            DropIndex("dbo.OrderItem", new[] { "OrderId" });
+            DropIndex("dbo.Order", new[] { "CustomerId" });
+            DropIndex("dbo.Delivery", new[] { "ProductId" });
+            DropIndex("dbo.Delivery", new[] { "OrderId" });
+            DropIndex("dbo.Product", new[] { "ProviderId" });
+            DropIndex("dbo.Product", new[] { "CategoryId" });
+            DropIndex("dbo.Cart", new[] { "ProductId" });
+            DropIndex("dbo.Cart", new[] { "CustomerId" });
+            DropTable("dbo.Return");
+            DropTable("dbo.ProductOut");
+            DropTable("dbo.ProductIn");
+            DropTable("dbo.OrderItem");
+            DropTable("dbo.Discount");
+            DropTable("dbo.Order");
+            DropTable("dbo.Delivery");
+            DropTable("dbo.Provider");
+            DropTable("dbo.Category");
+            DropTable("dbo.Product");
+            DropTable("dbo.Customer");
+            DropTable("dbo.Cart");
+            DropTable("dbo.Admin");
         }
     }
 }
