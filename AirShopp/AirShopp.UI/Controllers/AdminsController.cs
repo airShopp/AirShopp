@@ -27,6 +27,7 @@ namespace AirShopp.UI.Controllers
         public ActionResult Index()
         {
             int m = _adminService.Add(2, 4);
+            return View();
 
         }
 
