@@ -33,7 +33,6 @@ namespace AirShopp.DataAccess
         public DbSet<ProductIn> ProductIn { get; set; }
         public DbSet<ProductOut> ProductOut { get; set; }
 
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
