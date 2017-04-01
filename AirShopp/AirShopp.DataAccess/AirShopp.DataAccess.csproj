@@ -51,8 +51,10 @@
   <ItemGroup>
     <Compile Include="AirShoppContext.cs" />
     <Compile Include="Mapping\AdminMapping.cs" />
+    <Compile Include="Mapping\AreaMapping.cs" />
     <Compile Include="Mapping\CartMapping.cs" />
     <Compile Include="Mapping\CategoryMapping.cs" />
+    <Compile Include="Mapping\CityMapping.cs" />
     <Compile Include="Mapping\CustomerMapping.cs" />
     <Compile Include="Mapping\DeliveryMapping.cs" />
     <Compile Include="Mapping\DiscountMapping.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Mapping\ProductMapping.cs" />
     <Compile Include="Mapping\ProductOutMapping.cs" />
     <Compile Include="Mapping\ProviderMapping.cs" />
+    <Compile Include="Mapping\ProvinceMapping.cs" />
     <Compile Include="Mapping\ReturnMapping.cs" />
     <Compile Include="Migrations\201703221049047_InitialAirShoppTable.cs" />
     <Compile Include="Migrations\201703221049047_InitialAirShoppTable.Designer.cs">
