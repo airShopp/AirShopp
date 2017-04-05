@@ -61,16 +61,12 @@ namespace AirShopp.DataAccess
 
             modelBuilder.Configurations.Add(new ProductInMapping());
             modelBuilder.Configurations.Add(new ProductOutMapping());
-<<<<<<< HEAD
-
             modelBuilder.Configurations.Add(new ProvinceMapping());
             modelBuilder.Configurations.Add(new CityMapping());
             modelBuilder.Configurations.Add(new AreaMapping());
-=======
             modelBuilder.Configurations.Add(new FactoryMapping());
             modelBuilder.Configurations.Add(new InventoryMapping());
             modelBuilder.Configurations.Add(new InventoryActionMapping());
->>>>>>> Kenneth
         }
     }
 }

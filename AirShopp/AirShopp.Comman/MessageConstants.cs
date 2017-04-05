@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirShopp.Comman
+namespace AirShopp.Common
 {
     public class MessageConstants
     {

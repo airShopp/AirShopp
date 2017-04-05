@@ -72,12 +72,6 @@
     <Compile Include="Province\Province.cs" />
     <Compile Include="Return\Return.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AirShopp.Comman\AirShopp.Comman.csproj">
-      <Project>{b1a5448b-8eaf-47ba-8549-12225ea895d4}</Project>
-      <Name>AirShopp.Comman</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

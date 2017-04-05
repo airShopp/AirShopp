@@ -18,6 +18,42 @@ namespace AirShopp.DataAccess.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.Area",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        AreaId = c.Long(nullable: false),
+                        AreaName = c.String(nullable: false, maxLength: 200),
+                        CityId = c.Long(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.City", t => t.CityId)
+                .Index(t => t.CityId);
+            
+            CreateTable(
+                "dbo.City",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        CityId = c.Long(nullable: false),
+                        CityName = c.String(nullable: false, maxLength: 200),
+                        ProvinceId = c.Long(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Province", t => t.ProvinceId)
+                .Index(t => t.ProvinceId);
+            
+            CreateTable(
+                "dbo.Province",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        ProvinceId = c.Long(nullable: false),
+                        ProvinceName = c.String(nullable: false, maxLength: 200),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.Cart",
                 c => new
                     {
@@ -253,6 +289,8 @@ namespace AirShopp.DataAccess.Migrations
             DropForeignKey("dbo.Product", "CategoryId", "dbo.Category");
             DropForeignKey("dbo.Cart", "CustomerId", "dbo.Customer");
             DropForeignKey("dbo.Order", "CustomerId", "dbo.Customer");
+            DropForeignKey("dbo.Area", "CityId", "dbo.City");
+            DropForeignKey("dbo.City", "ProvinceId", "dbo.Province");
             DropIndex("dbo.Return", new[] { "OrderId" });
             DropIndex("dbo.OrderItem", new[] { "ProductId" });
             DropIndex("dbo.OrderItem", new[] { "OrderId" });
@@ -266,6 +304,8 @@ namespace AirShopp.DataAccess.Migrations
             DropIndex("dbo.Order", new[] { "CustomerId" });
             DropIndex("dbo.Cart", new[] { "ProductId" });
             DropIndex("dbo.Cart", new[] { "CustomerId" });
+            DropIndex("dbo.City", new[] { "ProvinceId" });
+            DropIndex("dbo.Area", new[] { "CityId" });
             DropTable("dbo.Return");
             DropTable("dbo.OrderItem");
             DropTable("dbo.ProductOutFactory");
@@ -281,6 +321,9 @@ namespace AirShopp.DataAccess.Migrations
             DropTable("dbo.Order");
             DropTable("dbo.Customer");
             DropTable("dbo.Cart");
+            DropTable("dbo.Province");
+            DropTable("dbo.City");
+            DropTable("dbo.Area");
             DropTable("dbo.Admin");
         }
     }
