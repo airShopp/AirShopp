@@ -1,4 +1,5 @@
-﻿using AirShopp.Domain;
+﻿using AirShopp.DataAccess;
+using AirShopp.Domain;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -71,8 +72,13 @@ namespace AirShopp.UI.Models
         private IUnityContainer BuildAndInitContainer()
         {
             var container = new UnityContainer();
-
+            
+            //Services
             container.RegisterType<IAdminService, AdminService>();
+
+
+            //Repositories
+            container.RegisterType<IAdminRepository, AdminRepository>();
             return container;
         }
     }

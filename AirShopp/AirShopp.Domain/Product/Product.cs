@@ -1,6 +1,5 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace AirShopp.Domain
 {
@@ -10,18 +9,20 @@ namespace AirShopp.Domain
         public string ProductName { get; set; }
         public long CategoryId { get; set; }
         public long ProviderId { get; set; }
-        public int Storage { get; set; }
+        //public int InventoryId { get; set; }
+
+        //public int Storage { get; set; }
         public DateTime ProductionDate { get; set; }
         public string KeepDate { get; set; }
         public decimal Price { get; set; }
         public int Supply { get; set; }
 
-        [ForeignKey("CategoryId")]
-        [Required()]
-        public virtual Category category { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual Provider Provider { get; set; }
+        //public virtual Inventory Inventory { get; set; }
 
-        [ForeignKey("ProviderId")]
-        [Required()]
-        public virtual Provider provider { get; set; }
+        public ICollection<Cart> Carts { get; set; }
+        public ICollection<Inventory> Inventories { get; set; }
+
     }
 }

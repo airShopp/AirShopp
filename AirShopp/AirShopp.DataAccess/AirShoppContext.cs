@@ -30,8 +30,13 @@ namespace AirShopp.DataAccess
 
         public DbSet<Admin> Admin { get; set; }
 
-        public DbSet<ProductIn> ProductIn { get; set; }
-        public DbSet<ProductOut> ProductOut { get; set; }
+        public DbSet<ProductInFactory> ProductIn { get; set; }
+        public DbSet<ProductOutFactory> ProductOut { get; set; }
+        public DbSet<Factory> Factory { get; set; }
+        public DbSet<Inventory> Inventory { get; set; }
+        public DbSet<InventoryAction> InventoryAction { get; set; }
+
+
 
         public DbSet<Province> Province { get; set; }
         public DbSet<City> City { get; set; }
@@ -56,10 +61,16 @@ namespace AirShopp.DataAccess
 
             modelBuilder.Configurations.Add(new ProductInMapping());
             modelBuilder.Configurations.Add(new ProductOutMapping());
+<<<<<<< HEAD
 
             modelBuilder.Configurations.Add(new ProvinceMapping());
             modelBuilder.Configurations.Add(new CityMapping());
             modelBuilder.Configurations.Add(new AreaMapping());
+=======
+            modelBuilder.Configurations.Add(new FactoryMapping());
+            modelBuilder.Configurations.Add(new InventoryMapping());
+            modelBuilder.Configurations.Add(new InventoryActionMapping());
+>>>>>>> Kenneth
         }
     }
 }

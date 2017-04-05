@@ -46,7 +46,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD:AirShopp/AirShopp.Comman/AirShopp.Common.csproj
     <Compile Include="Constants.cs" />
+=======
+    <Compile Include="BaseException.cs" />
+    <Compile Include="MessageConstants.cs" />
+>>>>>>> Kenneth:AirShopp/AirShopp.Comman/AirShopp.Comman.csproj
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QRCodeHelper.cs" />
   </ItemGroup>

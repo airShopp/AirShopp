@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\Admin.cs" />
+    <Compile Include="Admin\IAdminRepository.cs" />
     <Compile Include="Admin\AdminService.cs" />
     <Compile Include="Admin\IAdminService.cs" />
     <Compile Include="Area\Area.cs" />
@@ -57,17 +59,25 @@
     <Compile Include="DeliveryStation\DeliveryStation.cs" />
     <Compile Include="Delivery\Delivery.cs" />
     <Compile Include="Discount\Discount.cs" />
+    <Compile Include="Product\Inventory.cs" />
     <Compile Include="OrderItem\OrderItem.cs" />
     <Compile Include="Order\Order.cs" />
+    <Compile Include="Product\Factory.cs" />
+    <Compile Include="Product\InventoryAction.cs" />
     <Compile Include="Product\Product.cs" />
-    <Compile Include="Product\ProductIn.cs" />
-    <Compile Include="Product\ProductOut.cs" />
+    <Compile Include="Product\ProductInFactory.cs" />
+    <Compile Include="Product\ProductOutFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\Provider.cs" />
     <Compile Include="Province\Province.cs" />
     <Compile Include="Return\Return.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\AirShopp.Comman\AirShopp.Comman.csproj">
+      <Project>{b1a5448b-8eaf-47ba-8549-12225ea895d4}</Project>
+      <Name>AirShopp.Comman</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

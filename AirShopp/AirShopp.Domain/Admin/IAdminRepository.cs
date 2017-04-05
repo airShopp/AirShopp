@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AirShopp.Domain
 {
-    public interface IAdminService
+    public interface IAdminRepository
     {
-        Admin UserLogin(string account, string password);
+        Admin GetUser(string account, string password);
     }
 }

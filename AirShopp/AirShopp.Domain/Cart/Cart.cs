@@ -14,12 +14,7 @@ namespace AirShopp.Domain
         public bool IsBuy { get; set; }
         public decimal ProductTotalAmount { get; set; }
 
-        [ForeignKey("CustomerId")]
-        [Required()]
-        public virtual Customer customer { get; set; }
-
-        [ForeignKey("ProductId")]
-        [Required()]
-        public virtual Product product { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

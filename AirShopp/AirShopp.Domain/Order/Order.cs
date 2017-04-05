@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,8 +15,6 @@ namespace AirShopp.Domain
         public string OrderStatus { get; set; }
         public DateTime DeliveryDate { get; set; }
 
-        [ForeignKey("CustomerId")]
-        [Required()]
-        public Customer customer { get; set; }
+        public Customer Customer { get; set; }
     }
 }
