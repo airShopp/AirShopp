@@ -4,14 +4,14 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace AirShopp.DataAccess.Mapping
 {
-    class ProductInMapping :EntityTypeConfiguration<ProductInFactory>
+    class InventoryMapping : EntityTypeConfiguration<Inventory>
     {
-        public ProductInMapping()
+        public InventoryMapping()
         {
             HasKey(e => e.Id).Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(e => e.Amount).IsRequired();
-            Property(e => e.Price).IsRequired();
-            Property(e => e.InDate).IsRequired();
+            HasRequired(e => e.Product).WithMany(e => e.Inventories).HasForeignKey(fk => fk.ProductId);
+            HasRequired(e => e.Factory).WithMany(e => e.Inventories).HasForeignKey(fk => fk.ProductId);
         }
     }
 }

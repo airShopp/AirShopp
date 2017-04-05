@@ -8,6 +8,6 @@ namespace AirShopp.Domain
 {
     public interface IAdminService
     {
-        int Add(int a, int b);
+        Admin UserLogin(string account, string password);
     }
 }

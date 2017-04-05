@@ -3,7 +3,7 @@ namespace AirShopp.DataAccess.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialAirShoppTable : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -56,14 +56,28 @@ namespace AirShopp.DataAccess.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.Order",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        CustomerId = c.Long(nullable: false),
+                        TotalAmount = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        OrderDate = c.DateTime(nullable: false),
+                        OrderStatus = c.String(),
+                        DeliveryDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Customer", t => t.CustomerId)
+                .Index(t => t.CustomerId);
+            
+            CreateTable(
                 "dbo.Product",
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
-                        ProductName = c.String(),
+                        ProductName = c.String(nullable: false, maxLength: 100),
                         CategoryId = c.Long(nullable: false),
                         ProviderId = c.Long(nullable: false),
-                        Storage = c.Int(nullable: false),
                         ProductionDate = c.DateTime(nullable: false),
                         KeepDate = c.String(),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
@@ -81,6 +95,30 @@ namespace AirShopp.DataAccess.Migrations
                     {
                         Id = c.Long(nullable: false, identity: true),
                         CategoryName = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Inventory",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        ProductId = c.Long(nullable: false),
+                        FactoryId = c.Long(nullable: false),
+                        Amount = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Factory", t => t.ProductId)
+                .ForeignKey("dbo.Product", t => t.ProductId)
+                .Index(t => t.ProductId);
+            
+            CreateTable(
+                "dbo.Factory",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 100),
+                        IsUsed = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -116,21 +154,6 @@ namespace AirShopp.DataAccess.Migrations
                 .Index(t => t.ProductId);
             
             CreateTable(
-                "dbo.Order",
-                c => new
-                    {
-                        Id = c.Long(nullable: false, identity: true),
-                        CustomerId = c.Long(nullable: false),
-                        TotalAmount = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        OrderDate = c.DateTime(nullable: false),
-                        OrderStatus = c.String(),
-                        DeliveryDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Customer", t => t.CustomerId)
-                .Index(t => t.CustomerId);
-            
-            CreateTable(
                 "dbo.Discount",
                 c => new
                     {
@@ -138,6 +161,43 @@ namespace AirShopp.DataAccess.Migrations
                         CustomerLevel = c.String(),
                         Discounts = c.Decimal(nullable: false, precision: 18, scale: 2),
                         ScoreRequire = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.InventoryAction",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        ProductInFactoryId = c.Long(nullable: false),
+                        ProductOutFactoryId = c.Long(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.ProductInFactory", t => t.ProductInFactoryId)
+                .ForeignKey("dbo.ProductOutFactory", t => t.ProductOutFactoryId)
+                .Index(t => t.ProductInFactoryId)
+                .Index(t => t.ProductOutFactoryId);
+            
+            CreateTable(
+                "dbo.ProductInFactory",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        Amount = c.Int(nullable: false),
+                        Price = c.String(nullable: false),
+                        InDate = c.DateTime(nullable: false),
+                        ProductName = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.ProductOutFactory",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        Amount = c.Int(nullable: false),
+                        OutDate = c.DateTime(nullable: false),
+                        ProductName = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -157,33 +217,6 @@ namespace AirShopp.DataAccess.Migrations
                 .ForeignKey("dbo.Order", t => t.OrderId)
                 .ForeignKey("dbo.Product", t => t.ProductId)
                 .Index(t => t.OrderId)
-                .Index(t => t.ProductId);
-            
-            CreateTable(
-                "dbo.ProductIn",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        ProductId = c.Long(nullable: false),
-                        Amount = c.Int(nullable: false),
-                        Price = c.String(nullable: false),
-                        InDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Product", t => t.ProductId)
-                .Index(t => t.ProductId);
-            
-            CreateTable(
-                "dbo.ProductOut",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        ProductId = c.Long(nullable: false),
-                        Amount = c.Int(nullable: false),
-                        OutDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Product", t => t.ProductId)
                 .Index(t => t.ProductId);
             
             CreateTable(
@@ -207,39 +240,45 @@ namespace AirShopp.DataAccess.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.Return", "OrderId", "dbo.Order");
-            DropForeignKey("dbo.ProductOut", "ProductId", "dbo.Product");
-            DropForeignKey("dbo.ProductIn", "ProductId", "dbo.Product");
             DropForeignKey("dbo.OrderItem", "ProductId", "dbo.Product");
             DropForeignKey("dbo.OrderItem", "OrderId", "dbo.Order");
+            DropForeignKey("dbo.InventoryAction", "ProductOutFactoryId", "dbo.ProductOutFactory");
+            DropForeignKey("dbo.InventoryAction", "ProductInFactoryId", "dbo.ProductInFactory");
             DropForeignKey("dbo.Delivery", "ProductId", "dbo.Product");
             DropForeignKey("dbo.Delivery", "OrderId", "dbo.Order");
-            DropForeignKey("dbo.Order", "CustomerId", "dbo.Customer");
             DropForeignKey("dbo.Cart", "ProductId", "dbo.Product");
             DropForeignKey("dbo.Product", "ProviderId", "dbo.Provider");
+            DropForeignKey("dbo.Inventory", "ProductId", "dbo.Product");
+            DropForeignKey("dbo.Inventory", "ProductId", "dbo.Factory");
             DropForeignKey("dbo.Product", "CategoryId", "dbo.Category");
             DropForeignKey("dbo.Cart", "CustomerId", "dbo.Customer");
+            DropForeignKey("dbo.Order", "CustomerId", "dbo.Customer");
             DropIndex("dbo.Return", new[] { "OrderId" });
-            DropIndex("dbo.ProductOut", new[] { "ProductId" });
-            DropIndex("dbo.ProductIn", new[] { "ProductId" });
             DropIndex("dbo.OrderItem", new[] { "ProductId" });
             DropIndex("dbo.OrderItem", new[] { "OrderId" });
-            DropIndex("dbo.Order", new[] { "CustomerId" });
+            DropIndex("dbo.InventoryAction", new[] { "ProductOutFactoryId" });
+            DropIndex("dbo.InventoryAction", new[] { "ProductInFactoryId" });
             DropIndex("dbo.Delivery", new[] { "ProductId" });
             DropIndex("dbo.Delivery", new[] { "OrderId" });
+            DropIndex("dbo.Inventory", new[] { "ProductId" });
             DropIndex("dbo.Product", new[] { "ProviderId" });
             DropIndex("dbo.Product", new[] { "CategoryId" });
+            DropIndex("dbo.Order", new[] { "CustomerId" });
             DropIndex("dbo.Cart", new[] { "ProductId" });
             DropIndex("dbo.Cart", new[] { "CustomerId" });
             DropTable("dbo.Return");
-            DropTable("dbo.ProductOut");
-            DropTable("dbo.ProductIn");
             DropTable("dbo.OrderItem");
+            DropTable("dbo.ProductOutFactory");
+            DropTable("dbo.ProductInFactory");
+            DropTable("dbo.InventoryAction");
             DropTable("dbo.Discount");
-            DropTable("dbo.Order");
             DropTable("dbo.Delivery");
             DropTable("dbo.Provider");
+            DropTable("dbo.Factory");
+            DropTable("dbo.Inventory");
             DropTable("dbo.Category");
             DropTable("dbo.Product");
+            DropTable("dbo.Order");
             DropTable("dbo.Customer");
             DropTable("dbo.Cart");
             DropTable("dbo.Admin");

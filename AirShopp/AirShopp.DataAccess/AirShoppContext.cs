@@ -30,8 +30,13 @@ namespace AirShopp.DataAccess
 
         public DbSet<Admin> Admin { get; set; }
 
-        public DbSet<ProductIn> ProductIn { get; set; }
-        public DbSet<ProductOut> ProductOut { get; set; }
+        public DbSet<ProductInFactory> ProductIn { get; set; }
+        public DbSet<ProductOutFactory> ProductOut { get; set; }
+        public DbSet<Factory> Factory { get; set; }
+        public DbSet<Inventory> Inventory { get; set; }
+        public DbSet<InventoryAction> InventoryAction { get; set; }
+
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -52,6 +57,9 @@ namespace AirShopp.DataAccess
 
             modelBuilder.Configurations.Add(new ProductInMapping());
             modelBuilder.Configurations.Add(new ProductOutMapping());
+            modelBuilder.Configurations.Add(new FactoryMapping());
+            modelBuilder.Configurations.Add(new InventoryMapping());
+            modelBuilder.Configurations.Add(new InventoryActionMapping());
         }
     }
 }

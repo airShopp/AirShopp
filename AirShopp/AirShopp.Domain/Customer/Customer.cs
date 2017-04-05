@@ -1,9 +1,17 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace AirShopp.Domain
 {
     public class Customer
     {
+        public Customer()
+        {
+            Orders = new List<Order>();
+            Carts = new List<Cart>();
+        }
+
         public long Id { get; set; }
         public string Account { get; set; }
         public string Password { get; set; }
@@ -16,5 +24,8 @@ namespace AirShopp.Domain
         public string CustomerName { get; set; }
         public string CustomerLevel { get; set; }
         public int CustomerScore { get; set; }
+
+        public ICollection<Cart> Carts { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

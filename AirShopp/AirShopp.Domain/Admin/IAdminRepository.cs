@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirShopp.Comman
+namespace AirShopp.Domain
 {
-    class CustomDependencyResolver
+    public interface IAdminRepository
     {
+        Admin GetUser(string account, string password);
     }
 }

@@ -4,7 +4,7 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace AirShopp.DataAccess.Mapping
 {
-    class ProductOutMapping : EntityTypeConfiguration<ProductOut>
+    class ProductOutMapping : EntityTypeConfiguration<ProductOutFactory>
     {
         public ProductOutMapping()
         {

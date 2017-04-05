@@ -18,6 +18,9 @@ namespace AirShopp.UI
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
+            bundles.Add(new ScriptBundle("~/bundles/AirShopp").Include(
+                "~/Scripts/knockout-3.4.2.js", 
+                "~/Scripts/Init/test.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
