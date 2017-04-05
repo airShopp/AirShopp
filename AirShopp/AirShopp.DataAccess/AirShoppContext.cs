@@ -33,6 +33,10 @@ namespace AirShopp.DataAccess
         public DbSet<ProductIn> ProductIn { get; set; }
         public DbSet<ProductOut> ProductOut { get; set; }
 
+        public DbSet<Province> Province { get; set; }
+        public DbSet<City> City { get; set; }
+        public DbSet<Area> Area { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
@@ -52,6 +56,10 @@ namespace AirShopp.DataAccess
 
             modelBuilder.Configurations.Add(new ProductInMapping());
             modelBuilder.Configurations.Add(new ProductOutMapping());
+
+            modelBuilder.Configurations.Add(new ProvinceMapping());
+            modelBuilder.Configurations.Add(new CityMapping());
+            modelBuilder.Configurations.Add(new AreaMapping());
         }
     }
 }

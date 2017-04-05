@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="72371759861743cb84b22479ad39bfbd" Name="Diagram1" ZoomLevel="71" >
+      <Diagram DiagramId="72371759861743cb84b22479ad39bfbd" Name="Diagram1" ZoomLevel="111" >
         <EntityTypeShape EntityType="AirShopp.Admins" Width="1.5" PointX="21.75" PointY="2.125" />
         <EntityTypeShape EntityType="AirShopp.Carts" Width="1.5" PointX="17.25" PointY="2.625" />
         <EntityTypeShape EntityType="AirShopp.Categories" Width="1.5" PointX="7.625" PointY="3.875" />
