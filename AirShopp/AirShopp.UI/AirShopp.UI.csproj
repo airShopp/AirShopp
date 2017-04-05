@@ -238,10 +238,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AirShopp.Comman\AirShopp.Common.csproj">
-      <Project>{b1a5448b-8eaf-47ba-8549-12225ea895d4}</Project>
-      <Name>AirShopp.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AirShopp.DataAccess\AirShopp.DataAccess.csproj">
       <Project>{2f40b81e-ff54-4774-86c0-67381b8a9df3}</Project>
       <Name>AirShopp.DataAccess</Name>

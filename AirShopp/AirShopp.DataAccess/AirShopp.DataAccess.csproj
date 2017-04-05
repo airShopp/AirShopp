@@ -88,7 +88,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AirShopp.Comman\AirShopp.Common.csproj">
+    <ProjectReference Include="..\AirShopp.Common\AirShopp.Common.csproj">
       <Project>{b1a5448b-8eaf-47ba-8549-12225ea895d4}</Project>
       <Name>AirShopp.Common</Name>
     </ProjectReference>
