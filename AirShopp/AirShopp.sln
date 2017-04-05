@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirShopp.DataAccess", "AirS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirShopp.Domain", "AirShopp.Domain\AirShopp.Domain.csproj", "{1383C9C2-3A93-40CD-A824-95B7531A5C68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirShopp.Comman", "AirShopp.Comman\AirShopp.Comman.csproj", "{B1A5448B-8EAF-47BA-8549-12225EA895D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirShopp.Common", "AirShopp.Common\AirShopp.Common.csproj", "{B1A5448B-8EAF-47BA-8549-12225EA895D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

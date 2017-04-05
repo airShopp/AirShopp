@@ -1,7 +1,7 @@
 ﻿using System;
 using AirShopp.Domain;
 using System.Linq;
-using AirShopp.Comman;
+using AirShopp.Common;
 
 namespace AirShopp.DataAccess
 {
