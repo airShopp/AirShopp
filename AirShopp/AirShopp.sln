@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 14 for Web
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirShopp.UI", "AirShopp.UI\AirShopp.UI.csproj", "{6532C343-A8AC-4316-969C-408D84247FCE}"
 EndProject
@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirShopp.DataAccess", "AirS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirShopp.Domain", "AirShopp.Domain\AirShopp.Domain.csproj", "{1383C9C2-3A93-40CD-A824-95B7531A5C68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirShopp.Comman", "AirShopp.Comman\AirShopp.Comman.csproj", "{B1A5448B-8EAF-47BA-8549-12225EA895D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirShopp.Common", "AirShopp.Comman\AirShopp.Common.csproj", "{B1A5448B-8EAF-47BA-8549-12225EA895D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

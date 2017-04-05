@@ -48,8 +48,13 @@
     <Compile Include="Cart\Cart.cs" />
     <Compile Include="Category\Category.cs" />
     <Compile Include="City\City.cs" />
+    <Compile Include="Courier\Courier.cs" />
     <Compile Include="Customer\Customer.cs" />
     <Compile Include="Customer\ICustomerFactory.cs" />
+    <Compile Include="DeliveryInfo\DeliveryInfo.cs" />
+    <Compile Include="DeliveryNote\DeliveryNote.cs" />
+    <Compile Include="DeliveryOrder\DeliveryOrder.cs" />
+    <Compile Include="DeliveryStation\DeliveryStation.cs" />
     <Compile Include="Delivery\Delivery.cs" />
     <Compile Include="Discount\Discount.cs" />
     <Compile Include="OrderItem\OrderItem.cs" />
