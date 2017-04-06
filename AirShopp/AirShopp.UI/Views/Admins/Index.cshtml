@@ -1,13 +1,15 @@
-﻿@Scripts.Render("~/bundles/AirShopp")
+﻿@model AirShopp.Domain.Admin
+@Scripts.Render("~/bundles/AirShopp")
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_airShoppLayout.cshtml";
 }
 <br/>
 <br/>
-Please go to login page<a href="Admins\Login">Login</a>
+<sapn style="margin-left:40%;">Nothing to do</sapn>
+    @if (Model != null)
+    {
+    <h1 style="margin-left:45%;">Welcome! @Model.Account</h1>
+    }
 
-<br/><span>@ViewBag.ErrorMessage</span>
-<script>
-
-</script>
 

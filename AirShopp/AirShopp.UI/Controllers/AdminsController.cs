@@ -40,12 +40,13 @@ namespace AirShopp.UI.Controllers
             try
             {
                 Admin admin = _adminService.UserLogin(account, password);
-                return View();
+                ViewBag.Message = "Success！！";
+                return View("Index",admin);
             }
             catch (Exception ex)
             {
                 ViewBag.ErrorMessage = ex.Message;
-                return View("Index");
+                return View();
             }
         }
 
