@@ -15,6 +15,6 @@ namespace AirShopp.Domain
         public string AreaName { get; set; }
         public long CityId { get; set; }
 
-        public City City { get; set; }
+        //public City City { get; set; }
     }
 }

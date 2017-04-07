@@ -4,7 +4,7 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace AirShopp.DataAccess.Mapping
 {
-    class FactoryMapping : EntityTypeConfiguration<Factory>
+    class FactoryMapping : EntityTypeConfiguration<Warehouse>
     {
         public FactoryMapping()
         {

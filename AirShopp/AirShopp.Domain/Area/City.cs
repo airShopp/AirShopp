@@ -15,7 +15,7 @@ namespace AirShopp.Domain
         public string CityName { get; set; }
         public long ProvinceId { get; set; }
 
-        public Province Province { get; set; }
-        public ICollection<Area> Areas { get; set; }
+        //public Province Province { get; set; }
+        //public ICollection<Area> Areas { get; set; }
     }
 }

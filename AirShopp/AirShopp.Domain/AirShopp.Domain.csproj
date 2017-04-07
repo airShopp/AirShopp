@@ -49,15 +49,16 @@
     <Compile Include="Area\Area.cs" />
     <Compile Include="Cart\Cart.cs" />
     <Compile Include="Category\Category.cs" />
-    <Compile Include="City\City.cs" />
-    <Compile Include="Courier\Courier.cs" />
+    <Compile Include="Area\City.cs" />
+    <Compile Include="DeliveryStation\Courier.cs" />
     <Compile Include="Customer\Customer.cs" />
     <Compile Include="Customer\ICustomerFactory.cs" />
-    <Compile Include="DeliveryInfo\DeliveryInfo.cs" />
-    <Compile Include="DeliveryNote\DeliveryNote.cs" />
-    <Compile Include="DeliveryOrder\DeliveryOrder.cs" />
+    <Compile Include="Delivery\DeliveryInfo.cs" />
+    <Compile Include="Delivery\DeliveryNote.cs" />
+    <Compile Include="Delivery\DeliveryOrder.cs" />
     <Compile Include="DeliveryStation\DeliveryStation.cs" />
     <Compile Include="Delivery\Delivery.cs" />
+    <Compile Include="Delivery\DeliveryOrderItem.cs" />
     <Compile Include="Discount\Discount.cs" />
     <Compile Include="Product\Inventory.cs" />
     <Compile Include="OrderItem\OrderItem.cs" />
@@ -69,7 +70,7 @@
     <Compile Include="Product\ProductOutFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\Provider.cs" />
-    <Compile Include="Province\Province.cs" />
+    <Compile Include="Area\Province.cs" />
     <Compile Include="Return\Return.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
