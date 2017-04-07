@@ -8,6 +8,6 @@
         public int Amount { get; set; }
 
         public Product Product { get; set; }
-        public Factory Factory { get; set; }
+        public Warehouse Factory { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace AirShopp.Domain
 {
-    public class Factory
+    public class Warehouse
     {
         public long Id { get; set; }
         public string Name { get; set; }

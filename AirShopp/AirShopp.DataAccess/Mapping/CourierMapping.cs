@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace AirShopp.DataAccess.Mapping
 {
-    class AreaMapping : EntityTypeConfiguration<Area>
+    class CourierMapping : EntityTypeConfiguration<Courier>
     {
-        public AreaMapping()
+        public CourierMapping()
         {
             HasKey(e => e.Id).Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(e => e.AreaId).IsRequired();
-            Property(e => e.AreaName).HasMaxLength(256).IsRequired();
+            Property(e => e.Name).HasMaxLength(32).IsRequired();
+            Property(e => e.Phone).HasMaxLength(11).IsRequired();
 
-            //HasRequired(e => e.City).WithMany(e => e.Areas).HasForeignKey(fk => fk.CityId);
+            HasRequired(e => e.DeliveryStation).WithMany(e => e.Couriers).HasForeignKey(fk => fk.DeliveryStationId);
         }
     }
 }

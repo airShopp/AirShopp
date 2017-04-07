@@ -9,15 +9,16 @@ using System.Threading.Tasks;
 
 namespace AirShopp.DataAccess.Mapping
 {
-    class AreaMapping : EntityTypeConfiguration<Area>
+    class DeliveryInfoMapping : EntityTypeConfiguration<DeliveryInfo>
     {
-        public AreaMapping()
+        public DeliveryInfoMapping()
         {
             HasKey(e => e.Id).Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(e => e.AreaId).IsRequired();
-            Property(e => e.AreaName).HasMaxLength(256).IsRequired();
+            Property(e => e.Description).HasMaxLength(512).IsRequired();
+            Property(e => e.CurrentLocation).HasMaxLength(64).IsRequired();
+            Property(e => e.UpdateTime).IsRequired();
 
-            //HasRequired(e => e.City).WithMany(e => e.Areas).HasForeignKey(fk => fk.CityId);
+            HasRequired(e => e.Order).WithMany(e => e.DeliveryInfos).HasForeignKey(fk => fk.OrderId);
         }
     }
 }
