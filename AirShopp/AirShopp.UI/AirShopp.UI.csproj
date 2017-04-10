@@ -184,6 +184,13 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Css\HomePage\bootstrap.css" />
+    <Content Include="Content\Css\HomePage\flexslider.css" />
+    <Content Include="Content\Css\HomePage\megamenu.css" />
+    <Content Include="Content\Css\HomePage\style.css" />
+    <Content Include="Content\Css\reset.css" />
+    <Content Include="Content\Css\style.css" />
+    <Content Include="Content\Css\supersized.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -205,6 +212,20 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-3.4.2.debug.js" />
     <Content Include="Scripts\knockout-3.4.2.js" />
+    <Content Include="Scripts\MainJS\HomePage\bootstrap.js" />
+    <Content Include="Scripts\MainJS\HomePage\easing.js" />
+    <Content Include="Scripts\MainJS\HomePage\imagezoom.js" />
+    <Content Include="Scripts\MainJS\HomePage\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\MainJS\HomePage\jquery.flexisel.js" />
+    <Content Include="Scripts\MainJS\HomePage\jquery.flexslider.js" />
+    <Content Include="Scripts\MainJS\HomePage\jquery.jscrollpane.min.js" />
+    <Content Include="Scripts\MainJS\HomePage\megamenu.js" />
+    <Content Include="Scripts\MainJS\HomePage\menu_jquery.js" />
+    <Content Include="Scripts\MainJS\HomePage\move-top.js" />
+    <Content Include="Scripts\MainJS\HomePage\scripts.js" />
+    <Content Include="Scripts\MainJS\HomePage\simpleCart.min.js" />
+    <Content Include="Scripts\MainJS\jquery-1.8.2.min.js" />
+    <Content Include="Scripts\MainJS\scripts.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
