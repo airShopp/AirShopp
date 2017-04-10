@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1383C9C2-3A93-40CD-A824-95B7531A5C68}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AirShopp.Domain</RootNamespace>
+    <AssemblyName>AirShopp.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\Admin.cs" />
+    <Compile Include="Admin\IAdminRepository.cs" />
+    <Compile Include="Admin\AdminService.cs" />
+    <Compile Include="Admin\IAdminService.cs" />
+    <Compile Include="Area\Area.cs" />
+    <Compile Include="Cart\Cart.cs" />
+    <Compile Include="Category\Category.cs" />
+<<<<<<< HEAD
+    <Compile Include="Area\City.cs" />
+    <Compile Include="DeliveryStation\Courier.cs" />
+=======
+    <Compile Include="Category\ICategoryRepository.cs" />
+    <Compile Include="City\City.cs" />
+    <Compile Include="Courier\Courier.cs" />
+>>>>>>> Kenneth
+    <Compile Include="Customer\Customer.cs" />
+    <Compile Include="Customer\ICustomerFactory.cs" />
+    <Compile Include="Delivery\DeliveryInfo.cs" />
+    <Compile Include="Delivery\DeliveryNote.cs" />
+    <Compile Include="Delivery\DeliveryOrder.cs" />
+    <Compile Include="DeliveryStation\DeliveryStation.cs" />
+    <Compile Include="Delivery\Delivery.cs" />
+    <Compile Include="Delivery\DeliveryOrderItem.cs" />
+    <Compile Include="Discount\Discount.cs" />
+    <Compile Include="Product\Inventory.cs" />
+    <Compile Include="OrderItem\OrderItem.cs" />
+    <Compile Include="Order\Order.cs" />
+    <Compile Include="Product\Factory.cs" />
+    <Compile Include="Product\InventoryAction.cs" />
+    <Compile Include="Product\Product.cs" />
+    <Compile Include="Product\ProductInFactory.cs" />
+    <Compile Include="Product\ProductOutFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider\Provider.cs" />
+    <Compile Include="Area\Province.cs" />
+    <Compile Include="Return\Return.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
