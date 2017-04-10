@@ -29,6 +29,21 @@ namespace AirShopp.DataAccess.Migrations
 
                     INSERT INTO Provider(Id,ProviderName)
                     values(7,'河北硕辰建筑装饰工程有限公司');
+
+                    INSERT INTO Provider(Id,ProviderName)
+                    values(8,'广东服装设计有限公司');
+
+                    INSERT INTO Provider(Id,ProviderName)
+                    values(9,'母婴用品有限公司');
+
+                    INSERT INTO Provider(Id,ProviderName)
+                    values(10,'化妆品有限公司');
+
+                    INSERT INTO Provider(Id,ProviderName)
+                    values(11,'四川食品批发有限公司');
+                    
+                    INSERT INTO Provider(Id,ProviderName)
+                    values(12,'成都文具图书制造有限公司');
                  ");
         }
         

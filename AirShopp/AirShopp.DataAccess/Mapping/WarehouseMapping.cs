@@ -4,9 +4,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace AirShopp.DataAccess.Mapping
 {
-    class FactoryMapping : EntityTypeConfiguration<Warehouse>
+    class WarehouseMapping : EntityTypeConfiguration<Warehouse>
     {
-        public FactoryMapping()
+        public WarehouseMapping()
         {
             HasKey(e => e.Id).Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(e => e.Name).HasMaxLength(100).IsRequired();

@@ -47,13 +47,13 @@
     <Compile Include="Admin\AdminService.cs" />
     <Compile Include="Admin\IAdminService.cs" />
     <Compile Include="Area\Area.cs" />
+    <Compile Include="Area\City.cs" />
     <Compile Include="Cart\Cart.cs" />
     <Compile Include="Category\Category.cs" />
     <Compile Include="Category\ICategoryRepository.cs" />
-    <Compile Include="City\City.cs" />
-    <Compile Include="Courier\Courier.cs" />
     <Compile Include="Customer\Customer.cs" />
     <Compile Include="Customer\ICustomerFactory.cs" />
+    <Compile Include="DeliveryStation\Courier.cs" />
     <Compile Include="Delivery\DeliveryInfo.cs" />
     <Compile Include="Delivery\DeliveryNote.cs" />
     <Compile Include="Delivery\DeliveryOrder.cs" />
@@ -64,7 +64,7 @@
     <Compile Include="Product\Inventory.cs" />
     <Compile Include="OrderItem\OrderItem.cs" />
     <Compile Include="Order\Order.cs" />
-    <Compile Include="Product\Factory.cs" />
+    <Compile Include="Product\Warehouse.cs" />
     <Compile Include="Product\InventoryAction.cs" />
     <Compile Include="Product\Product.cs" />
     <Compile Include="Product\ProductInFactory.cs" />
