@@ -10,7 +10,11 @@ namespace AirShopp.DataAccess.Migrations
             Sql(@"
                    SET IDENTITY_INSERT Admin ON
                    INSERT INTO dbo.Admin(Id,Account,Password)
-                   VALUES(1,'zhangsan','123');
+                   VALUES(1,'Amanda','123');
+                   INSERT INTO dbo.Admin(Id,Account,Password)
+                   VALUES(2,'Japser','123');
+                   INSERT INTO dbo.Admin(Id,Account,Password)
+                   VALUES(3,'Kenneth','123');
                 ");
         }
         

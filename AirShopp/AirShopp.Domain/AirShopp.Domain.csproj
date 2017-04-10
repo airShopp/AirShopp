@@ -49,6 +49,7 @@
     <Compile Include="Area\Area.cs" />
     <Compile Include="Cart\Cart.cs" />
     <Compile Include="Category\Category.cs" />
+    <Compile Include="Category\ICategoryRepository.cs" />
     <Compile Include="City\City.cs" />
     <Compile Include="Courier\Courier.cs" />
     <Compile Include="Customer\Customer.cs" />
