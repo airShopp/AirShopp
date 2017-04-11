@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Address\Address.cs" />
     <Compile Include="Admin\Admin.cs" />
     <Compile Include="Admin\IAdminRepository.cs" />
     <Compile Include="Admin\AdminService.cs" />
@@ -49,8 +50,12 @@
     <Compile Include="Area\Area.cs" />
     <Compile Include="Area\City.cs" />
     <Compile Include="Cart\Cart.cs" />
+    <Compile Include="Cart\CartService.cs" />
+    <Compile Include="Cart\ICartRepository.cs" />
+    <Compile Include="Cart\ICartService.cs" />
     <Compile Include="Category\Category.cs" />
     <Compile Include="Category\ICategoryRepository.cs" />
+    <Compile Include="Comments\Comments.cs" />
     <Compile Include="Customer\Customer.cs" />
     <Compile Include="Customer\ICustomerFactory.cs" />
     <Compile Include="DeliveryStation\Courier.cs" />
@@ -62,7 +67,7 @@
     <Compile Include="Delivery\DeliveryOrderItem.cs" />
     <Compile Include="Discount\Discount.cs" />
     <Compile Include="Product\Inventory.cs" />
-    <Compile Include="OrderItem\OrderItem.cs" />
+    <Compile Include="Order\OrderItem.cs" />
     <Compile Include="Order\Order.cs" />
     <Compile Include="Product\Warehouse.cs" />
     <Compile Include="Product\InventoryAction.cs" />
@@ -72,7 +77,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\Provider.cs" />
     <Compile Include="Area\Province.cs" />
-    <Compile Include="Return\Return.cs" />
+    <Compile Include="Order\Return.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

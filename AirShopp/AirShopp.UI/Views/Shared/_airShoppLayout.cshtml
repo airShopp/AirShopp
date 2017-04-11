@@ -66,7 +66,7 @@
                                 </div>
                                 <i class="glyphicon glyphicon-shopping-cart"></i>
                             </a>
-                            <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+                            <p> @Html.ActionLink("Cart", "LoadCartList", "Cart", new { admin = Model.Admin }) </p>
                             <div class="clearfix"> </div>
                         </div>
                     </div>

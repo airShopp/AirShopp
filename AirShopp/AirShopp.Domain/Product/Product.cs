@@ -15,8 +15,9 @@ namespace AirShopp.Domain
         //public int Supply { get; set; }
         public int url { get; set; }
         public virtual Category Category { get; set; }
-        public virtual Provider Provider { get; set; } 
+        public virtual Provider Provider { get; set; }
 
+        public ICollection<Comment> Comment { get; set; }
         public ICollection<Cart> Carts { get; set; }
         public ICollection<Inventory> Inventories { get; set; }
 
