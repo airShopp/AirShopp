@@ -66,7 +66,7 @@ namespace AirShopp.DataAccess
 
             modelBuilder.Configurations.Add(new ProductInMapping());
             modelBuilder.Configurations.Add(new ProductOutMapping());
-            modelBuilder.Configurations.Add(new FactoryMapping());
+            modelBuilder.Configurations.Add(new WarehouseMapping());
             modelBuilder.Configurations.Add(new InventoryMapping());
             modelBuilder.Configurations.Add(new InventoryActionMapping());
 

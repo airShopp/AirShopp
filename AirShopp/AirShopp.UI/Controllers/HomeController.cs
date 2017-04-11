@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AirShopp.Domain;
+using AirShopp.UI.Models.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,27 @@ namespace AirShopp.UI.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public readonly ICategoryRepository _categoryRepository;
+        public readonly IProductRepository _productRepository;
+
+        public HomeController(
+            ICategoryRepository categoryRepository,
+            IProductRepository productRepository)
         {
-            return View();
+            _categoryRepository = categoryRepository;
+            _productRepository = productRepository;
+        }
+
+        public ActionResult Index(Admin admin)
+         {
+            HomeViewModel homeViewModel = new HomeViewModel()
+            {
+                Admin = admin,
+                Categories = _categoryRepository.GetCategories(),
+                Products = _productRepository.Products()
+
+            };
+            return View(homeViewModel);
         }
 
         public ActionResult About()

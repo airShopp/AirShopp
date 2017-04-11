@@ -40,7 +40,8 @@ namespace AirShopp.UI.Controllers
             try
             {
                 Admin admin = _adminService.UserLogin(account, password);
-                return View();
+                ViewBag.Message = "Success！！";
+                return RedirectToAction("Index","Home",admin);
             }
             catch (Exception ex)
             {
@@ -56,6 +57,11 @@ namespace AirShopp.UI.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Test()
+        {
+            return View();
         }
     }
 }

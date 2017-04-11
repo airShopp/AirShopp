@@ -72,13 +72,12 @@ namespace AirShopp.UI.Models
         private IUnityContainer BuildAndInitContainer()
         {
             var container = new UnityContainer();
-            
             //Services
             container.RegisterType<IAdminService, AdminService>();
-
-
             //Repositories
             container.RegisterType<IAdminRepository, AdminRepository>();
+            container.RegisterType<ICategoryRepository, CategoryRepository>();
+            container.RegisterType<IProductRepository, ProductRepository>();
             return container;
         }
     }
