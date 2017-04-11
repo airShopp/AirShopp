@@ -29,6 +29,38 @@ namespace AirShopp.DataAccess.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.DeliveryStation",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 32),
+                        Address = c.String(nullable: false, maxLength: 64),
+                        Latitude = c.Double(nullable: false),
+                        Longitude = c.Double(nullable: false),
+                        StationLevel = c.Int(nullable: false),
+                        ParentStationId = c.Long(nullable: false),
+                        AreaId = c.Long(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Area", t => t.AreaId)
+                .ForeignKey("dbo.DeliveryStation", t => t.ParentStationId)
+                .Index(t => t.ParentStationId)
+                .Index(t => t.AreaId);
+            
+            CreateTable(
+                "dbo.Courier",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 32),
+                        Phone = c.String(nullable: false, maxLength: 11),
+                        DeliveryStationId = c.Long(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.DeliveryStation", t => t.DeliveryStationId)
+                .Index(t => t.DeliveryStationId);
+            
+            CreateTable(
                 "dbo.Cart",
                 c => new
                     {
@@ -215,35 +247,6 @@ namespace AirShopp.DataAccess.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Courier",
-                c => new
-                    {
-                        Id = c.Long(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 32),
-                        Phone = c.String(nullable: false, maxLength: 11),
-                        DeliveryStationId = c.Long(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DeliveryStation", t => t.DeliveryStationId)
-                .Index(t => t.DeliveryStationId);
-            
-            CreateTable(
-                "dbo.DeliveryStation",
-                c => new
-                    {
-                        Id = c.Long(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 32),
-                        Address = c.String(nullable: false, maxLength: 64),
-                        Latitude = c.Double(nullable: false),
-                        Longitude = c.Double(nullable: false),
-                        StationLevel = c.Int(nullable: false),
-                        ParentStationId = c.Long(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DeliveryStation", t => t.ParentStationId)
-                .Index(t => t.ParentStationId);
-            
-            CreateTable(
                 "dbo.Delivery",
                 c => new
                     {
@@ -368,8 +371,6 @@ namespace AirShopp.DataAccess.Migrations
             DropForeignKey("dbo.InventoryAction", "ProductInFactoryId", "dbo.ProductInFactory");
             DropForeignKey("dbo.Delivery", "ProductId", "dbo.Product");
             DropForeignKey("dbo.Delivery", "OrderId", "dbo.Order");
-            DropForeignKey("dbo.Courier", "DeliveryStationId", "dbo.DeliveryStation");
-            DropForeignKey("dbo.DeliveryStation", "ParentStationId", "dbo.DeliveryStation");
             DropForeignKey("dbo.Cart", "ProductId", "dbo.Product");
             DropForeignKey("dbo.Product", "ProviderId", "dbo.Provider");
             DropForeignKey("dbo.Inventory", "ProductId", "dbo.Product");
@@ -381,6 +382,9 @@ namespace AirShopp.DataAccess.Migrations
             DropForeignKey("dbo.DeliveryNote", "Id", "dbo.Order");
             DropForeignKey("dbo.DeliveryInfo", "OrderId", "dbo.Order");
             DropForeignKey("dbo.Order", "CustomerId", "dbo.Customer");
+            DropForeignKey("dbo.DeliveryStation", "ParentStationId", "dbo.DeliveryStation");
+            DropForeignKey("dbo.Courier", "DeliveryStationId", "dbo.DeliveryStation");
+            DropForeignKey("dbo.DeliveryStation", "AreaId", "dbo.Area");
             DropIndex("dbo.Return", new[] { "OrderId" });
             DropIndex("dbo.OrderItem", new[] { "ProductId" });
             DropIndex("dbo.OrderItem", new[] { "OrderId" });
@@ -388,8 +392,6 @@ namespace AirShopp.DataAccess.Migrations
             DropIndex("dbo.InventoryAction", new[] { "ProductInFactoryId" });
             DropIndex("dbo.Delivery", new[] { "ProductId" });
             DropIndex("dbo.Delivery", new[] { "OrderId" });
-            DropIndex("dbo.DeliveryStation", new[] { "ParentStationId" });
-            DropIndex("dbo.Courier", new[] { "DeliveryStationId" });
             DropIndex("dbo.Inventory", new[] { "ProductId" });
             DropIndex("dbo.Product", new[] { "ProviderId" });
             DropIndex("dbo.Product", new[] { "CategoryId" });
@@ -400,6 +402,9 @@ namespace AirShopp.DataAccess.Migrations
             DropIndex("dbo.Order", new[] { "CustomerId" });
             DropIndex("dbo.Cart", new[] { "ProductId" });
             DropIndex("dbo.Cart", new[] { "CustomerId" });
+            DropIndex("dbo.Courier", new[] { "DeliveryStationId" });
+            DropIndex("dbo.DeliveryStation", new[] { "AreaId" });
+            DropIndex("dbo.DeliveryStation", new[] { "ParentStationId" });
             DropTable("dbo.Return");
             DropTable("dbo.Province");
             DropTable("dbo.OrderItem");
@@ -408,8 +413,6 @@ namespace AirShopp.DataAccess.Migrations
             DropTable("dbo.InventoryAction");
             DropTable("dbo.Discount");
             DropTable("dbo.Delivery");
-            DropTable("dbo.DeliveryStation");
-            DropTable("dbo.Courier");
             DropTable("dbo.City");
             DropTable("dbo.Provider");
             DropTable("dbo.Warehouse");
@@ -423,6 +426,8 @@ namespace AirShopp.DataAccess.Migrations
             DropTable("dbo.Order");
             DropTable("dbo.Customer");
             DropTable("dbo.Cart");
+            DropTable("dbo.Courier");
+            DropTable("dbo.DeliveryStation");
             DropTable("dbo.Area");
             DropTable("dbo.Admin");
         }

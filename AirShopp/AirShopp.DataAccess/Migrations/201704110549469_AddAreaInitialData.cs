@@ -2,7 +2,7 @@ namespace AirShopp.DataAccess.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AddAreaInitialData : DbMigration
     {
         public override void Up()
@@ -3160,7 +3160,7 @@ namespace AirShopp.DataAccess.Migrations
                         SELECT 3144,659004,'Îå¼ÒÇþÊÐ',659000
                 ");
         }
-        
+
         public override void Down()
         {
             Sql(@"

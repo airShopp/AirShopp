@@ -75,29 +75,33 @@
     <Compile Include="Mapping\ProviderMapping.cs" />
     <Compile Include="Mapping\ProvinceMapping.cs" />
     <Compile Include="Mapping\ReturnMapping.cs" />
-    <Compile Include="Migrations\201704070734306_InitialTable.cs" />
-    <Compile Include="Migrations\201704070734306_InitialTable.Designer.cs">
-      <DependentUpon>201704070734306_InitialTable.cs</DependentUpon>
+    <Compile Include="Migrations\201704110546343_InitialTable.cs" />
+    <Compile Include="Migrations\201704110546343_InitialTable.Designer.cs">
+      <DependentUpon>201704110546343_InitialTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704070735093_AddLoginTestUser.cs" />
-    <Compile Include="Migrations\201704070735093_AddLoginTestUser.Designer.cs">
-      <DependentUpon>201704070735093_AddLoginTestUser.cs</DependentUpon>
+    <Compile Include="Migrations\201704110547015_AddLoginTestUser.cs" />
+    <Compile Include="Migrations\201704110547015_AddLoginTestUser.Designer.cs">
+      <DependentUpon>201704110547015_AddLoginTestUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704070735220_AddProvinceInitialData.cs" />
-    <Compile Include="Migrations\201704070735220_AddProvinceInitialData.Designer.cs">
-      <DependentUpon>201704070735220_AddProvinceInitialData.cs</DependentUpon>
+    <Compile Include="Migrations\201704110547298_AddProvinceInitialData.cs" />
+    <Compile Include="Migrations\201704110547298_AddProvinceInitialData.Designer.cs">
+      <DependentUpon>201704110547298_AddProvinceInitialData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704070735392_AddCityInitialData.cs" />
-    <Compile Include="Migrations\201704070735392_AddCityInitialData.Designer.cs">
-      <DependentUpon>201704070735392_AddCityInitialData.cs</DependentUpon>
+    <Compile Include="Migrations\201704110547473_AddCityInitialData.cs" />
+    <Compile Include="Migrations\201704110547473_AddCityInitialData.Designer.cs">
+      <DependentUpon>201704110547473_AddCityInitialData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704070736068_AddAreaInitialData.cs" />
-    <Compile Include="Migrations\201704070736068_AddAreaInitialData.Designer.cs">
-      <DependentUpon>201704070736068_AddAreaInitialData.cs</DependentUpon>
+    <Compile Include="Migrations\201704110549469_AddAreaInitialData.cs" />
+    <Compile Include="Migrations\201704110549469_AddAreaInitialData.Designer.cs">
+      <DependentUpon>201704110549469_AddAreaInitialData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704070746387_AddDeliveryStationInitialData.cs" />
-    <Compile Include="Migrations\201704070746387_AddDeliveryStationInitialData.Designer.cs">
-      <DependentUpon>201704070746387_AddDeliveryStationInitialData.cs</DependentUpon>
+    <Compile Include="Migrations\201704110550088_AddDeliveryStationInitialData.cs" />
+    <Compile Include="Migrations\201704110550088_AddDeliveryStationInitialData.Designer.cs">
+      <DependentUpon>201704110550088_AddDeliveryStationInitialData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704110616411_AddCourierInitialData.cs" />
+    <Compile Include="Migrations\201704110616411_AddCourierInitialData.Designer.cs">
+      <DependentUpon>201704110616411_AddCourierInitialData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,23 +122,26 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704070734306_InitialTable.resx">
-      <DependentUpon>201704070734306_InitialTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704110546343_InitialTable.resx">
+      <DependentUpon>201704110546343_InitialTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704070735093_AddLoginTestUser.resx">
-      <DependentUpon>201704070735093_AddLoginTestUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704110547015_AddLoginTestUser.resx">
+      <DependentUpon>201704110547015_AddLoginTestUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704070735220_AddProvinceInitialData.resx">
-      <DependentUpon>201704070735220_AddProvinceInitialData.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704110547298_AddProvinceInitialData.resx">
+      <DependentUpon>201704110547298_AddProvinceInitialData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704070735392_AddCityInitialData.resx">
-      <DependentUpon>201704070735392_AddCityInitialData.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704110547473_AddCityInitialData.resx">
+      <DependentUpon>201704110547473_AddCityInitialData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704070736068_AddAreaInitialData.resx">
-      <DependentUpon>201704070736068_AddAreaInitialData.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704110549469_AddAreaInitialData.resx">
+      <DependentUpon>201704110549469_AddAreaInitialData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704070746387_AddDeliveryStationInitialData.resx">
-      <DependentUpon>201704070746387_AddDeliveryStationInitialData.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704110550088_AddDeliveryStationInitialData.resx">
+      <DependentUpon>201704110550088_AddDeliveryStationInitialData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704110616411_AddCourierInitialData.resx">
+      <DependentUpon>201704110616411_AddCourierInitialData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
