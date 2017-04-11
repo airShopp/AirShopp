@@ -18,6 +18,11 @@ namespace AirShopp.UI
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+               name: "Default1",
+               url: "{controller}/{action}/{admin}",
+               defaults: new { controller = "Cart", action = "LoadCartList", admin = UrlParameter.Optional }
+           );
         }
     }
 }
