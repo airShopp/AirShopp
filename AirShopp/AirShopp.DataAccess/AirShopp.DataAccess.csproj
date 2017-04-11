@@ -55,10 +55,16 @@
     <Compile Include="Mapping\CartMapping.cs" />
     <Compile Include="Mapping\CategoryMapping.cs" />
     <Compile Include="Mapping\CityMapping.cs" />
+    <Compile Include="Mapping\CourierMapping.cs" />
     <Compile Include="Mapping\CustomerMapping.cs" />
+    <Compile Include="Mapping\DeliveryInfoMapping.cs" />
     <Compile Include="Mapping\DeliveryMapping.cs" />
+    <Compile Include="Mapping\DeliveryNoteMapping.cs" />
+    <Compile Include="Mapping\DeliveryOrderItemMapping.cs" />
+    <Compile Include="Mapping\DeliveryOrderMapping.cs" />
+    <Compile Include="Mapping\DeliveryStationMapping.cs" />
     <Compile Include="Mapping\DiscountMapping.cs" />
-    <Compile Include="Mapping\FactoryMapping.cs" />
+    <Compile Include="Mapping\WarehouseMapping.cs" />
     <Compile Include="Mapping\InventoryActionMapping.cs" />
     <Compile Include="Mapping\InventoryMapping.cs" />
     <Compile Include="Mapping\OrderItemMapping.cs" />
@@ -69,13 +75,29 @@
     <Compile Include="Mapping\ProviderMapping.cs" />
     <Compile Include="Mapping\ProvinceMapping.cs" />
     <Compile Include="Mapping\ReturnMapping.cs" />
-    <Compile Include="Migrations\201704050920368_Initial.cs" />
-    <Compile Include="Migrations\201704050920368_Initial.Designer.cs">
-      <DependentUpon>201704050920368_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201704070734306_InitialTable.cs" />
+    <Compile Include="Migrations\201704070734306_InitialTable.Designer.cs">
+      <DependentUpon>201704070734306_InitialTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704050921236_AddLoginTestUser.cs" />
-    <Compile Include="Migrations\201704050921236_AddLoginTestUser.Designer.cs">
-      <DependentUpon>201704050921236_AddLoginTestUser.cs</DependentUpon>
+    <Compile Include="Migrations\201704070735093_AddLoginTestUser.cs" />
+    <Compile Include="Migrations\201704070735093_AddLoginTestUser.Designer.cs">
+      <DependentUpon>201704070735093_AddLoginTestUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704070735220_AddProvinceInitialData.cs" />
+    <Compile Include="Migrations\201704070735220_AddProvinceInitialData.Designer.cs">
+      <DependentUpon>201704070735220_AddProvinceInitialData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704070735392_AddCityInitialData.cs" />
+    <Compile Include="Migrations\201704070735392_AddCityInitialData.Designer.cs">
+      <DependentUpon>201704070735392_AddCityInitialData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704070736068_AddAreaInitialData.cs" />
+    <Compile Include="Migrations\201704070736068_AddAreaInitialData.Designer.cs">
+      <DependentUpon>201704070736068_AddAreaInitialData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704070746387_AddDeliveryStationInitialData.cs" />
+    <Compile Include="Migrations\201704070746387_AddDeliveryStationInitialData.Designer.cs">
+      <DependentUpon>201704070746387_AddDeliveryStationInitialData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201704100233114_UpdateTableProduct.cs" />
     <Compile Include="Migrations\201704100233114_UpdateTableProduct.Designer.cs">
@@ -97,15 +119,30 @@
     <Compile Include="Migrations\201704100850126_InitialTableProduct.Designer.cs">
       <DependentUpon>201704100850126_InitialTableProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704101115303_Initial.cs" />
+    <Compile Include="Migrations\201704101115303_Initial.Designer.cs">
+      <DependentUpon>201704101115303_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704110248503_ModifyCategory.cs" />
+    <Compile Include="Migrations\201704110248503_ModifyCategory.Designer.cs">
+      <DependentUpon>201704110248503_ModifyCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704110537246_ModifyInventory.cs" />
+    <Compile Include="Migrations\201704110537246_ModifyInventory.Designer.cs">
+      <DependentUpon>201704110537246_ModifyInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704110541279_ModifyProduct.cs" />
+    <Compile Include="Migrations\201704110541279_ModifyProduct.Designer.cs">
+      <DependentUpon>201704110541279_ModifyProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AdminRepository.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
+    <Compile Include="Repository\ProductRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -119,11 +156,23 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704050920368_Initial.resx">
-      <DependentUpon>201704050920368_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704070734306_InitialTable.resx">
+      <DependentUpon>201704070734306_InitialTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704050921236_AddLoginTestUser.resx">
-      <DependentUpon>201704050921236_AddLoginTestUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704070735093_AddLoginTestUser.resx">
+      <DependentUpon>201704070735093_AddLoginTestUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704070735220_AddProvinceInitialData.resx">
+      <DependentUpon>201704070735220_AddProvinceInitialData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704070735392_AddCityInitialData.resx">
+      <DependentUpon>201704070735392_AddCityInitialData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704070736068_AddAreaInitialData.resx">
+      <DependentUpon>201704070736068_AddAreaInitialData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704070746387_AddDeliveryStationInitialData.resx">
+      <DependentUpon>201704070746387_AddDeliveryStationInitialData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704100233114_UpdateTableProduct.resx">
       <DependentUpon>201704100233114_UpdateTableProduct.cs</DependentUpon>
@@ -139,6 +188,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704100850126_InitialTableProduct.resx">
       <DependentUpon>201704100850126_InitialTableProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704101115303_Initial.resx">
+      <DependentUpon>201704101115303_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704110248503_ModifyCategory.resx">
+      <DependentUpon>201704110248503_ModifyCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704110537246_ModifyInventory.resx">
+      <DependentUpon>201704110537246_ModifyInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704110541279_ModifyProduct.resx">
+      <DependentUpon>201704110541279_ModifyProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -15,7 +15,7 @@ namespace AirShopp.DataAccess.Mapping
         {
             HasKey(e => e.Id).Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(e => e.ProvinceId).IsRequired();
-            Property(e => e.ProvinceName).HasMaxLength(200).IsRequired();
+            Property(e => e.ProvinceName).HasMaxLength(256).IsRequired();
         }
     }
 }

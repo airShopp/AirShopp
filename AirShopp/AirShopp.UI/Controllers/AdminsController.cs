@@ -46,7 +46,7 @@ namespace AirShopp.UI.Controllers
             catch (Exception ex)
             {
                 ViewBag.ErrorMessage = ex.Message;
-                return View();
+                return View("Index");
             }
         }
 

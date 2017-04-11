@@ -20,7 +20,7 @@ namespace AirShopp.UI
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/AirShopp/JS").Include(
-                "~/Scripts/knockout-3.4.2.js", 
+                "~/Scripts/knockout-3.4.2.js",
                 "~/Scripts/Init/test.js",
                 "~/Scripts/MainJS/jquery-1.8.2.min.js",
                 "~/Scripts/MainJS/scripts.js",
@@ -32,7 +32,7 @@ namespace AirShopp.UI
                 "~/Content/Css/reset.css",
                 "~/Content/Css/style.css",
                 "~/Content/Css/supersized.css"
-                
+
                 ));
             bundles.Add(new StyleBundle("~/bundles/HomePage/Css").Include(
                 "~/Content/Css/HomePage/bootstrap.css",

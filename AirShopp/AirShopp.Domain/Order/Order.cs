@@ -16,5 +16,8 @@ namespace AirShopp.Domain
         public DateTime DeliveryDate { get; set; }
 
         public Customer Customer { get; set; }
+        public DeliveryOrder DeliveryOrder { get; set; }
+        public DeliveryNote DeliveryNote { get; set; }
+        public ICollection<DeliveryInfo> DeliveryInfos { get; set; }
     }
 }

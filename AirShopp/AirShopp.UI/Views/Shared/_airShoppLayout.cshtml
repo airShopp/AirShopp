@@ -21,7 +21,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700' rel='stylesheet' type='text/css'>
     <!--//web-fonts-->
     <!--/script-->
-  
+
 </head>
 <body>
     <!--start-home-->
@@ -35,7 +35,7 @@
                         <li><a href="#">Delivery information</a></li>
                         @if (Model.Admin.Account != null)
                         {
-                            <li>@Html.ActionLink(Model.Admin.Account,"Index","Home",Model.Admin)</li>
+                            <li>@Html.ActionLink(Model.Admin.Account, "Index", "Home", Model.Admin)</li>
                         }
                         else
                         {
@@ -170,7 +170,7 @@
                             </div>
                         </li>
                     }
-                   
+
                 </ul>
             </div>
         </div>
