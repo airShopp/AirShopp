@@ -1,0 +1,51 @@
+<<<<<<< HEAD:AirShopp/AirShopp.DataAccess/Migrations/201704070735093_AddLoginTestUser.cs
+namespace AirShopp.DataAccess.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+
+    public partial class AddLoginTestUser : DbMigration
+    {
+        public override void Up()
+        {
+            Sql(@"
+                   SET IDENTITY_INSERT Admin ON
+                   INSERT INTO dbo.Admin(Id,Account,Password)
+                   VALUES(1,'zhangsan','123');
+                ");
+        }
+
+        public override void Down()
+        {
+            Sql(@"DELETE FROM dbo.Admin");
+        }
+    }
+}
+=======
+namespace AirShopp.DataAccess.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class AddLoginTestUser : DbMigration
+    {
+        public override void Up()
+        {
+            Sql(@"
+                   SET IDENTITY_INSERT Admin ON
+                   INSERT INTO dbo.Admin(Id,Account,Password)
+                   VALUES(1,'Amanda','123');
+                   INSERT INTO dbo.Admin(Id,Account,Password)
+                   VALUES(2,'Japser','123');
+                   INSERT INTO dbo.Admin(Id,Account,Password)
+                   VALUES(3,'Kenneth','123');
+                ");
+        }
+        
+        public override void Down()
+        {
+            Sql(@"DELETE FROM dbo.Admin");
+        }
+    }
+}
+>>>>>>> Kenneth:AirShopp/AirShopp.DataAccess/Migrations/201704050921236_AddLoginTestUser.cs

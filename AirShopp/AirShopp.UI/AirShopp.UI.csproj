@@ -85,6 +85,22 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -156,15 +172,25 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\AirShoppDependencyResolver.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\HomeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Css\HomePage\bootstrap.css" />
+    <Content Include="Content\Css\HomePage\flexslider.css" />
+    <Content Include="Content\Css\HomePage\megamenu.css" />
+    <Content Include="Content\Css\HomePage\style.css" />
+    <Content Include="Content\Css\reset.css" />
+    <Content Include="Content\Css\style.css" />
+    <Content Include="Content\Css\supersized.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -178,10 +204,28 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-3.4.2.debug.js" />
+    <Content Include="Scripts\knockout-3.4.2.js" />
+    <Content Include="Scripts\MainJS\HomePage\bootstrap.js" />
+    <Content Include="Scripts\MainJS\HomePage\easing.js" />
+    <Content Include="Scripts\MainJS\HomePage\imagezoom.js" />
+    <Content Include="Scripts\MainJS\HomePage\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\MainJS\HomePage\jquery.flexisel.js" />
+    <Content Include="Scripts\MainJS\HomePage\jquery.flexslider.js" />
+    <Content Include="Scripts\MainJS\HomePage\jquery.jscrollpane.min.js" />
+    <Content Include="Scripts\MainJS\HomePage\megamenu.js" />
+    <Content Include="Scripts\MainJS\HomePage\menu_jquery.js" />
+    <Content Include="Scripts\MainJS\HomePage\move-top.js" />
+    <Content Include="Scripts\MainJS\HomePage\scripts.js" />
+    <Content Include="Scripts\MainJS\HomePage\simpleCart.min.js" />
+    <Content Include="Scripts\MainJS\jquery-1.8.2.min.js" />
+    <Content Include="Scripts\MainJS\scripts.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -200,10 +244,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Admins\Index.cshtml" />
+    <Content Include="Views\Admins\Login.cshtml" />
+    <Content Include="Views\Shared\_airShoppLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Content\Images\QRImages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -214,10 +261,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AirShopp.Comman\AirShopp.Comman.csproj">
-      <Project>{b1a5448b-8eaf-47ba-8549-12225ea895d4}</Project>
-      <Name>AirShopp.Comman</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AirShopp.DataAccess\AirShopp.DataAccess.csproj">
       <Project>{2f40b81e-ff54-4774-86c0-67381b8a9df3}</Project>
       <Name>AirShopp.DataAccess</Name>

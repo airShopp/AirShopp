@@ -1,0 +1,15 @@
+--检测Model变化生成一个快照(Migrations文件夹下带时间戳的文件)
+Add-Migration -Verbose -Name Initial -ProjectName AirShopp.DataAccess -StartUpProjectName AirShopp.DataAccess -ConnectionString "Server=YT00678-109;Database=airShopp;User Id=sa; Password=sa;" -ConnectionProviderName "System.Data.SqlClient"
+
+--根据生成的快照更新数据库
+Update-Database -Verbose -ProjectName AirShopp.DataAccess -StartUpProjectName AirShopp.DataAccess -ConnectionString "Server=YT00678-109;Database=airShopp;User Id=sa; Password=sa;" -ConnectionProviderName "System.Data.SqlClient"
+
+--回滚到指定的Migration，MigrationId 是要去数据库的第一张表找的
+Update-Database -Verbose -ProjectName AirShopp.DataAccess -StartUpProjectName AirShopp.DataAccess -ConnectionString "Server=YT00678-109;Database=airShopp;User Id=sa; Password=sa;" -ConnectionProviderName "System.Data.SqlClient" -TargetMigration <MigrationId>
+
+Update-Database -Verbose -ProjectName AirShopp.DataAccess -StartUpProjectName AirShopp.DataAccess -ConnectionString "Server=YT00674-109\SQLEXPRESS;Database=airShopp;User Id=sa; Password=sa;" -ConnectionProviderName "System.Data.SqlClient"
+
+
+--回滚到指定的Migration
+Update-Database -Verbose -ProjectName AirShopp.DataAccess -StartUpProjectName AirShopp.DataAccess -ConnectionString "Server=YT00674-109\SQLEXPRESS;Database=airShopp;User Id=sa; Password=sa;" -ConnectionProviderName "System.Data.SqlClient" -TargetMigration <MigrationId>
+

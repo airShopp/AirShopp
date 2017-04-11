@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace AirShopp.Domain
 {
     public class Category
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Category()
+        {
+            Products = new List<Product>();
+        }
+
         public long Id { get; set; }
         public string CategoryName { get; set; }
+
+        public ICollection<Product> Products { get; set; }
     }
 }

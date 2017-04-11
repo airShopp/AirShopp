@@ -1,0 +1,53 @@
+﻿@model AirShopp.Domain.Admin
+@{
+    ViewBag.Title = "Login";
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+@Scripts.Render("~/bundles/AirShopp/JS")
+@Styles.Render("~/bundles/AirShopp/Css")
+<head>
+    <meta charset="utf-8">
+    <title>Fullscreen Login</title>
+    <!-- CSS -->
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <span>@ViewBag.ErrorMessage</span>
+    <div class="page-container">
+        <h1>Login</h1>
+        @using (Html.BeginForm("Login", "Admins", FormMethod.Post))
+        {
+            @Html.ValidationSummary(true)
+            @*<input type="text" name="username" class="username" placeholder="Username">*@
+            @Html.TextBoxFor(m => m.Account, new { @class = "username", placeholder = "Username" })
+            @Html.ValidationMessageFor(m => m.Account)
+
+
+            @*<input type="password" name="password" class="password" placeholder="Password">*@
+            @Html.PasswordFor(m => m.Password, new { @class = "password", placeholder = "Password" })
+            @Html.ValidationMessageFor(m => m.Password)
+            <button type="submit">Login</button>
+            <div class="error"><span>+</span></div>
+        }
+        <div class="connect">
+            <p>Or connect with:</p>
+            <p>
+                <a class="facebook" href=""></a>
+                <a class="twitter" href=""></a>
+            </p>
+        </div>
+    </div>
+    <div align="center">Collect from <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a></div>
+
+</body>
+
+</html>

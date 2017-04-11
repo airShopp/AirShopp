@@ -1,0 +1,20 @@
+<<<<<<< HEAD
+﻿@{
+    ViewBag.Title = "Home Page";
+=======
+﻿@model AirShopp.UI.Models.ViewModel.HomeViewModel
+@Scripts.Render("~/bundles/AirShopp")
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_airShoppLayout.cshtml";
+>>>>>>> Kenneth
+}
+<br />
+<br />
+<sapn style="margin-left:40%;">Nothing to do</sapn>
+@if (Model != null)
+{
+    <h1 style="margin-left:45%;">Welcome! @Model.Admin.Account</h1>
+}
+
+
