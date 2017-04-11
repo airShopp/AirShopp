@@ -11,7 +11,7 @@ namespace AirShopp.DataAccess.Mapping
             HasKey(e => e.Id).Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(e => e.Amount).IsRequired();
             HasRequired(e => e.Product).WithMany(e => e.Inventories).HasForeignKey(fk => fk.ProductId);
-            HasRequired(e => e.Factory).WithMany(e => e.Inventories).HasForeignKey(fk => fk.ProductId);
+            HasRequired(e => e.Warehouse).WithMany(e => e.Inventories).HasForeignKey(fk => fk.WarehouseId);
         }
     }
 }

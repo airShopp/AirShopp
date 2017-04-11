@@ -64,6 +64,7 @@
     <Compile Include="Product\Inventory.cs" />
     <Compile Include="OrderItem\OrderItem.cs" />
     <Compile Include="Order\Order.cs" />
+    <Compile Include="Product\IProductRepository.cs" />
     <Compile Include="Product\Warehouse.cs" />
     <Compile Include="Product\InventoryAction.cs" />
     <Compile Include="Product\Product.cs" />
