@@ -7,13 +7,13 @@ namespace AirShopp.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class UpdateTableProduct : IMigrationMetadata
+    public sealed partial class ModifyProductAddColumnDescription : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateTableProduct));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ModifyProductAddColumnDescription));
         
         string IMigrationMetadata.Id
         {
-            get { return "201704100233114_UpdateTableProduct"; }
+            get { return "201704110712164_ModifyProductAddColumnDescription"; }
         }
         
         string IMigrationMetadata.Source

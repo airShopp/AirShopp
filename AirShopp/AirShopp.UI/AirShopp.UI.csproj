@@ -184,10 +184,12 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Css\HomePage\bootstrap.css" />
-    <Content Include="Content\Css\HomePage\flexslider.css" />
-    <Content Include="Content\Css\HomePage\megamenu.css" />
-    <Content Include="Content\Css\HomePage\style.css" />
+    <Content Include="Content\Css\HomePage\Common\bootstrap.css" />
+    <Content Include="Content\Css\HomePage\Layout\etalage.css" />
+    <Content Include="Content\Css\HomePage\Layout\content.css" />
+    <Content Include="Content\Css\HomePage\Common\flexslider.css" />
+    <Content Include="Content\Css\HomePage\Common\megamenu.css" />
+    <Content Include="Content\Css\HomePage\Layout\style.css" />
     <Content Include="Content\Css\reset.css" />
     <Content Include="Content\Css\style.css" />
     <Content Include="Content\Css\supersized.css" />
@@ -196,7 +198,7 @@
     <Content Include="Content\Images\HomePage\c2.png" />
     <Content Include="Content\Images\HomePage\c3.png" />
     <Content Include="Content\Images\HomePage\c4.png" />
-    <Content Include="Content\Images\HomePage\cart.png" />
+    <Content Include="Content\Images\HomePage\cart.jpg" />
     <Content Include="Content\Images\HomePage\close.png" />
     <Content Include="Content\Images\HomePage\f1.jpg" />
     <Content Include="Content\Images\HomePage\f2.jpg" />
@@ -263,12 +265,14 @@
     <Content Include="Scripts\MainJS\HomePage\easing.js" />
     <Content Include="Scripts\MainJS\HomePage\imagezoom.js" />
     <Content Include="Scripts\MainJS\HomePage\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\MainJS\HomePage\jquery.etalage.min.js" />
     <Content Include="Scripts\MainJS\HomePage\jquery.flexisel.js" />
     <Content Include="Scripts\MainJS\HomePage\jquery.flexslider.js" />
     <Content Include="Scripts\MainJS\HomePage\jquery.jscrollpane.min.js" />
     <Content Include="Scripts\MainJS\HomePage\megamenu.js" />
     <Content Include="Scripts\MainJS\HomePage\menu_jquery.js" />
     <Content Include="Scripts\MainJS\HomePage\move-top.js" />
+    <Content Include="Scripts\MainJS\HomePage\responsiveslides.min.js" />
     <Content Include="Scripts\MainJS\HomePage\scripts.js" />
     <Content Include="Scripts\MainJS\HomePage\simpleCart.min.js" />
     <Content Include="Scripts\MainJS\jquery-1.8.2.min.js" />
