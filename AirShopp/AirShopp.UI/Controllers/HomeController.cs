@@ -23,6 +23,9 @@ namespace AirShopp.UI.Controllers
 
         public ActionResult Index(Admin admin)
          {
+            string path = HttpRuntime.AppDomainAppPath.ToString()+"Content\\HomePage\\p4.jpg";
+            string path1 = Server.MapPath("~/Content/Images/HomePage");
+            string imgPath = path1.Substring(path1.IndexOf("Content"));
             HomeViewModel homeViewModel = new HomeViewModel()
             {
                 Admin = admin,

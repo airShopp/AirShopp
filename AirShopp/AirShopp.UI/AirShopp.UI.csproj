@@ -240,6 +240,8 @@
     <Content Include="Content\Images\LoginPage\facebook.png" />
     <Content Include="Content\Images\LoginPage\progress.gif" />
     <Content Include="Content\Images\LoginPage\twitter.png" />
+    <Content Include="Content\Products\User\3\充电器.jpg" />
+    <Content Include="Content\Products\User\3\快充数据线.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

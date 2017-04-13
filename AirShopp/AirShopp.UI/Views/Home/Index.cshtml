@@ -4,6 +4,8 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_airShoppLayout.cshtml";
 }
+
+
 <div class="main">
     <div class="content">
         <div class="content_top">
@@ -57,7 +59,7 @@
                 if (m < Model.Products.Count)
                 {
                     <div class="grid_1_of_4 images_1_of_4">
-                        <a href="single.html"><img src="~/Content/Images/HomePage/p5.jpg" alt="" /></a>
+                        <a href="single.html"><img src="@Model.Products[m].url" alt="" /></a>
                     
                         <h2>@Model.Products[m].ProductName </h2>
                         <p>@Model.Products[m].Description</p>
