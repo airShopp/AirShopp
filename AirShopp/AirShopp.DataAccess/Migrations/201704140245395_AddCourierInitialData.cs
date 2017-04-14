@@ -10,7 +10,7 @@ namespace AirShopp.DataAccess.Migrations
             Sql(@"
                     SET IDENTITY_INSERT Courier ON
                         INSERT  Courier(Id,Name,Phone,DeliveryStationId)
-                        SELECT 1, N'?Æë»¸¹«', 13502463200, 21 UNION
+                        SELECT 1, N'Æë»¸¹«', 13502463200, 21 UNION
                         SELECT 2, N'¹ÜÖÙ', 13008388032, 22 UNION
                         SELECT 3, N'ÚôÅó', 15301327446, 23 UNION
                         SELECT 4, N'±«ÊåÑÀ', 15106732145, 24 UNION
