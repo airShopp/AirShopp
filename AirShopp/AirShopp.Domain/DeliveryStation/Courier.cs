@@ -13,6 +13,6 @@ namespace AirShopp.Domain
         public string Phone { get; set; }// Phone
         public long DeliveryStationId { get; set; } //Foreign key ref DeliveryStation (Id)
 
-        public DeliveryStation DeliveryStation { get; set; }
+        public virtual DeliveryStation DeliveryStation { get; set; }
     }
 }

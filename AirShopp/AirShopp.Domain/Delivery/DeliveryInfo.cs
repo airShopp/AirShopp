@@ -15,6 +15,6 @@ namespace AirShopp.Domain
         public DateTime UpdateTime { get; set; }// Process time
         public long OrderId { get; set; }// Foreign key ref Order (Id)
 
-        public Order Order { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

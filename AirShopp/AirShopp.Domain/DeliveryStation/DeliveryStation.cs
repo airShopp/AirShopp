@@ -18,10 +18,10 @@ namespace AirShopp.Domain
         public long AreaId { get; set; }// Foreign key ref Area (Id)
 
 
-        public Area Area { get; set; }
-        public ICollection<Courier> Couriers { get; set; }
+        public virtual Area Area { get; set; }
+        public virtual ICollection<Courier> Couriers { get; set; }
 
-        public DeliveryStation ParentDeliveryStation { get; set; }
-        public ICollection<DeliveryStation> DeliveryStations { get; set; }
+        public virtual DeliveryStation ParentDeliveryStation { get; set; }
+        public virtual ICollection<DeliveryStation> DeliveryStations { get; set; }
     }
 }

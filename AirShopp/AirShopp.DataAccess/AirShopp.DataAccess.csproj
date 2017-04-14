@@ -75,9 +75,9 @@
     <Compile Include="Mapping\ProviderMapping.cs" />
     <Compile Include="Mapping\ProvinceMapping.cs" />
     <Compile Include="Mapping\ReturnMapping.cs" />
-    <Compile Include="Migrations\201704110546343_InitialTable.cs" />
-    <Compile Include="Migrations\201704110546343_InitialTable.Designer.cs">
-      <DependentUpon>201704110546343_InitialTable.cs</DependentUpon>
+    <Compile Include="Migrations\201704070734306_InitialTable.cs" />
+    <Compile Include="Migrations\201704070734306_InitialTable.Designer.cs">
+      <DependentUpon>201704070734306_InitialTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201704110547015_AddLoginTestUser.cs" />
     <Compile Include="Migrations\201704110547015_AddLoginTestUser.Designer.cs">
@@ -160,8 +160,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704110546343_InitialTable.resx">
-      <DependentUpon>201704110546343_InitialTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704070734306_InitialTable.resx">
+      <DependentUpon>201704070734306_InitialTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704110547015_AddLoginTestUser.resx">
       <DependentUpon>201704110547015_AddLoginTestUser.cs</DependentUpon>
