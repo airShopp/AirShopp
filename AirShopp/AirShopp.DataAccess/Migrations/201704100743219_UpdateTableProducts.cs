@@ -8,7 +8,6 @@ namespace AirShopp.DataAccess.Migrations
         public override void Up()
         {
             DropColumn("dbo.Product", "Supply");
-            AddColumn("dbo.Product", "Description", c => c.String(nullable: true));
         }
         
         public override void Down()

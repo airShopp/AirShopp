@@ -3,16 +3,16 @@ namespace AirShopp.DataAccess.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class UpdateTableProduct : DbMigration
+    public partial class ModifyProductAddColumnDescription : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Product", "url", c => c.String(nullable: false));
+            AddColumn("dbo.Product", "Description", c => c.String());
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Product", "url");
+            DropColumn("dbo.Product", "Description");
         }
     }
 }

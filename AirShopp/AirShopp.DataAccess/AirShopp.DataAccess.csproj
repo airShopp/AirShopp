@@ -103,10 +103,6 @@
     <Compile Include="Migrations\201704110616411_AddCourierInitialData.Designer.cs">
       <DependentUpon>201704110616411_AddCourierInitialData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704100233114_UpdateTableProduct.cs" />
-    <Compile Include="Migrations\201704100233114_UpdateTableProduct.Designer.cs">
-      <DependentUpon>201704100233114_UpdateTableProduct.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201704100233594_InitialTableCategory.cs" />
     <Compile Include="Migrations\201704100233594_InitialTableCategory.Designer.cs">
       <DependentUpon>201704100233594_InitialTableCategory.cs</DependentUpon>
@@ -138,6 +134,10 @@
     <Compile Include="Migrations\201704110541279_ModifyProduct.cs" />
     <Compile Include="Migrations\201704110541279_ModifyProduct.Designer.cs">
       <DependentUpon>201704110541279_ModifyProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704110712164_ModifyProductAddColumnDescription.cs" />
+    <Compile Include="Migrations\201704110712164_ModifyProductAddColumnDescription.Designer.cs">
+      <DependentUpon>201704110712164_ModifyProductAddColumnDescription.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -181,9 +181,6 @@
     <EmbeddedResource Include="Migrations\201704110616411_AddCourierInitialData.resx">
       <DependentUpon>201704110616411_AddCourierInitialData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704100233114_UpdateTableProduct.resx">
-      <DependentUpon>201704100233114_UpdateTableProduct.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704100233594_InitialTableCategory.resx">
       <DependentUpon>201704100233594_InitialTableCategory.cs</DependentUpon>
     </EmbeddedResource>
@@ -207,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704110541279_ModifyProduct.resx">
       <DependentUpon>201704110541279_ModifyProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704110712164_ModifyProductAddColumnDescription.resx">
+      <DependentUpon>201704110712164_ModifyProductAddColumnDescription.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

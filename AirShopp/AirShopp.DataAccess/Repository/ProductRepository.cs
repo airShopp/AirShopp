@@ -12,13 +12,15 @@ namespace AirShopp.DataAccess
         public List<Product> Products()
         {
             List<Product> products = new List<Product>();
-            _context.Product.OrderBy(x =>Guid.NewGuid()).Take(10).ToList().ForEach(product => {
+            _context.Product.OrderBy(x => Guid.NewGuid()).Take(10).ToList().ForEach(product => {
                 products.Add(new Product() {
                       Id = product.Id,
                       Price = product.Price,
                       KeepDate = product.KeepDate,
                       ProductionDate = product.ProductionDate,
-                      ProductName = product.ProductName
+                      ProductName = product.ProductName,
+                      Description = product.Description
+                      
                 });
             });
             return products;
