@@ -18,6 +18,6 @@ namespace AirShopp.Domain
         public string Remarks { get; set; }// Something to be comments
         public long DeliveryOrderId { get; set; }// Foreign key ref DeliveryOrder (Id)
 
-        public DeliveryOrder DeliveryOder { get; set; }
+        public virtual DeliveryOrder DeliveryOder { get; set; }
     }
 }

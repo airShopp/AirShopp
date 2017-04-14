@@ -22,6 +22,7 @@ namespace AirShopp.DataAccess.Mapping
             Property(e => e.StationLevel).IsRequired();
 
             HasRequired(e => e.ParentDeliveryStation).WithMany(e=>e.DeliveryStations).HasForeignKey(fk => fk.ParentStationId);
+            HasRequired(e => e.Area).WithMany(e => e.DeliveryStations).HasForeignKey(fk => fk.AreaId);
         }
     }
 }
