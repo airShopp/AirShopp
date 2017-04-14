@@ -7,13 +7,13 @@ namespace AirShopp.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddLoginTestUser : IMigrationMetadata
+    public sealed partial class AddAreaInitialData : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddLoginTestUser));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddAreaInitialData));
         
         string IMigrationMetadata.Id
         {
-            get { return "201704110547015_AddLoginTestUser"; }
+            get { return "201704140243358_AddAreaInitialData"; }
         }
         
         string IMigrationMetadata.Source

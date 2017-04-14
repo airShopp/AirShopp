@@ -7,13 +7,13 @@ namespace AirShopp.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddProvinceInitialData : IMigrationMetadata
+    public sealed partial class InitialTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddProvinceInitialData));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201704110547298_AddProvinceInitialData"; }
+            get { return "201704140241285_InitialTable"; }
         }
         
         string IMigrationMetadata.Source

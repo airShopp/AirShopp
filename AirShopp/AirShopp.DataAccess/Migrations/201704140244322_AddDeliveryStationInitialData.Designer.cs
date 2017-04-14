@@ -13,7 +13,7 @@ namespace AirShopp.DataAccess.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201704110550088_AddDeliveryStationInitialData"; }
+            get { return "201704140244322_AddDeliveryStationInitialData"; }
         }
         
         string IMigrationMetadata.Source
