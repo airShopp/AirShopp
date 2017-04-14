@@ -4,6 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_airShoppLayout.cshtml";
 }
+
 <div class="main">
     <div class="content">
         <div class="content_top">
@@ -57,9 +58,9 @@
                 if (m < Model.Products.Count)
                 {
                     <div class="grid_1_of_4 images_1_of_4">
-                        <a href="single.html"><img src="~/Content/Images/HomePage/p5.jpg" alt="" /></a>
+                        <a href="single.html"><img src="@Model.Products[m].url" alt="" /></a>
                     
-                        <h2>@Model.Products[m].ProductName </h2>
+                        <h2>@Html.ActionLink(@Model.Products[m].ProductName, "Index", "Product", Model, new { target = "_blank" }) </h2>
                         <p>@Model.Products[m].Description</p>
                         <p><span class="strike">$528.22</span><span class="price">$@Model.Products[m].Price</span></p>
                         <div class="button"><span><img src="~/Content/Images/HomePage/cart.jpg" alt="" /><a href="single.html" class="cart-button">Add to Cart</a></span> </div>

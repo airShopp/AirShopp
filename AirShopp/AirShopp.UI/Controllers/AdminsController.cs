@@ -37,11 +37,14 @@ namespace AirShopp.UI.Controllers
         [HttpPost]
         public ActionResult Login(string account, string password)
         {
+            
             try
             {
                 Admin admin = _adminService.UserLogin(account, password);
                 ViewBag.Message = "Success！！";
-                return RedirectToAction("Index","Home",admin);
+                Session["UserName"] = admin.Account;
+                Session["Password"] = admin.Id;
+                return RedirectToAction("Index","Home");
             }
             catch (Exception ex)
             {

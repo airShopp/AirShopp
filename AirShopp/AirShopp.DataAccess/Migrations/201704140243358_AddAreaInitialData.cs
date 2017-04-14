@@ -740,7 +740,8 @@ namespace AirShopp.DataAccess.Migrations
                         SELECT 728,230713,N'带岭区',230700 UNION
                         SELECT 729,230714,N'乌伊岭区',230700 UNION
                         SELECT 730,230715,N'红星区',230700 UNION
-                        SELECT 731,230716,N'上甘岭区',230700 UNION
+                        SELECT 731,230716,N'上甘岭区',230700
+INSERT INTO Area (Id,AreaId,AreaName,CityId) 
                         SELECT 732,230722,N'嘉荫县',230700 UNION
                         SELECT 733,230781,N'铁力市',230700 UNION
                         SELECT 734,230801,N'市辖区',230800 UNION
@@ -2101,7 +2102,8 @@ namespace AirShopp.DataAccess.Migrations
                         SELECT 2087,450205,N'柳北区',450200 UNION
                         SELECT 2088,450221,N'柳江县',450200 UNION
                         SELECT 2089,450222,N'柳城县',450200 UNION
-                        SELECT 2090,450223,N'鹿寨县',450200 UNION
+                        SELECT 2090,450223,N'鹿寨县',450200
+INSERT INTO Area (Id,AreaId,AreaName,CityId) 
                         SELECT 2091,450224,N'融安县',450200 UNION
                         SELECT 2092,450225,N'融水苗族自治县',450200 UNION
                         SELECT 2093,450226,N'三江侗族自治县',450200 UNION
@@ -2482,7 +2484,8 @@ namespace AirShopp.DataAccess.Migrations
                         SELECT 2468,520201,N'钟山区',520200 UNION
                         SELECT 2469,520203,N'六枝特区',520200 UNION
                         SELECT 2470,520221,N'水城县',520200 UNION
-                        SELECT 2471,520222,N'盘　县',520200 UNION
+                        SELECT 2471,520222,N'盘　县',520200
+INSERT INTO Area (Id,AreaId,AreaName,CityId) 
                         SELECT 2472,520301,N'市辖区',520300 UNION
                         SELECT 2473,520302,N'红花岗区',520300 UNION
                         SELECT 2474,520303,N'汇川区',520300 UNION
