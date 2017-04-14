@@ -61,7 +61,7 @@
                         <a href="single.html"><img src="@Model.Products[m].url" alt="" /></a>
                     
                         <h2>@Html.ActionLink(@Model.Products[m].ProductName, "Index", "Product", Model, new { target = "_blank" }) </h2>
-                        <p>@Model.Products[m].Description</p>
+                        @*<p>@Model.Products[m].Description</p>*@
                         <p><span class="strike">$528.22</span><span class="price">$@Model.Products[m].Price</span></p>
                         <div class="button"><span><img src="~/Content/Images/HomePage/cart.jpg" alt="" /><a href="single.html" class="cart-button">Add to Cart</a></span> </div>
                         <div class="button"><span><a href="single.html" class="details">Details</a></span></div>

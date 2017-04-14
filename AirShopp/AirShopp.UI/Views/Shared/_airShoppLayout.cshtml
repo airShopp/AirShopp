@@ -34,13 +34,14 @@
                         <li><a href="#">help</a></li>
                         <li><a href="contact.html">Contact</a></li>
                         <li><a href="#">Delivery information</a></li>
-                        @if (Model.Admin.Account != null)
+                        @if (Session["Admin"] != null)
                         {
-                            <li>@Html.ActionLink(Model.Admin.Account, "Index", "Home", Model.Admin)</li>
+                            var admin = Session["Admin"] as AirShopp.Domain.Admin;
+                            <li>@Html.ActionLink(admin.Account, "Index", "Home", admin.Id)</li>
                         }
                         else
                         {
-                            <li>@Html.ActionLink("Login", "Login", "Admins")</li>
+                            <li> @Html.ActionLink("Login", "Login", "Admins") </li>
                         }
                     </ul>
                 </div>
