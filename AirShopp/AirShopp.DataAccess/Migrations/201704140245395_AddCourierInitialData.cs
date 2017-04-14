@@ -669,7 +669,8 @@ namespace AirShopp.DataAccess.Migrations
                         SELECT 657, N'Öììä', 15203577575, 677 UNION
                         SELECT 658, N'ÁøÓÀ', 13905794201, 678 UNION
                         SELECT 659, N'»ÆÍ¥¼á', 13008062156, 679 UNION
-                        SELECT 660, N'ÇØ¹Û', 13107337605, 680 UNION
+                        SELECT 660, N'ÇØ¹Û', 13107337605, 680
+INSERT  Courier(Id,Name,Phone,DeliveryStationId)
                         SELECT 661, N'êÌÊâ', 13706262114, 681 UNION
                         SELECT 662, N'êÌ¼¸µÀ', 15003245331, 682 UNION
                         SELECT 663, N'Â½ÓÎ', 13401668522, 683 UNION
@@ -904,7 +905,8 @@ namespace AirShopp.DataAccess.Migrations
                         SELECT 892, N'ÕÅÖ®¶´', 15807433514, 912 UNION
                         SELECT 893, N'ÀîÁ«Ó¢', 13103343922, 913 UNION
                         SELECT 894, N'µËÊÀ²ý', 13000561311, 914 UNION
-                        SELECT 895, N'¶¡Èê²ý', 15700918657, 915 UNION
+                        SELECT 895, N'¶¡Èê²ý', 15700918657, 915
+INSERT  Courier(Id,Name,Phone,DeliveryStationId)
                         SELECT 896, N'²ÜÑ©ÇÛ', 13100183811, 916 UNION
                         SELECT 897, N'ÃÎç÷', 13907348449, 917 UNION
                         SELECT 898, N'ÒäÁø', 15503684707, 918 UNION
@@ -1293,7 +1295,8 @@ namespace AirShopp.DataAccess.Migrations
                         SELECT 1281, N'Æ½´º', 15908762303, 1301 UNION
                         SELECT 1282, N'Ó×°Ø', 15908153947, 1302 UNION
                         SELECT 1283, N'ÇïÁé', 13305132183, 1303 UNION
-                        SELECT 1284, N'ÄýÜ½', 13301188949, 1304 UNION
+                        SELECT 1284, N'ÄýÜ½', 13301188949, 1304
+INSERT  Courier(Id,Name,Phone,DeliveryStationId)
                         SELECT 1285, N'ÄîÑÌ', 15306055686, 1305 UNION
                         SELECT 1286, N'°×É½', 13506210537, 1306 UNION
                         SELECT 1287, N'´ÓÁé', 15600406073, 1307 UNION
