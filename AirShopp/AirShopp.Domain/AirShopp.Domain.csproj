@@ -57,11 +57,14 @@
     <Compile Include="Cart\ICartRepository.cs" />
     <Compile Include="Cart\ICartService.cs" />
     <Compile Include="Category\Category.cs" />
+    <Compile Include="Category\CategoryService.cs" />
     <Compile Include="Category\ICategoryRepository.cs" />
     <Compile Include="Comment\Comment.cs" />
     <Compile Include="Comment\CommentService.cs" />
     <Compile Include="Comment\ICommentRepository.cs" />
     <Compile Include="Comment\ICommentService.cs" />
+    <Compile Include="Category\ICategoryService.cs" />
+    <Compile Include="Common\IReadFromDb.cs" />
     <Compile Include="Customer\Customer.cs" />
     <Compile Include="Customer\ICustomerFactory.cs" />
     <Compile Include="DeliveryStation\Courier.cs" />

@@ -1,4 +1,5 @@
 ﻿using AirShopp.Domain;
+using AirShopp.UI.Models;
 using AirShopp.UI.Models.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -12,25 +13,37 @@ namespace AirShopp.UI.Controllers
     {
         public readonly ICategoryRepository _categoryRepository;
         public readonly IProductRepository _productRepository;
+        public readonly ICategoryService _categoryService;
 
         public HomeController(
             ICategoryRepository categoryRepository,
-            IProductRepository productRepository)
+            IProductRepository productRepository,
+            ICategoryService categoryService)
         {
             _categoryRepository = categoryRepository;
             _productRepository = productRepository;
+            _categoryService = categoryService;
         }
 
         public ActionResult Index(Admin admin)
          {
-            string path = HttpRuntime.AppDomainAppPath.ToString()+"Content\\HomePage\\p4.jpg";
-            string path1 = Server.MapPath("~/Content/Images/HomePage");
-            string imgPath = path1.Substring(path1.IndexOf("Content"));
+            //string path = HttpRuntime.AppDomainAppPath.ToString()+$"/Content/HomePage/p4.jpg";
+            //string path1 = Server.MapPath("~/Content/Images/HomePage");
+            //string imgPath = path1.Substring(path1.IndexOf("Content"));
+
+            var secondCategories = (from category in _categoryService.Categories()
+                                    where category.ParentId > 0
+                                    select new CategoryModel
+                                    {
+                                        Id = category.Id,
+                                        CategoryName = category.CategoryName,
+                                        ParentId = category.ParentId
+                                    }).ToList();
             HomeViewModel homeViewModel = new HomeViewModel()
             {
-                Admin = admin,
-                Categories = _categoryRepository.GetCategories(),
-                Products = _productRepository.Products()
+                Categories = _categoryRepository.GetCategories().ToList(),
+                Products = _productRepository.Products(),
+                SecondCategories = secondCategories
 
             };
             return View(homeViewModel);
