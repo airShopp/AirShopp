@@ -34,10 +34,10 @@
                         <li><a href="#">help</a></li>
                         <li><a href="contact.html">Contact</a></li>
                         <li><a href="#">Delivery information</a></li>
-                        @if (Session["Admin"] != null)
+                        @if (Session["User"] != null)
                         {
-                            var admin = Session["Admin"] as AirShopp.Domain.Admin;
-                            <li>@Html.ActionLink(admin.Account, "Index", "Home", admin.Id)</li>
+                            var user = Session["User"] as AirShopp.Domain.Admin;
+                            <li>@Html.ActionLink(user.Account, "Index", "Home", user.Id)</li>
                         }
                         else
                         {

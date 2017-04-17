@@ -35,7 +35,7 @@ namespace AirShopp.UI.Controllers
             try
             {
                 Admin admin = _adminService.UserLogin(account, password);
-                Session.Add("Admin",admin);
+                Session.Add("User",admin);
                 return RedirectToAction("Index","Home");
             }
             catch (Exception ex)
