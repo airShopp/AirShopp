@@ -1,4 +1,5 @@
-﻿using AirShopp.UI.Models.ViewModel;
+﻿using AirShopp.UI.Models;
+using AirShopp.UI.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,10 @@ namespace AirShopp.UI.Controllers
         public ActionResult Index(HomeViewModel  model)
         {
             return View("ProductDetail", model);
+        }
+        public ActionResult getProduct(long CategoryId)
+        {
+            return View();
         }
     }
 }
