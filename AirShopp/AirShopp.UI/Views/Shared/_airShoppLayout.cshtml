@@ -1,327 +1,187 @@
-﻿@model AirShopp.UI.Models.ViewModel.HomeViewModel
-<!DOCTYPE HTML>
+﻿<!doctype html>
 <html>
 <head>
-    <title>Home</title>
-    @Styles.Render("~/bundles/HomePage/Css")
-    @Styles.Render("~/bundles/HomePage/Layout")
-    @Scripts.Render("~/bundles/HomePage")
-    <script type="applijegleryion/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- start menu -->
-    <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+    <title>歪秀购物</title>
+    @Scripts.Render("~/bundles/AirShopp/js")
+    @Styles.Render("~/bundles/AirShopp/Layout")
     <script type="text/javascript">
-       jQuery(document).ready(function($) {
-        $(".scroll").click(function(event){
-         event.preventDefault();
-         $('html,body').animate({scrollTop:$(this.hash).offset().top},900);
-        });
-       });
-    </script>
-    <!--web-fonts-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,600,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700' rel='stylesheet' type='text/css'>
-    <!--//web-fonts-->
-    <!--/script-->
+         var intDiff = parseInt(80000);//倒计时总秒数量
+         function timer(intDiff){
+             window.setInterval(function(){
+                 var day=0,
+                         hour=0,
+                         minute=0,
+                         second=0;//时间默认值
+                 if(intDiff > 0){
+                     day = Math.floor(intDiff / (60 * 60 * 24));
+                     hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+                     minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+                     second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+                 }
+                 if (minute <= 9) minute = '0' + minute;
+                 if (second <= 9) second = '0' + second;
 
+                 $('#hour_show').html('<s id="h"></s>'+hour+'');
+                 $('#minute_show').html('<s></s>'+minute+'');
+                 $('#second_show').html('<s></s>'+second+'');
+                 intDiff--;
+             }, 1000);
+         }
+
+         $(function(){
+             timer(intDiff);
+         });
+    </script>
 </head>
 <body>
-    <!--start-home-->
-    <div class="top_bg" id="home">
-        <div class="container">
-            <div class="header_top">
-                <div class="top_right">
-                    <ul>
-                        <li><a href="#">help</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="#">Delivery information</a></li>
-                        @if (Session["User"] != null)
-                        {
-                            var user = Session["User"] as AirShopp.Domain.Admin;
-                            <li>@Html.ActionLink(user.Account, "Index", "Home", user.Id)</li>
-                        }
-                        else
-                        {
-                            <li> @Html.ActionLink("Login", "Login", "Admins") </li>
-                        }
-                    </ul>
-                </div>
-                <div class="top_left">
-                    <h6><span></span> Call us : 032 2352 782</h6>
-                </div>
-                <div class="clearfix"> </div>
+    <!--- header begin-->
+    <header id="pc-header">
+        <div class="BHeader">
+            <div class="yNavIndex">
+                <ul class="BHeaderl">
+                    <li style="display:none;"><a href="#" style="float:left;">嘻哈杂货铺</a> <a href="#" style="float:left;">退出</a> </li>
+                    @if (Session["User"] != null)
+                    {
+                        var user = Session["User"] as AirShopp.Domain.Admin;
+                        <li>@Html.ActionLink(user.Account, "GetUser", "User", null, new { style = "color:#ea4949" })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("请登录", "Login", "User", null, new { style = "color:#ea4949" })</li>
+                    }
+                    <li class="headerul">|</li>
+                    <li><a href="register.html">免费注册</a> </li>
+                    <li class="headerul">|</li>
+                    <li><a href="my-d.html">订单查询</a> </li>
+                    <li class="headerul">|</li>
+                    <li><a href="my-s.html">我的收藏</a> </li>
+                    <li class="headerul">|</li>
+                    <li id="pc-nav" class="menu">
+                        <a href="my-user.html" class="tit">我的商城</a>
+                        <div class="subnav">
+                            <a href="my-d.html">我的订单</a>
+                            <a href="my-s.html">我的收藏</a>
+                            <a href="my-user.html">账户安全</a>
+                            <a href="my-add.html">地址管理</a>
+                            <a href="my-p.html">我要评价</a>
+                        </div>
+                    </li>
+                    <li class="headerul">|</li>
+                    <li id="pc-nav1" class="menu">
+                        <a href="#" class="tit M-iphone">手机悦商城</a>
+                        <div class="subnav">
+                            <a href="#"><img src="~/Content/icon/ewm.png" width="115" height="115" title="扫一扫，有惊喜！"></a>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
-    <!--header-->
-    <div class="header_bg">
-        <div class="container">
-            <div class="header">
-                <div class="head-t">
-                    <div class="logo">
-                        <a href="index.html"><h1>Air <span>Shop</span></h1> </a>
-                    </div>
-                    <div class="header_right">
-                        <div class="cart box_1">
-                            <a href="checkout.html">
-                                <div class="total">
-                                    <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
-                                </div>
-                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                            </a>
-                            <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
-                            <div class="clearfix"> </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <!--start-header-menu-->
-                <ul class="megamenu skyblue">
-                    <li class="active grid"><a class="color1" href="index.html">Home</a></li>
-                    @foreach (var productCategory in Model.Categories)
-                    {
-                        <li class="grid">
-                            <a class="color2" href="#">@productCategory.CategoryName</a>
-                            <div class="megapanel">
-                                <div class="row">
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Clothing</h4>
-                                            <ul>
-                                                <li><a href="product.html">new arrivals</a></li>
-                                                <li><a href="product.html">men</a></li>
-                                                <li><a href="product.html">women</a></li>
-                                                <li><a href="product.html">accessories</a></li>
-                                                <li><a href="product.html">kids</a></li>
-                                                <li><a href="product.html">brands</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>kids</h4>
-                                            <ul>
-                                                <li><a href="product.html">Pools &amp; Tees</a></li>
-                                                <li><a href="product.html">shirts</a></li>
-                                                <li><a href="product.html">shorts</a></li>
-                                                <li><a href="product.html">twinsets</a></li>
-                                                <li><a href="product.html">kurts</a></li>
-                                                <li><a href="product.html">jackets</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Bags</h4>
-                                            <ul>
-                                                <li><a href="product.html">Handbag</a></li>
-                                                <li><a href="product.html">Slingbags</a></li>
-                                                <li><a href="product.html">Clutches</a></li>
-                                                <li><a href="product.html">Totes</a></li>
-                                                <li><a href="product.html">Wallets</a></li>
-                                                <li><a href="product.html">Laptopbags</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>account</h4>
-                                            <ul>
-                                                <li><a href="account.html">login</a></li>
-                                                <li><a href="account.html">create an account</a></li>
-                                                <li><a href="product.html">create wishlist</a></li>
-                                                <li><a href="product.html">my shopping bag</a></li>
-                                                <li><a href="product.html">brands</a></li>
-                                                <li><a href="product.html">create wishlist</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Accessories</h4>
-                                            <ul>
-                                                <li><a href="product.html">Belts</a></li>
-                                                <li><a href="product.html">Pens</a></li>
-                                                <li><a href="product.html">Eyeglasses</a></li>
-                                                <li><a href="product.html">accessories</a></li>
-                                                <li><a href="product.html">Watches</a></li>
-                                                <li><a href="product.html">Jewellery</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Footwear</h4>
-                                            <ul>
-                                                <li><a href="product.html">new arrivals</a></li>
-                                                <li><a href="product.html">men</a></li>
-                                                <li><a href="product.html">women</a></li>
-                                                <li><a href="product.html">accessories</a></li>
-                                                <li><a href="product.html">kids</a></li>
-                                                <li><a href="product.html">style videos</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col2"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                </div>
-                            </div>
-                        </li>
-                    }
-
+        @RenderBody()
+    </header>
+    <!-- header End -->
+    <div class="aui-footer-bot">
+        <div class="time-lists aui-footer-pd clearfix">
+            <div class="aui-footer-list clearfix">
+                <h4>
+                    <span><img src="~/Content/icon/icon-d1.png"></span>
+                    <em>消费者权益</em>
+                </h4>
+                <ul>
+                    <li><a href="#">保障范围 </a> </li>
+                    <li><a href="#">退货退款流程</a> </li>
+                    <li><a href="#">服务中心 </a> </li>
+                    <li><a href="#">服务中心</a> </li>
+                    <li><a href="#"> 更多特色服务 </a> </li>
+                </ul>
+            </div>
+            <div class="aui-footer-list clearfix">
+                <h4>
+                    <span><img src="~/Content/icon/icon-d2.png"></span>
+                    <em>新手上路</em>
+                </h4>
+                <ul>
+                    <li><a href="#">退货退款流程</a> </li>
+                    <li><a href="#">服务中心 </a> </li>
+                    <li><a href="#">服务中心</a> </li>
+                    <li><a href="#"> 更多特色服务 </a> </li>
+                </ul>
+            </div>
+            <div class="aui-footer-list clearfix">
+                <h4>
+                    <span><img src="~/Content/icon/icon-d3.png"></span>
+                    <em>保障正品</em>
+                </h4>
+                <ul>
+                    <li><a href="#">退货退款流程</a> </li>
+                    <li><a href="#">服务中心 </a> </li>
+                    <li><a href="#">服务中心</a> </li>
+                    <li><a href="#"> 更多特色服务 </a> </li>
+                </ul>
+            </div>
+            <div class="aui-footer-list clearfix">
+                <h4>
+                    <span><img src="~/Content/icon/icon-d1.png"></span>
+                    <em>消费者权益</em>
+                </h4>
+                <ul>
+                    <li><a href="#">退货退款流程</a> </li>
+                    <li><a href="#">服务中心 </a> </li>
+                    <li><a href="#">服务中心</a> </li>
+                    <li><a href="#"> 更多特色服务 </a> </li>
+                </ul>
+            </div>
+        </div>
+        <div style="border-bottom:1px solid #dedede"></div>
+        <div class="time-lists aui-footer-pd time-lists-ls clearfix">
+            <div class="aui-footer-list clearfix">
+                <h4>购物指南</h4>
+                <ul>
+                    <li><a href="#">保障范围 </a> </li>
+                    <li><a href="#">购物流程</a> </li>
+                    <li><a href="#">会员介绍 </a> </li>
+                    <li><a href="#">生活旅行</a> </li>
+                    <li><a href="#"> 常见问题 </a> </li>
+                    <li><a href="#"> 联系客服购物指南 </a> </li>
+                </ul>
+            </div>
+            <div class="aui-footer-list clearfix">
+                <h4>特色服务</h4>
+                <ul>
+                    <li><a href="#">退货退款流程</a> </li>
+                    <li><a href="#">服务中心 </a> </li>
+                    <li><a href="#">服务中心</a> </li>
+                    <li><a href="#"> 更多特色服务 </a> </li>
+                    <li><a href="#"> 更多特色服务 </a> </li>
+                    <li><a href="#"> 更多特色服务 </a> </li>
+                    <li><a href="#"> 更多特色服务 </a> </li>
+                </ul>
+            </div>
+            <div class="aui-footer-list clearfix">
+                <h4>帮助中心</h4>
+                <ul>
+                    <li><a href="#">退货退款流程</a> </li>
+                    <li><a href="#">退货退款流程</a> </li>
+                    <li><a href="#">退货退款流程</a> </li>
+                    <li><a href="#">退货退款流程</a> </li>
+                    <li><a href="#">服务中心 </a> </li>
+                    <li><a href="#">服务中心</a> </li>
+                    <li><a href="#"> 更多特色服务 </a> </li>
+                </ul>
+            </div>
+            <div class="aui-footer-list clearfix">
+                <h4>新手指导</h4>
+                <ul>
+                    <li><a href="#">退货退款流程</a> </li>
+                    <li><a href="#">退货退款流程</a> </li>
+                    <li><a href="#">服务中心 </a> </li>
+                    <li><a href="#">服务中心</a> </li>
+                    <li><a href="#">服务中心</a> </li>
+                    <li><a href="#"> 更多特色服务 </a> </li>
+                    <li><a href="#"> 更多特色服务 </a> </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="copyrights">Collect from <a href="http://www.cssmoban.com/">手机网站模板</a></div>
-
-    <!--start-bottom-->
-    <!--start-image-cursuals-->
-
-    @RenderBody()
-    <div class="scroll-slider">
-        <div class="container">
-            <div class="nbs-flexisel-container">
-                <div class="nbs-flexisel-inner">
-                    <ul class="flexiselDemo3 nbs-flexisel-ul" style="left: -253.6px; display: block;">
-                        <li onClick="location.href='#';" class="nbs-flexisel-item" style="width: 253.6px;"><img src="~/Content/Images/HomePage/c3.png" alt="" /></li>
-                        <li onClick="location.href='#';" class="nbs-flexisel-item" style="width: 253.6px;"><img src="~/Content/Images/HomePage/c4.png" alt="" /></li>
-                        <li onClick="location.href='#';" class="nbs-flexisel-item" style="width: 253.6px;"><img src="~/Content/Images/HomePage/c1.png" alt="" /></li>
-                        <li onClick="location.href='#';" class="nbs-flexisel-item" style="width: 253.6px;"><img src="~/Content/Images/HomePage/c2.png" alt="" /></li>
-                        <li onClick="location.href='#';" class="nbs-flexisel-item" style="width: 253.6px;"><img src="~/Content/Images/HomePage/c3.png" alt="" /></li>
-                        <li onClick="location.href='#';" class="nbs-flexisel-item" style="width: 253.6px;"><img src="~/Content/Images/HomePage/c4.png" alt="" /></li>
-                        <li onClick="location.href='#';" class="nbs-flexisel-item" style="width: 253.6px;"><img src="~/Content/Images/HomePage/c1.png" alt="" /></li>
-                        <li onClick="location.href='#';" class="nbs-flexisel-item" style="width: 253.6px;"><img src="~/Content/Images/HomePage/c2.png" alt="" /></li>
-                    </ul><div class="nbs-flexisel-nav-left" style="top: 21.5px;"></div><div class="nbs-flexisel-nav-right" style="top: 21.5px;"></div>
-                </div>
-            </div>
-            <div class="clearfix"> </div>
-            <!--start-image-->
-            <script type="text/javascript" src="js/jquery.flexisel.js"></script>
-            <!--//end-->
-            <script type="text/javascript">
-                $(window).load(function() {
-                    $(".flexiselDemo3").flexisel({
-                        visibleItems: 5,
-                        animationSpeed: 1000,
-                        autoPlay: true,
-                        autoPlaySpeed: 3000,
-                        pauseOnHover: true,
-                        enableResponsiveBreakpoints: true,
-                        responsiveBreakpoints: {
-                            portrait: {
-                                changePoint:480,
-                                visibleItems: 2
-                            },
-                            landscape: {
-                                changePoint:640,
-                                visibleItems: 3
-                            },
-                            tablet: {
-                                changePoint:768,
-                                visibleItems: 3
-                            }
-                        }
-                    });
-                });
-            </script>
-            <!---->
-        </div>
-    </div>
-    <!--//end-bottom-->
-    <!--start-footer-->
-    <div class="footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="col-md-2 footer-left">
-                    <h3>About Us</h3>
-                    <ul>
-                        <li><a href="#">Who We Are</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="#">Our Sites</a></li>
-                        <li><a href="#">In The News</a></li>
-                        <li><a href="#">Carrers</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2 footer-left">
-                    <h3>Your Account</h3>
-                    <ul>
-                        <li><a href="account.html">Your Account</a></li>
-                        <li><a href="#">Personal Information</a></li>
-                        <li><a href="contact.html">Addresses</a></li>
-                        <li><a href="#">Discount</a></li>
-                        <li><a href="#">Track your order</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2 footer-left">
-                    <h3>Shopping</h3>
-                    <ul>
-                        <li><a href="#">Accesories</a></li>
-                        <li><a href="#">Books</a></li>
-                        <li><a href="#">Cloths</a></li>
-                        <li><a href="#">Bags</a></li>
-                        <li><a href="#">Shoes</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2 footer-left ">
-                    <h3>Categories</h3>
-                    <ul>
-                        <li><a href="#">Sports Shoes</a></li>
-                        <li><a href="#">Casual Shorts</a></li>
-                        <li><a href="#">Formal Shoes</a></li>
-                        <li><a href="#">Party Wear</a></li>
-                        <li><a href="#">Ethnic Wear</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2 footer-left lost">
-                    <h3>Life Style</h3>
-                    <ul>
-                        <li><a href="#">Spa</a></li>
-                        <li><a href="#">Beauty</a></li>
-                        <li><a href="#">Travel</a></li>
-                        <li><a href="#">Food</a></li>
-                        <li><a href="#">Trends</a></li>
-                    </ul>
-                </div>
-                <div class="clearfix"> </div>
-            </div>
-
-        </div>
-    </div>
-    <ul class="socials">
-        <li><a class="soc1" href="#"></a></li>
-        <li><a class="soc2" href="#"></a></li>
-        <li><a class="soc3" href="#"></a></li>
-    </ul>
-    <!--/start-copyright-->
-    <div class="copy">
-        <div class="container">
-            <p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="http://www.cssmoban.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
-        </div>
-    </div>
-    <!--//end-copyright-->
-    <!--end-footer-->
-    <!--//end-content-->
-    <!--start-smooth-scrolling-->
-    <script type="text/javascript">
-         $(document).ready(function() {
-          /*
-          var defaults = {
-             containerID: 'toTop', // fading element id
-           containerHoverID: 'toTopHover', // fading element hover id
-           scrollSpeed: 1200,
-           easingType: 'linear'
-           };
-          */
-
-          $().UItoTop({ easingType: 'easeOutQuart' });
-
-         });
-    </script>
-    <a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+    <script type="text/javascript">banner()</script>
 </body>
 </html>
