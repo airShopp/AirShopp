@@ -16,6 +16,6 @@ namespace AirShopp.Domain
         public string Remarks { get; set; }// Remarks
         public long OrderId { get; set; }// Foreign key ref Order (Id)
 
-        public Order Order { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

@@ -35,10 +35,16 @@ namespace AirShopp.UI
 
                 ));
             bundles.Add(new StyleBundle("~/bundles/HomePage/Css").Include(
-                "~/Content/Css/HomePage/bootstrap.css",
-                "~/Content/Css/HomePage/style.css",
-                "~/Content/Css/HomePage/megamenu.css"
+                "~/Content/Css/HomePage/Common/bootstrap.css",
+                "~/Content/Css/HomePage/Common/flexslider.css",
+                "~/Content/Css/HomePage/Common/megamenu.css"
                 ));
+            bundles.Add(new StyleBundle("~/bundles/HomePage/Layout").Include(
+                "~/Content/Css/HomePage/Layout/style.css",
+                "~/Content/Css/HomePage/Layout/content.css",
+                "~/Content/Css/HomePage/Layout/etalage.css"
+                ));
+            
             bundles.Add(new ScriptBundle("~/bundles/HomePage").Include(
                 "~/Scripts/MainJS/HomePage/jquery-1.11.1.min.js",
                 "~/Scripts/MainJS/HomePage/menu_jquery.js",
@@ -48,7 +54,9 @@ namespace AirShopp.UI
                 "~/Scripts/MainJS/HomePage/modernizr.custom.js",
                 "~/Scripts/MainJS/HomePage/move-top.js",
                 "~/Scripts/MainJS/HomePage/easing.js",
-                "~/Scripts/MainJS/HomePage/jquery.flexisel.js"
+                "~/Scripts/MainJS/HomePage/jquery.flexisel.js",
+                "~/Scripts/MainJS/HomePage/jquery.etalage.min.js",
+                "~/Scripts/MainJS/HomePage/responsiveslides.min.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(

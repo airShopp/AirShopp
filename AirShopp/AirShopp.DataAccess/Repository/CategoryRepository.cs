@@ -12,7 +12,7 @@ namespace AirShopp.DataAccess
         public List<Category> GetCategories()
         {
             List<Category> CategoryList = new List<Category>();
-            _context.Category.ToList().ForEach(category =>
+            _context.Category.Where(c => c.ParentId == 0).ToList().ForEach(category =>
             {
                 CategoryList.Add(new Category
                 {

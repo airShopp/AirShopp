@@ -79,6 +79,7 @@ namespace AirShopp.UI.Models
             container.RegisterType<IAdminRepository, AdminRepository>();
             container.RegisterType<ICartRepository, CartRepository>();
             container.RegisterType<ICategoryRepository, CategoryRepository>();
+            container.RegisterType<IProductRepository, ProductRepository>();
             return container;
         }
     }

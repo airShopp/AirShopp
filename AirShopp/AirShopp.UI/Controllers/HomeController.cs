@@ -11,20 +11,29 @@ namespace AirShopp.UI.Controllers
     public class HomeController : Controller
     {
         public readonly ICategoryRepository _categoryRepository;
-        public HomeController(ICategoryRepository categoryRepository)
+        public readonly IProductRepository _productRepository;
+
+        public HomeController(
+            ICategoryRepository categoryRepository,
+            IProductRepository productRepository)
         {
             _categoryRepository = categoryRepository;
+            _productRepository = productRepository;
         }
 
         public ActionResult Index(Admin admin)
          {
-            HomeViewModel categoryViewModel = new HomeViewModel()
+            string path = HttpRuntime.AppDomainAppPath.ToString()+"Content\\HomePage\\p4.jpg";
+            string path1 = Server.MapPath("~/Content/Images/HomePage");
+            string imgPath = path1.Substring(path1.IndexOf("Content"));
+            HomeViewModel homeViewModel = new HomeViewModel()
             {
                 Admin = admin,
-                Categories = _categoryRepository.GetCategories()
+                Categories = _categoryRepository.GetCategories(),
+                Products = _productRepository.Products()
 
             };
-            return View(categoryViewModel);
+            return View(homeViewModel);
         }
 
         public ActionResult About()

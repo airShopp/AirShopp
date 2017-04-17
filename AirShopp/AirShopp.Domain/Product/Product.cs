@@ -12,8 +12,9 @@ namespace AirShopp.Domain
         public DateTime ProductionDate { get; set; }
         public string KeepDate { get; set; }
         public decimal Price { get; set; }
+        public string Description { get; set; }
         //public int Supply { get; set; }
-        public int url { get; set; }
+        public string url { get; set; }
         public virtual Category Category { get; set; }
         public virtual Provider Provider { get; set; }
 
