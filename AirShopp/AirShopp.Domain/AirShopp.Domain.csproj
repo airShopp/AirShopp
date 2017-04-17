@@ -50,7 +50,10 @@
     <Compile Include="Area\City.cs" />
     <Compile Include="Cart\Cart.cs" />
     <Compile Include="Category\Category.cs" />
+    <Compile Include="Category\CategoryService.cs" />
     <Compile Include="Category\ICategoryRepository.cs" />
+    <Compile Include="Category\ICategoryService.cs" />
+    <Compile Include="Common\IReadFromDb.cs" />
     <Compile Include="Customer\Customer.cs" />
     <Compile Include="Customer\ICustomerFactory.cs" />
     <Compile Include="DeliveryStation\Courier.cs" />
