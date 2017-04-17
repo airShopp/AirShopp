@@ -188,6 +188,7 @@
     <Content Include="Content\home.css" />
     <Content Include="Content\icon\1f.png" />
     <Content Include="Content\icon\2f.png" />
+    <Content Include="Content\icon\AirShoppLogo.png" />
     <Content Include="Content\icon\arrow.gif" />
     <Content Include="Content\icon\btnys.png" />
     <Content Include="Content\icon\car.png" />
