@@ -43,6 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address\Address.cs" />
+    <Compile Include="Address\AddressService.cs" />
+    <Compile Include="Address\IAddressRepository.cs" />
+    <Compile Include="Address\IAddressService.cs" />
     <Compile Include="Admin\Admin.cs" />
     <Compile Include="Admin\IAdminRepository.cs" />
     <Compile Include="Admin\AdminService.cs" />
@@ -55,7 +58,10 @@
     <Compile Include="Cart\ICartService.cs" />
     <Compile Include="Category\Category.cs" />
     <Compile Include="Category\ICategoryRepository.cs" />
-    <Compile Include="Comments\Comments.cs" />
+    <Compile Include="Comment\Comment.cs" />
+    <Compile Include="Comment\CommentService.cs" />
+    <Compile Include="Comment\ICommentRepository.cs" />
+    <Compile Include="Comment\ICommentService.cs" />
     <Compile Include="Customer\Customer.cs" />
     <Compile Include="Customer\ICustomerFactory.cs" />
     <Compile Include="DeliveryStation\Courier.cs" />
@@ -66,6 +72,9 @@
     <Compile Include="Delivery\Delivery.cs" />
     <Compile Include="Delivery\DeliveryOrderItem.cs" />
     <Compile Include="Discount\Discount.cs" />
+    <Compile Include="Order\IOrderRepository.cs" />
+    <Compile Include="Order\IOrderservice.cs" />
+    <Compile Include="Order\Orderservice.cs" />
     <Compile Include="Product\Inventory.cs" />
     <Compile Include="Order\OrderItem.cs" />
     <Compile Include="Order\Order.cs" />
