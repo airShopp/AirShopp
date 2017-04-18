@@ -15,6 +15,7 @@ namespace AirShopp.DataAccess.Mapping
         {
             HasKey(e => e.Id).Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(e => e.CustomerId).IsRequired();
+            Property(e => e.AreaId).IsRequired();
             Property(e => e.DeliveryAddress).IsRequired();
             Property(e => e.ReceiverName).IsRequired();
             Property(e => e.ReceiverPhone).IsRequired();

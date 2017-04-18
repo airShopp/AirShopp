@@ -4,15 +4,38 @@ using AirShopp.UI.Models.ViewModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AirShopp.Domain;
 
 namespace AirShopp.UI.Controllers
 {
     public class BMapRoutePlanningController : Controller
     {
+        private IAddressService _addressService;
+        private IDeliveryStationService _deliveryStationService;
+        private IProvinceService _provinceService;
+        private ICityService _cityService;
+
+        public BMapRoutePlanningController(IAddressService addressService, IDeliveryStationService deliveryStationService, IProvinceService provinceService, ICityService citySrvice)
+        {
+            _addressService = addressService;
+            _deliveryStationService = deliveryStationService;
+            _provinceService = provinceService;
+            _cityService = citySrvice;
+        }
+
         //
         // GET: /BMapRoutePlanning/
         public ActionResult Index()
         {
+
+            Address address = _addressService.GetAddress(1).FirstOrDefault();
+
+            City city = _cityService.GetCity(address.Area.CityId).FirstOrDefault();
+
+            Province province = _provinceService.GetProvince(city.ProvinceId).FirstOrDefault();
+
+            DeliveryStation deliveryStation = _deliveryStationService.GetDeliveryStation(address.AreaId).FirstOrDefault();
+
             // 1. Click query delivery info button and pass params()
             // 2. 
 
@@ -31,9 +54,9 @@ namespace AirShopp.UI.Controllers
             OriginPointsViewModel endPoint = new OriginPointsViewModel()
             {
                 Name = "终点",
-                Address = "上海市浦东新区浦东软件园17号楼",
-                Longitude = 121.605791,
-                Latitude = 31.213232,
+                Address = address.DeliveryAddress,
+                Longitude = address.Longitude,
+                Latitude = address.Latitude,
                 Remark = ""
             };
 
