@@ -23,7 +23,8 @@ namespace AirShopp.DataAccess.Migrations
                     Values(6, N'体育健身用品',0);
                     INSERT INTO Category(Id,CategoryName,ParentId)
                     Values(7, N'文具图书',0);
-                    家用电器
+                    INSERT INTO Category(Id,CategoryName,ParentId)
+                    Values(8, N'母婴儿童',0);
                 ");
         }
         
