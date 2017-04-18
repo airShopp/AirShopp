@@ -24,6 +24,7 @@ namespace AirShopp.UI
                 "~/Scripts/js/jcarousellite.js",
                 "~/Scripts/js/jquery.js",
                 "~/Scripts/js/js-tab.js",
+                "~/Scripts/js/LuShu.js",
                 "~/Scripts/js/MSClass.js",
                 "~/Scripts/js/top.js"
                 ));
