@@ -16,6 +16,7 @@ namespace AirShopp.DataAccess
         {
         }
 
+        public DbSet<Address> Address { get; set; }
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Discount> Discount { get; set; }
         public DbSet<Category> Category { get; set; }
@@ -53,6 +54,7 @@ namespace AirShopp.DataAccess
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             modelBuilder.Configurations.Add(new CustomerMapping());
+            modelBuilder.Configurations.Add(new AddressMapping());
             modelBuilder.Configurations.Add(new DiscountMapping());
             modelBuilder.Configurations.Add(new CategoryMapping());
             modelBuilder.Configurations.Add(new ProviderMapping());
