@@ -42,6 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Address\Address.cs" />
+    <Compile Include="Address\AddressService.cs" />
+    <Compile Include="Address\IAddressRepository.cs" />
+    <Compile Include="Address\IAddressService.cs" />
     <Compile Include="Admin\Admin.cs" />
     <Compile Include="Admin\IAdminRepository.cs" />
     <Compile Include="Admin\AdminService.cs" />
@@ -49,9 +53,16 @@
     <Compile Include="Area\Area.cs" />
     <Compile Include="Area\City.cs" />
     <Compile Include="Cart\Cart.cs" />
+    <Compile Include="Cart\CartService.cs" />
+    <Compile Include="Cart\ICartRepository.cs" />
+    <Compile Include="Cart\ICartService.cs" />
     <Compile Include="Category\Category.cs" />
     <Compile Include="Category\CategoryService.cs" />
     <Compile Include="Category\ICategoryRepository.cs" />
+    <Compile Include="Comment\Comment.cs" />
+    <Compile Include="Comment\CommentService.cs" />
+    <Compile Include="Comment\ICommentRepository.cs" />
+    <Compile Include="Comment\ICommentService.cs" />
     <Compile Include="Category\ICategoryService.cs" />
     <Compile Include="Common\IReadFromDb.cs" />
     <Compile Include="Customer\Customer.cs" />
@@ -64,8 +75,11 @@
     <Compile Include="Delivery\Delivery.cs" />
     <Compile Include="Delivery\DeliveryOrderItem.cs" />
     <Compile Include="Discount\Discount.cs" />
+    <Compile Include="Order\IOrderRepository.cs" />
+    <Compile Include="Order\IOrderservice.cs" />
+    <Compile Include="Order\Orderservice.cs" />
     <Compile Include="Product\Inventory.cs" />
-    <Compile Include="OrderItem\OrderItem.cs" />
+    <Compile Include="Order\OrderItem.cs" />
     <Compile Include="Order\Order.cs" />
     <Compile Include="Product\IProductRepository.cs" />
     <Compile Include="Product\Warehouse.cs" />
@@ -76,7 +90,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\Provider.cs" />
     <Compile Include="Area\Province.cs" />
-    <Compile Include="Return\Return.cs" />
+    <Compile Include="Order\Return.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
