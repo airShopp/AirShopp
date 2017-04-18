@@ -1,6 +1,5 @@
-﻿@model AirShopp.UI.Models.ViewModel.HomeViewModel
-@{
-    ViewBag.Title = "_homePageLayout";
+﻿@{
+    ViewBag.Title = "_orderPageLayout";
 }
 <!doctype html>
 <html>
@@ -8,125 +7,128 @@
     <title>AirShopp</title>
     @Scripts.Render("~/bundles/AirShopp/js")
     @Styles.Render("~/bundles/AirShopp/Layout")
-    <script type="text/javascript">
-         var intDiff = parseInt(80000);//倒计时总秒数量
-         function timer(intDiff){
-             window.setInterval(function(){
-                 var day=0,
-                         hour=0,
-                         minute=0,
-                         second=0;//时间默认值
-                 if(intDiff > 0){
-                     day = Math.floor(intDiff / (60 * 60 * 24));
-                     hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
-                     minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
-                     second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
-                 }
-                 if (minute <= 9) minute = '0' + minute;
-                 if (second <= 9) second = '0' + second;
-
-                 $('#hour_show').html('<s id="h"></s>'+hour+'');
-                 $('#minute_show').html('<s></s>'+minute+'');
-                 $('#second_show').html('<s></s>'+second+'');
-                 intDiff--;
-             }, 1000);
-         }
-
+    @Styles.Render("~/bundles/AirShopp/Css")
+    <script>
          $(function(){
-             timer(intDiff);
+
+             $("#H-table li").each(function(i){
+                 $(this).click((function(k){
+                     var _index = k;
+                     return function(){
+                         $(this).addClass("cur").siblings().removeClass("cur");
+                         $(".H-over").hide();
+                         $(".H-over:eq(" + _index + ")").show();
+                     }
+                 })(i));
+             });
+             $("#H-table1 li").each(function(i){
+                 $(this).click((function(k){
+                     var _index = k;
+                     return function(){
+                         $(this).addClass("cur").siblings().removeClass("cur");
+                         $(".H-over1").hide();
+                         $(".H-over1:eq(" + _index + ")").show();
+                     }
+                 })(i));
+             });
          });
     </script>
 </head>
 <body>
+
     <!--- header begin-->
     <header id="pc-header">
         <div class="BHeader">
             <div class="yNavIndex">
                 <ul class="BHeaderl">
-                    <li style="display:none;"><a href="#" style="float:left;">嘻哈杂货铺</a> <a href="#" style="float:left;">退出</a> </li>
-                    @if (Session["User"] != null)
-                    {
-                        var user = Session["User"] as AirShopp.Domain.Admin;
-                        <li>@Html.ActionLink(user.Account, "GetUser", "User", null, new { style = "color:#ea4949" })</li>
-                    }
-                    else
-                    {
-                        <li>@Html.ActionLink("请登录", "Login", "User", null, new { style = "color:#ea4949" })</li>
-                    }
+                    <li><a href="#">登录</a> </li>
                     <li class="headerul">|</li>
-                    <li><a href="register.html">免费注册</a> </li>
+                    <li><a href="#">订单查询</a> </li>
                     <li class="headerul">|</li>
-                    <li>@Html.ActionLink("订单查询", "Index", "Order", null, new { style = "color:#ea4949" })</li>
-                    <li class="headerul">|</li>
-                    <li><a href="my-s.html">我的收藏</a> </li>
+                    <li><a href="#">我的收藏</a> </li>
                     <li class="headerul">|</li>
                     <li id="pc-nav" class="menu">
-                        <a href="my-user.html" class="tit">我的商城</a>
+                        <a href="#" class="tit">我的商城</a>
                         <div class="subnav">
-                            @Html.ActionLink("我的订单", "Index", "Order", null, new { style = "color:#ea4949" })
-                            <a href="my-s.html">我的收藏</a>
-                            <a href="my-user.html">账户安全</a>
-                            <a href="my-add.html">地址管理</a>
-                            <a href="my-p.html">我要评价</a>
+                            <a href="#">我的山城</a>
+                            <a href="#">我的山城</a>
+                            <a href="#">我的山城</a>
                         </div>
                     </li>
                     <li class="headerul">|</li>
-                    <li id="pc-nav1" class="menu">
-                        <a href="#" class="tit M-iphone">手机悦商城</a>
-                        <div class="subnav">
-                            <a href="#"><img src="~/Content/icon/ewm.png" width="115" height="115" title="扫一扫，有惊喜！"></a>
-                        </div>
-                    </li>
+                    <li><a href="#" class="M-iphone">手机悦商城</a> </li>
                 </ul>
             </div>
         </div>
         <div class="container clearfix">
-            <div class="header-logo fl"><h1><a href="首页.html"><img src="~/Content/icon/logo.png"></a> </h1></div>
+            <div class="header-logo fl"><h1><a href="#"><img src="theme/icon/logo.png"></a> </h1></div>
+            <div class="member-title fl"><h2></h2></div>
             <div class="head-form fl">
                 <form class="clearfix">
                     <input type="text" class="search-text" accesskey="" id="key" autocomplete="off" placeholder="洗衣机">
                     <button class="button" onClick="search('key');return false;">搜索</button>
                 </form>
-            </div>
-            <div class="header-cart fr"><a href="#"><img src="~/Content/icon/car.png"></a> <i class="head-amount">99</i></div>
-            <div class="head-mountain"></div>
-        </div>
-        <div class="yHeader">
-            <div class="yNavIndex">
-                <div class="pullDown">
-                    <h2 class="pullDownTitle">
-                        全部商品分类
-                    </h2>
-                    <ul class="pullDownList">
-                       @{var i = 1; }
-                        @foreach (var secondCategory in Model.SecondCategories)
-                        {
-                            var className = "list" + i;
-                            <li class="menulihover">
-                                <i class="@className"></i>
-                                @Html.ActionLink(secondCategory.CategoryName,"getProductByCategoryId","product",secondCategory.Id)
-                                <span></span>
-                            </li>
-                            i++;
-                        }
-                    </ul>
-               
+                <div class="words-text clearfix">
+                    <a href="#" class="red">1元秒爆</a>
+                    <a href="#">低至五折</a>
+                    <a href="#">农用物资</a>
+                    <a href="#">买一赠一</a>
+                    <a href="#">佳能相机</a>
+                    <a href="#">稻香村月饼</a>
+                    <a href="#">服装城</a>
                 </div>
-                <ul class="yMenuIndex">
-                    @foreach (var category in Model.Categories)
-                    {
-                        <li><a href="" target="_blank">@category.CategoryName</a></li>
-                    }
-                </ul>
             </div>
+            <div class="header-cart fr"><a href="#"><img src="theme/icon/car.png"></a> <i class="head-amount">99</i></div>
         </div>
     </header>
-    @RenderBody();
+    <!-- header End -->
+
+    <div class="containers"><div class="pc-nav-item"><a href="#">首页</a> &gt; <a href="#">会员中心 </a> &gt; <a href="#">商城快讯</a></div></div>
+
+    <!-- 商城快讯 begin -->
+    <section id="member">
+        <div class="member-center clearfix">
+            <div class="member-left fl">
+                <div class="member-apart clearfix">
+                    <div class="fl"><a href="#"><img src="theme/img/bg/mem.png"></a></div>
+                    <div class="fl">
+                        <p>用户名：</p>
+                        <p><a href="#">亚里士多德</a></p>
+                        <p>搜悦号：</p>
+                        <p>389323080</p>
+                    </div>
+                </div>
+                <div class="member-lists">
+                    <dl>
+                        <dt>我的商城</dt>
+                        <dd class="cur"><a href="#">我的订单</a></dd>
+                        <dd><a href="#">我的收藏</a></dd>
+                        <dd><a href="#">账户安全</a></dd>
+                        <dd><a href="#">我的评价</a></dd>
+                        <dd><a href="#">地址管理</a></dd>
+                    </dl>
+                    <dl>
+                        <dt>客户服务</dt>
+                        <dd><a href="#">退货申请</a></dd>
+                        <dd><a href="#">退货/退款记录</a></dd>
+                    </dl>
+                    <dl>
+                        <dt>我的消息</dt>
+                        <dd><a href="#">商城快讯</a></dd>
+                        <dd><a href="#">帮助中心</a></dd>
+                    </dl>
+                </div>
+            </div>
+            @RenderBody();
+        </div>
+    </section>
+    <!-- 商城快讯 End -->
+    <!--- footer begin-->
     <div class="aui-footer-bot">
         <div class="time-lists aui-footer-pd clearfix">
             <div class="aui-footer-list clearfix">
                 <h4>
-                    <span><img src="~/Content/icon/icon-d1.png"></span>
+                    <span><img src="theme/icon/icon-d1.png"></span>
                     <em>消费者权益</em>
                 </h4>
                 <ul>
@@ -139,7 +141,7 @@
             </div>
             <div class="aui-footer-list clearfix">
                 <h4>
-                    <span><img src="~/Content/icon/icon-d2.png"></span>
+                    <span><img src="theme/icon/icon-d2.png"></span>
                     <em>新手上路</em>
                 </h4>
                 <ul>
@@ -151,7 +153,7 @@
             </div>
             <div class="aui-footer-list clearfix">
                 <h4>
-                    <span><img src="~/Content/icon/icon-d3.png"></span>
+                    <span><img src="theme/icon/icon-d3.png"></span>
                     <em>保障正品</em>
                 </h4>
                 <ul>
@@ -163,7 +165,7 @@
             </div>
             <div class="aui-footer-list clearfix">
                 <h4>
-                    <span><img src="~/Content/icon/icon-d1.png"></span>
+                    <span><img src="theme/icon/icon-d1.png"></span>
                     <em>消费者权益</em>
                 </h4>
                 <ul>
@@ -225,6 +227,6 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">banner()</script>
+    <!-- footer End -->
 </body>
 </html>

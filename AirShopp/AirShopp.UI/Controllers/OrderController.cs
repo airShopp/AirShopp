@@ -11,7 +11,11 @@ namespace AirShopp.UI.Controllers
         // GET: Order
         public ActionResult Index()
         {
-            return View();
+            return View("OrderList", null);
+        }
+        public ActionResult OrderDetail()
+        {
+            return View("OrderDetail", null);
         }
     }
 }

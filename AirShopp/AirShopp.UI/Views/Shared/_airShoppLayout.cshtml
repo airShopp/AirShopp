@@ -34,60 +34,6 @@
     </script>
 </head>
 <body>
-<<<<<<< HEAD
-    <!--start-home-->
-    <div class="top_bg" id="home">
-        <div class="container">
-            <div class="header_top">
-                <div class="top_right">
-                    <ul>
-                        <li><a href="#">help</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="#">Delivery information</a></li>
-                        @if (Model.Admin.Account != null)
-                        {
-                            <li>@Html.ActionLink(Model.Admin.Account, "Index", "Home", Model.Admin)</li>
-                        }
-                        else
-                        {
-                            <li>@Html.ActionLink("Login", "Login", "Admins")</li>
-                        }
-                    </ul>
-                </div>
-                <div class="top_left">
-                    <h6><span></span> Call us : 032 2352 782</h6>
-                </div>
-                <div class="clearfix"> </div>
-            </div>
-        </div>
-    </div>
-    <!--header-->
-    <div class="header_bg">
-        <div class="container">
-            <div class="header">
-                <div class="head-t">
-                    <div class="logo">
-                        <a href="index.html"><h1>Air <span>Shop</span></h1> </a>
-                    </div>
-                    <div class="header_right">
-                        <div class="cart box_1">
-                            <a href="checkout.html">
-                                <div class="total">
-                                    <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
-                                </div>
-                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                            </a>
-                            <p> @Html.ActionLink("Cart", "LoadCartList", "Cart", new { Id = 1, Account = "Amanda" }, new { @class = "Admin"}) </p>
-                            <div class="clearfix"> </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <!--start-header-menu-->
-                <ul class="megamenu skyblue">
-                    <li class="active grid"><a class="color1" href="index.html">Home</a></li>
-                    @foreach (var productCategory in Model.Categories)
-=======
     <!--- header begin-->
     <header id="pc-header">
         <div class="BHeader">
@@ -95,7 +41,6 @@
                 <ul class="BHeaderl">
                     <li style="display:none;"><a href="#" style="float:left;">嘻哈杂货铺</a> <a href="#" style="float:left;">退出</a> </li>
                     @if (Session["User"] != null)
->>>>>>> Dev
                     {
                         var user = Session["User"] as AirShopp.Domain.Admin;
                         <li>@Html.ActionLink(user.Account, "GetUser", "User", null, new { style = "color:#ea4949" })</li>
@@ -107,14 +52,14 @@
                     <li class="headerul">|</li>
                     <li><a href="register.html">免费注册</a> </li>
                     <li class="headerul">|</li>
-                    <li><a href="my-d.html">订单查询</a> </li>
+                    <li>@Html.ActionLink("订单查询", "Index", "Order", null, new { style = "color:#ea4949" })</li>
                     <li class="headerul">|</li>
                     <li><a href="my-s.html">我的收藏</a> </li>
                     <li class="headerul">|</li>
                     <li id="pc-nav" class="menu">
                         <a href="my-user.html" class="tit">我的商城</a>
                         <div class="subnav">
-                            <a href="my-d.html">我的订单</a>
+                            @Html.ActionLink("我的订单", "Index", "Order", null, new { style = "color:#ea4949" })
                             <a href="my-s.html">我的收藏</a>
                             <a href="my-user.html">账户安全</a>
                             <a href="my-add.html">地址管理</a>

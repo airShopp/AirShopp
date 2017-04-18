@@ -13,9 +13,9 @@ namespace AirShopp.DataAccess.Migrations
                     {
                         Id = c.Long(nullable: false, identity: true),
                         CustomerId = c.Long(nullable: false),
-                        DeliveryAddress = c.String(),
-                        ReceiverName = c.String(),
-                        ReceiverPhone = c.String(),
+                        DeliveryAddress = c.String(nullable: false),
+                        ReceiverName = c.String(nullable: false),
+                        ReceiverPhone = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Customer", t => t.CustomerId)
@@ -45,14 +45,14 @@ namespace AirShopp.DataAccess.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.Address", "CustomerId", "dbo.Customer");
             DropForeignKey("dbo.Comment", "ProductId", "dbo.Product");
             DropForeignKey("dbo.Comment", "OrderId", "dbo.Order");
             DropForeignKey("dbo.Order", "AddressId", "dbo.Address");
-            DropForeignKey("dbo.Address", "CustomerId", "dbo.Customer");
+            DropIndex("dbo.Order", new[] { "AddressId" });
             DropIndex("dbo.Comment", new[] { "ProductId" });
             DropIndex("dbo.Comment", new[] { "OrderId" });
             DropIndex("dbo.Address", new[] { "CustomerId" });
-            DropIndex("dbo.Order", new[] { "AddressId" });
             DropColumn("dbo.Order", "SpecialType");
             DropColumn("dbo.Order", "IsSpecialOrder");
             DropColumn("dbo.Order", "AddressId");
