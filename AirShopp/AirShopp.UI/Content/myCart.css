@@ -169,3 +169,27 @@ img{
 	font-size:18px;
 	line-height:40px;
 	}
+.page {
+    margin-left:35%;
+}
+.pagination a { 
+    border: 1px solid #ccc; 
+    float: left; 
+    font-size: 12px; 
+    height: 20px; 
+    line-height: 20px; 
+    margin-left: 2px; 
+    overflow: hidden; 
+    padding: 3px 10px; 
+    border-radius:3px;
+}
+.pagination a:hover {
+    background:#005aa0; 
+    color:#fff; 
+    border:1px solid #005aa0;
+}
+.pagination .current {
+    color:#f60; 
+    font-weight:800; 
+    border: none;
+}

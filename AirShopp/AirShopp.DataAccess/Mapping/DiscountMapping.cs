@@ -9,7 +9,11 @@ namespace AirShopp.DataAccess.Mapping
         public DiscountMapping()
         {
             HasKey(e => e.Id).Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            //more..
+            HasRequired(e => e.Product).WithMany(e => e.Discounts).HasForeignKey(fk => fk.ProductId);
+            Property(e => e.Discounts).IsRequired();
+            Property(e => e.StartTime).IsRequired();
+            Property(e => e.EndTime).IsRequired();
+            Property(e => e.IsUsed).IsRequired();
         }
     }
 }

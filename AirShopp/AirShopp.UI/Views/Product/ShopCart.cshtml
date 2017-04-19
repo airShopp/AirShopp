@@ -1,15 +1,12 @@
 ﻿
 @{
     ViewBag.Title = "ShopCart";
-    Layout = "~/Views/Shared/_airShoppLayout.cshtml";
+    Layout = "~/Views/Shared/_shopCartLayout.cshtml";
 }
 @Scripts.Render("~/bundles/AirShopp/Cart/js")
 @Styles.Render("~/bundles/AirShopp/Cart/Css")
 <section>
     <div class="pc-details">
-        <div class="containers">
-            <div class="pc-nav-item"><a class="pc-title" href="#">AirShopp</a> &gt;<a href="#">购物车</a> </div>
-        </div>
         <div id="content">
             <table width="100%" border="0" cellspacing="0" cellpadding="0" id="shopping">
                 <tr>
@@ -26,7 +23,7 @@
                 </tr>
                
                 <tr id="product1">
-                    <td class="cart_td_1"><input name="cartCheckBox" type="checkbox" value="product1" onclick="selectSingle()" /></td>
+                    <td class="cart_td_1"><input name="cartCheckBox" class="select3" type="checkbox" value="product1" onclick="selectSingle()" /></td>
                     <td class="cart_td_2"><img src="~/Content/img/cart/taobao_cart_01.jpg" alt="shopping" /></td>
                     <td class="cart_td_3">
                         <a href="#">日韩流行风时尚美眉最爱独特米字拼图金属坡跟公主靴子黑色</a><br />
@@ -41,7 +38,7 @@
                 </tr>
 
                 <tr id="product2">
-                    <td class="cart_td_1"><input name="cartCheckBox" type="checkbox" value="product2" onclick="selectSingle()" /></td>
+                    <td class="cart_td_1"><input name="cartCheckBox" class="select4" type="checkbox" value="product2" onclick="selectSingle()" /></td>
                     <td class="cart_td_2"><img src="~/Content/img/cart/taobao_cart_02.jpg" alt="shopping" /></td>
                     <td class="cart_td_3">
                         <a href="#">chanel/香奈尔/香奈尔炫亮魅力唇膏3.5g</a><br />
@@ -55,7 +52,7 @@
                 </tr>
 
                 <tr id="product3">
-                    <td class="cart_td_1"><input name="cartCheckBox" type="checkbox" value="product3" onclick="selectSingle()" /></td>
+                    <td class="cart_td_1"><input name="cartCheckBox" class="select5" type="checkbox" value="product3" onclick="selectSingle()" /></td>
                     <td class="cart_td_2"><img src="~/Content/img/cart/taobao_cart_03.jpg" alt="shopping" /></td>
                     <td class="cart_td_3">
                         <a href="#">蝶妆海晳蓝清滢粉底液10#（象牙白）</a><br />
@@ -69,7 +66,7 @@
                 </tr>
 
                 <tr id="product4">
-                    <td class="cart_td_1"><input name="cartCheckBox" type="checkbox" value="product4" onclick="selectSingle()" /></td>
+                    <td class="cart_td_1"><input name="cartCheckBox" class="select6" type="checkbox" value="product4" onclick="selectSingle()" /></td>
                     <td class="cart_td_2"><img src="~/Content/img/cart/taobao_cart_04.jpg" alt="shopping" /></td>
                     <td class="cart_td_3">
                         <a href="#">相宜促销专供 大S推荐 最好用的LilyBell化妆棉</a><br />
@@ -90,22 +87,21 @@
                     </td>
                 </tr>
             </table>
-            <div class="page" style="padding:30px 20px;">
-                <div class="pagination">
-                    <a style="display:none" class="fl " href="#">上一页</a>
-                    <a href="#" class="current">1</a>
-                    <a href="javascript:;">2</a>
-                    <a href="javascript:;">3</a>
-                    <a href="javascript:;">4</a>
-                    <a href="javascript:;">5</a>
-                    <a href="javascript:;">6</a>
-                    <a href="javascript:;">7</a>
-                    <span class="pc-search-di">…</span>
-                    <a href="javascript:;">1088</a>
-                    <a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>
-                </div>
+           </div>
+        <div class="page" style="padding:0 0 5px 0;">
+            <div class="pagination">
+                <a style="display:none" class="fl " href="#">上一页</a>
+                <a href="#" class="current">1</a>
+                <a href="javascript:;">2</a>
+                <a href="javascript:;">3</a>
+                <a href="javascript:;">4</a>
+                <a href="javascript:;">5</a>
+                <a href="javascript:;">6</a>
+                <a href="javascript:;">7</a>
+                <span class="pc-search-di">…</span>
+                <a href="javascript:;">1088</a>
+                <a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>
             </div>
-
         </div>
     </div>
 </section>
