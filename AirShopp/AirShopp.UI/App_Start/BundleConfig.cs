@@ -53,6 +53,13 @@ namespace AirShopp.UI
             bundles.Add(new ScriptBundle("~/bundles/AirShopp/Inventory/js").Include(
                 "~/Scripts/js/jquery"
                 ));
+
+            bundles.Add(new ScriptBundle("~/bundles/AirShopp/Cart/js").Include(
+                "~/Scripts/js/myCart.js"
+                ));
+            bundles.Add(new StyleBundle("~/bundles/AirShopp/Cart/Css").Include(
+                "~/Content/myCart.css"
+                ));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));

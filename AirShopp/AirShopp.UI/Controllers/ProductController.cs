@@ -11,11 +11,16 @@ namespace AirShopp.UI.Controllers
     public class ProductController : Controller
     {
         // GET: Product
-        public ActionResult Index(HomeViewModel  model)
+        public ActionResult Index()
         {
-            return View("ProductDetail", model);
+            var Category = Session["Category"];
+            return View("ProductList");
         }
-        public ActionResult getProduct(long CategoryId)
+        public ActionResult getProduct( )
+        {
+            return View("ProductDetail");
+        }
+        public ActionResult ShopCart()
         {
             return View();
         }

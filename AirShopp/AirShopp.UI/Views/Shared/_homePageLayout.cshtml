@@ -89,7 +89,7 @@
                     <button class="button" onClick="search('key');return false;">搜索</button>
                 </form>
             </div>
-            <div class="header-cart fr"><a href="#"><img src="~/Content/icon/car.png"></a> <i class="head-amount">99</i></div>
+            <div class="header-cart fr"><a href="/Product/ShopCart"><img src="~/Content/icon/car.png"></a> <i class="head-amount">99</i></div>
             <div class="head-mountain"></div>
         </div>
         <div class="yHeader">
@@ -116,7 +116,7 @@
                 <ul class="yMenuIndex">
                     @foreach (var category in Model.Categories)
                     {
-                        <li><a href="" target="_blank">@category.CategoryName</a></li>
+                        <li><a href="/Product/Index" target="_blank">@category.CategoryName</a></li>
                     }
                 </ul>
             </div>
