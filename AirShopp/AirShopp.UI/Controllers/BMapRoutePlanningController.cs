@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AirShopp.Domain;
+using AirShopp.Common;
 
 namespace AirShopp.UI.Controllers
 {
@@ -27,17 +28,13 @@ namespace AirShopp.UI.Controllers
         // GET: /BMapRoutePlanning/
         public ActionResult Index()
         {
+            // 1. Click query delivery info button and pass params()
+            // 2. 
 
             Address address = _addressService.GetAddress(1).FirstOrDefault();
 
-            City city = _cityService.GetCity(address.Area.CityId).FirstOrDefault();
-
-            Province province = _provinceService.GetProvince(city.ProvinceId).FirstOrDefault();
-
-            DeliveryStation deliveryStation = _deliveryStationService.GetDeliveryStation(address.AreaId).FirstOrDefault();
-
-            // 1. Click query delivery info button and pass params()
-            // 2. 
+            // Current area delivery station
+            DeliveryStation deliveryStation = _deliveryStationService.GetDeliveryStation(address.AreaId, 2).FirstOrDefault();
 
             List<OriginPointsViewModel> pointsList = new List<OriginPointsViewModel>();
 
@@ -50,6 +47,41 @@ namespace AirShopp.UI.Controllers
             };
             pointsList.Add(startUpPoint);
 
+            OriginPointsViewModel firstPoint = new OriginPointsViewModel()
+            {
+                Name = deliveryStation.ParentDeliveryStation.Name,
+                Address = deliveryStation.ParentDeliveryStation.Address,
+                Longitude = deliveryStation.ParentDeliveryStation.Longitude,
+                Latitude = deliveryStation.ParentDeliveryStation.Latitude,
+                Remark = ""
+            };
+
+            OriginPointsViewModel secondPoint = new OriginPointsViewModel()
+            {
+                Name = deliveryStation.Name,
+                Address = deliveryStation.Address,
+                Longitude = deliveryStation.Longitude,
+                Latitude = deliveryStation.Latitude,
+                Remark = ""
+            };
+
+            List<double> distanceList = new List<double>();
+            foreach (var obj in deliveryStation.DeliveryStations)
+            {
+                distanceList.Add(MathHelper.GetDistance(obj.Longitude, obj.Latitude, address.Longitude, address.Latitude));
+            }
+
+            distanceList.Sort();
+
+
+
+
+
+            String str = "http://api.map.baidu.com/routematrix/v2/driving?output=json&origins=40.45,116.34|40.54,116.35&destinations=40.34,116.45|40.35,116.46&ak=BZpwjUXFrAlT6g87xFxY4c3Cf82zen93";
+
+
+            String s = WebAPIHelper.Get(str);
+
 
             OriginPointsViewModel endPoint = new OriginPointsViewModel()
             {
@@ -59,6 +91,8 @@ namespace AirShopp.UI.Controllers
                 Latitude = address.Latitude,
                 Remark = ""
             };
+
+
 
 
 

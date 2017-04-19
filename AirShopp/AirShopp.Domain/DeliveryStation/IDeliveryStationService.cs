@@ -8,6 +8,6 @@ namespace AirShopp.Domain
 {
     public interface IDeliveryStationService
     {
-        List<DeliveryStation> GetDeliveryStation(long areaId);
+        List<DeliveryStation> GetDeliveryStation(long areaId, int stationLevel);
     }
 }

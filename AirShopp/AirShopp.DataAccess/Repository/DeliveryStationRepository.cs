@@ -12,9 +12,14 @@ namespace AirShopp.DataAccess
     {
         public AirShoppContext _context = new AirShoppContext();
 
-        public List<DeliveryStation> GetDeliveryStation(long areaId)
+        public List<DeliveryStation> GetDeliveryStation(long areaId, int stationLevel)
         {
-            return _context.DeliveryStation.Where(x => x.AreaId == areaId).ToList();
+            /*
+            return (from o in _context.DeliveryStation
+                   where o.AreaId == areaId && o.StationLevel == 2
+                   select o).ToList();
+             * */
+            return _context.DeliveryStation.Where(x => (x.AreaId == areaId && x.StationLevel == stationLevel)).ToList();
         }
         /*
         public void AddDeliveryStation(DeliveryStation deliveryStation)

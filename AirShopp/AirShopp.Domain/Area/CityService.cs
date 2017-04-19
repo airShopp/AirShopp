@@ -13,10 +13,11 @@ namespace AirShopp.Domain
         {
             _cityRepository = cityRepository;
         }
-
+        /*
         public List<City> GetCity(long cityId)
         {
             return _cityRepository.GetCity(cityId);
         }
+         * */
     }
 }

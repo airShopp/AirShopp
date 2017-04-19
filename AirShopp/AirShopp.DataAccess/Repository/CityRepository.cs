@@ -11,9 +11,11 @@ namespace AirShopp.DataAccess
     {
         public AirShoppContext _context = new AirShoppContext();
 
+        /*
         public List<City> GetCity(long cityId)
         {
             return _context.City.Where(x => x.CityId == cityId).ToList();
         }
+         * */
     }
 }

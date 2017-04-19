@@ -10,10 +10,11 @@ namespace AirShopp.DataAccess
     public class ProvinceRepository: IProvinceRepository
     {
         public AirShoppContext _context = new AirShoppContext();
-
+        /*
         public List<Province> GetProvince(long provinceId)
         {
             return _context.Province.Where(x => x.ProvinceId == provinceId).ToList();
         }
+         * */
     }
 }

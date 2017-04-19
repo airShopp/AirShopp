@@ -8,6 +8,6 @@ namespace AirShopp.Domain
 {
     public interface ICityService
     {
-        List<City> GetCity(long cityId);
+        //List<City> GetCity(long cityId);
     }
 }
