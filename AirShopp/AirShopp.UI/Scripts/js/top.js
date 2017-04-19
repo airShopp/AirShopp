@@ -55,37 +55,37 @@ function banner(){
     }
 }
 
-//$(function(){
-//    //限时抢购滚动
-//    $('#demo-01').jCarouselLite({
-//        btnPrev: '#prev-01',
-//        btnNext: '#next-01',
-//        visible:4
-//    });
-//    //商城快讯滚动
-//    var a=new Marquee("MarqueeDiv",2,1,1000,20,20,0,0,0);
+$(function(){
+    //限时抢购滚动
+    $('#demo-01').jCarouselLite({
+        btnPrev: '#prev-01',
+        btnNext: '#next-01',
+        visible:4
+    });
+    ////商城快讯滚动
+    //var a=new Marquee("MarqueeDiv",2,1,1000,20,20,0,0,0);
 
-//    $("#H-table li").each(function(i){
-//        $(this).click((function(k){
-//            var _index = k;
-//            return function(){
-//                $(this).addClass("cur").siblings().removeClass("cur");
-//                $(".H-over").hide();
-//                $(".H-over:eq(" + _index + ")").show();
-//            }
-//        })(i));
-//    });
-//    $("#H-table1 li").each(function(i){
-//        $(this).click((function(k){
-//            var _index = k;
-//            return function(){
-//                $(this).addClass("cur").siblings().removeClass("cur");
-//                $(".H-over1").hide();
-//                $(".H-over1:eq(" + _index + ")").show();
-//            }
-//        })(i));
-//    });
-//});
+    //$("#H-table li").each(function(i){
+    //    $(this).click((function(k){
+    //        var _index = k;
+    //        return function(){
+    //            $(this).addClass("cur").siblings().removeClass("cur");
+    //            $(".H-over").hide();
+    //            $(".H-over:eq(" + _index + ")").show();
+    //        }
+    //    })(i));
+    //});
+    //$("#H-table1 li").each(function(i){
+    //    $(this).click((function(k){
+    //        var _index = k;
+    //        return function(){
+    //            $(this).addClass("cur").siblings().removeClass("cur");
+    //            $(".H-over1").hide();
+    //            $(".H-over1:eq(" + _index + ")").show();
+    //        }
+    //    })(i));
+    //});
+});
 
 (function(a){
     a.fn.hoverClass=function(b){
