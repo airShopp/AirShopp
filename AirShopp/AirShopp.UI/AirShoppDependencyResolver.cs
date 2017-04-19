@@ -77,6 +77,10 @@ namespace AirShopp.UI.Models
             container.RegisterType<ICartService, CartService>();
             container.RegisterType<IAddressService, AddressService>();
             container.RegisterType<ICategoryService, CategoryService>();
+            container.RegisterType<IDeliveryStationService, DeliveryStationService>();
+            container.RegisterType<IProvinceService, ProvinceService>();
+            container.RegisterType<ICityService, CityService>();
+            container.RegisterType<IAreaService, AreaService>();
 
             //Repositories
             container.RegisterType<IAdminRepository, AdminRepository>();
@@ -84,6 +88,10 @@ namespace AirShopp.UI.Models
             container.RegisterType<IAddressRepository, AddressRepository>();
             container.RegisterType<ICategoryRepository, CategoryRepository>();
             container.RegisterType<IProductRepository, ProductRepository>();
+            container.RegisterType<IDeliveryStationRepository, DeliveryStationRepository>();
+            container.RegisterType<IProvinceRepository, ProvinceRepository>();
+            container.RegisterType<ICityRepository, CityRepository>();
+            container.RegisterType<IAreaRepository, AreaRepository>();
 
             //
             container.RegisterType<IReadFromDb, ReadFromDb>();

@@ -50,7 +50,7 @@ namespace AirShopp.DataAccess.Migrations
         public override void Down()
         {
             Sql(@"
-                    TRUNCATE TABLE Province
+                    DELETE FROM  dbo.Province
                ");
         }
     }
