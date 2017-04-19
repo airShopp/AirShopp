@@ -5,7 +5,8 @@
 <div class="member-right fr">
     <div class="member-head">
         <div class="member-heels fl"><h2>订单号：1234567890</h2></div>
-        <div class="member-backs fr"><a href="#">返回订单首页</a></div>
+        <div class="member-backs fr">@Html.ActionLink("返回订单首页", "Index", "Order", new { customerId = (Session["User"] as AirShopp.Domain.Admin).Id }, new { style = "color:#FFFFFF" })
+        </div>
     </div>
     <div class="member-border">
         <div class="member-order">

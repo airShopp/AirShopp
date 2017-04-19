@@ -122,9 +122,21 @@
     <Compile Include="Migrations\201704171130325_AddAddressAndComment.Designer.cs">
       <DependentUpon>201704171130325_AddAddressAndComment.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704180022008_AddOrderInitialData.cs" />
-    <Compile Include="Migrations\201704180022008_AddOrderInitialData.Designer.cs">
-      <DependentUpon>201704180022008_AddOrderInitialData.cs</DependentUpon>
+    <Compile Include="Migrations\201704180610099_AddCustomerInitialData.cs" />
+    <Compile Include="Migrations\201704180610099_AddCustomerInitialData.Designer.cs">
+      <DependentUpon>201704180610099_AddCustomerInitialData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704180614296_AddAddressInitialData.cs" />
+    <Compile Include="Migrations\201704180614296_AddAddressInitialData.Designer.cs">
+      <DependentUpon>201704180614296_AddAddressInitialData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704180621481_AddOrderInitialData.cs" />
+    <Compile Include="Migrations\201704180621481_AddOrderInitialData.Designer.cs">
+      <DependentUpon>201704180621481_AddOrderInitialData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704180629247_AddOrderItemInitialData.cs" />
+    <Compile Include="Migrations\201704180629247_AddOrderItemInitialData.Designer.cs">
+      <DependentUpon>201704180629247_AddOrderItemInitialData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -192,8 +204,17 @@
     <EmbeddedResource Include="Migrations\201704171130325_AddAddressAndComment.resx">
       <DependentUpon>201704171130325_AddAddressAndComment.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704180022008_AddOrderInitialData.resx">
-      <DependentUpon>201704180022008_AddOrderInitialData.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704180610099_AddCustomerInitialData.resx">
+      <DependentUpon>201704180610099_AddCustomerInitialData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704180614296_AddAddressInitialData.resx">
+      <DependentUpon>201704180614296_AddAddressInitialData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704180621481_AddOrderInitialData.resx">
+      <DependentUpon>201704180621481_AddOrderInitialData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704180629247_AddOrderItemInitialData.resx">
+      <DependentUpon>201704180629247_AddOrderItemInitialData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AirShopp.Domain;
+using AirShopp.UI.Models.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,14 +10,38 @@ namespace AirShopp.UI.Controllers
 {
     public class OrderController : Controller
     {
+        private IOrderservice _orderService;
         // GET: Order
-        public ActionResult Index()
+        public ActionResult Index(long customerId)
         {
+            //List<Order> orderList = _orderService.LoadOrderList(customerId);
+            //OrderViewModel orderViewModel = new OrderViewModel();
+            //orderViewModel.AllOrder.AddRange(orderList);
+            //orderViewModel.PendingPaymentOrder.AddRange(orderList.Where(x => x.OrderStatus == "1").ToList());
+            //orderViewModel.PendingDeliveryOrder.AddRange(orderList.Where(x => x.OrderStatus == "2").ToList());
+            //orderViewModel.PendingReceivedOrder.AddRange(orderList.Where(x => x.OrderStatus == "3").ToList());
+            //orderViewModel.FinishedOrder.AddRange(orderList.Where(x => x.OrderStatus == "4").ToList());
+            //return View("OrderList", orderViewModel);
             return View("OrderList", null);
         }
         public ActionResult OrderDetail()
         {
             return View("OrderDetail", null);
+        }
+
+        public ActionResult ReturnHistory(long customerId)
+        {
+            return View("ReturnHistory", null);
+        }
+
+        public ActionResult ReturnList(long customerId)
+        {
+            return View("ReturnList", null);
+        }
+
+        public ActionResult GetReturnRequest(long customerId)
+        {
+            return View("ReturnRequest", null);
         }
     }
 }

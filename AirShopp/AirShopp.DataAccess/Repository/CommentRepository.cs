@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirShopp.DataAccess.Repository
+namespace AirShopp.DataAccess
 {
     public class CommentRepository : ICommentRepository
     {

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace AirShopp.Domain
 {
-    public class CommentService
+    public class CommentService : ICommentService
     {
+        public void AddComment(Comment comment)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

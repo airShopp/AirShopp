@@ -59,7 +59,15 @@
                     <li id="pc-nav" class="menu">
                         <a href="my-user.html" class="tit">我的商城</a>
                         <div class="subnav">
-                            @Html.ActionLink("我的订单", "Index", "Order", null, new { style = "color:#ea4949" })
+                            @if (Session["User"] != null)
+                            {
+                                var user = Session["User"] as AirShopp.Domain.Admin;
+                                @Html.ActionLink("订单查询", "Index", "Order", new { customerId = user.Id }, new { style = "color:#ea4949" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("订单查询", "Login", "User", null, new { style = "color:#ea4949" })
+                            }
                             <a href="my-s.html">我的收藏</a>
                             <a href="my-user.html">账户安全</a>
                             <a href="my-add.html">地址管理</a>
@@ -76,9 +84,10 @@
                 </ul>
             </div>
         </div>
-        @RenderBody()
+        
     </header>
     <!-- header End -->
+    @RenderBody()
     <div class="aui-footer-bot">
         <div class="time-lists aui-footer-pd clearfix">
             <div class="aui-footer-list clearfix">

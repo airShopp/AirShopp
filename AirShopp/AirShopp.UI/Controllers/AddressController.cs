@@ -32,7 +32,7 @@ namespace AirShopp.UI.Controllers
         public ActionResult GetAddress(long customerId)
         {
             _addressService.GetAddress(customerId);
-            return View();
+            return View("AddressList", null);
         }
 
         public ActionResult UpdateAddress(Address address)
