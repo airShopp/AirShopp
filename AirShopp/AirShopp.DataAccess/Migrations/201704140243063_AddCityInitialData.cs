@@ -377,7 +377,7 @@ namespace AirShopp.DataAccess.Migrations
         public override void Down()
         {
             Sql(@"
-                    TRUNCATE TABLE City
+                    DELETE FROM  dbo.City
                ");
         }
     }

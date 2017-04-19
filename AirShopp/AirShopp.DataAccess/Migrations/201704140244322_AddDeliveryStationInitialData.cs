@@ -9,7 +9,7 @@ namespace AirShopp.DataAccess.Migrations
         {
             Sql(@"
                    SET IDENTITY_INSERT DeliveryStation ON
-                       INSERT  DeliveryStation (Id,Name,Address,Latitude,Longitude,StationLevel,ParentStationId,AreaId)
+                       INSERT  DeliveryStation (Id,Name,Address,Longitude,Latitude,StationLevel,ParentStationId,AreaId)
                        SELECT 1, N'上海市分拨中心', N'上海市分拨中心',121.275605,31.087346,1,1,797 UNION
                        SELECT 2, N'上海市黄浦区分拨中心', N'上海市黄浦区分拨中心',121.48,31.23,2,1,783 UNION
                        SELECT 3, N'上海市卢湾区分拨中心', N'上海市卢湾区分拨中心',121.47,31.22,2,1,784 UNION
@@ -1456,7 +1456,7 @@ INSERT  DeliveryStation (Id,Name,Address,Latitude,Longitude,StationLevel,ParentS
         public override void Down()
         {
             Sql(@"
-                    TRUNCATE TABLE DeliveryStation
+                    DELETE FROM  dbo.DeliveryStation
                ");
         }
     }

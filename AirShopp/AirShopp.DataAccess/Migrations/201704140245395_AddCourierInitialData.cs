@@ -1436,7 +1436,7 @@ INSERT  Courier(Id,Name,Phone,DeliveryStationId)
         public override void Down()
         {
             Sql(@"
-                    TRUNCATE TABLE Courier
+                    DELETE FROM  dbo.Courier
                ");
         }
     }
