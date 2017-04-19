@@ -138,20 +138,28 @@
     <Compile Include="Migrations\201704180629247_AddOrderItemInitialData.Designer.cs">
       <DependentUpon>201704180629247_AddOrderItemInitialData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704180540531_RefineAddress.cs" />
+    <Compile Include="Migrations\201704180540531_RefineAddress.Designer.cs">
+      <DependentUpon>201704180540531_RefineAddress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704190619059_MidifyModelDiscount.cs" />
+    <Compile Include="Migrations\201704190619059_MidifyModelDiscount.Designer.cs">
+      <DependentUpon>201704190619059_MidifyModelDiscount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AddressRepository.cs" />
-    <Compile Include="Migrations\201704170743505_AddCategoryData.cs" />
-    <Compile Include="Migrations\201704170743505_AddCategoryData.Designer.cs">
-      <DependentUpon>201704170743505_AddCategoryData.cs</DependentUpon>
-    </Compile>
     <Compile Include="ReadFromDb.cs" />
     <Compile Include="Repository\AdminRepository.cs" />
+    <Compile Include="Repository\AreaRepository.cs" />
     <Compile Include="Repository\CartRepository.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
+    <Compile Include="Repository\CityRepository.cs" />
     <Compile Include="Repository\CommentRepository.cs" />
+    <Compile Include="Repository\DeliveryStationRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
+    <Compile Include="Repository\ProvinceRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -198,9 +206,6 @@
     <EmbeddedResource Include="Migrations\201704140601200_InitialProductData.resx">
       <DependentUpon>201704140601200_InitialProductData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704170743505_AddCategoryData.resx">
-      <DependentUpon>201704170743505_AddCategoryData.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704171130325_AddAddressAndComment.resx">
       <DependentUpon>201704171130325_AddAddressAndComment.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,6 +220,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704180629247_AddOrderItemInitialData.resx">
       <DependentUpon>201704180629247_AddOrderItemInitialData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704180540531_RefineAddress.resx">
+      <DependentUpon>201704180540531_RefineAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704190619059_MidifyModelDiscount.resx">
+      <DependentUpon>201704190619059_MidifyModelDiscount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

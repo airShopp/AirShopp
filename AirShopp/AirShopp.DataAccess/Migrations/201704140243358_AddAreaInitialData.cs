@@ -3167,7 +3167,7 @@ INSERT INTO Area (Id,AreaId,AreaName,CityId)
         public override void Down()
         {
             Sql(@"
-                    TRUNCATE TABLE Area
+                    DELETE FROM  dbo.Area
                ");
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using AirShopp.Common.Page;
+using System.Linq;
 
 namespace AirShopp.Domain
 {
@@ -13,6 +14,9 @@ namespace AirShopp.Domain
         {
             var categories = (from category in _readFromDb.Categories
                               select category);
+            PageList<Category> CategoryAfterPaging = Pagination.ToPagedList(_readFromDb.Categories.OrderBy(e => e.Id), 2 , 5);
+            int t = CategoryAfterPaging.PageIndex;
+            int a = CategoryAfterPaging.PageSize;
             return categories;
         }
     }

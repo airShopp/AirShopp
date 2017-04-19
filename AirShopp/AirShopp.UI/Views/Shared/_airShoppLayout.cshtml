@@ -1,7 +1,8 @@
 ﻿<!doctype html>
 <html>
 <head>
-    <title>歪秀购物</title>
+    <title>AirShopp</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/icon/Air.ico">
     @Scripts.Render("~/bundles/AirShopp/js")
     @Styles.Render("~/bundles/AirShopp/Layout")
     <script type="text/javascript">
@@ -52,7 +53,7 @@
                     <li class="headerul">|</li>
                     <li><a href="register.html">免费注册</a> </li>
                     <li class="headerul">|</li>
-                    <li>@Html.ActionLink("订单查询", "Index", "Order", null, new { style = "color:#ea4949" })</li>
+                    <li>@Html.ActionLink("订单查询", "Index", "Order", null)</li>
                     <li class="headerul">|</li>
                     <li><a href="my-s.html">我的收藏</a> </li>
                     <li class="headerul">|</li>

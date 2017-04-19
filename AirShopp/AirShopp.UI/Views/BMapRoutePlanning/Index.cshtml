@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>test</title>
+    <style type="text/css">
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+        #map_canvas {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=BZpwjUXFrAlT6g87xFxY4c3Cf82zen93"></script>
+    @Scripts.Render("~/bundles/AirShopp/js")
+    @Styles.Render("~/bundles/AirShopp/Layout")
+</head>
+<body>
+    <div id="map_canvas"></div>
+    <p id="content"></p>
+    <button onclick="run()">开始</button>
+    <script>
+
+        var originalPoints = [new originalPoint("起点", "", 121.275605, 31.087346), new originalPoint("途径点", "", 121.53, 31.22), new originalPoint("终点", "", 121.605321, 31.135641)];
+
+        drawRoute(originalPoints);
+
+        var lushu;
+
+        function originalPoint(name, address, lng, lat) {
+            this.Name = name;
+            this.address = address;
+            this.lng = lng;
+            this.lat = lat;
+        }
+
+        // Pass all points
+        function drawRoute(originalPoints) {
+
+            var length = originalPoints.length;
+
+            if (length >= 2) {
+                var map = new BMap.Map('map_canvas');
+
+                initMap(map);
+
+                var points = [];
+                for (var i = 0; i < length; i++) {
+                    var point = new BMap.Point(originalPoints[i].lng, originalPoints[i].lat);
+                    points.push(point);
+                }
+
+                var drivings = [];
+                for (var i = 0; i < length - 1; i++) {
+                    var driving = new BMap.DrivingRoute(map);
+                    drivings.push(driving);
+                }
+
+                for (var i = 0; i < length - 1; i++) {
+                    drivings[i].search(points[i], points[i + 1]);
+                }
+
+                var lastDrivingIndex = drivings.length - 1;
+                drivings[lastDrivingIndex].setSearchCompleteCallback(function () {
+
+                    var pts = [];
+                    var actualPoints = [];
+                    for (var i = 0; i < length - 1; i++) {
+                        var temp = drivings[i].getResults().getPlan(0).getRoute(0).getPath();
+                        if (i == 0) {
+                            actualPoints.push(0);
+                            actualPoints.push(temp.length - 1);
+                        } else {
+                            actualPoints.push(actualPoints[i] + temp.length - 1);
+                        }
+                        pts = pts.concat(temp);
+                    }
+
+                    var polyline = new BMap.Polyline(pts);
+                    map.addOverlay(polyline);
+
+                    for (var i = 0; i < points.length; i++) {
+                        var marker = new BMap.Marker(points[i]);
+                        var label = new BMap.Label(originalPoints[i].Name, { position: points[i] });
+                        map.addOverlay(marker);
+                        map.addOverlay(label);
+                    }
+
+                    map.setViewport(points);
+
+                    lushu = new BMapLib.LuShu(map, pts, {
+                        defaultContent: "",
+                        autoView: true,//是否开启自动视野调整，如果开启那么路书在运动过程中会根据视野自动调整
+                        icon: new BMap.Icon('http://developer.baidu.com/map/jsdemo/img/car.png', new BMap.Size(52, 26), { anchor: new BMap.Size(27, 13) }),
+                        speed: 10000,
+                        enableRotation: true,//是否设置marker随着道路的走向进行旋转
+                        landmarkPois: []
+                    }, actualPoints, setArrivedCallBack);
+                });
+            }
+        }
+
+        function initMap(map) {
+            map.clearOverlays();
+            map.enableScrollWheelZoom();
+            map.centerAndZoom(new BMap.Point(116.404, 39.915), 15);
+            map.addControl(new BMap.NavigationControl());
+            map.addControl(new BMap.ScaleControl());
+            map.addControl(new BMap.OverviewMapControl());
+        }
+
+        function setArrivedCallBack() {
+            document.getElementById("content").innerHTML += ' 123';
+        }
+
+        function run() {
+            lushu.start();
+        }
+
+    </script>
+</body>
+</html>

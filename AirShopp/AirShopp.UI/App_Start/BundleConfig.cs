@@ -24,6 +24,7 @@ namespace AirShopp.UI
                 "~/Scripts/js/jcarousellite.js",
                 "~/Scripts/js/jquery.js",
                 "~/Scripts/js/js-tab.js",
+                "~/Scripts/js/LuShu.js",
                 "~/Scripts/js/MSClass.js",
                 "~/Scripts/js/top.js"
                 ));
@@ -32,10 +33,12 @@ namespace AirShopp.UI
                 "~/Content/home.css",
                 "~/Content/login.css",
                 "~/Content/member.css"));
+            //Layout
             bundles.Add(new StyleBundle("~/bundles/AirShopp/Layout").Include(
                 "~/Content/base.css",
                 "~/Content/home.css"
                 ));
+            //login
             bundles.Add(new StyleBundle("~/bundles/AirShopp/Login/Css").Include(
                 "~/Content/base.css",
                 "~/Content/login.css"
@@ -43,6 +46,20 @@ namespace AirShopp.UI
             bundles.Add(new ScriptBundle("~/bundles/AirShopp/Login/js").Include(
                 "~/Scripts/js/jquery-3.1.1.min.js",
                 "~/Scripts/js/checkcode.js"
+                ));
+            //Inventory page
+            bundles.Add(new StyleBundle("~/bundles/AirShopp/Inventory/Css").Include(
+                "~/Content/member.css"
+                ));
+            bundles.Add(new ScriptBundle("~/bundles/AirShopp/Inventory/js").Include(
+                "~/Scripts/js/jquery"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/AirShopp/Cart/js").Include(
+                "~/Scripts/js/myCart.js"
+                ));
+            bundles.Add(new StyleBundle("~/bundles/AirShopp/Cart/Css").Include(
+                "~/Content/myCart.css"
                 ));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",

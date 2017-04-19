@@ -156,7 +156,7 @@ body{min-width: 1200px; _width:expression(document.documentElement.clientWidth>1
 
 .banner{height:480px;overflow:hidden;}
 .banner .d1{width:100%;height:480px;display:block;position:absolute;left:0px;top:0px;}
-.banner .d2{width:100%;height:30px;clear:both;position:absolute;z-index:999;left:0px;top:410px;}
+.banner .d2{width:100%;height:30px;clear:both;position:absolute;z-index:999;left:0px;top:360px;}
 .banner .d2 ul{float:left;position:absolute;left:42%;top:0px; display:inline;  background:url("../Content/icon/slider.png") no-repeat; width:220px; height:30px;}
 .banner .d2 li{width:35px;height:9px;overflow:hidden;cursor:pointer;background:url("../Content/icon/li.png") no-repeat center;float:left;display:inline; margin:5px 1px 0 7px}
 .banner .d2 li.nuw{background:url("../Content/icon/lii.png") no-repeat center;}
@@ -164,7 +164,7 @@ body{min-width: 1200px; _width:expression(document.documentElement.clientWidth>1
 
 
 
-.yBanner{height:480px;width: 100%;overflow: hidden;position: relative;}
+.yBanner{height:400px;width: 100%;overflow: hidden;position: relative;}
 
 
 .MarqueeDiv { padding-left:10px;}
@@ -193,7 +193,7 @@ body{min-width: 1200px; _width:expression(document.documentElement.clientWidth>1
 
 
 
-.pc-banner {overflow:hidden;width:1010px;padding-left:190px;height: 480px;margin: 0 auto;position: relative;}
+.pc-banner {overflow:hidden;width:1010px;padding-left:190px;height: 400px;margin: 0 auto;position: relative;}
 .pc-banner1{ background:#ece5d3; width:100%; height:480px; position:absolute;top: 0;left: 0; }
 .button    { background:#ea4949; width:82px; height:36px; border:none; color:#fff; cursor: pointer; float: left; font-size: 16px; line-height: 1; font-weight:normal}
 .button:hover{ background:#ea3232}
@@ -505,8 +505,8 @@ body{min-width: 1200px; _width:expression(document.documentElement.clientWidth>1
 .pc-space-j {font-size:16px;}
 .pc-space-j strong {color:#c81623; padding-right:20px;}
 
-.pc-details  { background:#b0947f url("../img/bg/xq.png") no-repeat center top; height:585px;}
-.pc-details-l{ background:#fafafa url("../img/bg/xq-b.png") repeat-x bottom; height:538px;}
+
+.pc-details-l{ background:#fafafa url("img/bg/xq-b.png") repeat-x bottom; height:538px;}
 .pc-comment {width:130px; text-align:center; padding:20px 0;}
 .pc-comment strong {font: 400 46px/30px arial;color: #e4393c;}
 .pc-comment strong span {color: #e4393c; font-size: 24px;}
@@ -562,7 +562,7 @@ body{min-width: 1200px; _width:expression(document.documentElement.clientWidth>1
 .pc-product {padding:20px;}
 
 .pc-product-h { float:left; width:420px;}
-.pc-product-t { float:left; width:500px; padding:2px 20px;}
+.pc-product-t { float:left; width:680px; padding:2px 20px;}
 .pc-product-s { float:left; width:178px; height:505px; border-left:1px solid #dbdbdb; text-align:left; padding-left:20px;}
 
 .pc-product-top {width:418px; height:418px; border:1px solid #e0e0e0; margin-bottom:15px;}
