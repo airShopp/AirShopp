@@ -38,32 +38,12 @@ namespace AirShopp.UI.Controllers
 
             List<OriginPointsViewModel> pointsList = new List<OriginPointsViewModel>();
 
-            OriginPointsViewModel startUpPoint = new OriginPointsViewModel(){
-                Name = "起点",
-                Address = "江苏昆山物流转运中心",
-                Longitude = 120.964369,
-                Latitude = 31.372474,
-                Remark = ""
-            };
+            OriginPointsViewModel startUpPoint = new OriginPointsViewModel("起点", "江苏昆山物流转运中心", 120.964369, 31.372474, "");
             pointsList.Add(startUpPoint);
 
-            OriginPointsViewModel firstPoint = new OriginPointsViewModel()
-            {
-                Name = deliveryStation.ParentDeliveryStation.Name,
-                Address = deliveryStation.ParentDeliveryStation.Address,
-                Longitude = deliveryStation.ParentDeliveryStation.Longitude,
-                Latitude = deliveryStation.ParentDeliveryStation.Latitude,
-                Remark = ""
-            };
+            OriginPointsViewModel firstPoint = new OriginPointsViewModel(deliveryStation.ParentDeliveryStation.Name, deliveryStation.ParentDeliveryStation.Address, deliveryStation.ParentDeliveryStation.Longitude, deliveryStation.ParentDeliveryStation.Latitude, "");
 
-            OriginPointsViewModel secondPoint = new OriginPointsViewModel()
-            {
-                Name = deliveryStation.Name,
-                Address = deliveryStation.Address,
-                Longitude = deliveryStation.Longitude,
-                Latitude = deliveryStation.Latitude,
-                Remark = ""
-            };
+            OriginPointsViewModel secondPoint = new OriginPointsViewModel(deliveryStation.Name, deliveryStation.Address, deliveryStation.Longitude, deliveryStation.Latitude, "");
 
             List<double> distanceList = new List<double>();
             foreach (var obj in deliveryStation.DeliveryStations)
@@ -73,35 +53,30 @@ namespace AirShopp.UI.Controllers
 
             distanceList.Sort();
 
+            if (distanceList.Count >= 50)
+            {
+                var tempList = distanceList.Take(50).ToList();
+                distanceList.Clear();
+                distanceList = tempList;
+            }
 
+            String baseURL = "http://api.map.baidu.com/routematrix/v2/driving?";
 
+            String output = "output=json";
 
+            String origins = "";
 
-            String str = "http://api.map.baidu.com/routematrix/v2/driving?output=json&origins=40.45,116.34|40.54,116.35&destinations=40.34,116.45|40.35,116.46&ak=BZpwjUXFrAlT6g87xFxY4c3Cf82zen93";
+            String destinations = "";
 
+            String ak = "";
+
+            String str = baseURL + output + origins + destinations + ak;
 
             String s = WebAPIHelper.Get(str);
 
-
-            OriginPointsViewModel endPoint = new OriginPointsViewModel()
-            {
-                Name = "终点",
-                Address = address.DeliveryAddress,
-                Longitude = address.Longitude,
-                Latitude = address.Latitude,
-                Remark = ""
-            };
-
-
-
-
-
-
-
-
-
+            OriginPointsViewModel endPoint = new OriginPointsViewModel("终点", address.DeliveryAddress, address.Longitude, address.Latitude, "");
 
             return View();
         }
-	}
+    }
 }
