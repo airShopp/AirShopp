@@ -118,10 +118,10 @@
                        @{var i = 1; }
                         @foreach (var secondCategory in Model.SecondCategories)
                         {
-                            var className = "list" + i;
+                            var className = "listi" + i;
                             <li class="menulihover">
                                 <i class="@className"></i>
-                                @Html.ActionLink(secondCategory.CategoryName,"getProductByCategoryId","product",secondCategory.Id)
+                                @Html.ActionLink(secondCategory.CategoryName, "getProduct", new { Controller = "Product", CategoryId = secondCategory.Id })
                                 <span></span>
                             </li>
                             i++;
