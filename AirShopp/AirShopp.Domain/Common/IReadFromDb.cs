@@ -9,5 +9,12 @@ namespace AirShopp.Domain
     public interface IReadFromDb
     {
         IQueryable<Category> Categories { get; }
+        IQueryable<Cart> Carts { get; }
+        IQueryable<InventoryAction> InventoryActions { get; }
+        IQueryable<Inventory> Inventories { get; }
+        IQueryable<Product> Products { get; }
+        IQueryable<Discount> Discounts { get; }
+        IQueryable<ProductOutFactory> ProductOutFactories { get; }
+
     }
 }

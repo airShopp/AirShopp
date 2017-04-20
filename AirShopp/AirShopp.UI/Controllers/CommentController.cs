@@ -18,7 +18,7 @@ namespace AirShopp.UI.Controllers
         // GET: Comment
         public ActionResult Index()
         {
-            return View();
+            return Content("");
         }
 
         public ActionResult AddComment(Comment comment)

@@ -9,14 +9,32 @@ namespace AirShopp.Domain
     public class CartService:ICartService
     {
         public ICartRepository _cartRepository;
-        public CartService(ICartRepository cartRepository)
+        public IReadFromDb _readFromDb;
+        public CartService(
+            ICartRepository cartRepository,
+            IReadFromDb readFromDb)
         {
             _cartRepository = cartRepository;
+            _readFromDb = readFromDb;
         }
 
         public List<Cart> LoadCartList(long customerId)
         {
             return _cartRepository.LoadCartList(customerId);
+        }
+
+
+        public int GetProductAmoutByUser(long customerId)
+        {
+            int cartProductAmount = 0;
+            if (customerId > 0)
+            {
+                cartProductAmount = (from cart in _readFromDb.Carts
+                             where cart.CustomerId == customerId
+                             select cart.Quantity
+                         ).Sum();
+            }
+            return cartProductAmount;
         }
     }
 }

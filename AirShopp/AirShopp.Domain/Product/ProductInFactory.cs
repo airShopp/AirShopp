@@ -9,8 +9,5 @@ namespace AirShopp.Domain
         public int Amount { get; set; }
         public string Price { get; set; }
         public DateTime InDate { get; set; }
-        public string ProductName { get; set; }
-
-        public ICollection<InventoryAction> InventoryActions { get; set; }
     }
 }

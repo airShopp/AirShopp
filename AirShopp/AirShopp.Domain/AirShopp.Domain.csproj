@@ -77,7 +77,7 @@
     <Compile Include="Category\ICategoryService.cs" />
     <Compile Include="Common\IReadFromDb.cs" />
     <Compile Include="Customer\Customer.cs" />
-    <Compile Include="Customer\ICustomerFactory.cs" />
+    <Compile Include="Customer\ICustomerRepository.cs" />
     <Compile Include="DeliveryStation\Courier.cs" />
     <Compile Include="DeliveryStation\IDeliveryStationService.cs" />
     <Compile Include="Delivery\DeliveryInfo.cs" />

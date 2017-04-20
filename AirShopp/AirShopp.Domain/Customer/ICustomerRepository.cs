@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace AirShopp.Domain
 {
-    public interface ICustomerFactory
+    public interface ICustomerRepository
     {
+        Customer GetCustomer(string account, string password);
     }
 }

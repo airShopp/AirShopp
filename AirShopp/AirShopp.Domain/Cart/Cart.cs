@@ -12,9 +12,9 @@ namespace AirShopp.Domain
         public decimal DiscountPrice { get; set; }
         public int Quantity { get; set; }
         public bool IsBuy { get; set; }
-        public decimal ProductTotalAmount { get; set; }
 
         public virtual Customer Customer { get; set; }
         public virtual Product Product { get; set; }
     }
+
 }
