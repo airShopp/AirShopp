@@ -11,5 +11,6 @@ namespace AirShopp.Comman
         public const char VIRGULE = '/';
         public const string PIC_SUFFIX_JPG = ".jpg";
         public const string IMG_LOCATION = "Content\\Images\\QRImages\\";
+        public const string BMAP_AK = "BZpwjUXFrAlT6g87xFxY4c3Cf82zen93";
     }
 }

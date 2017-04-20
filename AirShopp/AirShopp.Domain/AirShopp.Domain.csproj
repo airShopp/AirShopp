@@ -61,6 +61,7 @@
     <Compile Include="Area\IProvinceService.cs" />
     <Compile Include="Area\IProvinceRepository.cs" />
     <Compile Include="Area\ProvinceService.cs" />
+    <Compile Include="Common\BMapDataModel.cs" />
     <Compile Include="DeliveryStation\DeliveryStationService.cs" />
     <Compile Include="DeliveryStation\IDeliveryStationRepository.cs" />
     <Compile Include="Cart\Cart.cs" />

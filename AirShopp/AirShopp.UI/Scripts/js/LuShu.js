@@ -202,7 +202,8 @@ var BMapLib = window.BMapLib = BMapLib || {};
             icon: null,
             //默认速度 米/秒
             speed: 4000,
-            defaultContent: ''
+            defaultContent: '',
+            currentIndex : 0
         };
         this._setOptions(opts);
 
@@ -502,11 +503,16 @@ var BMapLib = window.BMapLib = BMapLib || {};
                 for(var i = 0; i < me._actualPoints.length; i++){
                     if (index == me._actualPoints[i]){
                         flag = true;
+                        me._opts.currentIndex++;
                     }
                 }
 
-                if (flag){
-                    me._setArrivedCallBack();
+                if (flag) {
+                    if (me._opts.currentIndex == me._opts.pointLists.length) {
+                        me._setArrivedCallBack(me._opts.pointLists[me._opts.currentIndex - 1], me._opts.currentIndex, me._opts.pointLists[me._opts.currentIndex - 1]);
+                    } else {
+                        me._setArrivedCallBack(me._opts.pointLists[me._opts.currentIndex - 1], me._opts.currentIndex, me._opts.pointLists[me._opts.currentIndex]);
+                    }
                 }
                 me._move(me._path[index], me._path[index + 1], me._tween.linear);
             }
