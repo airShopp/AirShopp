@@ -55,6 +55,9 @@
     <Compile Include="JsonHelper.cs" />
     <Compile Include="MathHelper.cs" />
     <Compile Include="MessageConstants.cs" />
+    <Compile Include="Page\IPageList.cs" />
+    <Compile Include="Page\PageList.cs" />
+    <Compile Include="Page\Pagination.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QRCodeHelper.cs" />
     <Compile Include="WebAPIHelper.cs" />
@@ -66,6 +69,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

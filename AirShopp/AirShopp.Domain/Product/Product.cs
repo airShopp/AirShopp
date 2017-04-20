@@ -22,5 +22,7 @@ namespace AirShopp.Domain
         public ICollection<Cart> Carts { get; set; }
         public ICollection<Inventory> Inventories { get; set; }
 
+        public ICollection<Discount> Discounts { get; set; }
+
     }
 }

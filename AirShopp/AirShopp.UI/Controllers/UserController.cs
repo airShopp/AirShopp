@@ -31,12 +31,12 @@ namespace AirShopp.UI.Controllers
         [HttpPost]
         public ActionResult Login(string account, string password)
         {
-            
+
             try
             {
                 Admin admin = _adminService.UserLogin(account, password);
-                Session.Add("User",admin);
-                return RedirectToAction("Index","Home");
+                Session.Add("User", admin);
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
@@ -45,6 +45,10 @@ namespace AirShopp.UI.Controllers
             }
         }
 
+        public ActionResult Register()
+        {
+            return View();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -54,9 +58,5 @@ namespace AirShopp.UI.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Test()
-        {
-            return View();
-        }
     }
 }

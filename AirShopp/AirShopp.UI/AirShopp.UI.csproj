@@ -172,6 +172,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\BMapRoutePlanningController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\CartController.cs" />
@@ -194,6 +195,8 @@
     <Content Include="Content\home.css" />
     <Content Include="Content\icon\1f.png" />
     <Content Include="Content\icon\2f.png" />
+    <Content Include="Content\icon\Air.ico" />
+    <Content Include="Content\icon\AirShoppLogo.png" />
     <Content Include="Content\icon\arrow.gif" />
     <Content Include="Content\icon\btnys.png" />
     <Content Include="Content\icon\car.png" />
@@ -279,6 +282,27 @@
     <Content Include="Content\img\ad\top1.png" />
     <Content Include="Content\img\bg\mem.png" />
     <Content Include="Content\img\bg\xq.png" />
+    <Content Include="Content\img\cart\defaultpic.gif" />
+    <Content Include="Content\img\cart\favicon.ico" />
+    <Content Include="Content\img\cart\li_err.gif" />
+    <Content Include="Content\img\cart\li_ok.gif" />
+    <Content Include="Content\img\cart\login-bg.jpg" />
+    <Content Include="Content\img\cart\logo.png" />
+    <Content Include="Content\img\cart\register_bg.gif" />
+    <Content Include="Content\img\cart\taobao_adding.jpg" />
+    <Content Include="Content\img\cart\taobao_bg.png" />
+    <Content Include="Content\img\cart\taobao_cart_01.jpg" />
+    <Content Include="Content\img\cart\taobao_cart_02.jpg" />
+    <Content Include="Content\img\cart\taobao_cart_03.jpg" />
+    <Content Include="Content\img\cart\taobao_cart_04.jpg" />
+    <Content Include="Content\img\cart\taobao_del.jpg" />
+    <Content Include="Content\img\cart\taobao_icon_01.jpg" />
+    <Content Include="Content\img\cart\taobao_icon_02.jpg" />
+    <Content Include="Content\img\cart\taobao_logo.gif" />
+    <Content Include="Content\img\cart\taobao_minus.jpg" />
+    <Content Include="Content\img\cart\taobao_relation.jpg" />
+    <Content Include="Content\img\cart\taobao_subtn.jpg" />
+    <Content Include="Content\img\cart\说明.htm" />
     <Content Include="Content\img\pd\bar1.png" />
     <Content Include="Content\img\pd\bar2.png" />
     <Content Include="Content\img\pd\bar3.png" />
@@ -317,6 +341,7 @@
     <Content Include="Content\login\login-icons.png" />
     <Content Include="Content\login\msg.png" />
     <Content Include="Content\member.css" />
+    <Content Include="Content\myCart.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -328,6 +353,8 @@
     <Content Include="Content\img\ad\Thumbs.db" />
     <Content Include="Content\img\bg\Thumbs.db" />
     <Content Include="Content\img\pd\Thumbs.db" />
+    <Content Include="Content\img\cart\更多VIP资源免费下载.url" />
+    <Content Include="Content\img\cart\织梦CMS整站源码通用安装说明.url" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -346,6 +373,7 @@
     <Content Include="Scripts\js\js-tab.js" />
     <Content Include="Scripts\js\LuShu.js" />
     <Content Include="Scripts\js\MSClass.js" />
+    <Content Include="Scripts\js\myCart.js" />
     <Content Include="Scripts\js\prototype.js" />
     <Content Include="Scripts\js\top.js" />
     <Content Include="Scripts\knockout-3.4.2.debug.js" />
@@ -368,19 +396,20 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\_airShoppLayout.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
-    <Content Include="Views\Shared\_homePageLayout.cshtml" />
     <Content Include="Views\BMapRoutePlanning\Index.cshtml" />
     <Content Include="Views\Address\ViewAddress.cshtml" />
     <Content Include="Views\Order\OrderList.cshtml" />
     <Content Include="Views\Shared\_orderPageLayout.cshtml" />
     <Content Include="Views\Order\OrderDetail.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="Views\Inventory\Index.cshtml" />
+    <Content Include="Views\Product\ProductList.cshtml" />
+    <Content Include="Views\Product\ShopCart.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Shared\_homePageLayout.cshtml" />
+    <Content Include="Views\Shared\_shopCartLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

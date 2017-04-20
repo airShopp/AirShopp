@@ -42,6 +42,7 @@ namespace AirShopp.UI.Controllers
                 SecondCategories = secondCategories
 
             };
+            Session["Category"] = homeViewModel.Categories;
             return View(homeViewModel);
         }
 

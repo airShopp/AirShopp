@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>AirShopp</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/icon/Air.ico">
     @Scripts.Render("~/bundles/AirShopp/js")
     @Styles.Render("~/bundles/AirShopp/Layout")
     <script type="text/javascript">
@@ -56,14 +57,14 @@
                     <li class="headerul">|</li>
                     <li><a href="register.html">免费注册</a> </li>
                     <li class="headerul">|</li>
-                    <li>@Html.ActionLink("订单查询", "Index", "Order", null, new { style = "color:#ea4949" })</li>
+                    <li>@Html.ActionLink("订单查询", "Index", "Order", null)</li>
                     <li class="headerul">|</li>
                     <li><a href="my-s.html">我的收藏</a> </li>
                     <li class="headerul">|</li>
                     <li id="pc-nav" class="menu">
                         <a href="my-user.html" class="tit">我的商城</a>
                         <div class="subnav">
-                            @Html.ActionLink("我的订单", "Index", "Order", null, new { style = "color:#ea4949" })
+                            @Html.ActionLink("我的订单", "Index", "Order", null)
                             <a href="my-s.html">我的收藏</a>
                             <a href="my-user.html">账户安全</a>
                             <a href="my-add.html">地址管理</a>
@@ -81,14 +82,14 @@
             </div>
         </div>
         <div class="container clearfix">
-            <div class="header-logo fl"><h1><a href="首页.html"><img src="~/Content/icon/logo.png"></a> </h1></div>
+            <div class="header-logo fl"><h1><a href="首页.html"><img src="~/Content/icon/AirShoppLogo.png"></a> </h1></div>
             <div class="head-form fl">
                 <form class="clearfix">
                     <input type="text" class="search-text" accesskey="" id="key" autocomplete="off" placeholder="洗衣机">
                     <button class="button" onClick="search('key');return false;">搜索</button>
                 </form>
             </div>
-            <div class="header-cart fr"><a href="#"><img src="~/Content/icon/car.png"></a> <i class="head-amount">99</i></div>
+            <div class="header-cart fr"><a href="/Product/ShopCart"><img src="~/Content/icon/car.png"></a> <i class="head-amount">99</i></div>
             <div class="head-mountain"></div>
         </div>
         <div class="yHeader">
@@ -115,7 +116,7 @@
                 <ul class="yMenuIndex">
                     @foreach (var category in Model.Categories)
                     {
-                        <li><a href="" target="_blank">@category.CategoryName</a></li>
+                        <li><a href="/Product/Index" target="_blank">@category.CategoryName</a></li>
                     }
                     <li>@Html.ActionLink("BMap", "Index", "BMapRoutePlanning")</li>
                 </ul>
