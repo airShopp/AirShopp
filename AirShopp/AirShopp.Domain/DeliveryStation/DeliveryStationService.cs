@@ -14,9 +14,20 @@ namespace AirShopp.Domain
             _deliveryStationRepository = deliveryStationRepository;
         }
 
-        public List<DeliveryStation> GetDeliveryStation(long areaId, int stationLevel)
+        public List<DeliveryStation> GetDeliveryStations(long areaId, int stationLevel)
         {
-            return _deliveryStationRepository.GetDeliveryStation(areaId, stationLevel);
+            return _deliveryStationRepository.GetDeliveryStations(areaId, stationLevel);
+        }
+
+        public DeliveryStation GetDeliveryStation(double lng, double lat)
+        {
+            DeliveryStation deliveryStation = null;
+            List<DeliveryStation> deliveryStationList =  _deliveryStationRepository.GetDeliveryStation(lng, lat);
+            if (deliveryStationList != null)
+            {
+                deliveryStation = deliveryStationList.FirstOrDefault();
+            }
+            return deliveryStation;
         }
     }
 }

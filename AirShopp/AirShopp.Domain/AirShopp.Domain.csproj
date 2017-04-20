@@ -62,7 +62,10 @@
     <Compile Include="Area\IProvinceRepository.cs" />
     <Compile Include="Area\ProvinceService.cs" />
     <Compile Include="Common\BMapDataModel.cs" />
+    <Compile Include="DeliveryStation\CourierService.cs" />
     <Compile Include="DeliveryStation\DeliveryStationService.cs" />
+    <Compile Include="DeliveryStation\ICourierRepository.cs" />
+    <Compile Include="DeliveryStation\ICourierService.cs" />
     <Compile Include="DeliveryStation\IDeliveryStationRepository.cs" />
     <Compile Include="Cart\Cart.cs" />
     <Compile Include="Cart\CartService.cs" />
@@ -82,11 +85,14 @@
     <Compile Include="DeliveryStation\Courier.cs" />
     <Compile Include="DeliveryStation\IDeliveryStationService.cs" />
     <Compile Include="Delivery\DeliveryInfo.cs" />
+    <Compile Include="Delivery\DeliveryInfoService.cs" />
     <Compile Include="Delivery\DeliveryNote.cs" />
     <Compile Include="Delivery\DeliveryOrder.cs" />
     <Compile Include="DeliveryStation\DeliveryStation.cs" />
     <Compile Include="Delivery\Delivery.cs" />
     <Compile Include="Delivery\DeliveryOrderItem.cs" />
+    <Compile Include="Delivery\IDeliveryInfoRepository.cs" />
+    <Compile Include="Delivery\IDeliveryInfoService.cs" />
     <Compile Include="Discount\Discount.cs" />
     <Compile Include="Order\IOrderRepository.cs" />
     <Compile Include="Order\IOrderservice.cs" />

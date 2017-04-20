@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<AirShopp.UI.Models.ViewModel.OriginPointsViewModel>
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_airShoppLayout.cshtml";
 }
 <html lang="en">
 <head>
@@ -27,20 +28,18 @@
     <div id="map_canvas"></div>
     <p id="content"></p>
     <button onclick="run()">开始</button>
-
     <script>
 
-        var originalPoints = @Html.Raw(Json.Encode(Model));
+        var originPoints = @Html.Raw(Json.Encode(Model));
 
-        drawRoute(originalPoints);
+        drawRoute(originPoints);
 
         var lushu;
 
-
         // Pass all points
-        function drawRoute(originalPoints) {
+        function drawRoute(originPoints) {
 
-            var length = originalPoints.length;
+            var length = originPoints.length;
 
             if (length >= 2) {
                 var map = new BMap.Map('map_canvas');
@@ -48,7 +47,7 @@
                 initMap(map);
 
                 // init BMapPoint
-                var points = initPoints(originalPoints, []);
+                var points = initPoints(originPoints, []);
 
                 // init BMapDriving
                 var drivings = initDrivings(map, length, []);
@@ -77,7 +76,7 @@
                     }
                     catch(err)
                     {
-                        drawRoute(originalPoints);
+                        drawRoute(originPoints);
                     }
 
                     var polyline = new BMap.Polyline(pts);
@@ -85,7 +84,7 @@
 
                     for (var i = 0; i < points.length; i++) {
                         var marker = new BMap.Marker(points[i]);
-                        var label = new BMap.Label(originalPoints[i].Name, { position: points[i] });
+                        var label = new BMap.Label(originPoints[i].Name, { position: points[i] });
                         map.addOverlay(marker);
                         map.addOverlay(label);
                     }
@@ -99,7 +98,7 @@
                         speed: 10000,
                         enableRotation: true,//是否设置marker随着道路的走向进行旋转
                         landmarkPois: [],
-                        pointLists: points,
+                        originPoints: originPoints,
                         currentIndex: 0
                     }, actualPoints, setArrivedCallBack);
                 });
@@ -115,9 +114,9 @@
             map.addControl(new BMap.OverviewMapControl());
         }
         
-        function initPoints(originalPoints, points){
-            for (var i = 0; i < originalPoints.length; i++) {
-                var point = new BMap.Point(originalPoints[i].Longitude, originalPoints[i].Latitude);
+        function initPoints(originPoints, points){
+            for (var i = 0; i < originPoints.length; i++) {
+                var point = new BMap.Point(originPoints[i].Longitude, originPoints[i].Latitude);
                 points.push(point);
             }
             return points;
@@ -139,14 +138,13 @@
             this.Remark = remark;
         }
 
+
         function setArrivedCallBack(point, index, nextPoint) {
-            $.get("/BMapRoutePlanning/GetDeliveryInfo",
+            $.get('@Url.Action("GetDeliveryInfo", "BMapRoutePlanning")',
                 { 
-                    lng: point.lng,
-                    lat: point.lat,
+                    point: JSON.stringify(point),
                     index: index,
-                    nextLng: nextPoint.lng,
-                    nextLat: nextPoint.lat
+                    nextPoint: JSON.stringify(nextPoint)
                 },
                 function(data){
                     document.getElementById("content").innerHTML += " " + data;

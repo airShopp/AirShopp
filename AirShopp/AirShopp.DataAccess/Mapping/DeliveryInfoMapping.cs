@@ -15,7 +15,7 @@ namespace AirShopp.DataAccess.Mapping
         {
             HasKey(e => e.Id).Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(e => e.Description).HasMaxLength(512).IsRequired();
-            Property(e => e.CurrentLocation).HasMaxLength(64).IsRequired();
+            Property(e => e.Index).IsRequired();
             Property(e => e.UpdateTime).IsRequired();
 
             HasRequired(e => e.Order).WithMany(e => e.DeliveryInfos).HasForeignKey(fk => fk.OrderId);

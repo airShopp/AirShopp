@@ -508,10 +508,10 @@ var BMapLib = window.BMapLib = BMapLib || {};
                 }
 
                 if (flag) {
-                    if (me._opts.currentIndex == me._opts.pointLists.length) {
-                        me._setArrivedCallBack(me._opts.pointLists[me._opts.currentIndex - 1], me._opts.currentIndex, me._opts.pointLists[me._opts.currentIndex - 1]);
+                    if (me._opts.currentIndex == me._opts.originPoints.length) {
+                        me._setArrivedCallBack(me._opts.originPoints[me._opts.currentIndex - 1], me._opts.currentIndex, me._opts.originPoints[me._opts.currentIndex - 1]);
                     } else {
-                        me._setArrivedCallBack(me._opts.pointLists[me._opts.currentIndex - 1], me._opts.currentIndex, me._opts.pointLists[me._opts.currentIndex]);
+                        me._setArrivedCallBack(me._opts.originPoints[me._opts.currentIndex - 1], me._opts.currentIndex, me._opts.originPoints[me._opts.currentIndex]);
                     }
                 }
                 me._move(me._path[index], me._path[index + 1], me._tween.linear);

@@ -16,37 +16,27 @@ namespace AirShopp.UI.Controllers
     {
         private IAddressService _addressService;
         private IDeliveryStationService _deliveryStationService;
-        private IProvinceService _provinceService;
-        private ICityService _cityService;
+        private IDeliveryInfoService _deliveryInfoService;
+        private ICourierService _courierService;
 
-        public BMapRoutePlanningController(IAddressService addressService, IDeliveryStationService deliveryStationService, IProvinceService provinceService, ICityService citySrvice)
+        public BMapRoutePlanningController(IAddressService addressService, IDeliveryStationService deliveryStationService, IDeliveryInfoService deliveryInfoService, ICourierService courierService)
         {
             _addressService = addressService;
             _deliveryStationService = deliveryStationService;
-            _provinceService = provinceService;
-            _cityService = citySrvice;
+            _deliveryInfoService = deliveryInfoService;
+            _courierService = courierService;
         }
 
         //
         // GET: /BMapRoutePlanning/
         public ActionResult Index()
         {
-
-            Address address = _addressService.GetAddress(1).FirstOrDefault();
+            int orderId = 1;
+            // Pass Order model
+            Address address = _addressService.GetAddress(orderId).FirstOrDefault();
 
             // Current area delivery station
-            DeliveryStation deliveryStation = _deliveryStationService.GetDeliveryStation(address.AreaId, 2).FirstOrDefault();
-
-            List<OriginPointsViewModel> pointsList = new List<OriginPointsViewModel>();
-
-            OriginPointsViewModel startUpPoint = new OriginPointsViewModel("起点", "江苏昆山物流转运中心", 120.964369, 31.372474, "");
-            pointsList.Add(startUpPoint);
-
-            OriginPointsViewModel firstPoint = new OriginPointsViewModel(deliveryStation.ParentDeliveryStation.Name, deliveryStation.ParentDeliveryStation.Address, deliveryStation.ParentDeliveryStation.Longitude, deliveryStation.ParentDeliveryStation.Latitude, "");
-            pointsList.Add(firstPoint);
-
-            OriginPointsViewModel secondPoint = new OriginPointsViewModel(deliveryStation.Name, deliveryStation.Address, deliveryStation.Longitude, deliveryStation.Latitude, "");
-            pointsList.Add(secondPoint);
+            DeliveryStation deliveryStation = _deliveryStationService.GetDeliveryStations(address.AreaId, 2).FirstOrDefault();
 
             List<DeliveryStation> stationList = new List<DeliveryStation>();
             Dictionary<double, DeliveryStation> distanceMap = new Dictionary<double, DeliveryStation>();
@@ -96,36 +86,99 @@ namespace AirShopp.UI.Controllers
 
             int minDistanceIndex = bMapDataModel.Result.FindIndex(x => x.Distance.Value == bMapDataModel.Result.Min(y => y.Distance.Value));
 
+            // init originPoint
+            OriginPointsViewModel startUpPoint = new OriginPointsViewModel("起点", "江苏昆山物流转运中心", 120.964369, 31.372474, "");
+
+            OriginPointsViewModel firstPoint = new OriginPointsViewModel(deliveryStation.ParentDeliveryStation.Name, deliveryStation.ParentDeliveryStation.Address, deliveryStation.ParentDeliveryStation.Longitude, deliveryStation.ParentDeliveryStation.Latitude, "");
+
+            OriginPointsViewModel secondPoint = new OriginPointsViewModel(deliveryStation.Name, deliveryStation.Address, deliveryStation.Longitude, deliveryStation.Latitude, "");
+
             OriginPointsViewModel thirdPoint = new OriginPointsViewModel(stationList[minDistanceIndex].Name, stationList[minDistanceIndex].Address, stationList[minDistanceIndex].Longitude, stationList[minDistanceIndex].Latitude, "");
-            pointsList.Add(thirdPoint);
 
             OriginPointsViewModel endPoint = new OriginPointsViewModel("终点", address.DeliveryAddress, address.Longitude, address.Latitude, "");
-            pointsList.Add(endPoint);
 
-            return View(pointsList);
+            return View(new List<OriginPointsViewModel>(){
+                    startUpPoint,
+                    firstPoint,
+                    secondPoint,
+                    thirdPoint,
+                    endPoint
+            });
         }
 
-        public ActionResult GetDeliveryInfo(double lng, double lat, int index, double nextLng, double nextLat)
+        public ActionResult GetDeliveryInfo(string point, int index, string nextPoint)
         {
+            int orderId = 1;
+            int maxIndex = _deliveryInfoService.GetMaxIndex(orderId);
+
+            OriginPointsViewModel currentLocation = JsonHelper.DeserializeJsonToObject<OriginPointsViewModel>(point);
+            OriginPointsViewModel nextLocation = JsonHelper.DeserializeJsonToObject<OriginPointsViewModel>(nextPoint);
             switch (index)
             {
                 case 1:
-
-
-
-                    break;
-                case 2:
-                    break;
-                case 3:
+                    {
+                        DeliveryInfo startDeliveryInfo = new DeliveryInfo(MessageConstants.DELIVERYINFO_START_MESSAGE, ++maxIndex, orderId);
+                        DeliveryInfo packageDeliveryInfo = new DeliveryInfo(string.Format(MessageConstants.DELIVERYINFO_PACKAGE_MESSAGE, currentLocation.Name), ++maxIndex, orderId);
+                        DeliveryInfo transferDeliveryInfo = new DeliveryInfo(string.Format(MessageConstants.DELIVERYINFO_TRANSFER_MESSAGE, currentLocation.Name, nextLocation.Name), ++maxIndex, orderId);
+                        AddDeliveryInfo(new List<DeliveryInfo>(){
+                            startDeliveryInfo,
+                            packageDeliveryInfo,
+                            transferDeliveryInfo
+                        });
+                    }
                     break;
                 case 4:
+                    {
+                        DeliveryInfo receiveDeliveryInfo = new DeliveryInfo(string.Format(
+                            MessageConstants.DELIVERYINFO__RECEIVE_MESSAGE, currentLocation.Name), ++maxIndex, orderId);
+
+                        DeliveryStation deliveryStation = _deliveryStationService.GetDeliveryStation(currentLocation.Longitude, currentLocation.Latitude);
+
+                        Courier courier = _courierService.GetCourier(deliveryStation.Id);
+
+                        DeliveryInfo deliveryDeliveryInfo = new DeliveryInfo(string.Format(MessageConstants.DELIVERYINFO_DELIVERY_MESSAGE, currentLocation.Name, courier.Name, courier.Phone), ++maxIndex, orderId
+                           );
+
+                        AddDeliveryInfo(new List<DeliveryInfo>(){
+                            receiveDeliveryInfo,
+                            deliveryDeliveryInfo
+                        });
+                    }
                     break;
                 case 5:
+                    {
+                        DeliveryInfo endDeliveryInfo = new DeliveryInfo(
+                                string.Format(MessageConstants.DELIVERYINFO_END_MESSAGE, currentLocation.Name), ++maxIndex, orderId
+                                );
+                        _deliveryInfoService.AddDeliverInfo(endDeliveryInfo);
+
+                    }
                     break;
                 default:
+                    {
+                        DeliveryInfo receiveDeliveryInfo = new DeliveryInfo(string.Format(
+                            MessageConstants.DELIVERYINFO__RECEIVE_MESSAGE, currentLocation.Name), ++maxIndex, orderId);
+                        DeliveryInfo transferDeliveryInfo = new DeliveryInfo(string.Format(
+                            MessageConstants.DELIVERYINFO_TRANSFER_MESSAGE,
+                            currentLocation.Name, nextLocation.Name), ++maxIndex, orderId);
+                        AddDeliveryInfo(new List<DeliveryInfo>(){
+                            receiveDeliveryInfo,
+                            transferDeliveryInfo
+                        });
+                    }
                     break;
             }
+
+
             return Content("");
+        }
+
+        private void AddDeliveryInfo(List<DeliveryInfo> deliveryInfoList)
+        {
+            foreach (var item in deliveryInfoList)
+            {
+                _deliveryInfoService.AddDeliverInfo(item);
+            }
         }
 
     }
