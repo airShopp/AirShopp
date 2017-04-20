@@ -14,8 +14,7 @@ namespace AirShopp.DataAccess.Mapping
         public InventoryActionMapping()
         {
             HasKey(e => e.Id).Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            HasRequired(e => e.ProductInFactory).WithMany(e => e.InventoryActions).HasForeignKey(fk => fk.ProductInFactoryId);
-            HasRequired(e => e.ProductOutFactory).WithMany(e => e.InventoryActions).HasForeignKey(fk => fk.ProductOutFactoryId);
+            HasRequired(e => e.Inventory).WithMany(e => e.InventoryActions).HasForeignKey(fk => fk.InventoryId);
         }
     }
 }

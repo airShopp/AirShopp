@@ -8,8 +8,5 @@ namespace AirShopp.Domain
         public long Id { get; set; }
         public int Amount { get; set; }
         public DateTime OutDate { get; set; }
-        public string ProductName { get; set; }
-
-        public ICollection<InventoryAction> InventoryActions { get; set; }
     }
 }

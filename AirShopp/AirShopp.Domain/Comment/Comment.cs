@@ -12,6 +12,7 @@ namespace AirShopp.Domain
         public long OrderId { get; set; }
         public long ProductId { get; set; }
         public string Comments { get; set; }
+        public DateTime CommentDate { get; set; }
 
         public Order Order { get; set; }
         public Product Product { get; set; }

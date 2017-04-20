@@ -1,4 +1,4 @@
-﻿@*@model AirShopp.UI.Models.ViewModel.HomeViewModel*@
+﻿@model AirShopp.UI.Models.ViewModel.HomeViewModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_homePageLayout.cshtml";
@@ -36,48 +36,16 @@
                 <div class="yScrollListIn">
                     <div style="display:block;" class="yScrollListInList yScrollListInList1">
                         <ul>
-                            <li>
-                                <a href="/Product/getProduct">
-                                    <img src="~/Content/img/pd/p1.png">
-                                    <p class="head-name pc-pa10">TP-LINK TL-WN725N 微型150M无线USB网卡</p>
-                                    <p class="label-default">3.45折</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/Product/getProduct">
-                                    <img src="~/Content/img/pd/p2.png">
-                                    <p class="head-name pc-pa10">TP-LINK TL-WN725N 微型150M无线USB网卡</p>
-                                    <p class="label-default">3.45折</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/Product/getProduct">
-                                    <img src="~/Content/img/pd/p3.png">
-                                    <p class="head-name pc-pa10">TP-LINK TL-WN725N 微型150M无线USB网卡</p>
-                                    <p class="label-default">3.45折</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/Product/getProduct">
-                                    <img src="~/Content/img/pd/p4.png">
-                                    <p class="head-name pc-pa10">TP-LINK TL-WN725N 微型150M无线USB网卡</p>
-                                    <p class="label-default">3.45折</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/Product/getProduct">
-                                    <img src="~/Content/img/pd/p5.png">
-                                    <p class="head-name pc-pa10">TP-LINK TL-WN725N 微型150M无线USB网卡</p>
-                                    <p class="label-default">3.45折</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/Product/getProduct">
-                                    <img src="~/Content/img/pd/p6.png">
-                                    <p class="head-name pc-pa10">TP-LINK TL-WN725N 微型150M无线USB网卡</p>
-                                    <p class="label-default">3.45折</p>
-                                </a>
-                            </li>
+                            @foreach (var hotProduct in Model.HotProducts)
+                            {
+                                <li>
+                                    <a href="/Product/getProduct">
+                                        <img src="~/Content/img/pd/p1.png">
+                                        <p class="head-name pc-pa10">@hotProduct.ProductName.Substring(0,20)</p>
+                                        <p class="label-default">@hotProduct.Discounts 折</p>
+                                    </a>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>

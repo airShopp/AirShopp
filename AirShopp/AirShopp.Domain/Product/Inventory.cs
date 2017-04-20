@@ -1,4 +1,6 @@
-﻿namespace AirShopp.Domain
+﻿using System.Collections.Generic;
+
+namespace AirShopp.Domain
 {
     public class Inventory
     {
@@ -9,5 +11,6 @@
 
         public Product Product { get; set; }
         public Warehouse Warehouse { get; set; }
+        public ICollection<InventoryAction> InventoryActions { get; set; }
     }
 }

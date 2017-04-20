@@ -9,12 +9,15 @@ namespace AirShopp.UI.Controllers
     {
         private AirShoppContext db = new AirShoppContext();
         private IAdminService _adminService;
+        private ICustomerRepository _customerRepository;
 
         public UserController(
-            IAdminService adminService
+            IAdminService adminService,
+            ICustomerRepository customerRepository
             )
         {
             _adminService = adminService;
+            _customerRepository = customerRepository;
         }
 
         // GET: Admins
@@ -29,14 +32,14 @@ namespace AirShopp.UI.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(string account, string password)
+        public ActionResult Login(string account, string password, string userType)
         {
 
             try
             {
-                Admin admin = _adminService.UserLogin(account, password);
-                Session.Add("User", admin);
-                return RedirectToAction("Index", "Home");
+                Customer customer = _customerRepository.GetCustomer(account, password);
+                Session.Add("customer", customer);
+                return RedirectToAction("Index", "Home",customer);
             }
             catch (Exception ex)
             {

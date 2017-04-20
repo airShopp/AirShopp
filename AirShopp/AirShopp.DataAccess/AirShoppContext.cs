@@ -31,9 +31,9 @@ namespace AirShopp.DataAccess
 
         public DbSet<Admin> Admin { get; set; }
 
-        public DbSet<ProductInFactory> ProductIn { get; set; }
-        public DbSet<ProductOutFactory> ProductOut { get; set; }
-        public DbSet<Warehouse> Factory { get; set; }
+        public DbSet<ProductInFactory> ProductInFactory { get; set; }
+        public DbSet<ProductOutFactory> ProductOutFactory { get; set; }
+        public DbSet<Warehouse> Warehouse { get; set; }
         public DbSet<Inventory> Inventory { get; set; }
         public DbSet<InventoryAction> InventoryAction { get; set; }
 
