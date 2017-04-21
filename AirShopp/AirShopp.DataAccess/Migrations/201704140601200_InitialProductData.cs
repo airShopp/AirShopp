@@ -11,21 +11,21 @@ namespace AirShopp.DataAccess.Migrations
                     SET IDENTITY_INSERT dbo.Product ON 
                     --电器
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description)
-                    VALUES(1,'原装中兴充电器 5V1A手机电源适配器 USB充电头5V0.7A设备电源',1,1,GETUTCDATE(),'三年',200,'待定项',NULL);
+                    VALUES(1,'原装中兴充电器 5V1A手机电源适配器 USB充电头5V0.7A设备电源',1,1,GETUTCDATE(),'三年',200,'/Content/img/product/中兴充电器.jpg',NULL);
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description)
-                    VALUES(2,'小米M4 红米note3手机原装正品拆机数据线快速闪充充电器直充头2a',1,1,GETUTCDATE(),'三年',200,'待定项',NULL);
+                    VALUES(2,'小米M4 红米note3手机原装正品拆机数据线快速闪充充电器直充头2a',1,1,GETUTCDATE(),'三年',200,'/Content/img/product/红米数据线.jpg',NULL);
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description)
-                    VALUES(3,'VIVO充电器原装X6 X7 plus X9双引擎闪充头V3max手机数据线Xplay5',1,1,GETUTCDATE(),'三年',200,'待定项',NULL);
+                    VALUES(3,'VIVO充电器原装X6 X7 plus X9双引擎闪充头V3max手机数据线Xplay5',1,1,GETUTCDATE(),'三年',200,'/Content/img/product/Vivo充电器.jpg',NULL);
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description)
                     VALUES(4,'华为原装充电器荣耀4C 3C 4A畅玩4X 3X C8818 G610手机数据线充头',1,1,GETUTCDATE(),'三年',200,'待定项',NULL);
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description)
-                    VALUES(5,'8口USB快速充电器头手机平板智能显示多口多功能手机通用排插座2A',1,1,GETUTCDATE(),'三年',200,'待定项',NULL);
+                    VALUES(5,'8口USB快速充电器头手机平板智能显示多口多功能手机通用排插座2A',1,1,GETUTCDATE(),'三年',200,'/Content/img/product/8口USB快速充电器.jpg','');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description)
-                    VALUES(6,'舜红正品500W变压器220V转110V日本美国电器110V转220V电压变压器',1,1,GETUTCDATE(),'三年',200,'待定项',NULL);
+                    VALUES(6,'舜红正品500W变压器220V转110V日本美国电器110V转220V电压变压器',1,1,GETUTCDATE(),'三年',200,'/Content/img/product/舜红500W变压器.jpg',NULL);
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description)
                     VALUES(7,'三星充电器原装正品S6edge s7 note4/5手机快充头A8/9V原装数据线',1,1,GETUTCDATE(),'三年',200,'待定项',NULL);
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description)
-                    VALUES(8,'华为原装充电器4X 5X荣耀6 Plus Mate8 7 P8数据线手机充电器通用',1,1,GETUTCDATE(),'三年',200,'待定项',NULL);
+                    VALUES(8,'华为原装充电器4X 5X荣耀6 Plus Mate8 7 P8数据线手机充电器通用',1,1,GETUTCDATE(),'三年',200,'/Content/img/product/华为充电头.jpg',NULL);
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description)
                     VALUES(9,'索尼原装充电器快充头正品Z1 Z2 Z3 L36H C5 Z5 Z4 Z5P手机数据线',1,1,GETUTCDATE(),'三年',200,'待定项',NULL);
                     --服饰
@@ -34,13 +34,13 @@ namespace AirShopp.DataAccess.Migrations
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
                     VALUES(11,'2017仙公主网络直播衣服装美女装主播上镜露肩小姐夜店性感连衣裙', 2, 8, GETUTCDATE(), '三年', 300,'待定项','');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
-                    VALUES(12,'2017新款江南雨表演服伞舞演出服民族扇子舞秧歌服装古典舞蹈服女', 2, 8, GETUTCDATE(), '三年', 300,'待定项','本款服装采用优质高丝宝和雪纺布料精心制作而成  布料穿着舒适透气性好   款式简约而不简单    大方而不俗气   适合演绎各种舞蹈      现在购买还送同款头饰    也可以联系客服换其他款式头饰    一套包邮 （偏远地区除外）');
+                    VALUES(12,'2017新款江南雨表演服伞舞演出服民族扇子舞秧歌服装古典舞蹈服女', 2, 8, GETUTCDATE(), '三年', 300,'/Content/img/product/舞蹈服.jpg','本款服装采用优质高丝宝和雪纺布料精心制作而成  布料穿着舒适透气性好   款式简约而不简单    大方而不俗气   适合演绎各种舞蹈      现在购买还送同款头饰    也可以联系客服换其他款式头饰    一套包邮 （偏远地区除外）');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
                     VALUES(13,'胸围120大码女装夏韩版胖MM个性潮蝙蝠衫 短袖T恤 胖人服装显瘦衣', 2, 8, GETUTCDATE(), '三年', 300,'待定项','');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
                     VALUES(14,'宠物服饰狗狗衣服两脚衣春夏装小泰迪犬猫咪博美比熊幼犬狗衣服', 2, 8, GETUTCDATE(), '三年', 300,'待定项','');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
-                    VALUES(15,'酒店工作服夏装女 西餐厅服务员服装短袖 火锅店餐饮服务员制服', 2, 8, GETUTCDATE(), '三年', 300,'待定项','北京工作服工厂店网上直销。单上衣送围裙现在活动特价28元送围裙（数量有限送完为止），数量有限，预购从速。售完为止。  女士尺码偏小，亲们可以咨询客服啊。');
+                    VALUES(15,'酒店工作服夏装女 西餐厅服务员服装短袖 火锅店餐饮服务员制服', 2, 8, GETUTCDATE(), '三年', 300,'/Content/img/product/服装短袖.jpg','北京工作服工厂店网上直销。单上衣送围裙现在活动特价28元送围裙（数量有限送完为止），数量有限，预购从速。售完为止。  女士尺码偏小，亲们可以咨询客服啊。');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
                     VALUES(16,'结婚登记证件照情侣服装男女长袖纯棉白衬衣领证拍照上衣尖领衬衫', 2, 8, GETUTCDATE(), '三年', 300,'待定项','结婚登记证件照情侣服装男女长袖棉质白衬衣领证拍照上衣尖领衬衫');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
@@ -53,13 +53,13 @@ namespace AirShopp.DataAccess.Migrations
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
                     VALUES(20,'【第二件半价】韩国每日坚果 混合燕麦果仁 儿童妇女零食20g*30袋',8,9,GETUTCDATE(),'两年',200,'待定项','一盒30袋套餐，一天一袋，囤货一月，补充每天营养。');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
-                    VALUES(21,'Floradix Iron德国药店铁元绿色妇女儿童孕产妇口服液500ml',8,9,GETUTCDATE(),'两年',200,'待定项','');
+                    VALUES(21,'Floradix Iron德国药店铁元绿色妇女儿童孕产妇口服液500ml',8,9,GETUTCDATE(),'两年',200,'/Content/img/product/口服液.jpg','');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
-                    VALUES(22,'包邮正版 大鱼/（美）丹尼尔&middot;华莱士著，宁蒙译/北方妇女儿童出',8,9,GETUTCDATE(),'两年',200,'待定项','');
+                    VALUES(22,'包邮正版 大鱼/（美）丹尼尔&middot;华莱士著，宁蒙译/北方妇女儿童出',8,9,GETUTCDATE(),'两年',200,'/Content/img/product/书.jpg','');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
                     VALUES(23,'妇女节幼儿园手工节日花盆礼物玩具diy儿童手工制作材料包',8,9,GETUTCDATE(),'两年',200,'待定项','');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
-                    VALUES(24,'创意婚庆蛋糕毛巾实用妇女节礼物儿童 公司活动促销小礼品定制品',8,9,GETUTCDATE(),'两年',200,'待定项','纯棉毛巾，手工制作，可爱的造型，总有一款适合您，欢迎选购，产品定制200个起！');
+                    VALUES(24,'创意婚庆蛋糕毛巾实用妇女节礼物儿童 公司活动促销小礼品定制品',8,9,GETUTCDATE(),'两年',200,'/Content/img/product/蛋糕毛巾.jpg','纯棉毛巾，手工制作，可爱的造型，总有一款适合您，欢迎选购，产品定制200个起！');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
                     VALUES(25,'妇女节礼物幼儿园创意儿童小礼品义乌小商品小玩意手环玩具批發',8,9,GETUTCDATE(),'两年',200,'待定项','');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description)
@@ -81,7 +81,7 @@ namespace AirShopp.DataAccess.Migrations
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
                     VALUES(33,'碧妮爽肤水乳液精华液男女深度补水化妆柔肤水保湿美白控油护肤品',5,10,GETUTCDATE(),'两年',200,'待定项','水 乳 精华液 三合一  买2送1');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
-                    VALUES(34,'祛斑美白套装去黄美白祛斑霜产品男女淡斑去斑补水正品化妆护肤品',5,10,GETUTCDATE(),'两年',200,'待定项','氧疗祛斑套装  用后30天 不满意就退款');
+                    VALUES(34,'祛斑美白套装去黄美白祛斑霜产品男女淡斑去斑补水正品化妆护肤品',5,10,GETUTCDATE(),'两年',200,'/Content/img/product/补水化妆品.jpg','氧疗祛斑套装  用后30天 不满意就退款');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
                     VALUES(35,'旋转透明亚克力化妆品收纳盒桌面梳妆台护肤品整理置物架大号韩国',5,10,GETUTCDATE(),'两年',200,'待定项','化妆品收纳盒，360度旋转，超大容量 护肤品，彩妆收纳，透明亚克力材质。托盘可以根据护肤品高度调节。家用多功能梳妆台洗手台整理韩国储物盒超大号收纳神器。打破格局，高瓶、低瓶、护肤品、彩妆全部能装，做到真正的一目了然和随意拿放。');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
@@ -104,7 +104,7 @@ namespace AirShopp.DataAccess.Migrations
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
                     VALUES(44,'粗陶白瓷干花满天星花瓶简约现代白色插花家居客厅陶瓷摆件小花器',3,7,GETUTCDATE(),'两年',200,'待定项','');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
-                    VALUES(45,'冬夏季家居四季男女情侣棉麻亚麻拖鞋居家室内木地板软底防滑布春',3,7,GETUTCDATE(),'两年',200,'待定项','');
+                    VALUES(45,'冬夏季家居四季男女情侣棉麻亚麻拖鞋居家室内木地板软底防滑布春',3,7,GETUTCDATE(),'两年',200,'/Content/img/product/防滑布.jpg','');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
                     VALUES(46,'【天天特价】招财玉白菜摆件笔筒家居办公室桌工艺品创意开业礼品',3,7,GETUTCDATE(),'两年',200,'待定项','白菜笔筒，做工精致，实用，送朋友，送长辈，送老师，送老板首选，百分比实拍绝对无ps，全国包邮！！！');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
@@ -144,7 +144,7 @@ namespace AirShopp.DataAccess.Migrations
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
                     VALUES(63,'锅巴休闲特产零食粗粮锅巴原味香辣特产零食童年怀旧食品500g包邮',4,11,GETUTCDATE(),'两年',200,'待定项','');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
-                    VALUES(64,'三角结婚庆喜糖果好彩头小样Q酸QQ软糖散装500g85个零食品批发',4,11,GETUTCDATE(),'两年',200,'待定项','');
+                    VALUES(64,'三角结婚庆喜糖果好彩头小样Q酸QQ软糖散装500g85个零食品批发',4,11,GETUTCDATE(),'两年',200,'/Content/img/product/QQ软糖.jpg','');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 
                     VALUES(65,'辈儿香 麻辣鱼味卷不是辣条油炸普通型膨化食品脆卷 56g*20袋包邮',4,11,GETUTCDATE(),'两年',200,'待定项','');
                     INSERT INTO dbo.Product(Id, ProductName,CategoryId,ProviderId,ProductionDATE,KeepDate,Price,Url,Description) 

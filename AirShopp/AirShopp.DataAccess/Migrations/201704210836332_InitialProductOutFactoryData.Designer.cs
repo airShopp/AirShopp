@@ -7,13 +7,13 @@ namespace AirShopp.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialProductInFactoryTable : IMigrationMetadata
+    public sealed partial class InitialProductOutFactoryData : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialProductInFactoryTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialProductOutFactoryData));
         
         string IMigrationMetadata.Id
         {
-            get { return "201704200740376_InitialProductInFactoryTable"; }
+            get { return "201704210836332_InitialProductOutFactoryData"; }
         }
         
         string IMigrationMetadata.Source

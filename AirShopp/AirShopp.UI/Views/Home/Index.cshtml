@@ -1,9 +1,45 @@
 ﻿@model AirShopp.UI.Models.ViewModel.HomeViewModel
 @{
-    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_homePageLayout.cshtml";
 }
 
+@{
+    var StartTime = Model.TimeLimitProduct[0].DiscountStartTime;
+    var EndTime = Model.TimeLimitProduct[0].DiscountEndTime;
+    var LimitTime = EndTime.Subtract(StartTime);
+    var d = LimitTime.Days;
+    var H = LimitTime.Hours;
+    var se = LimitTime.Seconds;
+    var s = LimitTime.TotalSeconds;
+}
+<script type="text/javascript">
+         var intDiff = @s;//倒计时总秒数量
+         function timer(intDiff){
+             window.setInterval(function(){
+                 var day=0,
+                         hour=0,
+                         minute=0,
+                         second=0;//时间默认值
+                 if(intDiff > 0){
+                     day = Math.floor(intDiff / (60 * 60 * 24));
+                     hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+                     minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+                     second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+                 }
+                 if (minute <= 9) minute = '0' + minute;
+                 if (second <= 9) second = '0' + second;
+                 $('#day_show').html('<s id="d"></s>' + day+ '');
+                 $('#hour_show').html('<s id="h"></s>'+hour+'');
+                 $('#minute_show').html('<s></s>'+minute+'');
+                 $('#second_show').html('<s></s>'+second+'');
+                 intDiff--;
+             }, 1000);
+         }
+
+         $(function(){
+             timer(intDiff);
+         });
+</script>
 <!--- banner begin-->
 <section id="pc-banner">
     <div class="yBanner">
@@ -26,30 +62,16 @@
         <div style="text-align:center;clear:both"></div>
     </div>
 </section>
-
 <!--热卖区-->
 <div class="time-lists clearfix">
     <div class="time-list time-list-w fl">
-        <div class="time-title time-clear"><h2>热卖区</h2><div class="pc-font fl"></div><a class="pc-spin fr" href="javascript:;">换一换</a> </div>
-        <div class="time-border">
-            <div class="yScrollList">
-                <div class="yScrollListIn">
-                    <div style="display:block;" class="yScrollListInList yScrollListInList1">
-                        <ul>
-                            @foreach (var hotProduct in Model.HotProducts)
-                            {
-                                <li>
-                                    <a href="/Product/getProduct">
-                                        <img src="~/Content/img/pd/p1.png">
-                                        <p class="head-name pc-pa10">@hotProduct.ProductName.Substring(0,20)</p>
-                                        <p class="label-default">@hotProduct.Discounts 折</p>
-                                    </a>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <div class="time-title time-clear">
+            <h2>热卖区</h2>
+            <div class="pc-font fl"></div>
+            @Ajax.ActionLink("换一换", "GetHotProduct", "Home", new AjaxOptions { UpdateTargetId = "HotProduct", HttpMethod = "Get" }, new { @Class = "pc-spin fr" })
+        </div>
+        <div class="time-border" id="HotProduct">
+          @Html.Partial("HotProduct");
         </div>
     </div>
 </div>
@@ -60,11 +82,14 @@
         <div class="time-title">
             <h2>限时抢购</h2>
             <div class="time-item clearfix fl" style="padding-left:10px;">
-                <strong id="hour_show">00</strong>
-                <strong class="pc-clear-sr">:</strong>
-                <strong id="minute_show">00</strong>
-                <strong class="pc-clear-sr">:</strong>
-                <strong id="second_show">00</strong>
+                <strong id="day_show">@LimitTime.Days</strong>
+                <strong class="pc-clear-sr">天</strong>
+                <strong id="hour_show">@LimitTime.Hours</strong>
+                <strong class="pc-clear-sr">时</strong>
+                <strong id="minute_show">@LimitTime.Minutes</strong>
+                <strong class="pc-clear-sr">分</strong>
+                <strong id="second_show">@LimitTime.Seconds</strong>
+                <strong class="pc-clear-sr">秒</strong>
             </div><!--倒计时模块-->
             <a href="sale-begin.html" class="fr">更多抢购商品</a>
         </div>
@@ -74,82 +99,20 @@
                     <a class="yScrollListbtn yScrollListbtnl" id="prev-01"></a>
                     <div class="yScrollListInList yScrollListInList1 jCarouselLite" style="display:block;margin-left: 20px;" id="demo-01">
                         <ul>
-                            <li>
-                                <a href="page.html" target="_blank">
-                                    <img src="~/Content/img/pd/pd1.png">
-                                    <p class="head-name">TP-LINK TL-WN725N 微型150M无线USB网卡</p>
-                                    <p><span class="price">￥138.00</span><span class="discount">￥1000</span></p>
-                                    <p class="label-default">3.45折</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="page.html" target="_blank">
-                                    <img src="~/Content/img/pd/p2.png">
-                                    <p class="head-name">TP-LINK TL-WN725N 微型150M无线USB网卡</p>
-                                    <p><span class="price">￥138.00</span><span class="discount">￥1000</span></p>
-                                    <p class="label-default">3.45折</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="page.html" target="_blank">
-                                    <img src="~/Content/img/pd/p3.png">
-                                    <p class="head-name">TP-LINK TL-WN725N 微型150M无线USB网卡</p>
-                                    <p><span class="price">￥138.00</span><span class="discount">￥1000</span></p>
-                                    <p class="label-default">3.45折</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="page.html" target="_blank">
-                                    <img src="~/Content/img/pd/p4.png">
-                                    <p class="head-name">TP-LINK TL-WN725N 微型150M无线USB网卡</p>
-                                    <p><span class="price">￥138.00</span><span class="discount">￥1000</span></p>
-                                    <p class="label-default">3.45折</p>
-                                </a>
-                            </li>
-
-                        </ul>
-
-
+                            @foreach (var timeProduct in Model.TimeLimitProduct)
+                            {
+                                <li>
+                                    <a href="/Product/getProduct">
+                                        <img src="@timeProduct.PictureUrl" />
+                                        <p class="head-name pc-pa10" title="@timeProduct.ProductName">@timeProduct.ProductName.Substring(0, 20) ···</p>
+                                        <p><span class="price">￥@timeProduct.DiscountPrice</span><span class="discount">￥@timeProduct.Price</span></p>
+                                        <p class="label-default">@timeProduct.Discounts 折</p>
+                                    </a>
+                                </li>
+                            }
+                         </ul>
                     </div>
                     <a class="yScrollListbtn yScrollListbtnr" id="next-01"></a>
-                    <div class="yScrollListInList yScrollListInList2">
-                        <ul>
-                            <li>
-                                <a href="">
-                                    <img src="~/Content/img/pd/p3.png">
-                                    <p class="head-name">TP-LINK TL-WN725N 微型150M无线USB网卡</p>
-                                    <p><span class="price">￥138.00</span><span class="discount">￥1000</span></p>
-                                    <p class="label-default">3.45折</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="~/Content/img/pd/p3.png">
-                                    <p class="head-name">TP-LINK TL-WN725N 微型150M无线USB网卡</p>
-                                    <p><span class="price">￥138.00</span><span class="discount">￥1000</span></p>
-                                    <p class="label-default">3.45折</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="~/Content/img/pd/p3.png">
-                                    <p class="head-name">TP-LINK TL-WN725N 微型150M无线USB网卡</p>
-                                    <p><span class="price">￥138.00</span><span class="discount">￥1000</span></p>
-                                    <p class="label-default">3.45折</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="~/Content/img/pd/p3.png">
-                                    <p class="head-name">TP-LINK TL-WN725N 微型150M无线USB网卡</p>
-                                    <p><span class="price">￥138.00</span><span class="discount">￥1000</span></p>
-                                    <p class="label-default">3.45折</p>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="yScrollListbtn yScrollListbtnl"></div>
-                        <div class="yScrollListbtn yScrollListbtnr"></div>
-                    </div>
                 </div>
             </div>
         </div>

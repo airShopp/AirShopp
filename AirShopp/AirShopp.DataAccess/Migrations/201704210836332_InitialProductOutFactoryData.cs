@@ -3,7 +3,7 @@ namespace AirShopp.DataAccess.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialProductInFactoryTable : DbMigration
+    public partial class InitialProductOutFactoryData : DbMigration
     {
         public override void Up()
         {
@@ -89,9 +89,10 @@ namespace AirShopp.DataAccess.Migrations
   
                 ");
         }
-        
+
         public override void Down()
         {
+            Sql(@"DELETE FROM dbo.ProductOutFactory");
         }
     }
 }

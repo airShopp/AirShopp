@@ -13,7 +13,7 @@ namespace AirShopp.DataAccess
         public List<Product> Products()
         {
             string path = HttpRuntime.AppDomainAppPath.ToString() + "\\Content\\Images\\HomePage\\p1.jpg";
-            string imgPath = path.Substring(path.IndexOf("Content"));
+            string imgPath = path.Substring(path.IndexOf("\\Content"));
             string RealPath = imgPath.Replace("\\","/");
 
             List<Product> products = new List<Product>();

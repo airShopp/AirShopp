@@ -154,10 +154,6 @@
     <Compile Include="Migrations\201704200731270_ModifyInventory.Designer.cs">
       <DependentUpon>201704200731270_ModifyInventory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704200740376_InitialProductInFactoryTable.cs" />
-    <Compile Include="Migrations\201704200740376_InitialProductInFactoryTable.Designer.cs">
-      <DependentUpon>201704200740376_InitialProductInFactoryTable.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201704200750446_InitialWarehouseTable.cs" />
     <Compile Include="Migrations\201704200750446_InitialWarehouseTable.Designer.cs">
       <DependentUpon>201704200750446_InitialWarehouseTable.cs</DependentUpon>
@@ -177,6 +173,10 @@
     <Compile Include="Migrations\201704201028453_InitialDiscountData.cs" />
     <Compile Include="Migrations\201704201028453_InitialDiscountData.Designer.cs">
       <DependentUpon>201704201028453_InitialDiscountData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704210836332_InitialProductOutFactoryData.cs" />
+    <Compile Include="Migrations\201704210836332_InitialProductOutFactoryData.Designer.cs">
+      <DependentUpon>201704210836332_InitialProductOutFactoryData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -266,9 +266,6 @@
     <EmbeddedResource Include="Migrations\201704200731270_ModifyInventory.resx">
       <DependentUpon>201704200731270_ModifyInventory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704200740376_InitialProductInFactoryTable.resx">
-      <DependentUpon>201704200740376_InitialProductInFactoryTable.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704200750446_InitialWarehouseTable.resx">
       <DependentUpon>201704200750446_InitialWarehouseTable.cs</DependentUpon>
     </EmbeddedResource>
@@ -283,6 +280,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704201028453_InitialDiscountData.resx">
       <DependentUpon>201704201028453_InitialDiscountData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704210836332_InitialProductOutFactoryData.resx">
+      <DependentUpon>201704210836332_InitialProductOutFactoryData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

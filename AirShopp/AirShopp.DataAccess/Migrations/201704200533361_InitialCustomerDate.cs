@@ -8,14 +8,15 @@ namespace AirShopp.DataAccess.Migrations
         public override void Up()
         {
             Sql(@"
-                INSERT INTO Customer(Account,Password,Address,RegisterDate,ZipCode,TelephoneNo,Gender,CustomerName,CustomerScore)
-                VALUES('Kenneth','123',NULL,GETUTCDATE(),NULL,13298312302,1,'KennethZhou',0);
+                  SET IDENTITY_INSERT dbo.Customer ON
+                INSERT INTO Customer(Id,Account,Password,Address,RegisterDate,ZipCode,TelephoneNo,Gender,CustomerName,CustomerScore)
+                VALUES(2,'Kenneth','123',NULL,GETUTCDATE(),NULL,13298312302,1,'KennethZhou',0);
 
-                INSERT INTO Customer(Account,Password,Address,RegisterDate,ZipCode,TelephoneNo,Gender,CustomerName,CustomerScore)
-                VALUES('Jasper','123',NULL,GETUTCDATE(),NULL,13298312307,1,'JasperYue',0);
+                INSERT INTO Customer(Id,Account,Password,Address,RegisterDate,ZipCode,TelephoneNo,Gender,CustomerName,CustomerScore)
+                VALUES(3,'Jasper','123',NULL,GETUTCDATE(),NULL,13298312307,1,'JasperYue',0);
 
-                INSERT INTO Customer(Account,Password,Address,RegisterDate,ZipCode,TelephoneNo,Gender,CustomerName,CustomerScore)
-                VALUES('Amanda','123',NULL,GETUTCDATE(),NULL,13298312275,0,'AmandaLi',0);
+                INSERT INTO Customer(Id,Account,Password,Address,RegisterDate,ZipCode,TelephoneNo,Gender,CustomerName,CustomerScore)
+                VALUES(4,'Amanda','123',NULL,GETUTCDATE(),NULL,13298312275,0,'AmandaLi',0);
                 ");
         }
         
