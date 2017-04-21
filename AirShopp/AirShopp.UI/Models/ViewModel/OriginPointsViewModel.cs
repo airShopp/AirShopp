@@ -12,15 +12,13 @@ namespace AirShopp.UI.Models.ViewModel
         public string Address { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
-        public string Remark { get; set; }
 
-        public OriginPointsViewModel(string name, string address, double longitude, double latitude, string remark)
+        public OriginPointsViewModel(string name, string address, double longitude, double latitude)
         {
             Name = name;
             Address = address;
             Longitude = longitude;
             Latitude = latitude;
-            Remark = remark;
         }
     }
 }

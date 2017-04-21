@@ -22,6 +22,11 @@ namespace AirShopp.DataAccess
             return _context.DeliveryInfo.Where(x => x.OrderId == orderId).OrderBy(y => y.Index).ToList();
         }
 
+        public List<DeliveryInfo> GetDeliveryInfoInRange(long orderId, int beginIndex)
+        {
+            return _context.DeliveryInfo.Where(x => (x.OrderId == orderId && x.Index > beginIndex)).ToList();
+        }
+
         public int GetMaxIndex(long orderId)
         {
             int index = 0;

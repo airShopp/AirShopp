@@ -10,6 +10,7 @@ namespace AirShopp.Domain
     {
         void AddDeliverInfo(DeliveryInfo deliveryInfo);
         List<DeliveryInfo> GetDeliveryInfo(long orderId);
+        List<DeliveryInfo> GetDeliveryInfoInRange(long oderId, int beginIndex);
         int GetMaxIndex(long orderId);
     }
 }

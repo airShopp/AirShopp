@@ -24,6 +24,11 @@ namespace AirShopp.Domain
             return _deliveryInfoRepository.GetDeliveryInfo(orderId);
         }
 
+        public List<DeliveryInfo> GetDeliveryInfoInRange(long orderId, int beginIndex)
+        {
+            return _deliveryInfoRepository.GetDeliveryInfoInRange(orderId, beginIndex);
+        }
+
         public int GetMaxIndex(long orderId)
         {
             return _deliveryInfoRepository.GetMaxIndex(orderId);

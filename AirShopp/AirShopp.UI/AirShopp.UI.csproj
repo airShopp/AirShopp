@@ -335,6 +335,9 @@
     <Content Include="Content\img\pd\product3.png" />
     <Content Include="Content\img\pd\product4.png" />
     <Content Include="Content\img\pd\yue.png" />
+    <Content Include="Content\img\TimeLine\icons.png" />
+    <Content Include="Content\img\TimeLine\point.png" />
+    <Content Include="Content\img\TimeLine\vertical.png" />
     <Content Include="Content\login.css" />
     <Content Include="Content\login\a1.jpg" />
     <Content Include="Content\login\code.png" />
@@ -369,12 +372,16 @@
     <Content Include="Scripts\js\index.js" />
     <Content Include="Scripts\js\jcarousellite.js" />
     <Content Include="Scripts\js\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\js\jquery.easing.js" />
     <Content Include="Scripts\js\jquery.js" />
+    <Content Include="Scripts\js\jquery.mousewheel.js" />
     <Content Include="Scripts\js\js-tab.js" />
     <Content Include="Scripts\js\LuShu.js" />
     <Content Include="Scripts\js\MSClass.js" />
     <Content Include="Scripts\js\myCart.js" />
     <Content Include="Scripts\js\prototype.js" />
+    <Content Include="Content\TimeLine.css" />
+    <Content Include="Scripts\js\TimeLine.js" />
     <Content Include="Scripts\js\top.js" />
     <Content Include="Scripts\knockout-3.4.2.debug.js" />
     <Content Include="Scripts\knockout-3.4.2.js" />
@@ -399,7 +406,6 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\_airShoppLayout.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
-    <Content Include="Views\BMapRoutePlanning\Index.cshtml" />
     <Content Include="Views\Address\ViewAddress.cshtml" />
     <Content Include="Views\Order\OrderList.cshtml" />
     <Content Include="Views\Shared\_orderPageLayout.cshtml" />
@@ -410,6 +416,7 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Shared\_homePageLayout.cshtml" />
     <Content Include="Views\Shared\_shopCartLayout.cshtml" />
+    <Content Include="Views\BMapRoutePlanning\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
