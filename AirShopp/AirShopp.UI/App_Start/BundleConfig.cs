@@ -26,7 +26,9 @@ namespace AirShopp.UI
                 "~/Scripts/js/js-tab.js",
                 "~/Scripts/js/LuShu.js",
                 "~/Scripts/js/MSClass.js",
-                "~/Scripts/js/top.js"
+                "~/Scripts/js/top.js",
+                "~/Scripts/jquery.unobtrusive-ajax.js",
+                "~/Scripts/jquery.validate.unobtrusive.js"
                 ));
             bundles.Add(new StyleBundle("~/bundles/AirShopp/Css").Include(
                 "~/Content/base.css",

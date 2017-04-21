@@ -12,6 +12,6 @@ namespace AirShopp.UI.Models.ViewModel
         public List<Category> Categories { get; set; }
         public List<CategoryModel> SecondCategories { get; set; }
         public List<ProductDataModel> HotProducts { get; set; }
-        public List<Product> TimeLimitProduct { get; set; }
+        public List<ProductDataModel> TimeLimitProduct { get; set; }
     }
 }
