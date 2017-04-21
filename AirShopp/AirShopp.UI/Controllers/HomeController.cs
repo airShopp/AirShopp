@@ -64,7 +64,7 @@ namespace AirShopp.UI.Controllers
                 Categories = _categoryRepository.GetCategories().ToList(),
                 HotProducts = hotProducts,
                 SecondCategories = secondCategories,
-                TimeLimitProduct = GetTimeLimitProduct()
+                TimeLimitProduct = GetTimeLimitProduct().OrderBy(x => Guid.NewGuid()).Take(8).ToList()
             };
             Session["Category"] = homeViewModel.Categories;
             return View(homeViewModel);
@@ -117,7 +117,7 @@ namespace AirShopp.UI.Controllers
                                 DiscountStartTime = D.StartTime,
                                 DiscountEndTime = D.EndTime,
                                 PictureUrl = P.url
-                            }).ToList();
+                            }).ToList(); ;
             return products;
         }
     }
