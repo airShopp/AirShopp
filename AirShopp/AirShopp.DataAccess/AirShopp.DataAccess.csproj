@@ -177,9 +177,10 @@
     <Compile Include="Migrations\201704210836332_InitialProductOutFactoryData.cs" />
     <Compile Include="Migrations\201704210836332_InitialProductOutFactoryData.Designer.cs">
       <DependentUpon>201704210836332_InitialProductOutFactoryData.cs</DependentUpon>
-    <Compile Include="Migrations\201704200931429_RefineDeliveryInfo.cs" />
-    <Compile Include="Migrations\201704200931429_RefineDeliveryInfo.Designer.cs">
-      <DependentUpon>201704200931429_RefineDeliveryInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704220709038_RefineDeliveryInfo1.cs" />
+    <Compile Include="Migrations\201704220709038_RefineDeliveryInfo1.Designer.cs">
+      <DependentUpon>201704220709038_RefineDeliveryInfo1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -288,8 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704210836332_InitialProductOutFactoryData.resx">
       <DependentUpon>201704210836332_InitialProductOutFactoryData.cs</DependentUpon>
-    <EmbeddedResource Include="Migrations\201704200931429_RefineDeliveryInfo.resx">
-      <DependentUpon>201704200931429_RefineDeliveryInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704220709038_RefineDeliveryInfo1.resx">
+      <DependentUpon>201704220709038_RefineDeliveryInfo1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
