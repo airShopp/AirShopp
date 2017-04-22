@@ -177,6 +177,9 @@
     <Compile Include="Migrations\201704210836332_InitialProductOutFactoryData.cs" />
     <Compile Include="Migrations\201704210836332_InitialProductOutFactoryData.Designer.cs">
       <DependentUpon>201704210836332_InitialProductOutFactoryData.cs</DependentUpon>
+    <Compile Include="Migrations\201704200931429_RefineDeliveryInfo.cs" />
+    <Compile Include="Migrations\201704200931429_RefineDeliveryInfo.Designer.cs">
+      <DependentUpon>201704200931429_RefineDeliveryInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -189,6 +192,8 @@
     <Compile Include="Repository\CityRepository.cs" />
     <Compile Include="Repository\CommentRepository.cs" />
     <Compile Include="Repository\CustomerRepository.cs" />
+    <Compile Include="Repository\CourierRepository.cs" />
+    <Compile Include="Repository\DeliveryInfoRepository.cs" />
     <Compile Include="Repository\DeliveryStationRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
@@ -283,6 +288,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704210836332_InitialProductOutFactoryData.resx">
       <DependentUpon>201704210836332_InitialProductOutFactoryData.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704200931429_RefineDeliveryInfo.resx">
+      <DependentUpon>201704200931429_RefineDeliveryInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
