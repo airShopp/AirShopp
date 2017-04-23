@@ -27,7 +27,7 @@
                         <li>@Html.ActionLink("请登录", "Login", "User", null, new { style = "color:#ea4949" })</li>
                     }
                     <li class="headerul">|</li>
-                    <li><a href="register.html">免费注册</a> </li>
+                    <li>@Html.ActionLink("免费注册", "Register", "User")</li>
                     <li class="headerul">|</li>
                     <li>@Html.ActionLink("订单查询", "Index", "Order", null)</li>
                     <li class="headerul">|</li>
@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="container clearfix">
-            <div class="header-logo fl"><h1><a href="首页.html"><img src="~/Content/icon/AirShoppLogo.png"></a> </h1></div>
+            <div class="header-logo fl"><h1><a href="@Url.Action("Index", "Home")"><img src="~/Content/icon/AirShoppLogo.png"></a> </h1></div>
             <div class="head-form fl">
                 <form class="clearfix">
                     <input type="text" class="search-text" accesskey="" id="key" autocomplete="off" placeholder="洗衣机">

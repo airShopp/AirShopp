@@ -138,10 +138,6 @@
     <Compile Include="Migrations\201704200514435_RefineModelCommentAndCustomer.Designer.cs">
       <DependentUpon>201704200514435_RefineModelCommentAndCustomer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704200533361_InitialCustomerDate.cs" />
-    <Compile Include="Migrations\201704200533361_InitialCustomerDate.Designer.cs">
-      <DependentUpon>201704200533361_InitialCustomerDate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201704200559594_ModifyCartTable.cs" />
     <Compile Include="Migrations\201704200559594_ModifyCartTable.Designer.cs">
       <DependentUpon>201704200559594_ModifyCartTable.cs</DependentUpon>
@@ -181,6 +177,14 @@
     <Compile Include="Migrations\201704220709038_RefineDeliveryInfo1.cs" />
     <Compile Include="Migrations\201704220709038_RefineDeliveryInfo1.Designer.cs">
       <DependentUpon>201704220709038_RefineDeliveryInfo1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704230918158_RefineCustomer.cs" />
+    <Compile Include="Migrations\201704230918158_RefineCustomer.Designer.cs">
+      <DependentUpon>201704230918158_RefineCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704200533361_InitialCustomerDate.cs" />
+    <Compile Include="Migrations\201704200533361_InitialCustomerDate.Designer.cs">
+      <DependentUpon>201704200533361_InitialCustomerDate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -260,9 +264,6 @@
     <EmbeddedResource Include="Migrations\201704200514435_RefineModelCommentAndCustomer.resx">
       <DependentUpon>201704200514435_RefineModelCommentAndCustomer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704200533361_InitialCustomerDate.resx">
-      <DependentUpon>201704200533361_InitialCustomerDate.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704200559594_ModifyCartTable.resx">
       <DependentUpon>201704200559594_ModifyCartTable.cs</DependentUpon>
     </EmbeddedResource>
@@ -292,6 +293,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704220709038_RefineDeliveryInfo1.resx">
       <DependentUpon>201704220709038_RefineDeliveryInfo1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704230918158_RefineCustomer.resx">
+      <DependentUpon>201704230918158_RefineCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704200533361_InitialCustomerDate.resx">
+      <DependentUpon>201704200533361_InitialCustomerDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

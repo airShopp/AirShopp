@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using AirShopp.DataAccess;
 using AirShopp.Domain;
+using AirShopp.UI.Models.ViewModel;
 
 namespace AirShopp.UI.Controllers
 {
@@ -51,6 +52,22 @@ namespace AirShopp.UI.Controllers
         public ActionResult Register()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult Register(UserViewModel user)
+        {
+            Customer customer = new Customer();
+            customer.Account = user.UserName;
+            customer.Password = user.Password;
+            _customerRepository.AddCustomer(customer);
+            // Return null not empty string
+            Customer customer1 = _customerRepository.GetCustomer(user.UserName, user.Password);
+            return View();
+        }
+
+        public ActionResult CheckAccount(string account)
+        {
+            return Content(_customerRepository.GetCustomer(account).ToString());
         }
         protected override void Dispose(bool disposing)
         {

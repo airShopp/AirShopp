@@ -10,7 +10,7 @@
 .login-header { width:990px; margin:0 auto; padding:20px 0;}
 .containers   { width:990px; margin:0 auto; padding:0;}
 .login-centre { width:990px; margin:0 auto;border-color: #eb4a4a #e0e0e0 #e0e0e0;  border-style: solid;  border-width: 3px 1px 1px;background:#f9f9f9}
-.login-back   { width:988px; height:510px; padding-top:80px;}
+.login-back   { width:988px; height:320px; padding:35px;}
 .login-switch { width:985px; line-height:32px;}
 .login-switch ul{padding-left:150px; }
 .login-switch p a { color:#ea4949;}
@@ -19,17 +19,17 @@
 .login-switch ul .cur{ width:224px; height:33px; line-height:32px; float:left; text-align:center; font-size:15px;  border-top:1px solid #e0e0e0; border-left:1px solid #e0e0e0; border-right:1px solid #e0e0e0; border-bottom:none; margin-left:15px; background:#fff; margin-bottom:-2px;}
 .login-input { margin:0 0 20px; overflow:hidden; }
 .login-input label { width:260px; height:40px; line-height:40px; text-align:right; padding-right:10px; float:left; font-size:15px;}
-.login-input input { width:512px; height:40px; line-height:40px; text-align:left;  padding-left:5px;   float:left; border:1px solid #e0e0e0; font-size:14px; background:#fff}
+.login-input input { width:350px; height:40px; line-height:40px; text-align:left;  padding-left:5px;   float:left; border:1px solid #e0e0e0; font-size:14px; background:#fff}
 .login-input .obtain { width:106px; height:40px; line-height:40px; text-align:center;  padding-left:0;   float:left; border:1px solid #e0e0e0; font-size:12px;  display:block; background:#f7f7f7; margin-left:15px;}
 .login-input input:focus { border:1px solid #ea4949;}
 .login-input .list-input {background:#fff}
 .login-input .list-iphone { background:#fff; width:388px;}
 .login-input .list-notes  { background:#fff; width:132px;}
-.item-ifo { padding-left:270px; padding-top:20px;}
-.login-button {padding-left:270px; padding-top:30px;}
+.item-ifo { padding-left:270px; padding-top:10px;}
+.login-button {padding-left:270px; padding-top:20px;}
 .login-button a { width:270px; height:45px; line-height:45px; text-align:center; background:#ea4949; border-radius:2px; display:block; color:#ffffff; font-size:16px;}
 .login-button a:hover { width:270px; height:45px; line-height:45px; text-align:center; background:#f25350; border-radius:2px; display:block; color:#ffffff; font-size:16px;}
-
+.regmsg{color:red;font-size:12px;margin-top:8px;}
 
 
 li{
@@ -113,12 +113,9 @@ div{
     width:346px;
 }
 .login-form .login-tab{
-    height:54px;
     font-size:16px;
     text-align:center;
     border-bottom:1px solid #fff8f8;
-    position:absolute;
-
     display:block;
 }
 .login-form .login-tab a{
@@ -130,24 +127,23 @@ div{
     top:0;
     border-right:1px solid #fff4f4;
     text-decoration:none;
+    border-bottom:1px solid #bdbdbd;
 }
 .login-form .login-tab a:focus{
     outline:0!important;
     -moz-outline:0!important;
 }
 .login-form .login-tab a.checked,.login-form .login-tab a:hover{
-
     color:#ea4949;
 }
-.login-form .login-tab-l,.login-form .login-tab-r{
-    width:173px;
+.login-form .login-tab-r{
+    width:100%;
 }
-.login-form .login-tab-r{right:0;}
 .login-form .login-tab-link{display:inline-block;}
 /*login-box开始（账户登录）*/
 .login-form .login-box{
     width:306px;
-    padding:20px;
+    padding:20px 20px 10px;
     display: block;
     visibility: visible;
 }
@@ -166,7 +162,10 @@ div{
 }
 /*提示信息开始*/
 .login-form .msg-wrap{
+    text-align:center;
+    color:red;
     min-height:23px;
+    line-height:23px;
     margin-top:5px;
     margin-bottom:5px;
     height:auto!important;
@@ -200,7 +199,7 @@ div{
 }
 .form .item{
     position:relative;
-    margin-bottom:20px;
+    margin-bottom:15px;
     z-index:1;
 }
 .form .item .placeholder{
@@ -243,21 +242,21 @@ div{
 /*图形验证码*/
 .form .itxt02{
     padding:10px 5px;
-    width:150px;
-    text-align:center；
+    width:120px;
+    text-align:center;
 }
 .form .verify-code{/*验证码*/
     cursor:pointer;
     width:90px;
     height:33px;
-    vertical-align:middle；
+    vertical-align:middle;
 }
 .form .item-vcode .placeholder{left:25px}
 .form .item-vcode .itxt02,.form .item-vcode .verify-code{float:left}
 .form .item-vcode a{
     display:inline-block;
-    width:38px;
-    float:right；
+    float:right;
+    margin-top:8px;
 }
 .form .item-vcode:after{
     display:block;

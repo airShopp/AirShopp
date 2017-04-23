@@ -8,14 +8,15 @@ namespace AirShopp.Domain
     {
         public Customer()
         {
+            RegisterDate = DateTime.Now;
             Orders = new List<Order>();
             Carts = new List<Cart>();
+            Address = new List<Address>();
         }
 
         public long Id { get; set; }
         public string Account { get; set; }
         public string Password { get; set; }
-        public string Address { get; set; }
         public DateTime RegisterDate { get; set; }
         public string ZipCode { get; set; }
         public string TelephoneNo { get; set; }
@@ -23,7 +24,8 @@ namespace AirShopp.Domain
         public string CustomerName { get; set; }
         public int CustomerScore { get; set; }
 
-        public ICollection<Cart> Carts { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Address> Address { get; set; }
+        public virtual ICollection<Cart> Carts { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }
