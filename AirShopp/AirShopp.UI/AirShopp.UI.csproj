@@ -187,6 +187,7 @@
     </Compile>
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\Common\PageListBaseModel.cs" />
+    <Compile Include="Models\CustomerCommentDataModel.cs" />
     <Compile Include="Models\ProductDataModel.cs" />
     <Compile Include="Models\ViewModel\Admin\Class1.cs" />
     <Compile Include="Models\ViewModel\HomeViewModel.cs" />
@@ -353,6 +354,9 @@
     <Content Include="Content\img\product\红米数据线.jpg" />
     <Content Include="Content\img\product\舜红500W变压器.jpg" />
     <Content Include="Content\img\product\舞蹈服.jpg" />
+    <Content Include="Content\img\product\蛋糕毛巾1.jpg" />
+    <Content Include="Content\img\product\蛋糕毛巾2.jpg" />
+    <Content Include="Content\img\product\蛋糕毛巾3.jpg" />
     <Content Include="Content\img\product\补水化妆品.jpg" />
     <Content Include="Content\img\product\防滑布.jpg" />
     <Content Include="Content\login.css" />

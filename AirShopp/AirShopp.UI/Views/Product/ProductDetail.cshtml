@@ -1,9 +1,55 @@
-﻿
+﻿@model AirShopp.UI.Models.ViewModel.ProductDetailViewModel
 @{
     ViewBag.Title = "ProductDetail";
     Layout = "~/Views/Shared/_airShoppLayout.cshtml";
 }
+<script>
+         $(function(){
+         	$("#pro_detail a").click(function(){
+         		$("#pro_detail a").removeClass("cur");
+         		$(this).addClass("cur");
+         		$("#big_img").attr("src",$(this).attr("simg"));
+         	});
 
+         	$(".attrdiv a").click(function(){
+         		$(".attrdiv a").removeClass("cur");
+				$(this).addClass("cur");
+         	});
+
+         	$('.amount2').click(function(){
+		        var num_input = $("#subnum");
+		        var buy_num = (num_input.val()-1)>0?(num_input.val()-1):1;
+		        num_input.val(buy_num);
+		    });
+
+		    $('.amount1').click(function(){
+		        var num_input = $("#subnum");
+		        var buy_num = Number(num_input.val())+1;
+		        num_input.val(buy_num);
+		    });
+
+             $("#H-table li").each(function(i){
+                 $(this).click((function(k){
+                     var _index = k;
+                     return function(){
+                         $(this).addClass("cur").siblings().removeClass("cur");
+                         $(".H-over").hide();
+                         $(".H-over:eq(" + _index + ")").show();
+                     }
+                 })(i));
+             });
+             $("#H-table1 li").each(function(i){
+                 $(this).click((function(k){
+                     var _index = k;
+                     return function(){
+                         $(this).addClass("cur").siblings().removeClass("cur");
+                         $(".H-over1").hide();
+                         $(".H-over1:eq(" + _index + ")").show();
+                     }
+                 })(i));
+             });
+         });
+</script>
 <!-- 商品详情 begin -->
 <section>
     <div class="pc-details">
@@ -12,24 +58,50 @@
             <div class="pc-details-l">
                 <div class="pc-product clearfix">
                     <div class="pc-product-h">
-                        <div class="pc-product-top"><img src="~/Content/img/pd/product.png" id="big_img" width="418" height="418"></div>
+                        <div class="pc-product-top"><img src="@Model.ProductUrl[0]" id="big_img" width="418" height="418"></div>
                         <div class="pc-product-bop clearfix" id="pro_detail">
-                            <ul>
-                                <li><a href="javascript:void(0);" class="cur" simg="~/Content/img/pd/product.png"><img src="~/Content/img/pd/product.png" width="58" height="58"></a> </li>
-                                <li><a href="javascript:void(0);" simg="~/Content/img/pd/product2.png"><img src="~/Content/img/pd/product1.png" width="58" height="58"></a> </li>
-                                <li><a href="javascript:void(0);" simg="~/Content/img/pd/product3.png"><img src="~/Content/img/pd/product2.png" width="58" height="58"></a> </li>
+                            <ul>@{
+                                 List<string> productUrl = Model.ProductUrl;
+                                }
+                                @for (var i = 0; i < productUrl.Count(); i++)
+                                {
+                                    if (i == 0)
+                                    {
+                                        //    if (i < (productUrl.Count - 1))
+                                        //    {
+                                            <li><a href="javascript:void(0);" class="cur" simg="@productUrl[i]"><img src="@productUrl[i]" width="58" height="58"></a> </li>
+                                        @*}
+                                        else
+                                        {
+                                            <li><a href="javascript:void(0);" class="cur" simg="@productUrl[i]"><img src="@productUrl[i]" width="58" height="58"></a> </li>
+                                        }*@
+
+                                    }
+                                    else
+                                    {
+                                        //    if (i < (productUrl.Count - 1))
+                                        //    {
+                                            <li><a href="javascript:void(0);" simg="@productUrl[i]"><img src="@productUrl[i]" width="58" height="58"></a> </li>
+                                        @*}
+                                        else
+                                        {
+                                            <li><a href="javascript:void(0);" simg="@productUrl[i]"><img src="@productUrl[i]" width="58" height="58"></a> </li>
+                                        }*@
+                                    }
+                                }
+                                @*<li><a href="javascript:void(0);" simg="~/Content/img/pd/product3.png"><img src="~/Content/img/pd/product2.png" width="58" height="58"></a> </li>
                                 <li><a href="javascript:void(0);" simg="~/Content/img/pd/produc4.png"><img src="~/Content/img/pd/product3.png" width="58" height="58"></a> </li>
-                                <li><a href="javascript:void(0);" simg="~/Content/img/pd/product5.png"><img src="~/Content/img/pd/product4.png" width="58" height="58"></a> </li>
+                                <li><a href="javascript:void(0);" simg="~/Content/img/pd/product5.png"><img src="~/Content/img/pd/product4.png" width="58" height="58"></a> </li>*@
                             </ul>
                         </div>
                     </div>
                     <div class="pc-product-t">
                         <div class="pc-name-info">
-                            <h1>三星 Galaxy S3 (I939I) 白色 电信3G手机 双卡双待经典S3升级版，全新便捷双卡双待（GSM可上网)</h1>
+                            <h1>@Model.ProductName</h1>
                             <p>由<a href="#" class="reds">AirShopp官方</a> 负责发货，并提供售后服务。</p>
                         </div>
                         <div class="pc-dashed clearfix">
-                            <span>累计销量：<em class="reds">3988</em> 件</span><b>|</b><span>累计评价：<em class="reds">3888</em></span>
+                            <span>累计销量：<em class="reds">@Model.Sales</em> 件</span><b>|</b><span>累计评价：<em class="reds">@Model.CommentAmount</em></span>
                         </div>
                         <div class="pc-size">
                             @*<div class="attrdiv pc-telling clearfix">
@@ -50,7 +122,7 @@
                                     </ul>
                                 </div>
                             </div>*@
-                            @*<div class="pc-telling clearfix">
+                            <div class="pc-telling clearfix">
                                 <div class="pc-version">颜色分类</div>
                                 <div class="pc-adults">
                                     <ul>
@@ -60,20 +132,20 @@
 
                                     </ul>
                                 </div>
-                            </div>*@
+                            </div>
                             <div class="pc-telling clearfix">
                                 <div class="pc-version">数量</div>
                                 <div class="pc-adults clearfix">
                                     <div class="pc-adults-p clearfix fl">
-                                        <input type="" id="subnum" placeholder="1">
+                                        <input type="text" id="subnum" placeholder="1">
                                         <a href="javascript:void(0);" class="amount1"></a>
                                         <a href="javascript:void(0);" class="amount2"></a>
                                     </div>
                                     <div class="fl pc-letter ">件</div>
-                                    <div class="fl pc-stock ">库存<em>988</em>件</div>
+                                    <div class="fl pc-stock ">库存<em>@Model.ProductAmount</em>件</div>
                                 </div>
                             </div>
-                            <div class="pc-number clearfix"><span class="fl">商品编号：1654456   </span> <span class="fr">分享 收藏</span></div>
+                            <div class="pc-number clearfix"><span class="fl">商品编号：@Model.ProductId  </span> <span class="fr">分享 收藏</span></div>
                         </div>
                         <div class="pc-emption">
                             <a href="#">立即购买</a>

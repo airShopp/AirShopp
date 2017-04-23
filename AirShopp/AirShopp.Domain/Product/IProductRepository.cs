@@ -9,5 +9,6 @@ namespace AirShopp.Domain
     public interface IProductRepository
     {
         List<Product> Products();
+        Product GetProductById(long productId);
     }
 }

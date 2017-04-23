@@ -87,13 +87,16 @@
     <Compile Include="Delivery\Delivery.cs" />
     <Compile Include="Delivery\DeliveryOrderItem.cs" />
     <Compile Include="Discount\Discount.cs" />
+    <Compile Include="Order\IOrderItemRepository.cs" />
     <Compile Include="Order\IOrderRepository.cs" />
     <Compile Include="Order\IOrderservice.cs" />
     <Compile Include="Order\Orderservice.cs" />
+    <Compile Include="Product\IInventoryRepository.cs" />
     <Compile Include="Product\Inventory.cs" />
     <Compile Include="Order\OrderItem.cs" />
     <Compile Include="Order\Order.cs" />
     <Compile Include="Product\IProductRepository.cs" />
+    <Compile Include="Product\ProductSales.cs" />
     <Compile Include="Product\Warehouse.cs" />
     <Compile Include="Product\InventoryAction.cs" />
     <Compile Include="Product\Product.cs" />

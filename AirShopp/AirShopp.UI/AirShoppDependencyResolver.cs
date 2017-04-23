@@ -93,6 +93,9 @@ namespace AirShopp.UI.Models
             container.RegisterType<ICityRepository, CityRepository>();
             container.RegisterType<IAreaRepository, AreaRepository>();
             container.RegisterType<ICustomerRepository, CustomerRepository>();
+            container.RegisterType<ICommentRepository, CommentRepository>();
+            container.RegisterType<IInventoryRepository, InventoryRepository>();
+            container.RegisterType<IOrderItemRepository, OrderItemRepository>();
 
             //
             container.RegisterType<IReadFromDb, ReadFromDb>();

@@ -42,10 +42,8 @@ namespace AirShopp.UI.Controllers
                                         ParentId = category.ParentId
                                     }).ToList();
 
-            var hotProducts = (from IA in _readFromDb.InventoryActions
-                              join POF in _readFromDb.ProductOutFactories on IA.ProductOutFactoryId equals POF.Id
-                              join I in _readFromDb.Inventories on IA.InventoryId equals I.Id
-                              join P in _readFromDb.Products on I.ProductId equals P.Id
+            var hotProducts = (from P in _readFromDb.Products
+                              join PS in _readFromDb.ProductSales on P.Id equals PS.ProductId
                               join D in _readFromDb.Discounts on P.Id equals D.ProductId
                               select new ProductDataModel
                               {
@@ -54,7 +52,7 @@ namespace AirShopp.UI.Controllers
                                   Price = Math.Round((double)P.Price,2),
                                   DiscountPrice = Math.Round((double)((P.Price * D.Discounts) / 10), 2),
                                   Discounts = (double)D.Discounts,
-                                  Sales = POF.Amount,
+                                  Sales = PS.SalesAmount,
                                   PictureUrl = P.url
                               }).OrderBy(hp => hp.Sales).Take(20).OrderBy(x => Guid.NewGuid()).Take(6).ToList();
 
@@ -73,10 +71,8 @@ namespace AirShopp.UI.Controllers
         //Get
         public ActionResult GetHotProduct()
         {
-            var hotProducts = (from IA in _readFromDb.InventoryActions
-                               join POF in _readFromDb.ProductOutFactories on IA.ProductOutFactoryId equals POF.Id
-                               join I in _readFromDb.Inventories on IA.InventoryId equals I.Id
-                               join P in _readFromDb.Products on I.ProductId equals P.Id
+            var hotProducts = (from P in _readFromDb.Products
+                               join PS in _readFromDb.ProductSales on P.Id equals PS.ProductId
                                join D in _readFromDb.Discounts on P.Id equals D.ProductId
                                select new ProductDataModel
                                {
@@ -85,7 +81,7 @@ namespace AirShopp.UI.Controllers
                                    Price = Math.Round((double)P.Price, 2),
                                    DiscountPrice = Math.Round((double)((P.Price * D.Discounts) / 10), 2),
                                    Discounts = (double)D.Discounts,
-                                   Sales = POF.Amount,
+                                   Sales = PS.SalesAmount,
                                    PictureUrl = P.url
                                }).OrderBy(hp => hp.Sales).Take(20).OrderBy(x => Guid.NewGuid()).Take(6).ToList();
 
@@ -100,12 +96,9 @@ namespace AirShopp.UI.Controllers
         //GetTimeLimitProduct
         public List<ProductDataModel> GetTimeLimitProduct()
         {
-            var products = (from IA in _readFromDb.InventoryActions
-                            join POF in _readFromDb.ProductOutFactories on IA.ProductOutFactoryId equals POF.Id
-                            join I in _readFromDb.Inventories on IA.InventoryId equals I.Id
-                            join P in _readFromDb.Products on I.ProductId equals P.Id
+            var products = (from P in _readFromDb.Products
                             join D in _readFromDb.Discounts on P.Id equals D.ProductId
-                            where D.EndTime > DateTime.Now && D.StartTime < DateTime.Now
+                            where P.url != "待定项" && D.Discounts < 10 && D.EndTime > DateTime.Now 
                             select new ProductDataModel
                             {
                                 ProductId = P.Id,
@@ -113,7 +106,6 @@ namespace AirShopp.UI.Controllers
                                 Price = Math.Round((double)P.Price, 2),
                                 DiscountPrice = Math.Round((double)((P.Price * D.Discounts) / 10), 2),
                                 Discounts = (double)D.Discounts,
-                                Sales = POF.Amount,
                                 DiscountStartTime = D.StartTime,
                                 DiscountEndTime = D.EndTime,
                                 PictureUrl = P.url
