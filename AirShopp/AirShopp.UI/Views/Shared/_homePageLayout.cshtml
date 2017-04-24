@@ -77,7 +77,7 @@
                             var className = "listi" + i;
                             <li class="menulihover">
                                 <i class="@className"></i>
-                                @Html.ActionLink(secondCategory.CategoryName, "getProduct", new { Controller = "Product", CategoryId = secondCategory.Id })
+                                @Html.ActionLink(secondCategory.CategoryName, "GetProducts", new { Controller = "Product", categoryId = secondCategory.Id })
                                 <span></span>
                             </li>
                             i++;
@@ -88,7 +88,7 @@
                 <ul class="yMenuIndex">
                     @foreach (var category in Model.Categories)
                     {
-                        <li><a href="/Product/Index" target="_blank">@category.CategoryName</a></li>
+                        <li>@Html.ActionLink(category.CategoryName, "GetProducts", new { Controller = "Product", categoryId = category.Id })</li>
                     }
                     <li>@Html.ActionLink("BMap", "Index", "BMapRoutePlanning")</li>
                 </ul>
