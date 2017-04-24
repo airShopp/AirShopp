@@ -67,6 +67,7 @@
     <Compile Include="Mapping\DeliveryOrderMapping.cs" />
     <Compile Include="Mapping\DeliveryStationMapping.cs" />
     <Compile Include="Mapping\DiscountMapping.cs" />
+    <Compile Include="Mapping\ProductSalesMapping.cs" />
     <Compile Include="Mapping\WarehouseMapping.cs" />
     <Compile Include="Mapping\InventoryActionMapping.cs" />
     <Compile Include="Mapping\InventoryMapping.cs" />
@@ -178,7 +179,19 @@
     <Compile Include="Migrations\201704210836332_InitialProductOutFactoryData.Designer.cs">
       <DependentUpon>201704210836332_InitialProductOutFactoryData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704220709038_RefineDeliveryInfo1.cs" />
+    <Compile Include="Migrations\201704221135483_InitialTableProductSales.cs" />
+    <Compile Include="Migrations\201704221135483_InitialTableProductSales.Designer.cs">
+      <DependentUpon>201704221135483_InitialTableProductSales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704221136365_AddTableProductSalesData.cs" />
+    <Compile Include="Migrations\201704221136365_AddTableProductSalesData.Designer.cs">
+      <DependentUpon>201704221136365_AddTableProductSalesData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704230854383_IniitalTableComment.cs" />
+    <Compile Include="Migrations\201704230854383_IniitalTableComment.Designer.cs">
+      <DependentUpon>201704230854383_IniitalTableComment.cs</DependentUpon>
+    </Compile>
+<Compile Include="Migrations\201704220709038_RefineDeliveryInfo1.cs" />
     <Compile Include="Migrations\201704220709038_RefineDeliveryInfo1.Designer.cs">
       <DependentUpon>201704220709038_RefineDeliveryInfo1.cs</DependentUpon>
     </Compile>
@@ -196,6 +209,8 @@
     <Compile Include="Repository\CourierRepository.cs" />
     <Compile Include="Repository\DeliveryInfoRepository.cs" />
     <Compile Include="Repository\DeliveryStationRepository.cs" />
+    <Compile Include="Repository\InventoryRepository.cs" />
+    <Compile Include="Repository\OrderItemRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\ProvinceRepository.cs" />
@@ -290,7 +305,16 @@
     <EmbeddedResource Include="Migrations\201704210836332_InitialProductOutFactoryData.resx">
       <DependentUpon>201704210836332_InitialProductOutFactoryData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704220709038_RefineDeliveryInfo1.resx">
+    <EmbeddedResource Include="Migrations\201704221135483_InitialTableProductSales.resx">
+      <DependentUpon>201704221135483_InitialTableProductSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704221136365_AddTableProductSalesData.resx">
+      <DependentUpon>201704221136365_AddTableProductSalesData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704230854383_IniitalTableComment.resx">
+      <DependentUpon>201704230854383_IniitalTableComment.cs</DependentUpon>
+    </EmbeddedResource>
+	<EmbeddedResource Include="Migrations\201704220709038_RefineDeliveryInfo1.resx">
       <DependentUpon>201704220709038_RefineDeliveryInfo1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

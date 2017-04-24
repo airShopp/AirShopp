@@ -9,5 +9,6 @@ namespace AirShopp.Domain
     public interface ICommentRepository
     {
         void AddComment(Comment comment);
+        List<Comment> GetCommentsByProductId(long productId);
     }
 }

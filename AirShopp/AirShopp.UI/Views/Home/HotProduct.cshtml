@@ -6,7 +6,7 @@
                 @foreach (var hotProduct in Model.HotProducts)
                 {
                     <li>
-                        <a href="/Product/getProduct">
+                        <a href="/Product/getProduct?productId=@hotProduct.ProductId">
                             <img src="@hotProduct.PictureUrl" />
                             <p class="head-name pc-pa10" title="@hotProduct.ProductName">@hotProduct.ProductName.Substring(0, 20) ···</p>
                             <p><span class="price">￥@hotProduct.DiscountPrice</span><span class="discount">￥@hotProduct.Price</span></p>

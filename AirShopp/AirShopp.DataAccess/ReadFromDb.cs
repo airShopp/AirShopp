@@ -62,5 +62,13 @@ namespace AirShopp.DataAccess
                 return _context.Product;
             }
         }
+
+        public IQueryable<ProductSales> ProductSales
+        {
+            get
+            {
+                return _context.ProductSales;
+            }
+        }
     }
 }
