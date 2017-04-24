@@ -15,6 +15,7 @@ namespace AirShopp.Domain
         public string Description { get; set; }
         //public int Supply { get; set; }
         public string url { get; set; }
+        public bool IsOnSale { get; set; }
         public virtual Category Category { get; set; }
         public virtual Provider Provider { get; set; }
 

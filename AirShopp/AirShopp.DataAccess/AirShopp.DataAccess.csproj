@@ -191,9 +191,13 @@
     <Compile Include="Migrations\201704230854383_IniitalTableComment.Designer.cs">
       <DependentUpon>201704230854383_IniitalTableComment.cs</DependentUpon>
     </Compile>
-<Compile Include="Migrations\201704220709038_RefineDeliveryInfo1.cs" />
-    <Compile Include="Migrations\201704220709038_RefineDeliveryInfo1.Designer.cs">
-      <DependentUpon>201704220709038_RefineDeliveryInfo1.cs</DependentUpon>
+    <Compile Include="Migrations\201704240152127_RefineDeliveryInfo.cs" />
+    <Compile Include="Migrations\201704240152127_RefineDeliveryInfo.Designer.cs">
+      <DependentUpon>201704240152127_RefineDeliveryInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704240156130_RefineProductOnSale.cs" />
+    <Compile Include="Migrations\201704240156130_RefineProductOnSale.Designer.cs">
+      <DependentUpon>201704240156130_RefineProductOnSale.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -314,8 +318,11 @@
     <EmbeddedResource Include="Migrations\201704230854383_IniitalTableComment.resx">
       <DependentUpon>201704230854383_IniitalTableComment.cs</DependentUpon>
     </EmbeddedResource>
-	<EmbeddedResource Include="Migrations\201704220709038_RefineDeliveryInfo1.resx">
-      <DependentUpon>201704220709038_RefineDeliveryInfo1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704240152127_RefineDeliveryInfo.resx">
+      <DependentUpon>201704240152127_RefineDeliveryInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704240156130_RefineProductOnSale.resx">
+      <DependentUpon>201704240156130_RefineProductOnSale.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
