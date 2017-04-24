@@ -9,6 +9,7 @@ namespace AirShopp.Domain
     public interface ICartService
     {
         List<Cart> LoadCartList(long CustomerId);
-        int GetProductAmoutByUser(long customerId);
+        //TODO Cart_Kenneth
+        //int GetProductAmoutByUser(long customerId);
     }
 }

@@ -6,21 +6,22 @@ using System.Threading.Tasks;
 
 namespace AirShopp.Domain
 {
-    public class Comment
+    public class CartItem
     {
-        public Comment()
+        public CartItem()
         {
 
         }
 
         public long Id { get; set; }
-        public string Comments { get; set; }
-        public DateTime CommentDate { get; set; }
-
-        public long OrderId { get; set; }
-        public virtual Order Order { get; set; }
+        public int Quantity { get; set; }
+        public decimal PricePerProduct { get; set; }
+        public string ItemStatus { get; set; } //PENDING DELETE BOUGHT
 
         public long ProductId { get; set; }
         public virtual Product Product { get; set; }
+
+        public long CartId { get; set; }
+        public virtual Cart Cart { get; set; }
     }
 }

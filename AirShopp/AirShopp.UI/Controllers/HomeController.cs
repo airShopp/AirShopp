@@ -53,12 +53,14 @@ namespace AirShopp.UI.Controllers
                                   DiscountPrice = Math.Round((double)((P.Price * D.Discounts) / 10), 2),
                                   Discounts = (double)D.Discounts,
                                   Sales = PS.SalesAmount,
-                                  PictureUrl = P.url.Split(',')[0]
+                                  PictureUrl = P.Url.Split(',')[0]
                               }).OrderBy(hp => hp.Sales).Take(20).OrderBy(x => Guid.NewGuid()).Take(6).ToList();
 
             HomeViewModel homeViewModel = new HomeViewModel()
             {
-                CartProductAccount = _cartService.GetProductAmoutByUser(customer.Id),
+                //TODO Cart_Kenneth
+                CartProductAccount = 0,
+                //CartProductAccount = _cartService.GetProductAmoutByUser(customer.Id),
                 Categories = _categoryRepository.GetCategories().ToList(),
                 HotProducts = hotProducts,
                 SecondCategories = secondCategories,
@@ -82,7 +84,7 @@ namespace AirShopp.UI.Controllers
                                    DiscountPrice = Math.Round((double)((P.Price * D.Discounts) / 10), 2),
                                    Discounts = (double)D.Discounts,
                                    Sales = PS.SalesAmount,
-                                   PictureUrl = P.url.Split(',')[0]
+                                   PictureUrl = P.Url.Split(',')[0]
                                }).OrderBy(hp => hp.Sales).Take(20).OrderBy(x => Guid.NewGuid()).Take(6).ToList();
 
             HomeViewModel homeViewModel = new HomeViewModel()
@@ -98,7 +100,7 @@ namespace AirShopp.UI.Controllers
         {
             var products = (from P in _readFromDb.Products
                             join D in _readFromDb.Discounts on P.Id equals D.ProductId
-                            where P.url != "待定项" && D.Discounts < 10 && D.EndTime > DateTime.Now 
+                            where P.Url != "待定项" && D.Discounts < 10 && D.EndTime > DateTime.Now 
                             select new ProductDataModel
                             {
                                 ProductId = P.Id,
@@ -108,7 +110,7 @@ namespace AirShopp.UI.Controllers
                                 Discounts = (double)D.Discounts,
                                 DiscountStartTime = D.StartTime,
                                 DiscountEndTime = D.EndTime,
-                                PictureUrl = P.url.Split(',')[0]
+                                PictureUrl = P.Url.Split(',')[0]
                             }).ToList(); ;
             return products;
         }

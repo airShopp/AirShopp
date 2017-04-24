@@ -7,25 +7,30 @@ namespace AirShopp.Domain
 {
     public class Order
     {
+        public Order()
+        {
+
+        }
 
         public long Id { get; set; }
-        public long CustomerId { get; set; }
         public decimal TotalAmount { get; set; }
         public DateTime OrderDate { get; set; }
         public string OrderStatus { get; set; }
         public DateTime DeliveryDate { get; set; }
-        public long AddressId { get; set; }
         public bool IsSpecialOrder { get; set; }
         public string SpecialType { get; set; }
 
-        public Customer Customer { get; set; }
-        [ForeignKey("AddressId")]
-        public Address Address { get; set; }
-        public DeliveryOrder DeliveryOrder { get; set; }
-        public DeliveryNote DeliveryNote { get; set; }
-        public ICollection<DeliveryInfo> DeliveryInfos { get; set; }
+        public long CustomerId { get; set; }
+        public virtual Customer Customer { get; set; }
 
-        public ICollection<Comment> Comment { get; set; }
-        
+        public long AddressId { get; set; }
+        public virtual Address Address { get; set; }
+
+        public ICollection<Return> Returns { get; set; }
+        public virtual DeliveryOrder DeliveryOrder { get; set; }
+        public virtual DeliveryNote DeliveryNote { get; set; }
+        public virtual ICollection<DeliveryInfo> DeliveryInfos { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }

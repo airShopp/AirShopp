@@ -25,7 +25,6 @@ namespace AirShopp.DataAccess
         public DbSet<Cart> Cart { get; set; }
 
         public DbSet<Order> Order { get; set; }
-        public DbSet<Delivery> Delivery { get; set; }
         public DbSet<OrderItem> OrderItem { get; set; }
         public DbSet<Return> Return { get; set; }
         public DbSet<Comment> Comments { get; set; }
@@ -61,7 +60,6 @@ namespace AirShopp.DataAccess
             modelBuilder.Configurations.Add(new ProductMapping());
             modelBuilder.Configurations.Add(new CartMapping());
             modelBuilder.Configurations.Add(new OrderMapping());
-            modelBuilder.Configurations.Add(new DeliveryMapping());
             modelBuilder.Configurations.Add(new OrderItemMapping());
             modelBuilder.Configurations.Add(new ReturnMapping());
             modelBuilder.Configurations.Add(new AdminMapping());

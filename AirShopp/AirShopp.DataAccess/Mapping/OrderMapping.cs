@@ -10,7 +10,7 @@ namespace AirShopp.DataAccess.Mapping
         {
             HasKey(e => e.Id).Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             HasRequired(e => e.Customer).WithMany(k => k.Orders).HasForeignKey(fk => fk.CustomerId);
-            //more..
+            HasRequired(e => e.Address).WithMany(e => e.orders).HasForeignKey(fk => fk.AddressId);
         }
     }
 }

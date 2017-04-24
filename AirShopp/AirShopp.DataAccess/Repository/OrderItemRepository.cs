@@ -13,7 +13,8 @@ namespace AirShopp.DataAccess
             var orderItem = _context.OrderItem.Where(o => o.ProductId == productId).FirstOrDefault();
             if(orderItem != null)
             {
-                buyTime = orderItem.OrderDate;
+                //TODO OrderItem_Amanda
+                //buyTime = orderItem.OrderDate;
             }
             return buyTime;
         }

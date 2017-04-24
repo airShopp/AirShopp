@@ -9,14 +9,10 @@ namespace AirShopp.Domain
 {
     public class DeliveryInfo
     {
-        // 物流信息
-        public long Id { get; set; }// PK
-        public string Description { get; set; }// DeliveryInfo description
-        public int Index { get; set; }// DeliveryInfo order
-        public DateTime UpdateTime { get; set; }// Process time
-        public long OrderId { get; set; }// Foreign key ref Order (Id)
+        public DeliveryInfo()
+        {
 
-        public virtual Order Order { get; set; }
+        }
 
         public DeliveryInfo(string description, int index, long orderId)
         {
@@ -25,10 +21,13 @@ namespace AirShopp.Domain
             UpdateTime = DateTime.Now;
             OrderId = orderId;
         }
+        // 物流信息
+        public long Id { get; set; }// PK
+        public string Description { get; set; }// DeliveryInfo description
+        public int Index { get; set; }// DeliveryInfo order
+        public DateTime UpdateTime { get; set; }// Process time
 
-        public DeliveryInfo()
-        {
-
-        }
+        public long OrderId { get; set; }// Foreign key ref Order (Id)
+        public virtual Order Order { get; set; }
     }
 }

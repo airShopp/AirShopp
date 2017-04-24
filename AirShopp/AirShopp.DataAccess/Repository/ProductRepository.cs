@@ -32,7 +32,7 @@ namespace AirShopp.DataAccess
                       ProductionDate = product.ProductionDate,
                       ProductName = product.ProductName,
                       Description = product.Description,
-                      url = RealPath
+                      Url = RealPath
                 });
             });
             return products;
