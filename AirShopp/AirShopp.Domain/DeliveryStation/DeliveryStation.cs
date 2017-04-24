@@ -10,7 +10,8 @@ namespace AirShopp.Domain
     {
         public DeliveryStation()
         {
-
+            Couriers = new List<Courier>();
+            DeliveryStations = new List<DeliveryStation>();
         }
 
         public long Id { get; set; }// PK

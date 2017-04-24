@@ -8,6 +8,11 @@ namespace AirShopp.Domain
 {
     public class ProductSales
     {
+        public ProductSales()
+        {
+
+        }
+
         public long Id { get; set; }
         public long ProductId { get; set; }
         public int SalesAmount { get; set; }

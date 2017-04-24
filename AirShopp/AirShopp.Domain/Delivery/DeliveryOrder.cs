@@ -10,7 +10,7 @@ namespace AirShopp.Domain
     {
         public DeliveryOrder()
         {
-
+            DeliveryOrderItems = new List<DeliveryOrderItem>();
         }
 
         // 出库单

@@ -11,7 +11,7 @@ namespace AirShopp.Domain
     {
         public Address()
         {
-
+            Orders = new List<Order>();
         }
 
         public long Id { get; set; }
@@ -28,6 +28,6 @@ namespace AirShopp.Domain
         public long AreaId { get; set; }
         public virtual Area Area { get; set; }
 
-        public ICollection<Order> orders { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

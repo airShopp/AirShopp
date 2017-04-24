@@ -7,7 +7,11 @@ namespace AirShopp.Domain
     {
         public Product()
         {
-
+            Comments = new List<Comment>();
+            OrderItems = new List<OrderItem>();
+            CartItems = new List<CartItem>();
+            Inventories = new List<Inventory>();
+            Discounts = new List<Discount>();
         }
 
         public long Id { get; set; }

@@ -9,13 +9,16 @@ namespace AirShopp.Domain
     {
         public Order()
         {
-
+            Returns = new List<Return>();
+            DeliveryInfos = new List<DeliveryInfo>();
+            Comments = new List<Comment>();
+            OrderItems = new List<OrderItem>();
         }
 
         public long Id { get; set; }
         public decimal TotalAmount { get; set; }
         public DateTime OrderDate { get; set; }
-        public string OrderStatus { get; set; }
+        public string OrderStatus { get; set; } //OBLIGATION TRANSFER DELIVERY FINISHED
         public DateTime DeliveryDate { get; set; }
         public bool IsSpecialOrder { get; set; }
         public string SpecialType { get; set; }
