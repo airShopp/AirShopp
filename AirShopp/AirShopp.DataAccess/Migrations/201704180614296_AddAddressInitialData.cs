@@ -9,8 +9,8 @@ namespace AirShopp.DataAccess.Migrations
         {
             Sql(@"
                 SET IDENTITY_INSERT[dbo].[Address] ON
-                    INSERT INTO[Address](Id,CustomerId,DeliveryAddress,ReceiverName,ReceiverPhone)
-                    VALUES(1,1,'河南省洛阳市','Amanda','13298312275');
+                    INSERT INTO[Address](Id,CustomerId,AreaId,DeliveryAddress,ReceiverName,ReceiverPhone)
+                    VALUES(1,1,1,'河南省洛阳市','Amanda','13298312275');
                 ");
 
         }

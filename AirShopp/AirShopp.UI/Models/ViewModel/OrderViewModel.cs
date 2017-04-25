@@ -14,5 +14,13 @@ namespace AirShopp.UI.Models.ViewModel
         public List<Order> FinishedOrder { get; set; }
         public List<Order> AllOrder { get; set; }
 
+        public OrderViewModel()
+        {
+            PendingPaymentOrder = new List<Order>();
+            PendingDeliveryOrder = new List<Order>();
+            PendingReceivedOrder = new List<Order>();
+            FinishedOrder = new List<Order>();
+        }
+
     }
 }
