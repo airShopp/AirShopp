@@ -4,6 +4,11 @@ namespace AirShopp.Domain
 {
     public class Inventory
     {
+        public Inventory()
+        {
+            InventoryActions = new List<InventoryAction>();
+        }
+
         public long Id { get; set; }
         public long ProductId { get; set; }
         public long WarehouseId { get; set; }

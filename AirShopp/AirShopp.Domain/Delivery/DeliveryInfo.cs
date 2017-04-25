@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirShopp.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +9,25 @@ namespace AirShopp.Domain
 {
     public class DeliveryInfo
     {
+        public DeliveryInfo()
+        {
+
+        }
+
+        public DeliveryInfo(string description, int index, long orderId)
+        {
+            Description = description;
+            Index = index;
+            UpdateTime = DateTime.Now;
+            OrderId = orderId;
+        }
         // 物流信息
         public long Id { get; set; }// PK
         public string Description { get; set; }// DeliveryInfo description
-        public string CurrentLocation { get; set; }// Process location
+        public int Index { get; set; }// DeliveryInfo order
         public DateTime UpdateTime { get; set; }// Process time
-        public long OrderId { get; set; }// Foreign key ref Order (Id)
 
+        public long OrderId { get; set; }// Foreign key ref Order (Id)
         public virtual Order Order { get; set; }
     }
 }

@@ -8,6 +8,11 @@ namespace AirShopp.Domain
 {
     public class DeliveryOrderItem
     {
+        public DeliveryOrderItem()
+        {
+
+        }
+
         // 出库单项
         public long Id { get; set; }// PK
         public string ProductName { get; set; }// Name
@@ -16,8 +21,8 @@ namespace AirShopp.Domain
         public decimal PricePerProduct { get; set; }// Price per product
         public decimal TotalPrice { get; set; }// Total price
         public string Remarks { get; set; }// Something to be comments
-        public long DeliveryOrderId { get; set; }// Foreign key ref DeliveryOrder (Id)
 
+        public long DeliveryOrderId { get; set; }// Foreign key ref DeliveryOrder (Id)
         public virtual DeliveryOrder DeliveryOder { get; set; }
     }
 }

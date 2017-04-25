@@ -62,7 +62,7 @@ namespace AirShopp.UI.Controllers
                 ProductName = product.ProductName,
                 Description = product.Description,
                 Sales = salesAmount,
-                ProductUrl = product.url.Split(',').ToList(),
+                ProductUrl = product.Url.Split(',').ToList(),
                 CommentAmount = comment.Count(),
                 ProductAmount = _inventoryRepository.GetProductAmountByProductId(productId),
                 BuyTime = _orderItemRepository.GetBuyTimeByProductId(productId),

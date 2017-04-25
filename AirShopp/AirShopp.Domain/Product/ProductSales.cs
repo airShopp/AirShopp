@@ -9,9 +9,13 @@ namespace AirShopp.Domain
 {
     public class ProductSales
     {
+        public ProductSales()
+        {
+
+        }
+
         public long Id { get; set; }
         public long ProductId { get; set; }
-        [DefaultValue(0)]
         public int SalesAmount { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime UpdateDate { get; set; }

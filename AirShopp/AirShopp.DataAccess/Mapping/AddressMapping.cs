@@ -14,11 +14,12 @@ namespace AirShopp.DataAccess.Mapping
         public AddressMapping() 
         {
             HasKey(e => e.Id).Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(e => e.CustomerId).IsRequired();
-            Property(e => e.AreaId).IsRequired();
-            Property(e => e.DeliveryAddress).IsRequired();
-            Property(e => e.ReceiverName).IsRequired();
-            Property(e => e.ReceiverPhone).IsRequired();
+            Property(e => e.DeliveryAddress).HasMaxLength(128).IsRequired();
+            Property(e => e.ReceiverName).HasMaxLength(32).IsRequired();
+            Property(e => e.ReceiverPhone).HasMaxLength(11).IsRequired();
+
+            HasRequired(e => e.Area).WithMany(e => e.Addresses).HasForeignKey(e => e.AreaId);
+            HasRequired(e => e.Customer).WithMany(e => e.Addresses).HasForeignKey(e => e.CustomerId);
         }
     }
 }

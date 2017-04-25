@@ -12,7 +12,7 @@ namespace AirShopp.DataAccess
     {
         public AirShoppContext _context = new AirShoppContext();
 
-        public List<DeliveryStation> GetDeliveryStation(long areaId, int stationLevel)
+        public List<DeliveryStation> GetDeliveryStations(long areaId, int stationLevel)
         {
             /*
             return (from o in _context.DeliveryStation
@@ -20,6 +20,11 @@ namespace AirShopp.DataAccess
                    select o).ToList();
              * */
             return _context.DeliveryStation.Where(x => (x.AreaId == areaId && x.StationLevel == stationLevel)).ToList();
+        }
+
+        public List<DeliveryStation> GetDeliveryStation(double lng, double lat)
+        {
+            return _context.DeliveryStation.Where(x => (x.Longitude == lng && x.Latitude == lat)).ToList();
         }
         /*
         public void AddDeliveryStation(DeliveryStation deliveryStation)
