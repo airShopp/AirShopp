@@ -31,8 +31,16 @@ namespace AirShopp.UI.Controllers
         // GET: /BMapRoutePlanning/
         public ActionResult Index()
         {
+            Order order = new Order();
+
+            if (order.OrderStatus == OrderStatusEnumType.FINISHED.ToString())
+            {
+
+            }
+
             int orderId = 1;
-            // Pass Order model
+
+
 
             Address address = _addressService.GetAddress(orderId).FirstOrDefault();
 

@@ -8,6 +8,7 @@ namespace AirShopp.Domain
     {
         public Customer()
         {
+            RegisterDate = DateTime.Now;
             Orders = new List<Order>();
             Addresses = new List<Address>();
         }
