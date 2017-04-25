@@ -107,6 +107,7 @@ namespace AirShopp.UI.Controllers
 
         public ActionResult GetDeliveryInfo(string point, int index, string nextPoint, int orderId)
         {
+            //TODO Need to modify order status. transferring -> delivering -> done
             int maxIndex = _deliveryInfoService.GetMaxIndex(orderId);
             int backUpIndex = maxIndex;
 

@@ -1,24 +1,24 @@
 ﻿@model AirShopp.Domain.Admin
-@{ 
+@{
     Layout = null;
 }
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
     <title>立即登录</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/icon/Air.ico">
     @Scripts.Render("~/bundles/AirShopp/Login/js")
     @Styles.Render("~/bundles/AirShopp/Login/Css")
 </head>
 <body>
     <div class="w">
         <div id="logo">
-            <a href="index.html">
+            <a href="@Url.Action("Index", "Home")">
                 <img src="~/Content/icon/AirShoppLogo.png" alt="">
             </a>
             <b></b>
         </div>
-
-        <a href="#" class="q_link fr">
+        <a href="javascript:void(0)" class="q_link fr">
             <b class="fl"></b>
             登录页面，改进意见
         </a>
@@ -27,24 +27,27 @@
         <div class="login-wrap">
             <div class="w">
                 <div class="login-form">
+                    <div class="login-tab login-tab-r">
+                        <a href="javascript:;">账号登录</a>
+                    </div>
                     <div class="login-box" style="visibility: visible; display:block">
                         <div class="mt tab-h"></div>
                         <div class="msg-wrap"></div>
                         <div class="mc">
                             <div class="form">
-                                @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @id = "form"}))
+                                @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @id = "form" }))
                                 {
                                     <div class="item item-fore1 item-error">
                                         @Html.ValidationSummary(true)
                                         <label for="loginname" class="login-label name-label"></label>
-                                        @Html.TextBoxFor(m => m.Account, new { @class="itxt", id = "loginname", tabindex ="1", autocomplete="off", placeholder = "Username" })
+                                        @Html.TextBoxFor(m => m.Account, new { @class = "itxt", id = "loginname", tabindex = "1", autocomplete = "off", placeholder = "请输入用户名" })
                                         <span class="clear-btn" style="display:inline;"></span>
                                         @Html.ValidationMessageFor(m => m.Account)
                                     </div>
                                      <!-- 密码输入框fore2 -->
                                     <div id="entry" class="item item-fore2" style="visibility: visible">
                                         <label class="login-label pwd-label" for="nloginpwd"></label>
-                                        @Html.PasswordFor(m => m.Password, new { @class = "itxt itxt-error", id = "nloginpwd", placeholder = "Password", tabindex = "2", autocomplete = "off" })
+                                        @Html.PasswordFor(m => m.Password, new { @class = "itxt itxt-error", id = "nloginpwd", placeholder = "请输入密码", tabindex = "2", autocomplete = "off" })
                                         @Html.ValidationMessageFor(m => m.Password)
                                         <span class="clear-btn" style="display: inline;"></span>
                                         <span class="capslock" style="display: none;">
@@ -52,37 +55,21 @@
                                             大小写锁定已打开
                                         </span>
                                     </div>
-
-                                    @*<div class="item item-fore1 item-error">
-                                            <label for="loginname" class="login-label name-label"></label>
-                                            <input type="text" name="loginname" id="loginname" class="itxt" tabindex="1" autocomplete="off" placeholder="邮箱/用户名/已验证手机">
-                                            <span class="clear-btn" style="display:inline;"></span>
-                                        </div>*@
-                                        <!-- 密码输入框fore2 -->
-                                    @*<div id="entry" class="item item-fore2" style="visibility: visible">
-                                        <label class="login-label pwd-label" for="nloginpwd"></label>
-                                        <input type="password" name="" id="nloginpwd" name="nloginpwd" class="itxt itxt-error" tabindex="2" autocomplete="off" placeholder="密码">
-                                        <span class="clear-btn" style="display: inline;"></span>
-                                        <span class="capslock" style="display: none;">
-                                            <b></b>
-                                            大小写锁定已打开
-                                        </span>
-                                    </div>*@
-                                        <!-- 图片验证码开始 fore3-->
-                                        <div id="o-authcode" class="item item-vcode item-fore3 hide ">
-                                            <input type="text" name="" id="authcode" class="itxt itxt02" name="authcode" tabindex="3">
-                                            <input type="button" id="code" class="verify-code">
-                                            <a href="javascript:;" onclick='createCode();'>看不清换一张</a>
-                                        </div>
+                                    <!-- 图片验证码开始 fore3-->
+                                    <div id="o-authcode" class="item item-vcode item-fore3">
+                                        <input type="text" id="authcode" class="itxt itxt02" name="authcode" tabindex="3">
+                                        <input type="button" id="code" class="verify-code" onclick='createCode();'>
+                                        <a href="javascript:void(0);" onclick='createCode();'>看不清换一张</a>
+                                    </div>
                                         <!-- 自动登录开始fore4 -->
                                         <div class="item item-fore4">
                                             <div class="safe">
                                                 <span>
-                                                    <input type="checkbox" name="chkRememberMe" id="autologin" tabindex="3">
-                                                    <label for>自动登录</label>
+                                                    <input type="checkbox" name="chkRememberMe" id="autologin" tabindex="3" style="vertical-align:middle;">
+                                                    <label for="autologin">自动登录</label>
                                                 </span>
                                                 <span class="forget-pw-safe">
-                                                    <a href="">忘记密码</a>
+                                                    <a href="javascript:void(0)">忘记密码</a>
                                                 </span>
                                             </div>
                                         </div>
@@ -96,50 +83,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="qrcode-login">
-                        <div class="mc">
-                            <div class="qrcode-error-2016">
-                                <div class="qrcode-error-mask"></div>
-                                <p class="err-cont">服务器出错</p>
-                                <a href="javascript:void(0)" class="refresh-btn">刷新</a>
-                            </div>
-                            <div class="qrcode-main">
-
-                                <div class="qrcode-img" style="">
-                                    <img src="~/Content/login/code.png" alt="">
-                                    <div class="qrcode-error-02 hide" id="J-qrcodeerror" style="display: none;">
-                                        <a href="#none">
-                                            <span class="error-icon"></span>
-                                            <div class="txt">
-                                                网络开小差咯
-                                                <span class="ml10">刷新二维码</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="qrcode-help" style="display: none;"></div>
-                            </div>
-
-                            <div class="qrcode-panel">
-                                <ul>
-                                    <li class="fore1">
-                                        <span>打开</span>
-                                        <a href="">
-                                            <span class="red">手机歪秀购物 </span>
-                                        </a>
-                                    </li>
-                                    <li>扫一扫登录</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="coagent" id="kbCoagent">
                         <ul>
                             <li class="extra-r">
                                 <div class="regist-link">
-                                    <a href="/User/Register" class="">
+                                    <a href="/User/Register">
                                         <b></b>立即注册
                                     </a>
                                 </div>
@@ -182,34 +130,8 @@
             </div>
         </div>
     </div>
-
 </body>
-
-<script type="text/javascript">
-	//alert($)
-	$(".login-tab-r").click(function(){
-		$(".login-box").css({"display":"block","visibility":"visible"});
-		$(".qrcode-login").css({"display":"none"})
-	});
-	$(".login-tab-l").click(function(){
-		$(".login-box").css({"display":"none"});
-		$(".qrcode-login").css({"display":"block","visibility":"visible"})
-	});
-	//点击微信图片显示帮助
-	$(".qrcode-img").hover(function(){
-		$(".qrcode-img").css({"left": "0"});
-		$(".qrcode-help").css({"display":"block"});
-	},function(){
-		$(".qrcode-img").css({"left": "64px"});
-		$(".qrcode-help").css({"display":"none"});
-	});
-	//确认输入用户名密码后，显示验证码
-	$("#nloginpwd").blur(function(){
-		if(($("#loginname").val() !="" )&&($("#nloginpwd").val() !="")){
-		$("#o-authcode").css({"display":"block"});
-	}
-	})
-	createCode();
-
-</script>
 </html>
+<script type="text/javascript">
+    createCode();
+</script>
