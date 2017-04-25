@@ -18,7 +18,7 @@ namespace AirShopp.DataAccess.Migrations
         
         public override void Down()
         {
-            Sql(@"DELETE FROM dbo.Order");
+            Sql(@"DELETE FROM dbo.[Order]");
         }
     }
 }
