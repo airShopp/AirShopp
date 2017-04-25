@@ -8,11 +8,16 @@ namespace AirShopp.Domain
 {
     public class Courier
     {
+        public Courier()
+        {
+
+        }
+
         public long Id { get; set; }// PK
         public string Name { get; set; }// Name
         public string Phone { get; set; }// Phone
-        public long DeliveryStationId { get; set; } //Foreign key ref DeliveryStation (Id)
 
+        public long DeliveryStationId { get; set; } //Foreign key ref DeliveryStation (Id)
         public virtual DeliveryStation DeliveryStation { get; set; }
     }
 }

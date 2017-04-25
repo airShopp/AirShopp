@@ -5,15 +5,21 @@ namespace AirShopp.Domain
 {
     public class Return
     {
+        public Return()
+        {
+
+        }
+
         public long Id { get; set; }
-        public long OrderId { get; set; }
         public DateTime DeliveryDate { get; set; }
         public string ReturnReason { get; set; }
-        public string ProductId { get; set; }
-        public int Quantity { get; set; }
+        public string ReturnStatus { get; set; }
         public string CustomerName { get; set; }
 
-        [ForeignKey("OrderId")]
-        public virtual Order order { get; set; }
+        public long OrderId { get; set; }
+        public virtual Order Order { get; set; }
+
+        public long OrderItemId { get; set; }
+        public virtual OrderItem OrderItem { get; set; }
     }
 }

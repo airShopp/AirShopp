@@ -185,9 +185,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BMapDataModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\Common\PageListBaseModel.cs" />
+    <Compile Include="Models\CustomerCommentDataModel.cs" />
+    <Compile Include="Models\ProductDataModel.cs" />
+    <Compile Include="Models\ViewModel\UserViewModel.cs" />
+    <Compile Include="Models\ProductListDataModel.cs" />
+    <Compile Include="Models\ViewModel\Admin\Class1.cs" />
     <Compile Include="Models\ViewModel\HomeViewModel.cs" />
     <Compile Include="Models\ViewModel\OriginPointsViewModel.cs" />
+    <Compile Include="Models\ViewModel\ProductDetailViewModel.cs" />
+    <Compile Include="Models\ViewModel\ProductListViewModel.cs" />
+    <Compile Include="Models\ViewModel\ProductViewModel.cs" />
+    <Compile Include="Models\ViewModel\ShopCartViewModel.cs" />
     <Compile Include="Models\ViewModel\OrderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -336,6 +347,26 @@
     <Content Include="Content\img\pd\product3.png" />
     <Content Include="Content\img\pd\product4.png" />
     <Content Include="Content\img\pd\yue.png" />
+    <Content Include="Content\img\product\8口USB快速充电器.jpg" />
+    <Content Include="Content\img\product\QQ软糖.jpg" />
+    <Content Include="Content\img\product\蛋糕毛巾.jpg" />
+    <Content Include="Content\img\product\Vivo充电器.jpg" />
+    <Content Include="Content\img\product\中兴充电器.jpg" />
+    <Content Include="Content\img\product\书.jpg" />
+    <Content Include="Content\img\product\华为充电头.jpg" />
+    <Content Include="Content\img\product\口服液.jpg" />
+    <Content Include="Content\img\product\服装短袖.jpg" />
+    <Content Include="Content\img\product\红米数据线.jpg" />
+    <Content Include="Content\img\product\舜红500W变压器.jpg" />
+    <Content Include="Content\img\product\舞蹈服.jpg" />
+    <Content Include="Content\img\product\蛋糕毛巾1.jpg" />
+    <Content Include="Content\img\product\蛋糕毛巾2.jpg" />
+    <Content Include="Content\img\product\蛋糕毛巾3.jpg" />
+    <Content Include="Content\img\product\补水化妆品.jpg" />
+    <Content Include="Content\img\product\防滑布.jpg" />
+    <Content Include="Content\img\TimeLine\icons.png" />
+    <Content Include="Content\img\TimeLine\point.png" />
+    <Content Include="Content\img\TimeLine\vertical.png" />
     <Content Include="Content\login.css" />
     <Content Include="Content\login\a1.jpg" />
     <Content Include="Content\login\code.png" />
@@ -370,12 +401,16 @@
     <Content Include="Scripts\js\index.js" />
     <Content Include="Scripts\js\jcarousellite.js" />
     <Content Include="Scripts\js\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\js\jquery.easing.js" />
     <Content Include="Scripts\js\jquery.js" />
+    <Content Include="Scripts\js\jquery.mousewheel.js" />
     <Content Include="Scripts\js\js-tab.js" />
     <Content Include="Scripts\js\LuShu.js" />
     <Content Include="Scripts\js\MSClass.js" />
     <Content Include="Scripts\js\myCart.js" />
     <Content Include="Scripts\js\prototype.js" />
+    <Content Include="Content\TimeLine.css" />
+    <Content Include="Scripts\js\TimeLine.js" />
     <Content Include="Scripts\js\top.js" />
     <Content Include="Scripts\knockout-3.4.2.debug.js" />
     <Content Include="Scripts\knockout-3.4.2.js" />
@@ -394,8 +429,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\_airShoppLayout.cshtml" />
@@ -421,6 +454,10 @@
   <ItemGroup>
     <Content Include="Views\Shared\_homePageLayout.cshtml" />
     <Content Include="Views\Shared\_shopCartLayout.cshtml" />
+    <Content Include="Views\Home\HotProduct.cshtml" />
+    <Content Include="Views\BMapRoutePlanning\Index.cshtml" />
+	<Content Include="Views\Product\ProductList.cshtml" />
+    <Content Include="Views\Product\ChildList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using AirShopp.DataAccess;
 using AirShopp.Domain;
+using AirShopp.UI.Models.ViewModel;
 
 namespace AirShopp.UI.Controllers
 {
@@ -9,12 +10,15 @@ namespace AirShopp.UI.Controllers
     {
         private AirShoppContext db = new AirShoppContext();
         private IAdminService _adminService;
+        private ICustomerRepository _customerRepository;
 
         public UserController(
-            IAdminService adminService
+            IAdminService adminService,
+            ICustomerRepository customerRepository
             )
         {
             _adminService = adminService;
+            _customerRepository = customerRepository;
         }
 
         // GET: Admins
@@ -29,14 +33,14 @@ namespace AirShopp.UI.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(string account, string password)
+        public ActionResult Login(string account, string password, string userType)
         {
 
             try
             {
-                Admin admin = _adminService.UserLogin(account, password);
-                Session.Add("User", admin);
-                return RedirectToAction("Index", "Home");
+                Customer customer = _customerRepository.GetCustomer(account, password);
+                Session.Add("customer", customer);
+                return RedirectToAction("Index", "Home",customer);
             }
             catch (Exception ex)
             {
@@ -48,6 +52,22 @@ namespace AirShopp.UI.Controllers
         public ActionResult Register()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult Register(UserViewModel user)
+        {
+            Customer customer = new Customer();
+            customer.Account = user.UserName;
+            customer.Password = user.Password;
+            _customerRepository.AddCustomer(customer);
+            // Return null not empty string
+            Customer customer1 = _customerRepository.GetCustomer(user.UserName, user.Password);
+            return View();
+        }
+
+        public ActionResult CheckAccount(string account)
+        {
+            return Content(_customerRepository.GetCustomer(account).ToString());
         }
         protected override void Dispose(bool disposing)
         {

@@ -1,4 +1,5 @@
-﻿using AirShopp.Domain;
+﻿using AirShopp.Common.Page;
+using AirShopp.Domain;
 using AirShopp.UI.Models;
 using AirShopp.UI.Models.ViewModel;
 using System;
@@ -11,21 +12,27 @@ namespace AirShopp.UI.Controllers
 {
     public class HomeController : Controller
     {
-        public readonly ICategoryRepository _categoryRepository;
-        public readonly IProductRepository _productRepository;
-        public readonly ICategoryService _categoryService;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IProductRepository _productRepository;
+        private readonly ICategoryService _categoryService;
+        private readonly ICartService _cartService;
+        private readonly IReadFromDb _readFromDb;
 
         public HomeController(
             ICategoryRepository categoryRepository,
             IProductRepository productRepository,
-            ICategoryService categoryService)
+            ICategoryService categoryService,
+            ICartService cartService,
+            IReadFromDb readFromDb)
         {
             _categoryRepository = categoryRepository;
             _productRepository = productRepository;
             _categoryService = categoryService;
+            _cartService = cartService;
+            _readFromDb = readFromDb;
         }
-
-        public ActionResult Index(Admin admin)
+        //
+        public ActionResult Index(Customer customer)
          {
             var secondCategories = (from category in _categoryService.Categories()
                                     where category.ParentId > 0
@@ -35,29 +42,78 @@ namespace AirShopp.UI.Controllers
                                         CategoryName = category.CategoryName,
                                         ParentId = category.ParentId
                                     }).ToList();
+
+            var hotProducts = (from P in _readFromDb.Products
+                              join PS in _readFromDb.ProductSales on P.Id equals PS.ProductId
+                              join D in _readFromDb.Discounts on P.Id equals D.ProductId
+                              select new ProductDataModel
+                              {
+                                  ProductId = P.Id,
+                                  ProductName = P.ProductName,
+                                  Price = Math.Round((double)P.Price,2),
+                                  DiscountPrice = Math.Round((double)((P.Price * D.Discounts) / 10), 2),
+                                  Discounts = (double)D.Discounts,
+                                  Sales = PS.SalesAmount,
+                                  PictureUrl = P.Url
+                              }).OrderBy(hp => hp.Sales).Take(20).OrderBy(x => Guid.NewGuid()).Take(6).ToList();
+
             HomeViewModel homeViewModel = new HomeViewModel()
             {
+                //TODO Cart_Kenneth
+                CartProductAccount = 0,
+                //CartProductAccount = _cartService.GetProductAmoutByUser(customer.Id),
                 Categories = _categoryRepository.GetCategories().ToList(),
-                Products = _productRepository.Products(),
-                SecondCategories = secondCategories
-
+                HotProducts = hotProducts,
+                SecondCategories = secondCategories,
+                TimeLimitProduct = GetTimeLimitProduct().OrderBy(x => Guid.NewGuid()).Take(8).ToList()
             };
             Session["Category"] = homeViewModel.Categories;
             return View(homeViewModel);
         }
 
-        public ActionResult About()
+        //Get
+        public ActionResult GetHotProduct()
         {
-            ViewBag.Message = "Your application description page.";
+            var hotProducts = (from P in _readFromDb.Products
+                               join PS in _readFromDb.ProductSales on P.Id equals PS.ProductId
+                               join D in _readFromDb.Discounts on P.Id equals D.ProductId
+                               select new ProductDataModel
+                               {
+                                   ProductId = P.Id,
+                                   ProductName = P.ProductName,
+                                   Price = Math.Round((double)P.Price, 2),
+                                   DiscountPrice = Math.Round((double)((P.Price * D.Discounts) / 10), 2),
+                                   Discounts = (double)D.Discounts,
+                                   Sales = PS.SalesAmount,
+                                   PictureUrl = P.Url
+                               }).OrderBy(hp => hp.Sales).Take(20).OrderBy(x => Guid.NewGuid()).Take(6).ToList();
 
-            return View();
+            HomeViewModel homeViewModel = new HomeViewModel()
+            {
+                HotProducts = hotProducts
+
+            };
+            return PartialView("HotProduct", homeViewModel);
         }
 
-        public ActionResult Contact()
+        //GetTimeLimitProduct
+        public List<ProductDataModel> GetTimeLimitProduct()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            var products = (from P in _readFromDb.Products
+                            join D in _readFromDb.Discounts on P.Id equals D.ProductId
+                            where P.Url != "待定项" && D.Discounts < 10 && D.EndTime > DateTime.Now 
+                            select new ProductDataModel
+                            {
+                                ProductId = P.Id,
+                                ProductName = P.ProductName,
+                                Price = Math.Round((double)P.Price, 2),
+                                DiscountPrice = Math.Round((double)((P.Price * D.Discounts) / 10), 2),
+                                Discounts = (double)D.Discounts,
+                                DiscountStartTime = D.StartTime,
+                                DiscountEndTime = D.EndTime,
+                                PictureUrl = P.Url
+                            }).ToList(); ;
+            return products;
         }
     }
 }

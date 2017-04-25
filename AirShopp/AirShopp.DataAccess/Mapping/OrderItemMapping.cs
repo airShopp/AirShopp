@@ -9,7 +9,10 @@ namespace AirShopp.DataAccess.Mapping
         public OrderItemMapping()
         {
             HasKey(e => e.Id).Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            //more...
+
+            HasRequired(e => e.Order).WithMany(e => e.OrderItems).HasForeignKey(fk => fk.OrderId);
+
+            HasRequired(e => e.Product).WithMany(e => e.OrderItems).HasForeignKey(fk => fk.ProductId);
         }
     }
 }

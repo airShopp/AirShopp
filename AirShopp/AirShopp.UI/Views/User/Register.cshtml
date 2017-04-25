@@ -1,4 +1,5 @@
-﻿@{ 
+﻿@model AirShopp.UI.Models.ViewModel.UserViewModel
+@{ 
     Layout = null;
 }
 <!doctype html>
@@ -6,39 +7,42 @@
 <head>
     <title>用户注册</title>
     <link rel="shortcut icon" type="image/x-icon" href="theme/icon/favicon.ico">
+    @Scripts.Render("~/bundles/AirShopp/Login/js")
     @Styles.Render("~/bundles/AirShopp/Login/Css")
 </head>
 <body>
 
     <!--- header begin-->
     <header id="pc-header">
-        <div class="login-header" style="padding-bottom:0">
-            <div><h1><a href="index.html"><img src="~/Content/icon/AirShoppLogo.png"></a></h1></div>
+        <div class="login-header">
+            <a href="@Url.Action("Index", "Home")"><img src="~/Content/icon/AirShoppLogo.png"></a>
         </div>
     </header>
     <!-- header End -->
 
-
-
     <section id="login-content">
         <div class="login-centre">
             <div class="login-switch clearfix">
-                <p class="fr">我已经注册，现在就 <a href="login.html">登录</a></p>
+                <p class="fr">我已经注册，现在就 @Html.ActionLink("登录", "Login", "User")</p>
             </div>
             <div class="login-back">
                 <div class="H-over">
-                    <form>
+                    @using (Html.BeginForm("Register", "User", FormMethod.Post, new { @id = "form" }))
+                    {
                         <div class="login-input">
                             <label><i class="heart">*</i>用户名：</label>
-                            <input type="text" class="list-input1" id="username" name="info[username]" placeholder="">
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "list-input1", id = "username", tabindex = "1", autocomplete = "off", placeholder = "请输入用户名" })
+                            <span class="regmsg accountmsg"></span>
                         </div>
                         <div class="login-input">
                             <label><i class="heart">*</i>请设置密码：</label>
-                            <input type="text" class="list-input" id="password" name="info[password]" placeholder="">
+                            @Html.TextBoxFor(m => m.Password, new { @class = "list-input", id = "password", tabindex = "2", autocomplete = "off", placeholder = "请输入密码" })
+                            <span class="regmsg pwdmsg"></span>
                         </div>
                         <div class="login-input">
                             <label><i class="heart">*</i>请确认密码：</label>
-                            <input type="text" class="list-input" id="password1" name="info[password]" placeholder="">
+                            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "list-input", id = "password1", tabindex = "3", autocomplete = "off", placeholder = "请再次输入密码" })
+                            <span class="regmsg confpwdmsg"></span>
                         </div>
                         <div class="item-ifo">
                             <input type="checkbox" onClick="agreeonProtocol();" id="readme" checked="checked" class="checkbox">
@@ -46,9 +50,9 @@
                             <span class="clr"></span>
                         </div>
                         <div class="login-button">
-                            <a href="#">立即注册</a>
+                            <a href="javascript:void(0)" onclick="Check()">立即注册</a>
                         </div>
-                    </form>
+                    }
                 </div>
             </div>
         </div>
@@ -59,7 +63,7 @@
         <div class="containers">
             <div class="w" style="padding-top:30px">
                 <div id="footer-2013">
-                    <div class="links">
+                    <div class="links" style="padding:0 150px;">
                         <a href="">关于我们</a>
                         |
                         <a href="">联系我们</a>
@@ -79,8 +83,7 @@
                         <a href="">English site</a>
                     </div>
                     <div style="padding-left:10px">
-                        <p style="padding-top:10px; padding-bottom:10px; color:#999">网络文化经营许可证：浙网文[2013]0268-027号| 增值电信业务经营许可证：浙B2-20080224-1</p>
-                        <p style="padding-bottom:10px; color:#999">信息网络传播视听节目许可证：1109364号 | 互联网违法和不良信息举报电话:0571-81683755</p>
+                        <p style="padding-top:10px; padding-bottom:10px; color:#999;text-align:center;">Copyright©2004-2016  AirShopp 版权所有</p>
                     </div>
                 </div>
             </div>
@@ -90,3 +93,57 @@
     <!-- footer End -->
 </body>
 </html>
+<script>
+    function Check() {
+        var flag = true;
+        var pwd = $("#password").val();
+        var confpwd = $("#password1").val();
+        if (!$("#username").val()) {
+            flag = false;
+            $(".accountmsg").text("用户名不能为空");
+        } else {
+            CheckDuplicate()
+        }
+       
+        if (!pwd) {
+            flag = false;
+            $(".pwdmsg").text("密码不能为空");
+        } else {
+            $(".pwdmsg").text("");
+        }
+        if (!confpwd) {
+            flag = false;
+            $(".confpwdmsg").text("确认密码不能为空");
+        } else {
+            $(".confpwdmsg").text("");
+        }
+        if (flag) {
+            if (pwd != confpwd) {
+                $(".pwdmsg").text("两次密码输入不一致");
+                return;
+            } else {
+                $(".pwdmsg").text("");
+            }
+            $("#form").submit();
+        }
+    }
+
+    function CheckDuplicate(){
+        var username = $("#username").val();
+        if (!username) {
+            $(".accountmsg").text("用户名不能为空");
+        } else {
+            $.get("@Url.Action("CheckAccount", "User")",
+               { account: $("#username").val() },
+               function (data) {
+                   // true -> can not use
+                   if (data == "true"){
+                       $(".accountmsg").text("用户名已经存在");
+                   } else {
+                       $(".accountmsg").text("");
+                   }
+               }
+            )
+        }
+    };
+</script>

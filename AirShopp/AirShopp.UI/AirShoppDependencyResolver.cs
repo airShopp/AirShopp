@@ -83,6 +83,8 @@ namespace AirShopp.UI.Models
             container.RegisterType<IProvinceService, ProvinceService>();
             container.RegisterType<ICityService, CityService>();
             container.RegisterType<IAreaService, AreaService>();
+            container.RegisterType<IDeliveryInfoService, DeliveryInfoService>();
+            container.RegisterType<ICourierService, CourierService>();
 
             //Repositories
             container.RegisterType<IAdminRepository, AdminRepository>();
@@ -96,7 +98,12 @@ namespace AirShopp.UI.Models
             container.RegisterType<IProvinceRepository, ProvinceRepository>();
             container.RegisterType<ICityRepository, CityRepository>();
             container.RegisterType<IAreaRepository, AreaRepository>();
-
+            container.RegisterType<ICustomerRepository, CustomerRepository>();
+            container.RegisterType<ICommentRepository, CommentRepository>();
+            container.RegisterType<IInventoryRepository, InventoryRepository>();
+            container.RegisterType<IOrderItemRepository, OrderItemRepository>();
+            container.RegisterType<IDeliveryInfoRepository, DeliveryInfoRepository>();
+            container.RegisterType<ICourierRepository, CourierRepository>();
             //
             container.RegisterType<IReadFromDb, ReadFromDb>();
             return container;

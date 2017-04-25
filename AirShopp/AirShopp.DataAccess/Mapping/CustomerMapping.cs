@@ -9,9 +9,11 @@ namespace AirShopp.DataAccess.Mapping
         public CustomerMapping()
         {
             HasKey(e => e.Id).Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(e => e.Account).HasMaxLength(20).IsRequired();
-            Property(e => e.Password).HasMaxLength(20).IsRequired();
-            // more....
+            Property(e => e.Account).HasMaxLength(32).IsRequired();
+            Property(e => e.Password).HasMaxLength(32).IsRequired();
+            Property(e => e.CustomerName).HasMaxLength(32).IsOptional();
+            Property(e => e.ZipCode).HasMaxLength(6).IsOptional();
+            Property(e => e.TelephoneNo).HasMaxLength(11).IsOptional();
         }
     }
 }

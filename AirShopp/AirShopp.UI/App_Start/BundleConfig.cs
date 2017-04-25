@@ -24,9 +24,10 @@ namespace AirShopp.UI
                 "~/Scripts/js/jcarousellite.js",
                 "~/Scripts/js/jquery.js",
                 "~/Scripts/js/js-tab.js",
-                "~/Scripts/js/LuShu.js",
                 "~/Scripts/js/MSClass.js",
-                "~/Scripts/js/top.js"
+                "~/Scripts/js/top.js",
+                "~/Scripts/jquery.unobtrusive-ajax.js",
+                "~/Scripts/jquery.validate.unobtrusive.js"
                 ));
             bundles.Add(new StyleBundle("~/bundles/AirShopp/Css").Include(
                 "~/Content/base.css",
@@ -53,6 +54,18 @@ namespace AirShopp.UI
                 ));
             bundles.Add(new ScriptBundle("~/bundles/AirShopp/Inventory/js").Include(
                 "~/Scripts/js/jquery"
+                ));
+
+            //Delivery
+            bundles.Add(new StyleBundle("~/bundles/AirShopp/Delivery/Css").Include(
+                "~/Content/TimeLine.css"
+                ));
+            bundles.Add(new ScriptBundle("~/bundles/AirShopp/Delivery/js").Include(
+                "~/Scripts/js/LuShu.js",
+                "~/Scripts/js/TimeLine.js",
+                "~/Scripts/js/jquery.js",
+                "~/Scripts/js/jquery.easing.js",
+                "~/Scripts/js/jquery.mousewheel.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/AirShopp/Cart/js").Include(

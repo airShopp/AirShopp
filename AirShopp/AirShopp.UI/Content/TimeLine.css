@@ -1,0 +1,55 @@
+﻿@charset "utf-8";
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;}
+body{_background-image:url(about:blank);/*用浏览器空白页面作为背景*/_background-attachment:fixed; /* prevent screen flash in IE6 确保滚动条滚动时，元素不闪动*/ } 
+body{color:#535353;font-size:12px;font-family: "arial","微软雅黑";background:#f0f1f1;}
+.clear{clear:both;display:block;height:0;overflow:hidden;}
+
+/* history */
+#history{width:540px;height:360px;position:relative;margin:50px auto 0 auto;}
+#content{height:360px;width:540px;overflow:hidden;background:url(img/TimeLine/vertical.png) no-repeat 105px 2px;padding-top:10px;}
+
+.list{overflow:hidden;position:relative;}
+.list li{height:60px;vertical-align:bottom;overflow:hidden;position:relative;}
+.liwrap{height:55px;margin-top: 10px;}
+
+.lileft{float:left;height:55px;width:80px;line-height:55px;color:#AEAEAE;font-size:12px;text-align: center;}
+.liright{float:left;height:55px;width:405px;display:table;}
+.date p{height: 25px;line-height: 25px}
+
+.hisct{font-size:14px;color:#6e6e6e;vertical-align:middle;display:table-cell;}
+.lileft .md{font-size:18px;height: 30px;line-height: 30px}
+
+.point{float:left;width:55px;height:55px;background:url(img/TimeLine/point.png) no-repeat 0px 18px;overflow:hidden;}
+
+.point b{
+	height:16px;width:16px;background:#fff;display:block;margin:17px 0 0 19px;border-radius:18px;border:2px solid #6bc30d;
+	-webkit-transition:all 0.1s linear;
+	-moz-transition:all 0.1s linear;
+	-o-transition:all 0.1s linear;
+	transition:all 0.1s linear;
+	position:relative;
+	top:0;left:0;
+}
+.thiscur .point b{border:7px solid rgba(107,195,13,0.6);margin:12px 0px 0px 14px;border-radius:52px;}
+.thiscur .hisct{color:#6bc30d;}
+#arrow{position:fixed;top:50%;right:30px;}
+*html #arrow{position:absolute;top:expression(eval(document.documentElement.scrollTop));margin-top:350px;}
+
+#arrow ul li{
+	display:block;height:20px;width:20px;background:url(img/TimeLine/icons.png) no-repeat 0 0;cursor:pointer;
+	-webkit-transition:all 0.2s ease-out;
+	-moz-transition:all 0.2s ease-out;
+	-o-transition:all 0.2s ease-out;
+	transition:all 0.2s ease-out;
+}
+#arrow ul li:active{background-color:#000;}
+#arrow ul .arrow_active{
+	background-color:#000;
+	-webkit-transition:all 0.1s ease-in;
+	-moz-transition:all 0.1s ease-in;
+	-o-transition:all 0.1s ease-in;
+	transition:all 0.1s ease-in;
+}
+#arrow ul .arrowup{background-position:0px -26px;margin-bottom:10px;}
+#arrow ul .arrowdown{background-position:0px 0px;}

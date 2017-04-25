@@ -9,34 +9,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="~/Content/icon/Air.ico">
     @Scripts.Render("~/bundles/AirShopp/js")
     @Styles.Render("~/bundles/AirShopp/Layout")
-    <script type="text/javascript">
-         var intDiff = parseInt(80000);//倒计时总秒数量
-         function timer(intDiff){
-             window.setInterval(function(){
-                 var day=0,
-                         hour=0,
-                         minute=0,
-                         second=0;//时间默认值
-                 if(intDiff > 0){
-                     day = Math.floor(intDiff / (60 * 60 * 24));
-                     hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
-                     minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
-                     second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
-                 }
-                 if (minute <= 9) minute = '0' + minute;
-                 if (second <= 9) second = '0' + second;
-
-                 $('#hour_show').html('<s id="h"></s>'+hour+'');
-                 $('#minute_show').html('<s></s>'+minute+'');
-                 $('#second_show').html('<s></s>'+second+'');
-                 intDiff--;
-             }, 1000);
-         }
-
-         $(function(){
-             timer(intDiff);
-         });
-    </script>
 </head>
 <body>
     <!--- header begin-->
@@ -45,9 +17,9 @@
             <div class="yNavIndex">
                 <ul class="BHeaderl">
                     <li style="display:none;"><a href="#" style="float:left;">嘻哈杂货铺</a> <a href="#" style="float:left;">退出</a> </li>
-                    @if (Session["User"] != null)
+                    @if (Session["customer"] != null)
                     {
-                        var user = Session["User"] as AirShopp.Domain.Admin;
+                        var user = Session["customer"] as AirShopp.Domain.Customer;
                         <li>@Html.ActionLink(user.Account, "GetUser", "User", null, new { style = "color:#ea4949" })</li>
                     }
                     else
@@ -55,7 +27,7 @@
                         <li>@Html.ActionLink("请登录", "Login", "User", null, new { style = "color:#ea4949" })</li>
                     }
                     <li class="headerul">|</li>
-                    <li><a href="register.html">免费注册</a> </li>
+                    <li>@Html.ActionLink("免费注册", "Register", "User")</li>
                     <li class="headerul">|</li>
                     <li>
                         @if (Session["User"] != null)
@@ -99,14 +71,14 @@
             </div>
         </div>
         <div class="container clearfix">
-            <div class="header-logo fl"><h1><a href="首页.html"><img src="~/Content/icon/AirShoppLogo.png"></a> </h1></div>
+            <div class="header-logo fl"><h1><a href="@Url.Action("Index", "Home")"><img src="~/Content/icon/AirShoppLogo.png"></a> </h1></div>
             <div class="head-form fl">
                 <form class="clearfix">
                     <input type="text" class="search-text" accesskey="" id="key" autocomplete="off" placeholder="洗衣机">
                     <button class="button" onClick="search('key');return false;">搜索</button>
                 </form>
             </div>
-            <div class="header-cart fr"><a href="/Product/ShopCart"><img src="~/Content/icon/car.png"></a> <i class="head-amount">99</i></div>
+            <div class="header-cart fr"><a href="/Product/ShopCart"><img src="~/Content/icon/car.png"></a> <i class="head-amount">@Model.CartProductAccount</i></div>
             <div class="head-mountain"></div>
         </div>
         <div class="yHeader">
@@ -122,7 +94,7 @@
                             var className = "listi" + i;
                             <li class="menulihover">
                                 <i class="@className"></i>
-                                @Html.ActionLink(secondCategory.CategoryName, "getProduct", new { Controller = "Product", CategoryId = secondCategory.Id })
+                                @Html.ActionLink(secondCategory.CategoryName, "GetProducts", new { Controller = "Product", categoryId = secondCategory.Id })
                                 <span></span>
                             </li>
                             i++;
@@ -133,7 +105,7 @@
                 <ul class="yMenuIndex">
                     @foreach (var category in Model.Categories)
                     {
-                        <li><a href="/Product/Index" target="_blank">@category.CategoryName</a></li>
+                        <li>@Html.ActionLink(category.CategoryName, "GetProducts", new { Controller = "Product", categoryId = category.Id })</li>
                     }
                     <li>@Html.ActionLink("BMap", "Index", "BMapRoutePlanning")</li>
                 </ul>

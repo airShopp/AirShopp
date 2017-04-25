@@ -12,7 +12,8 @@ namespace AirShopp.DataAccess
         public List<Cart> LoadCartList(long customerId) 
         {
             List<Cart> cartList = new List<Cart>();
-
+            //TODO Cart_Kenneth
+            /*
             cartList.Add(new Cart()
             {
                 CustomerId = 1,
@@ -31,7 +32,7 @@ namespace AirShopp.DataAccess
                 Quantity = 20,
                 ProductId = 3
             });
-
+            */
             return cartList;
         }
     }
