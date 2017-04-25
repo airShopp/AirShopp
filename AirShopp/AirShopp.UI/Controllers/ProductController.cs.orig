@@ -61,8 +61,13 @@ namespace AirShopp.UI.Controllers
                 ProductId = product.Id,
                 ProductName = product.ProductName,
                 Description = product.Description,
+<<<<<<< HEAD
                 Sales = salesAmount,
+                ProductUrl = product.url.Split(',').ToList(),
+=======
+                Sales = productSales.SalesAmount,
                 ProductUrl = product.Url.Split(',').ToList(),
+>>>>>>> 200cb284044c64960800953b8dcdf64a430030b8
                 CommentAmount = comment.Count(),
                 ProductAmount = _inventoryRepository.GetProductAmountByProductId(productId),
                 BuyTime = _orderItemRepository.GetBuyTimeByProductId(productId),
@@ -90,7 +95,7 @@ namespace AirShopp.UI.Controllers
                                    Discounts = d.Discounts,
                                    DiscountPrice = Math.Round((double)((p.Price * d.Discounts) / 10), 2),
                                    CommentAmount = cm.Count(),
-                                   ProductUrl = p.Url
+                                   ProductUrl = p.url
                                });
 
             List<ProductListDataModel> pl = new List<ProductListDataModel>();

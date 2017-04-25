@@ -1,4 +1,5 @@
-﻿using AirShopp.Domain;
+﻿using AirShopp.Common.Page;
+using AirShopp.Domain;
 using AirShopp.UI.Models;
 using AirShopp.UI.Models.ViewModel;
 using System;
@@ -53,7 +54,7 @@ namespace AirShopp.UI.Controllers
                                   DiscountPrice = Math.Round((double)((P.Price * D.Discounts) / 10), 2),
                                   Discounts = (double)D.Discounts,
                                   Sales = PS.SalesAmount,
-                                  PictureUrl = P.Url.Split(',')[0]
+                                  PictureUrl = P.Url
                               }).OrderBy(hp => hp.Sales).Take(20).OrderBy(x => Guid.NewGuid()).Take(6).ToList();
 
             HomeViewModel homeViewModel = new HomeViewModel()
@@ -84,7 +85,7 @@ namespace AirShopp.UI.Controllers
                                    DiscountPrice = Math.Round((double)((P.Price * D.Discounts) / 10), 2),
                                    Discounts = (double)D.Discounts,
                                    Sales = PS.SalesAmount,
-                                   PictureUrl = P.Url.Split(',')[0]
+                                   PictureUrl = P.Url
                                }).OrderBy(hp => hp.Sales).Take(20).OrderBy(x => Guid.NewGuid()).Take(6).ToList();
 
             HomeViewModel homeViewModel = new HomeViewModel()
@@ -110,7 +111,7 @@ namespace AirShopp.UI.Controllers
                                 Discounts = (double)D.Discounts,
                                 DiscountStartTime = D.StartTime,
                                 DiscountEndTime = D.EndTime,
-                                PictureUrl = P.Url.Split(',')[0]
+                                PictureUrl = P.Url
                             }).ToList(); ;
             return products;
         }

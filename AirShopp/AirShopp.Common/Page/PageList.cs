@@ -52,7 +52,7 @@ namespace AirShopp.Common.Page
         public PageList(IQueryable<T> source, int? pageIndex, int? pageSize)
         {
             if (pageIndex == null) { pageIndex = 1; }//默认显示第一页数据
-            if (pageSize == null) { pageSize = 10; }//默认每页显示10条数据
+            if (pageSize == null) { pageSize = 12; }//默认每页显示10条数据
             this.TotalCount = source.Count();
             this.PageSize = pageSize.Value;
             this.PageIndex = pageIndex.Value;

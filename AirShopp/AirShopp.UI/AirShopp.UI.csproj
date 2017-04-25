@@ -189,10 +189,12 @@
     <Compile Include="Models\Common\PageListBaseModel.cs" />
     <Compile Include="Models\CustomerCommentDataModel.cs" />
     <Compile Include="Models\ProductDataModel.cs" />
+    <Compile Include="Models\ProductListDataModel.cs" />
     <Compile Include="Models\ViewModel\Admin\Class1.cs" />
     <Compile Include="Models\ViewModel\HomeViewModel.cs" />
     <Compile Include="Models\ViewModel\OriginPointsViewModel.cs" />
     <Compile Include="Models\ViewModel\ProductDetailViewModel.cs" />
+    <Compile Include="Models\ViewModel\ProductListViewModel.cs" />
     <Compile Include="Models\ViewModel\ProductViewModel.cs" />
     <Compile Include="Models\ViewModel\ShopCartViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -434,13 +436,14 @@
     <Content Include="Views\Shared\_orderPageLayout.cshtml" />
     <Content Include="Views\Order\OrderDetail.cshtml" />
     <Content Include="Views\Inventory\Index.cshtml" />
-    <Content Include="Views\Product\ProductList.cshtml" />
     <Content Include="Views\Product\ShopCart.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Shared\_homePageLayout.cshtml" />
     <Content Include="Views\Shared\_shopCartLayout.cshtml" />
     <Content Include="Views\Home\HotProduct.cshtml" />
     <Content Include="Views\BMapRoutePlanning\Index.cshtml" />
+	<Content Include="Views\Product\ProductList.cshtml" />
+    <Content Include="Views\Product\ChildList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
