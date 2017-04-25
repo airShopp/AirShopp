@@ -25,10 +25,9 @@ namespace AirShopp.DataAccess
         public DbSet<Cart> Cart { get; set; }
 
         public DbSet<Order> Order { get; set; }
-        public DbSet<Delivery> Delivery { get; set; }
         public DbSet<OrderItem> OrderItem { get; set; }
         public DbSet<Return> Return { get; set; }
-
+        public DbSet<Comment> Comments { get; set; }
         public DbSet<Admin> Admin { get; set; }
 
         public DbSet<ProductInFactory> ProductInFactory { get; set; }
@@ -46,7 +45,7 @@ namespace AirShopp.DataAccess
         public DbSet<DeliveryOrderItem> DeliveryOrderItem { get; set; }
         public DbSet<DeliveryStation> DeliveryStation { get; set; }
         public DbSet<Courier> Courier { get; set; }
-
+        public DbSet<ProductSales> ProductSales { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -61,7 +60,6 @@ namespace AirShopp.DataAccess
             modelBuilder.Configurations.Add(new ProductMapping());
             modelBuilder.Configurations.Add(new CartMapping());
             modelBuilder.Configurations.Add(new OrderMapping());
-            modelBuilder.Configurations.Add(new DeliveryMapping());
             modelBuilder.Configurations.Add(new OrderItemMapping());
             modelBuilder.Configurations.Add(new ReturnMapping());
             modelBuilder.Configurations.Add(new AdminMapping());
@@ -71,6 +69,7 @@ namespace AirShopp.DataAccess
             modelBuilder.Configurations.Add(new WarehouseMapping());
             modelBuilder.Configurations.Add(new InventoryMapping());
             modelBuilder.Configurations.Add(new InventoryActionMapping());
+            modelBuilder.Configurations.Add(new ProductSalesMapping());
 
             modelBuilder.Configurations.Add(new ProvinceMapping());
             modelBuilder.Configurations.Add(new CityMapping());
@@ -81,6 +80,7 @@ namespace AirShopp.DataAccess
             modelBuilder.Configurations.Add(new DeliveryOrderItemMapping());
             modelBuilder.Configurations.Add(new CourierMapping());
             modelBuilder.Configurations.Add(new DeliveryStationMapping());
+            modelBuilder.Configurations.Add(new CommentMapping());
         }
     }
 }

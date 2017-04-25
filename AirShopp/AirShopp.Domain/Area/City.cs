@@ -10,6 +10,11 @@ namespace AirShopp.Domain
 {
     public class City
     {
+        public City()
+        {
+
+        }
+
         public long Id { get; set; }
         public long CityId { get; set; }
         public string CityName { get; set; }

@@ -188,12 +188,15 @@
     <Compile Include="Models\BMapDataModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\Common\PageListBaseModel.cs" />
+    <Compile Include="Models\CustomerCommentDataModel.cs" />
     <Compile Include="Models\ProductDataModel.cs" />
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
+    <Compile Include="Models\ProductListDataModel.cs" />
     <Compile Include="Models\ViewModel\Admin\Class1.cs" />
     <Compile Include="Models\ViewModel\HomeViewModel.cs" />
     <Compile Include="Models\ViewModel\OriginPointsViewModel.cs" />
     <Compile Include="Models\ViewModel\ProductDetailViewModel.cs" />
+    <Compile Include="Models\ViewModel\ProductListViewModel.cs" />
     <Compile Include="Models\ViewModel\ProductViewModel.cs" />
     <Compile Include="Models\ViewModel\ShopCartViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -355,6 +358,9 @@
     <Content Include="Content\img\product\红米数据线.jpg" />
     <Content Include="Content\img\product\舜红500W变压器.jpg" />
     <Content Include="Content\img\product\舞蹈服.jpg" />
+    <Content Include="Content\img\product\蛋糕毛巾1.jpg" />
+    <Content Include="Content\img\product\蛋糕毛巾2.jpg" />
+    <Content Include="Content\img\product\蛋糕毛巾3.jpg" />
     <Content Include="Content\img\product\补水化妆品.jpg" />
     <Content Include="Content\img\product\防滑布.jpg" />
     <Content Include="Content\img\TimeLine\icons.png" />
@@ -432,13 +438,14 @@
     <Content Include="Views\Shared\_orderPageLayout.cshtml" />
     <Content Include="Views\Order\OrderDetail.cshtml" />
     <Content Include="Views\Inventory\Index.cshtml" />
-    <Content Include="Views\Product\ProductList.cshtml" />
     <Content Include="Views\Product\ShopCart.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Shared\_homePageLayout.cshtml" />
     <Content Include="Views\Shared\_shopCartLayout.cshtml" />
     <Content Include="Views\Home\HotProduct.cshtml" />
     <Content Include="Views\BMapRoutePlanning\Index.cshtml" />
+	<Content Include="Views\Product\ProductList.cshtml" />
+    <Content Include="Views\Product\ChildList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

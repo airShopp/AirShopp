@@ -8,13 +8,19 @@ namespace AirShopp.Domain
 {
     public class Comment
     {
+        public Comment()
+        {
+
+        }
+
         public long Id { get; set; }
-        public long OrderId { get; set; }
-        public long ProductId { get; set; }
         public string Comments { get; set; }
         public DateTime CommentDate { get; set; }
 
-        public Order Order { get; set; }
-        public Product Product { get; set; }
+        public long OrderId { get; set; }
+        public virtual Order Order { get; set; }
+
+        public long ProductId { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

@@ -6,7 +6,7 @@
 @{
     var StartTime = Model.TimeLimitProduct[0].DiscountStartTime;
     var EndTime = Model.TimeLimitProduct[0].DiscountEndTime;
-    var LimitTime = EndTime.Subtract(StartTime);
+    var LimitTime = EndTime.Subtract(DateTime.Now);
     var d = LimitTime.Days;
     var H = LimitTime.Hours;
     var se = LimitTime.Seconds;

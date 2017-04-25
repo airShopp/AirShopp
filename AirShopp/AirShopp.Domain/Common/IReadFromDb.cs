@@ -15,6 +15,8 @@ namespace AirShopp.Domain
         IQueryable<Product> Products { get; }
         IQueryable<Discount> Discounts { get; }
         IQueryable<ProductOutFactory> ProductOutFactories { get; }
+        IQueryable<ProductSales> ProductSales { get; }
+        IQueryable<Comment> Comments { get; }
 
     }
 }

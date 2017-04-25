@@ -10,6 +10,13 @@ namespace AirShopp.DataAccess
     {
         public readonly AirShoppContext _context = new AirShoppContext();
 
+        public Product GetProductById(long productId)
+        {
+            Product product = null;
+            product = _context.Product.FirstOrDefault(x => x.Id == productId);
+            return product;
+        }
+
         public List<Product> Products()
         {
             string path = HttpRuntime.AppDomainAppPath.ToString() + "\\Content\\Images\\HomePage\\p1.jpg";
@@ -25,7 +32,7 @@ namespace AirShopp.DataAccess
                       ProductionDate = product.ProductionDate,
                       ProductName = product.ProductName,
                       Description = product.Description,
-                      url = RealPath
+                      Url = RealPath
                 });
             });
             return products;

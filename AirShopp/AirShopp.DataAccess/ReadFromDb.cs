@@ -23,6 +23,14 @@ namespace AirShopp.DataAccess
             get { return _context.Category; }
         }
 
+        public IQueryable<Comment> Comments
+        {
+            get
+            {
+                return _context.Comments;
+            }
+        }
+
         public IQueryable<Discount> Discounts
         {
             get
@@ -60,6 +68,14 @@ namespace AirShopp.DataAccess
             get
             {
                 return _context.Product;
+            }
+        }
+
+        public IQueryable<ProductSales> ProductSales
+        {
+            get
+            {
+                return _context.ProductSales;
             }
         }
     }

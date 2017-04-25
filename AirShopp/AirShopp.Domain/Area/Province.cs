@@ -8,6 +8,11 @@ namespace AirShopp.Domain
 {
     public class Province
     {
+        public Province()
+        {
+
+        }
+
         public long Id { get; set; }
         public long ProvinceId { get; set; }
         public string ProvinceName { get; set; }

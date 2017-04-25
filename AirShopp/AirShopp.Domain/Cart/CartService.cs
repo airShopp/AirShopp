@@ -22,8 +22,8 @@ namespace AirShopp.Domain
         {
             return _cartRepository.LoadCartList(customerId);
         }
-
-
+        //TODO Cart_Kenneth
+        /*
         public int GetProductAmoutByUser(long customerId)
         {
             int cartProductAmount = 0;
@@ -36,5 +36,6 @@ namespace AirShopp.Domain
             }
             return cartProductAmount;
         }
+         * */
     }
 }

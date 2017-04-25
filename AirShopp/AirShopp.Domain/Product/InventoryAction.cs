@@ -8,6 +8,11 @@ namespace AirShopp.Domain
 {
     public class InventoryAction
     {
+        public InventoryAction()
+        {
+
+        }
+
         public long Id { get; set; }
         public long? ProductInFactoryId { get; set; }
         public long? ProductOutFactoryId { get; set; }
