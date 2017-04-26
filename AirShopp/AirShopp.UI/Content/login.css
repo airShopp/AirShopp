@@ -29,7 +29,7 @@
 .login-button {padding-left:270px; padding-top:20px;}
 .login-button a { width:270px; height:45px; line-height:45px; text-align:center; background:#ea4949; border-radius:2px; display:block; color:#ffffff; font-size:16px;}
 .login-button a:hover { width:270px; height:45px; line-height:45px; text-align:center; background:#f25350; border-radius:2px; display:block; color:#ffffff; font-size:16px;}
-.regmsg{color:red;font-size:12px;margin-top:8px;}
+.regmsg{color:red;font-size:12px;line-height:42px;padding-left:5px;}
 
 
 li{
@@ -138,27 +138,15 @@ div{
 }
 .login-form .login-tab-r{
     width:100%;
+    height:55px;
 }
 .login-form .login-tab-link{display:inline-block;}
 /*login-box开始（账户登录）*/
 .login-form .login-box{
     width:306px;
-    padding:20px 20px 10px;
+    padding:0 20px 10px;
     display: block;
     visibility: visible;
-}
-.login-form .login-box .mt{
-    display:inline-block;
-    display:block;width:306px;
-    overflow:visible;height:27px;
-}
-/*不清楚什么鬼*/
-.login-form .login-box .mt:after{
-    content:".";
-    display:block;
-    height:0;
-    clear:both;
-    visibility:hidden;
 }
 /*提示信息开始*/
 .login-form .msg-wrap{

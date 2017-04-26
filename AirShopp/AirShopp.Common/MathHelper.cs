@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Security;
 
 namespace AirShopp.Common
 {
@@ -13,6 +14,11 @@ namespace AirShopp.Common
             double x = System.Math.Abs(endPointX - startPointX);
             double y = System.Math.Abs(endPointY - startPointY);
             return Math.Sqrt(x * x + y * y);
-        } 
+        }
+
+        public static string SHA1(string source)
+        {
+            return FormsAuthentication.HashPasswordForStoringInConfigFile(source, "SHA1");
+        }
     }
 }

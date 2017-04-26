@@ -8,8 +8,8 @@ namespace AirShopp.Common
 {
     public class MessageConstants
     {
-        public static string USER_NAME_ERROR = "User name is error";
-        public static string PASSWORD_ERROR = "Password is error";
+        public static string USER_NAME_ERROR = "用户名不正确";
+        public static string PASSWORD_ERROR = "密码不正确";
 
         public static string DELIVERYINFO_START_MESSAGE = "您的订单开始处理";
         public static string DELIVERYINFO_PACKAGE_MESSAGE = "卖家发货，[{0}]已收件打包";

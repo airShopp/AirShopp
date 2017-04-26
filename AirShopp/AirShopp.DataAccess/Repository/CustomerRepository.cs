@@ -9,6 +9,7 @@ namespace AirShopp.DataAccess
     public class CustomerRepository : ICustomerRepository
     {
         public readonly AirShoppContext _context = new AirShoppContext();
+
         public Customer GetCustomer(string account, string password)
         {
             Customer customer = _context.Customer.FirstOrDefault(a => a.Account == account);
@@ -16,13 +17,13 @@ namespace AirShopp.DataAccess
             {
                 throw new BaseException(MessageConstants.USER_NAME_ERROR);
             }
-            if (customer.Password != password)
+            if (!MathHelper.SHA1(customer.Password).Equals(password))
             {
                 throw new BaseException(MessageConstants.PASSWORD_ERROR);
             }
             else
             {
-                return _context.Customer.FirstOrDefault(a => a.Account == account && a.Password == password);
+                return customer;
             }
         }
 

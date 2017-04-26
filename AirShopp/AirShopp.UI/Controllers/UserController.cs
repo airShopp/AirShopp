@@ -4,6 +4,7 @@ using AirShopp.DataAccess;
 using AirShopp.Domain;
 using AirShopp.UI.Models.ViewModel;
 using AirShopp.Common;
+using System.Web;
 
 namespace AirShopp.UI.Controllers
 {
@@ -33,36 +34,56 @@ namespace AirShopp.UI.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Login(UserViewModel user)
         {
+            HttpCookie AccountCookie = CookieHelper.GetCookie("UserName");
+            HttpCookie PwdCookie = CookieHelper.GetCookie("Password");
+            if (AccountCookie != null && PwdCookie != null && user.Password.Equals(PwdCookie.Value))
+            {
+                user.UserName = AccountCookie.Value;
+                user.Password = AccountCookie.Value;
+            }
+            else
+            {
+                user.Password = MathHelper.SHA1(user.Password);
+            }
+
             try
             {
                 Customer customer = _customerRepository.GetCustomer(user.UserName, user.Password);
-                Session.Add("customer", customer);
+
                 if (user.RememberPwd)
                 {
-                    CookieHelper.SetCookie("UserName", "UserName", user.UserName, DateTime.Now.AddDays(2));
-                    CookieHelper.SetCookie("Password", "Password", user.Password, DateTime.Now.AddDays(2));
+                    CookieHelper.SetCookie("UserName", "UserName", customer.Account, DateTime.Now.AddDays(1));
+                    CookieHelper.SetCookie("Password", "Password", MathHelper.SHA1(customer.Password), DateTime.Now.AddDays(1));
                 }
                 else
                 {
                     CookieHelper.RemoveCookie("UserName", null);
                     CookieHelper.RemoveCookie("Password", null);
                 }
+
+                // Clear password for security
+                customer.Password = null;
+                Session.Add("customer", customer);
+
                 return RedirectToAction("Index", "Home",customer);
             }
             catch (Exception ex)
             {
                 ViewBag.ErrorMessage = ex.Message;
-                return View("Index");
+                return View();
             }
         }
 
+        [HttpGet]
         public ActionResult Register()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Register(UserViewModel user)
         {
@@ -80,11 +101,13 @@ namespace AirShopp.UI.Controllers
             return Content(_customerRepository.GetCustomer(account).ToString());
         }
 
+        [HttpGet]
         public ActionResult Logout()
         {
             Session.Clear();
             return RedirectToAction("Index", "Home");
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
