@@ -8,7 +8,7 @@ using System.Web;
 using ThoughtWorks.QRCode.Codec;
 using ThoughtWorks.QRCode.Codec.Data;
 
-namespace AirShopp.Comman
+namespace AirShopp.Common
 {
     public class QRCodeHelper
     {

@@ -10,7 +10,7 @@
 .login-header { width:990px; margin:0 auto; padding:20px 0;}
 .containers   { width:990px; margin:0 auto; padding:0;}
 .login-centre { width:990px; margin:0 auto;border-color: #eb4a4a #e0e0e0 #e0e0e0;  border-style: solid;  border-width: 3px 1px 1px;background:#f9f9f9}
-.login-back   { width:988px; height:320px; padding:35px;}
+.login-back   { width:988px; padding:35px;}
 .login-switch { width:985px; line-height:32px;}
 .login-switch ul{padding-left:150px; }
 .login-switch p a { color:#ea4949;}
@@ -25,12 +25,12 @@
 .login-input .list-input {background:#fff}
 .login-input .list-iphone { background:#fff; width:388px;}
 .login-input .list-notes  { background:#fff; width:132px;}
-.item-ifo { padding-left:270px; padding-top:10px;}
-.login-button {padding-left:270px; padding-top:20px;}
+.item-ifo { padding-left:270px; padding-top:10px;padding-bottom:20px;}
+.login-button {padding-left:270px;}
 .login-button a { width:270px; height:45px; line-height:45px; text-align:center; background:#ea4949; border-radius:2px; display:block; color:#ffffff; font-size:16px;}
 .login-button a:hover { width:270px; height:45px; line-height:45px; text-align:center; background:#f25350; border-radius:2px; display:block; color:#ffffff; font-size:16px;}
 .regmsg{color:red;font-size:12px;line-height:42px;padding-left:5px;}
-
+.login-input .gendercheckbox{width:20px;height:20px;float:none;margin-top:10px;vertical-align:bottom}
 
 li{
     display: list-item;

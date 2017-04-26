@@ -30,12 +30,12 @@
                         <div class="login-input">
                             <label><i class="heart">*</i>用户名：</label>
                             @Html.TextBoxFor(m => m.UserName, new { @class = "list-input1", id = "username", tabindex = "1", autocomplete = "off", placeholder = "请输入用户名" })
-                            <p class="regmsg accountmsg"></p>
+                            <p class="regmsg accountmsg">@ViewBag.AccountMsg</p>
                         </div>
                         <div class="login-input">
                             <label><i class="heart">*</i>请设置密码：</label>
                             @Html.TextBoxFor(m => m.Password, new { @class = "list-input", id = "password", tabindex = "2", autocomplete = "off", placeholder = "请输入密码" })
-                            <p class="regmsg pwdmsg"></p>
+                            <p class="regmsg pwdmsg">@ViewBag.PwdMsg</p>
                         </div>
                         <div class="login-input">
                             <label><i class="heart">*</i>请确认密码：</label>
@@ -98,7 +98,10 @@
             flag = false;
             $(".accountmsg").text("用户名不能为空");
         } else {
-            CheckDuplicate()
+            CheckDuplicate();
+            if ($(".accountmsg").text() != "") {
+                flag = false;
+            }
         }
 
         if (!pwd) {

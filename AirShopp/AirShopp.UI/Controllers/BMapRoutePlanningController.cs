@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 using System.Web.Mvc;
 using AirShopp.Domain;
 using AirShopp.Common;
-using AirShopp.Comman;
 using AirShopp.UI.Models;
 
 namespace AirShopp.UI.Controllers

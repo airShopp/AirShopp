@@ -10,6 +10,8 @@ namespace AirShopp.Common
     {
         public static string USER_NAME_ERROR = "用户名不正确";
         public static string PASSWORD_ERROR = "密码不正确";
+        public static string USER_NAME_EXIST = "用户名已经存在";
+        public static string PASSWORD_NOT_EQUALS = "两次密码输入不一致";
 
         public static string DELIVERYINFO_START_MESSAGE = "您的订单开始处理";
         public static string DELIVERYINFO_PACKAGE_MESSAGE = "卖家发货，[{0}]已收件打包";

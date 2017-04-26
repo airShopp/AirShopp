@@ -17,10 +17,15 @@ namespace AirShopp.Domain
         public string Account { get; set; }
         public string Password { get; set; }
         public string CustomerName { get; set; }
-        public string ZipCode { get; set; }
         public string TelephoneNo { get; set; }
+        public string QuestionA { get; set; }
+        public string AnswerA { get; set; }
+        public string QuestionB { get; set; }
+        public string AnswerB { get; set; }
         public bool Gender { get; set; }
         public int CustomerScore { get; set; }
+        public string LastSignInIpAddr { get; set; }
+        public DateTime LastSignInTime { get; set; }
         public DateTime RegisterDate { get; set; }
 
         public virtual Cart Cart { get; set; }

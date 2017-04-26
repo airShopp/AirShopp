@@ -16,9 +16,9 @@
         <div class="BHeader">
             <div class="yNavIndex">
                 <ul class="BHeaderl">
-                    @if (Session["customer"] != null)
+                    @if (Session["CUSTOMER"] != null)
                     {
-                        var user = Session["customer"] as AirShopp.Domain.Customer;
+                        var user = Session["CUSTOMER"] as AirShopp.Domain.Customer;
                         <li>@Html.ActionLink(user.CustomerName, "GetUser", "User", null)</li>
                         <li>@Html.ActionLink("退出", "Logout", "User")</li>
                     }

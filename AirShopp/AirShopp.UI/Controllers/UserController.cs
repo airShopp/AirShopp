@@ -38,8 +38,9 @@ namespace AirShopp.UI.Controllers
         [HttpPost]
         public ActionResult Login(UserViewModel user)
         {
-            HttpCookie AccountCookie = CookieHelper.GetCookie("UserName");
-            HttpCookie PwdCookie = CookieHelper.GetCookie("Password");
+            HttpCookie AccountCookie = WebClientHelper.GetCookie(Constants.USER_NAME);
+            
+            HttpCookie PwdCookie = WebClientHelper.GetCookie(Constants.PASSWORD);
             if (AccountCookie != null && PwdCookie != null && user.Password.Equals(PwdCookie.Value))
             {
                 user.UserName = AccountCookie.Value;
@@ -56,18 +57,18 @@ namespace AirShopp.UI.Controllers
 
                 if (user.RememberPwd)
                 {
-                    CookieHelper.SetCookie("UserName", "UserName", customer.Account, DateTime.Now.AddDays(1));
-                    CookieHelper.SetCookie("Password", "Password", MathHelper.SHA1(customer.Password), DateTime.Now.AddDays(1));
+                    WebClientHelper.SetCookie(Constants.USER_NAME, Constants.USER_NAME, customer.Account, DateTime.Now.AddDays(1));
+                    WebClientHelper.SetCookie(Constants.PASSWORD, Constants.PASSWORD, MathHelper.SHA1(customer.Password), DateTime.Now.AddDays(1));
                 }
                 else
                 {
-                    CookieHelper.RemoveCookie("UserName", null);
-                    CookieHelper.RemoveCookie("Password", null);
+                    WebClientHelper.RemoveCookie(Constants.USER_NAME, null);
+                    WebClientHelper.RemoveCookie(Constants.PASSWORD, null);
                 }
 
                 // Clear password for security
                 customer.Password = null;
-                Session.Add("customer", customer);
+                Session.Add(Constants.SESSION_USER, customer);
 
                 return RedirectToAction("Index", "Home",customer);
             }
@@ -87,15 +88,36 @@ namespace AirShopp.UI.Controllers
         [HttpPost]
         public ActionResult Register(UserViewModel user)
         {
-            Customer customer = new Customer();
-            customer.Account = user.UserName;
-            customer.Password = user.Password;
-            _customerRepository.AddCustomer(customer);
-            // Return null not empty string
-            Customer customer1 = _customerRepository.GetCustomer(user.UserName, user.Password);
+            bool isExist = _customerRepository.GetCustomer(user.UserName);
+            bool isEquals = user.Password.Equals(user.ConfirmPassword);
+            if (!isExist && isEquals)
+            {
+                user.Password = MathHelper.SHA1(user.Password);
+                ViewBag.User = user;
+                return View("UpdateUserInfo");
+            }
+            else
+            {
+                if (isExist)
+                {
+                    ViewBag.AccountMsg = MessageConstants.USER_NAME_EXIST;
+                }
+                if (!isEquals)
+                {
+                    ViewBag.PwdMsg = MessageConstants.PASSWORD_NOT_EQUALS;
+                }
+                return View();
+            }
+            
+        }
+
+        [HttpGet]
+        public ActionResult UpdateUserInfo()
+        {
             return View();
         }
 
+        [HttpGet]
         public ActionResult CheckAccount(string account)
         {
             return Content(_customerRepository.GetCustomer(account).ToString());

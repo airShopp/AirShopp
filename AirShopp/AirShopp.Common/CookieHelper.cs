@@ -7,7 +7,7 @@ using System.Web;
 
 namespace AirShopp.Common
 {
-    public class CookieHelper
+    public class WebClientHelper
     {
         /// <summary>
         /// Set Cookie
@@ -76,7 +76,20 @@ namespace AirShopp.Common
                      * */
                 }
             }
+        }
 
+        /// <summary>
+        /// Get Client IP Addr
+        /// </summary>
+        /// <returns></returns>
+        public static string GetIP()
+        {
+            string ip = string.Empty;
+            if (!string.IsNullOrEmpty(System.Web.HttpContext.Current.Request.ServerVariables["HTTP_VIA"]))
+                ip = Convert.ToString(System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"]);
+            if (string.IsNullOrEmpty(ip))
+                ip = Convert.ToString(System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"]);
+            return ip;
         }
     }
 }

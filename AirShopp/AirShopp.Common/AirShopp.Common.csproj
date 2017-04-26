@@ -57,7 +57,6 @@
     <Compile Include="JsonHelper.cs" />
     <Compile Include="MathHelper.cs" />
     <Compile Include="MessageConstants.cs" />
-    <Compile Include="OrderStatusEnumType.cs" />
     <Compile Include="Page\IPageList.cs" />
     <Compile Include="Page\PageList.cs" />
     <Compile Include="Page\Pagination.cs" />

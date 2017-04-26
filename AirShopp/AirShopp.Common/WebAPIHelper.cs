@@ -16,7 +16,7 @@ namespace AirShopp.Common
                 if (request != null)
                 {
                     string retval = null;
-                    init_Request(ref request);
+                    Init_Request(ref request);
                     using (var Response = request.GetResponse())
                     {
                         using (var reader = new System.IO.StreamReader(Response.GetResponseStream(), System.Text.Encoding.UTF8))
@@ -41,7 +41,7 @@ namespace AirShopp.Common
                 if (request != null)
                 {
                     string retval = null;
-                    init_Request(ref request);
+                    Init_Request(ref request);
                     request.Method = "POST";
                     request.ServicePoint.Expect100Continue = false;
                     request.ContentType = "application/x-www-form-urlencoded; charset=utf-8";
@@ -68,7 +68,7 @@ namespace AirShopp.Common
             return null;
         }
 
-        private static void init_Request(ref System.Net.HttpWebRequest request)
+        private static void Init_Request(ref System.Net.HttpWebRequest request)
         {
             request.Accept = "text/json,*/*;q=0.5";
             request.Headers.Add("Accept-Charset", "utf-8;q=0.7,*;q=0.7");
