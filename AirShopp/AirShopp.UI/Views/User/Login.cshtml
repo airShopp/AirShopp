@@ -31,7 +31,7 @@
                         <a href="javascript:;">账号登录</a>
                     </div>
                     <div class="login-box" style="visibility: visible; display:block">
-                        <div class="msg-wrap">@ViewBag.ErrorMessage</div>
+                        <div class="msg-wrap">@TempData["ErrMsg"]</div>
                         <div class="mc">
                             <div class="form">
                                 @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @id = "form" }))

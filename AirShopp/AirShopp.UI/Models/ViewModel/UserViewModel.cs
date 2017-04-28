@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirShopp.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,5 +19,22 @@ namespace AirShopp.UI.Models.ViewModel
         public string AnswerA { get; set; }
         public string QuestionB { get; set; }
         public string AnswerB { get; set; }
+
+        public Customer toCustomer()
+        {
+            return new Customer()
+            {
+                Account = this.UserName,
+                Password = this.Password,
+                CustomerName = this.CustomerName,
+                TelephoneNo = this.TelephoneNo,
+                QuestionA = this.QuestionA,
+                QuestionB = this.QuestionB,
+                AnswerA = this.AnswerA,
+                AnswerB = this.AnswerB,
+                Gender = this.Gender,
+                LastSignInTime = DateTime.Now,
+            };
+        }
     }
 }

@@ -53,7 +53,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="BaseException.cs" />
-    <Compile Include="CookieHelper.cs" />
+    <Compile Include="WebClientHelper.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="MathHelper.cs" />
     <Compile Include="MessageConstants.cs" />

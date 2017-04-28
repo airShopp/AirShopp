@@ -16,9 +16,9 @@ namespace AirShopp.Common
             return Math.Sqrt(x * x + y * y);
         }
 
-        public static string SHA1(string source)
+        public static string MD5(string source)
         {
-            return FormsAuthentication.HashPasswordForStoringInConfigFile(source, "SHA1");
+            return FormsAuthentication.HashPasswordForStoringInConfigFile(source, "MD5");
         }
     }
 }

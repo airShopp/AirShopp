@@ -10,7 +10,6 @@ namespace AirShopp.UI.Controllers
 {
     public class UserController : Controller
     {
-        private AirShoppContext db = new AirShoppContext();
         private IAdminService _adminService;
         private ICustomerRepository _customerRepository;
 
@@ -39,7 +38,7 @@ namespace AirShopp.UI.Controllers
         public ActionResult Login(UserViewModel user)
         {
             HttpCookie AccountCookie = WebClientHelper.GetCookie(Constants.USER_NAME);
-            
+
             HttpCookie PwdCookie = WebClientHelper.GetCookie(Constants.PASSWORD);
             if (AccountCookie != null && PwdCookie != null && user.Password.Equals(PwdCookie.Value))
             {
@@ -48,7 +47,7 @@ namespace AirShopp.UI.Controllers
             }
             else
             {
-                user.Password = MathHelper.SHA1(user.Password);
+                user.Password = MathHelper.MD5(user.Password);
             }
 
             try
@@ -58,7 +57,7 @@ namespace AirShopp.UI.Controllers
                 if (user.RememberPwd)
                 {
                     WebClientHelper.SetCookie(Constants.USER_NAME, Constants.USER_NAME, customer.Account, DateTime.Now.AddDays(1));
-                    WebClientHelper.SetCookie(Constants.PASSWORD, Constants.PASSWORD, MathHelper.SHA1(customer.Password), DateTime.Now.AddDays(1));
+                    WebClientHelper.SetCookie(Constants.PASSWORD, Constants.PASSWORD, MathHelper.MD5(customer.Password), DateTime.Now.AddDays(1));
                 }
                 else
                 {
@@ -70,11 +69,11 @@ namespace AirShopp.UI.Controllers
                 customer.Password = null;
                 Session.Add(Constants.SESSION_USER, customer);
 
-                return RedirectToAction("Index", "Home",customer);
+                return RedirectToAction("Index", "Home", customer);
             }
             catch (Exception ex)
             {
-                ViewBag.ErrorMessage = ex.Message;
+                TempData["ErrMsg"] = ex.Message;
                 return View();
             }
         }
@@ -88,12 +87,13 @@ namespace AirShopp.UI.Controllers
         [HttpPost]
         public ActionResult Register(UserViewModel user)
         {
+            Console.WriteLine(this.GetHashCode());
             bool isExist = _customerRepository.GetCustomer(user.UserName);
             bool isEquals = user.Password.Equals(user.ConfirmPassword);
             if (!isExist && isEquals)
             {
-                user.Password = MathHelper.SHA1(user.Password);
-                ViewBag.User = user;
+                TempData["UserName"] = user.UserName;
+                TempData["Password"] = MathHelper.MD5(user.Password);
                 return View("UpdateUserInfo");
             }
             else
@@ -108,12 +108,15 @@ namespace AirShopp.UI.Controllers
                 }
                 return View();
             }
-            
+
         }
 
-        [HttpGet]
-        public ActionResult UpdateUserInfo()
+        [HttpPost]
+        public ActionResult UpdateUserInfo(UserViewModel user)
         {
+            Customer customer = user.toCustomer();
+            customer.LastSignInIpAddr = WebClientHelper.GetHostAddress();
+            _customerRepository.AddCustomer(customer);
             return View();
         }
 
@@ -128,15 +131,6 @@ namespace AirShopp.UI.Controllers
         {
             Session.Clear();
             return RedirectToAction("Index", "Home");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
 
     }

@@ -78,18 +78,37 @@ namespace AirShopp.Common
             }
         }
 
+
         /// <summary>
-        /// Get Client IP Addr
+        /// Get client ip address (ignore proxy)
         /// </summary>
-        /// <returns></returns>
-        public static string GetIP()
+        /// <returns>if failed, return 127.0.0.1</returns>
+        public static string GetHostAddress()
         {
-            string ip = string.Empty;
-            if (!string.IsNullOrEmpty(System.Web.HttpContext.Current.Request.ServerVariables["HTTP_VIA"]))
-                ip = Convert.ToString(System.Web.HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"]);
-            if (string.IsNullOrEmpty(ip))
-                ip = Convert.ToString(System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"]);
-            return ip;
+            string userHostAddress = HttpContext.Current.Request.UserHostAddress;
+
+            if (string.IsNullOrEmpty(userHostAddress))
+            {
+                userHostAddress = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+            }
+
+            //最后判断获取是否成功，并检查IP地址的格式（检查其格式非常重要）
+            if (!string.IsNullOrEmpty(userHostAddress) && IsIP(userHostAddress))
+            {
+                return userHostAddress;
+            }
+            return "127.0.0.1";
         }
+
+        /// <summary>
+        /// Check ip address format.
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <returns></returns>
+        private static bool IsIP(string ip)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(ip, @"^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$");
+        }
+
     }
 }

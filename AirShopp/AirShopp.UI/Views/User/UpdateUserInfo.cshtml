@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>完善个人信息</title>
-    <link rel="shortcut icon" type="image/x-icon" href="theme/icon/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/icon/Air.ico">
     @Scripts.Render("~/bundles/AirShopp/Login/js")
     @Styles.Render("~/bundles/AirShopp/Login/Css")
 </head>
@@ -25,13 +25,13 @@
             </div>
             <div class="login-back">
                 <div class="H-over">
-                    @using (Html.BeginForm("Register", "User", FormMethod.Post, new { @id = "form" }))
+                    @using (Html.BeginForm("UpdateUserInfo", "User", FormMethod.Post, new { @id = "form" }))
                     {
                         <div class="login-input">
                             <label><i class="heart">*</i>性别：</label>
-                            <input type="checkbox" class="gendercheckbox" checked ="checked" value="1"/>
+                            <input type="checkbox" class="gendercheckbox" name="Gender" checked="checked" value="1" />
                             <span style="font-size:14px;">男</span>
-                            <input type="checkbox" class="gendercheckbox" value="0" style="margin-left:20px;"/>
+                            <input type="checkbox" class="gendercheckbox" name="Gender" value="0" style="margin-left:20px;" />
                             <span style="font-size:14px;">女</span>
                         </div>
                         <div class="login-input">
@@ -64,12 +64,18 @@
                             @Html.TextBoxFor(m => m.AnswerB, new { @class = "list-input", tabindex = "6", autocomplete = "off", placeholder = "请输入密保答案" })
                             <p class="regmsg secondansmsg"></p>
                         </div>
-                        @Html.HiddenFor(m => m.UserName, new { @value = @ViewBag.User.UserName })
-                        @Html.HiddenFor(m => m.Password, new { @value = @ViewBag.User.Password })
+                        <input type="hidden" name="UserName" value="@TempData["UserName"]" />
+                        <input type="hidden" name="Password" value="@TempData["Password"]" />
                         <div class="login-button">
-                            <a href="javascript:void(0)" onclick="Check()">立即注册</a>
+                            <a href="javascript:void(0)" onclick="Submit1()">立即注册</a>
                         </div>
                     }
+                    <script>
+
+                        function Submit1() {
+                            document.getElementById("form").submit();
+                        }
+                    </script>
                 </div>
             </div>
         </div>

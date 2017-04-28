@@ -17,7 +17,7 @@ namespace AirShopp.DataAccess
             {
                 throw new BaseException(MessageConstants.USER_NAME_ERROR);
             }
-            if (!MathHelper.SHA1(customer.Password).Equals(password))
+            if (!customer.Password.Equals(password))
             {
                 throw new BaseException(MessageConstants.PASSWORD_ERROR);
             }
