@@ -16,19 +16,7 @@ namespace AirShopp.DataAccess
 
         public List<Address> GetAddress(long customerId)
         {
-            List<Address> addressList = new List<Address>();
-            _context.Address.Where(x => x.CustomerId == customerId).ToList().ForEach(address => {
-                addressList.Add(new Address() {
-                    Id = address.Id,
-                    ReceiverName = address.ReceiverName,
-                    ReceiverPhone = address.ReceiverPhone,
-                    DeliveryAddress = address.DeliveryAddress,
-                    IsDefault = address.IsDefault,
-                    //Customer = address.Customer,
-                });
-            });
-
-            return addressList;
+            return _context.Address.Where(x => x.CustomerId == customerId).ToList();
         }
 
         public void UpdateAddress(Address address)

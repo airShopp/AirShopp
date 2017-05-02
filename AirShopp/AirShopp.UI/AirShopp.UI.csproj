@@ -172,6 +172,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\FliterController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\BMapRoutePlanningController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
@@ -187,6 +188,7 @@
     </Compile>
     <Compile Include="Models\BMapDataModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\CheckLoginAttribute.cs" />
     <Compile Include="Models\Common\PageListBaseModel.cs" />
     <Compile Include="Models\CustomerCommentDataModel.cs" />
     <Compile Include="Models\Enum\OrderStatusEnumType.cs" />
@@ -452,6 +454,7 @@
     <Content Include="Views\Order\CheckOrder.cshtml" />
     <Content Include="Views\Order\SubmitOrder.cshtml" />
     <Content Include="Views\Shared\_orderFlowLayout.cshtml" />
+    <Content Include="Views\Shared\_basicTemplateLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_homePageLayout.cshtml" />
