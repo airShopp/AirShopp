@@ -11,7 +11,7 @@ using AirShopp.UI.Models;
 
 namespace AirShopp.UI.Controllers
 {
-    public class BMapRoutePlanningController : Controller
+    public class BMapRoutePlanningController : FliterController
     {
         private IAddressService _addressService;
         private IDeliveryStationService _deliveryStationService;
