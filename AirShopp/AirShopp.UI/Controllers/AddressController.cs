@@ -1,4 +1,5 @@
-﻿using AirShopp.Domain;
+﻿using AirShopp.Common;
+using AirShopp.Domain;
 using AirShopp.UI.Models.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace AirShopp.UI.Controllers
 {
-    public class AddressController : Controller
+    public class AddressController : FliterController
     {
         private IAddressService _addressService;
 
@@ -29,9 +30,10 @@ namespace AirShopp.UI.Controllers
             return View();
         }
 
-        public ActionResult GetAddress(long customerId)
+        public ActionResult GetAddress()
         {
-            List<Address> addressList = _addressService.GetAddress(customerId);
+            Customer customer = Session[Constants.SESSION_USER] as Customer;
+            List<Address> addressList = _addressService.GetAddress(customer.Id);
             AddressListViewModel addressListViewModel = new AddressListViewModel();
             addressListViewModel.ProvinceList = null;
             addressListViewModel.CityList = null;

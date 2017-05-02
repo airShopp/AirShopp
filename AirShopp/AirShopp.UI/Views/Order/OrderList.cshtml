@@ -13,15 +13,7 @@
     <div class="member-whole clearfix">
         <ul id="H-table" class="H-table">
             <li class="cur">
-                @if (Session["customer"] != null)
-                {
-                    var user = Session["customer"] as AirShopp.Domain.Customer;
-                    @Html.ActionLink("订单查询", "Index", "Order", new { customerId = user.Id }, new { style = "color:#ea4949" })
-                }
-                else
-                {
-                    @Html.ActionLink("订单查询", "Login", "User", null, new { style = "color:#ea4949" })
-                }
+               @Html.ActionLink("订单查询", "Index", "Order");
             </li>
             <li><a href="#">待付款<em>(44)</em></a></li>
             <li><a href="#">待发货</a></li>
@@ -49,7 +41,7 @@
                                 <span>@Model.AllOrder[i].OrderDate</span>
                                 <span>订单号：<em>@Model.AllOrder[i].Id</em></span>
                             </div>
-                            <div class="member-circle clearfix">
+                            <div class="member-circle clearfix" id="allOrderList">
                                 <div class="ci1">
                                     @for (int j = 0; j < @Model.AllOrder[i].OrderItems.Count(); j++)
                                     {
@@ -57,15 +49,15 @@
                                         AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
                                         <div class="ci7 clearfix">
                                             <span class="gr1"><a href="#"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
-                                            <span class="gr2"><a href="#">@orderItem.Product.ProductName</a></span>
+                                            <span class="gr2" style="width:260px"><a href="#">@orderItem.Product.ProductName</a></span>
                                             <span class="gr3">X @orderItem.Quantity</span>
                                         </div>
                                     }
                                 </div>
-                                <div class="ci2">@Model.AllOrder[i].Customer.CustomerName</div>
-                                <div class="ci3"><b>￥@Model.AllOrder[i].TotalAmount.ToString()</b><p>货到付款</p><p class="iphone">手机订单</p></div>
-                                <div class="ci4"><p>@Model.AllOrder[i].OrderDate.ToShortDateString()</p></div>
-                                <div class="ci5">
+                                <div class="ci2 amanda1">@Model.AllOrder[i].Customer.CustomerName</div>
+                                <div class="ci3 amanda1"><b>￥@Model.AllOrder[i].TotalAmount.ToString()</b><p>货到付款</p><p class="iphone">手机订单</p></div>
+                                <div class="ci4 amanda1"><p>@Model.AllOrder[i].OrderDate.ToShortDateString()</p></div>
+                                <div class="ci5 amanda1">
                                     <p>等待付款</p>
                                     <div style="position:relative;">
                                         <a id ="linkToDelivery">物流跟踪</a>
@@ -85,10 +77,10 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <p>@Html.ActionLink("订单详情", "OrderDetail", "Order", null, new { style = "color:#ea4949" })</p>
-                                </div>
-
-                                <div class="ci5 ci8"><p>剩余15时20分</p> <p><a href="#" class="member-touch">立即支付</a> </p> <p><a href="#">取消订单</a> </p></div>
+                                    <a href="/Order/OrderDetail?orderId=@Model.AllOrder[i].Id">订单详情</a>
+                                       @* <p>@Html.ActionLink("订单详情", "OrderDetail", "OrderDetail", null, new { style = "color:#ea4949" })</p>*@
+                                  </div>
+                                <div class="ci5 ci8 amanda1"><p>剩余15时20分</p> <p><a href="#" class="member-touch">立即支付</a> </p> <p><a href="#">取消订单</a> </p></div>
                             </div>
                         </li>
                     }
@@ -112,8 +104,6 @@
                             <div class="member-minute clearfix">
                                 <span>@Model.PendingPaymentOrder[i].OrderDate</span>
                                 <span>订单号：<em>@Model.PendingPaymentOrder[i].Id</em></span>
-                                <span><a href="#">以纯甲醇旗舰店</a></span>
-                                <span class="member-custom">客服电话：<em>010-6544-0986</em></span>
                             </div>
                             <div class="member-circle clearfix">
                                 <div class="ci1">
@@ -123,16 +113,16 @@
                                         AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
                                         <div class="ci7 clearfix">
                                             <span class="gr1"><a href="#"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
-                                            <span class="gr2"><a href="#">@orderItem.Product.ProductName</a></span>
+                                            <span class="gr2" style="width:260px"><a href="#">@orderItem.Product.ProductName</a></span>
                                             <span class="gr3">X @orderItem.Quantity</span>
                                         </div>
                                     }
                                 </div>
-                                <div class="ci2">@Model.PendingPaymentOrder[i].Customer.CustomerName</div>
-                                <div class="ci3"><b>￥@Model.PendingPaymentOrder[i].TotalAmount.ToString()</b><p>货到付款</p><p class="iphone">手机订单</p></div>
-                                <div class="ci4"><p>@Model.PendingPaymentOrder[i].OrderDate.ToShortDateString()</p></div>
-                                <div class="ci5"><p>已申请退货</p> <p><a href="#">退货日志</a></p></div>
-                                <div class="ci6"><p><a href="#">取消退货</a> </p></div>
+                                <div class="ci2 amanda1">@Model.PendingPaymentOrder[i].Customer.CustomerName</div>
+                                <div class="ci3 amanda1"><b>￥@Model.PendingPaymentOrder[i].TotalAmount.ToString()</b><p>货到付款</p><p class="iphone">手机订单</p></div>
+                                <div class="ci4 amanda1"><p>@Model.PendingPaymentOrder[i].OrderDate.ToShortDateString()</p></div>
+                                <div class="ci5 amanda1"><p>已申请退货</p> <p><a href="#">退货日志</a></p></div>
+                                <div class="ci6 amanda1"><p><a href="#">取消退货</a> </p></div>
                             </div>
                         </li>
                     }
@@ -156,8 +146,6 @@
                             <div class="member-minute clearfix">
                                 <span>@Model.PendingDeliveryOrder[i].OrderDate</span>
                                 <span>订单号：<em>@Model.PendingDeliveryOrder[i].Id</em></span>
-                                <span><a href="#">以纯甲醇旗舰店</a></span>
-                                <span class="member-custom">客服电话：<em>010-6544-0986</em></span>
                             </div>
                             <div class="member-circle clearfix">
                                 <div class="ci1">
@@ -167,7 +155,7 @@
                                         AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
                                         <div class="ci7 clearfix">
                                             <span class="gr1"><a href="#"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
-                                            <span class="gr2"><a href="#">@orderItem.Product.ProductName</a></span>
+                                            <span class="gr2" style="width:260px"><a href="#">@orderItem.Product.ProductName</a></span>
                                             <span class="gr3">X @orderItem.Quantity</span>
                                         </div>
                                     }
@@ -200,10 +188,8 @@
                             <div class="member-minute clearfix">
                                 <span>@Model.PendingReceivedOrder[i].OrderDate</span>
                                 <span>订单号：<em>@Model.PendingReceivedOrder[i].Id</em></span>
-                                <span><a href="#">以纯甲醇旗舰店</a></span>
-                                <span class="member-custom">客服电话：<em>010-6544-0986</em></span>
                             </div>
-                            <div class="member-circle clearfix">
+                            <div  class="member-circle clearfix">
                                 <div class="ci1">
                                     @for (int j = 0; j < @Model.PendingReceivedOrder[i].OrderItems.Count(); j++)
                                     {
@@ -211,7 +197,7 @@
                                         AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
                                         <div class="ci7 clearfix">
                                             <span class="gr1"><a href="#"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
-                                            <span class="gr2"><a href="#">@orderItem.Product.ProductName</a></span>
+                                            <span class="gr2" style="width:260px"><a href="#">@orderItem.Product.ProductName</a></span>
                                             <span class="gr3">X @orderItem.Quantity</span>
                                         </div>
                                     }
@@ -244,8 +230,6 @@
                             <div class="member-minute clearfix">
                                 <span>@Model.FinishedOrder[i].OrderDate</span>
                                 <span>订单号：<em>@Model.FinishedOrder[i].Id</em></span>
-                                <span><a href="#">以纯甲醇旗舰店</a></span>
-                                <span class="member-custom">客服电话：<em>010-6544-0986</em></span>
                             </div>
                             <div class="member-circle clearfix">
                                 <div class="ci1">
@@ -255,7 +239,7 @@
                                         AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
                                         <div class="ci7 clearfix">
                                             <span class="gr1"><a href="#"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
-                                            <span class="gr2"><a href="#">@orderItem.Product.ProductName</a></span>
+                                            <span class="gr2" style="width:260px"><a href="#">@orderItem.Product.ProductName</a></span>
                                             <span class="gr3">X @orderItem.Quantity</span>
                                         </div>
                                     }
@@ -297,4 +281,6 @@
     }).mouseout(function () {
         $("#deliveryDiv").hide();
     });
+    $(".amanda1").height($("#allOrderList").height());
+    $(".amanda1").css("paddingTop", "0");
 </script>

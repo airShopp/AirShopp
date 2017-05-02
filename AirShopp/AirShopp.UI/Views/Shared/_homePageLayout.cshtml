@@ -43,17 +43,9 @@
                     <li id="pc-nav" class="menu">
                         <a href="my-user.html" class="tit">我的商城</a>
                         <div class="subnav">
-                            @if (Session["CUSTOMER"] != null)
-                            {
-                                var user = Session["CUSTOMER"] as AirShopp.Domain.Customer;
-                                @Html.ActionLink("我的订单", "Index", "Order", new { customerId = user.Id }, new { style = "color:#ea4949" })
-                            }
-                            else
-                            {
-                                @Html.ActionLink("我的订单", "Login", "User", null, new { style = "color:#ea4949" })
-                            }
+                            @Html.ActionLink("订单查询", "Index", "Order", null)
                             <a href="my-user.html">账户安全</a>
-                            <a href="my-add.html">地址管理</a>
+                            @Html.ActionLink("地址管理", "GetAddress", "Address", null)
                             <a href="my-p.html">我要评价</a>
                         </div>
                     </li>

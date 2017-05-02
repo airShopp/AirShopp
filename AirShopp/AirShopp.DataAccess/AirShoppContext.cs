@@ -23,6 +23,7 @@ namespace AirShopp.DataAccess
         public DbSet<Provider> Provider { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Cart> Cart { get; set; }
+        public DbSet<CartItem> CartItem { get; set; }
 
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderItem> OrderItem { get; set; }
@@ -59,6 +60,7 @@ namespace AirShopp.DataAccess
             modelBuilder.Configurations.Add(new ProviderMapping());
             modelBuilder.Configurations.Add(new ProductMapping());
             modelBuilder.Configurations.Add(new CartMapping());
+            modelBuilder.Configurations.Add(new CartItemMapping());
             modelBuilder.Configurations.Add(new OrderMapping());
             modelBuilder.Configurations.Add(new OrderItemMapping());
             modelBuilder.Configurations.Add(new ReturnMapping());

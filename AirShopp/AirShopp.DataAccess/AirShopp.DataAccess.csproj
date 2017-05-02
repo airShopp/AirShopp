@@ -163,6 +163,10 @@
     <Compile Include="Migrations\201704260755363_RefineCustomerModel.Designer.cs">
       <DependentUpon>201704260755363_RefineCustomerModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705021047421_AddCartItemMapping.cs" />
+    <Compile Include="Migrations\201705021047421_AddCartItemMapping.Designer.cs">
+      <DependentUpon>201705021047421_AddCartItemMapping.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AddressRepository.cs" />
@@ -260,6 +264,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704260755363_RefineCustomerModel.resx">
       <DependentUpon>201704260755363_RefineCustomerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705021047421_AddCartItemMapping.resx">
+      <DependentUpon>201705021047421_AddCartItemMapping.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
