@@ -22,7 +22,7 @@
                     <td colspan="8" class="line"></td>
                 </tr>
                
-                <tr id="product1">
+                <tr id="product1" class="cartItem">
                     <td class="cart_td_1"><input name="cartCheckBox" class="select3" type="checkbox" value="product1" onclick="selectSingle()" /></td>
                     <td class="cart_td_2"><img src="~/Content/img/cart/taobao_cart_01.jpg" alt="shopping" /></td>
                     <td class="cart_td_3">
@@ -37,7 +37,7 @@
                     <td class="cart_td_8"><a href="javascript:deleteRow('product1');">删除</a></td>
                 </tr>
 
-                <tr id="product2">
+                <tr id="product2" class="cartItem">
                     <td class="cart_td_1"><input name="cartCheckBox" class="select4" type="checkbox" value="product2" onclick="selectSingle()" /></td>
                     <td class="cart_td_2"><img src="~/Content/img/cart/taobao_cart_02.jpg" alt="shopping" /></td>
                     <td class="cart_td_3">
@@ -49,9 +49,10 @@
                     <td class="cart_td_6"><img src="~/Content/img/cart/taobao_minus.jpg" alt="minus" onclick="changeNum('num_2','minus')" class="hand" /> <input id="num_2" type="text" value="1" class="num_input" readonly="readonly" /> <img src="~/Content/img/cart/taobao_adding.jpg" alt="add" onclick="changeNum('num_2','add')" class="hand" /></td>
                     <td class="cart_td_7"></td>
                     <td class="cart_td_8"><a href="javascript:deleteRow('product2');">删除</a></td>
+                    <td class="cart_td_9"><input name="cartCheckBox" class="select4" type="checkbox" value="product2" onclick="selectSingle()" /></td>
                 </tr>
 
-                <tr id="product3">
+                <tr id="product3" class="cartItem">
                     <td class="cart_td_1"><input name="cartCheckBox" class="select5" type="checkbox" value="product3" onclick="selectSingle()" /></td>
                     <td class="cart_td_2"><img src="~/Content/img/cart/taobao_cart_03.jpg" alt="shopping" /></td>
                     <td class="cart_td_3">
@@ -65,7 +66,7 @@
                     <td class="cart_td_8"><a href="javascript:deleteRow('product3');">删除</a></td>
                 </tr>
 
-                <tr id="product4">
+                <tr id="product4" class="cartItem">
                     <td class="cart_td_1"><input name="cartCheckBox" class="select6" type="checkbox" value="product4" onclick="selectSingle()" /></td>
                     <td class="cart_td_2"><img src="~/Content/img/cart/taobao_cart_04.jpg" alt="shopping" /></td>
                     <td class="cart_td_3">
@@ -83,7 +84,8 @@
                     <td colspan="5" class="shopend">
                         商品总价（不含运费）：<label id="total" class="yellow"></label> 元<br />
                         可获积分 <label class="yellow" id="integral"></label> 点<br />
-                        <input name=" " type="image" src="~/Content/img/cart/taobao_subtn.jpg" />
+                        @*@Html.ActionLink("立即购买", "CheckOrder", new { Controller = "Order"}, new { style = "color:#ea4949" })*@
+                        <input name="" type="image" src="~/Content/img/cart/taobao_subtn.jpg" onclick="CheckOrder()"/>
                     </td>
                 </tr>
             </table>
@@ -105,3 +107,22 @@
         </div>
     </div>
 </section>
+<script>
+    function CheckOrder()
+    {
+        //var str = "";
+        //var cartItemList = document.getElementsByClassName('cartItem').forEach(function () {
+        //    $(this).ch
+        //});
+        
+        //for(var cartItem in cartItemList)
+        //{
+            
+        //    if (isSelected)
+        //    {
+        //        str = str + tdArr.eq(0).find("input").val();
+        //        alert(str);
+        //    }
+        //}
+    }
+</script>

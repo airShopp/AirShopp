@@ -1,17 +1,16 @@
 ﻿@model AirShopp.UI.Models.ViewModel.UserViewModel
-@{ 
+@{
     Layout = null;
 }
 <!doctype html>
 <html>
 <head>
     <title>用户注册</title>
-    <link rel="shortcut icon" type="image/x-icon" href="theme/icon/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/icon/Air.ico">
     @Scripts.Render("~/bundles/AirShopp/Login/js")
     @Styles.Render("~/bundles/AirShopp/Login/Css")
 </head>
 <body>
-
     <!--- header begin-->
     <header id="pc-header">
         <div class="login-header">
@@ -19,7 +18,6 @@
         </div>
     </header>
     <!-- header End -->
-
     <section id="login-content">
         <div class="login-centre">
             <div class="login-switch clearfix">
@@ -32,20 +30,20 @@
                         <div class="login-input">
                             <label><i class="heart">*</i>用户名：</label>
                             @Html.TextBoxFor(m => m.UserName, new { @class = "list-input1", id = "username", tabindex = "1", autocomplete = "off", placeholder = "请输入用户名" })
-                            <span class="regmsg accountmsg"></span>
+                            <p class="regmsg accountmsg">@ViewBag.AccountMsg</p>
                         </div>
                         <div class="login-input">
                             <label><i class="heart">*</i>请设置密码：</label>
                             @Html.TextBoxFor(m => m.Password, new { @class = "list-input", id = "password", tabindex = "2", autocomplete = "off", placeholder = "请输入密码" })
-                            <span class="regmsg pwdmsg"></span>
+                            <p class="regmsg pwdmsg">@ViewBag.PwdMsg</p>
                         </div>
                         <div class="login-input">
                             <label><i class="heart">*</i>请确认密码：</label>
                             @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "list-input", id = "password1", tabindex = "3", autocomplete = "off", placeholder = "请再次输入密码" })
-                            <span class="regmsg confpwdmsg"></span>
+                            <p class="regmsg confpwdmsg"></p>
                         </div>
                         <div class="item-ifo">
-                            <input type="checkbox" onClick="agreeonProtocol();" id="readme" checked="checked" class="checkbox">
+                            <input type="checkbox" onclick="agreeonProtocol();" id="readme" checked="checked" class="checkbox">
                             <label for="protocol">我已阅读并同意<a id="protocol" class="blue" href="#">《悦商城用户协议》</a></label>
                             <span class="clr"></span>
                         </div>
@@ -57,7 +55,6 @@
             </div>
         </div>
     </section>
-
     <!--- footer begin-->
     <footer id="footer">
         <div class="containers">
@@ -87,13 +84,15 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </footer>
     <!-- footer End -->
 </body>
 </html>
 <script>
+    $.ajaxSetup({
+        async: false
+    });
     function Check() {
         var flag = true;
         var pwd = $("#password").val();
@@ -102,9 +101,12 @@
             flag = false;
             $(".accountmsg").text("用户名不能为空");
         } else {
-            CheckDuplicate()
+            CheckDuplicate();
+            if ($(".accountmsg").text() != "") {
+                flag = false;
+            }
         }
-       
+
         if (!pwd) {
             flag = false;
             $(".pwdmsg").text("密码不能为空");
@@ -128,7 +130,7 @@
         }
     }
 
-    function CheckDuplicate(){
+    function CheckDuplicate() {
         var username = $("#username").val();
         if (!username) {
             $(".accountmsg").text("用户名不能为空");
@@ -137,7 +139,7 @@
                { account: $("#username").val() },
                function (data) {
                    // true -> can not use
-                   if (data == "true"){
+                   if (data == "True") {
                        $(".accountmsg").text("用户名已经存在");
                    } else {
                        $(".accountmsg").text("");

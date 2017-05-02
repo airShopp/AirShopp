@@ -172,6 +172,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\FliterController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\BMapRoutePlanningController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
@@ -187,9 +188,12 @@
     </Compile>
     <Compile Include="Models\BMapDataModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\CheckLoginAttribute.cs" />
     <Compile Include="Models\Common\PageListBaseModel.cs" />
     <Compile Include="Models\CustomerCommentDataModel.cs" />
+    <Compile Include="Models\Enum\OrderStatusEnumType.cs" />
     <Compile Include="Models\ProductDataModel.cs" />
+    <Compile Include="Models\ViewModel\AddressListViewModel.cs" />
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
     <Compile Include="Models\ProductListDataModel.cs" />
     <Compile Include="Models\ViewModel\Admin\Class1.cs" />
@@ -199,6 +203,7 @@
     <Compile Include="Models\ViewModel\ProductListViewModel.cs" />
     <Compile Include="Models\ViewModel\ProductViewModel.cs" />
     <Compile Include="Models\ViewModel\ShopCartViewModel.cs" />
+    <Compile Include="Models\ViewModel\OrderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -432,20 +437,34 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\_airShoppLayout.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
-    <Content Include="Views\BMapRoutePlanning\Index.cshtml" />
     <Content Include="Views\Address\ViewAddress.cshtml" />
+    <Content Include="Views\BMapRoutePlanning\Index.cshtml" />
     <Content Include="Views\Order\OrderList.cshtml" />
     <Content Include="Views\Shared\_orderPageLayout.cshtml" />
     <Content Include="Views\Order\OrderDetail.cshtml" />
     <Content Include="Views\Inventory\Index.cshtml" />
+    <Content Include="Views\Address\AddressList.cshtml" />
+    <Content Include="Views\Product\ProductList.cshtml" />
+    <Content Include="Views\Comment\AddComment.cshtml" />
     <Content Include="Views\Product\ShopCart.cshtml" />
+    <Content Include="Views\Order\ReturnRequest.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\Order\ReturnList.cshtml" />
+    <Content Include="Views\Order\ReturnHistory.cshtml" />
+    <Content Include="Views\Order\CheckOrder.cshtml" />
+    <Content Include="Views\Order\SubmitOrder.cshtml" />
+    <Content Include="Views\Shared\_orderFlowLayout.cshtml" />
+    <Content Include="Views\Shared\_basicTemplateLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Views\Shared\_homePageLayout.cshtml" />
     <Content Include="Views\Shared\_shopCartLayout.cshtml" />
     <Content Include="Views\Home\HotProduct.cshtml" />
     <Content Include="Views\BMapRoutePlanning\Index.cshtml" />
-	<Content Include="Views\Product\ProductList.cshtml" />
+    <Content Include="Views\Product\ProductList.cshtml" />
     <Content Include="Views\Product\ChildList.cshtml" />
+    <Content Include="Views\User\UserInfo.cshtml" />
+    <Content Include="Views\User\UpdateUserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -473,7 +492,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\QRImages\" />
     <Folder Include="Views\Cart\" />
-    <Folder Include="Views\Comment\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

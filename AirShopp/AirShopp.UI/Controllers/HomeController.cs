@@ -1,4 +1,5 @@
-﻿using AirShopp.Common.Page;
+﻿using AirShopp.Common;
+using AirShopp.Common.Page;
 using AirShopp.Domain;
 using AirShopp.UI.Models;
 using AirShopp.UI.Models.ViewModel;
@@ -32,7 +33,7 @@ namespace AirShopp.UI.Controllers
             _readFromDb = readFromDb;
         }
         //
-        public ActionResult Index(Customer customer)
+        public ActionResult Index()
          {
             var secondCategories = (from category in _categoryService.Categories()
                                     where category.ParentId > 0
@@ -57,6 +58,7 @@ namespace AirShopp.UI.Controllers
                                   PictureUrl = P.Url
                               }).OrderBy(hp => hp.Sales).Take(20).OrderBy(x => Guid.NewGuid()).Take(6).ToList();
 
+            var customer = Session[Constants.SESSION_USER] as Customer;
             HomeViewModel homeViewModel = new HomeViewModel()
             {
                 //TODO Cart_Kenneth

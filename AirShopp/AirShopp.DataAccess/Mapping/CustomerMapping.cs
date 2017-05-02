@@ -11,9 +11,14 @@ namespace AirShopp.DataAccess.Mapping
             HasKey(e => e.Id).Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(e => e.Account).HasMaxLength(32).IsRequired();
             Property(e => e.Password).HasMaxLength(32).IsRequired();
-            Property(e => e.CustomerName).HasMaxLength(32).IsOptional();
-            Property(e => e.ZipCode).HasMaxLength(6).IsOptional();
-            Property(e => e.TelephoneNo).HasMaxLength(11).IsOptional();
+            Property(e => e.CustomerName).HasMaxLength(32).IsRequired();
+            Property(e => e.TelephoneNo).HasMaxLength(11).IsRequired();
+
+            Property(e => e.QuestionA).HasMaxLength(64).IsRequired();
+            Property(e => e.QuestionB).HasMaxLength(64).IsRequired();
+            Property(e => e.AnswerA).HasMaxLength(64).IsRequired();
+            Property(e => e.AnswerB).HasMaxLength(64).IsRequired();
+            Property(e => e.LastSignInIpAddr).HasMaxLength(64).IsRequired();
         }
     }
 }

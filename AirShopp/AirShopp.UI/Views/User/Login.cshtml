@@ -1,8 +1,8 @@
-﻿@model AirShopp.Domain.Admin
+﻿@model AirShopp.UI.Models.ViewModel.UserViewModel
 @{
     Layout = null;
 }
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
     <title>立即登录</title>
@@ -31,8 +31,7 @@
                         <a href="javascript:;">账号登录</a>
                     </div>
                     <div class="login-box" style="visibility: visible; display:block">
-                        <div class="mt tab-h"></div>
-                        <div class="msg-wrap"></div>
+                        <div class="msg-wrap">@TempData["ErrMsg"]</div>
                         <div class="mc">
                             <div class="form">
                                 @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @id = "form" }))
@@ -40,20 +39,15 @@
                                     <div class="item item-fore1 item-error">
                                         @Html.ValidationSummary(true)
                                         <label for="loginname" class="login-label name-label"></label>
-                                        @Html.TextBoxFor(m => m.Account, new { @class = "itxt", id = "loginname", tabindex = "1", autocomplete = "off", placeholder = "请输入用户名" })
+                                        @Html.TextBoxFor(m => m.UserName, new { @class = "itxt", id = "loginname", tabindex = "1", autocomplete = "off", placeholder = "请输入用户名" })
                                         <span class="clear-btn" style="display:inline;"></span>
-                                        @Html.ValidationMessageFor(m => m.Account)
+                                        @Html.ValidationMessageFor(m => m.UserName)
                                     </div>
                                      <!-- 密码输入框fore2 -->
                                     <div id="entry" class="item item-fore2" style="visibility: visible">
                                         <label class="login-label pwd-label" for="nloginpwd"></label>
                                         @Html.PasswordFor(m => m.Password, new { @class = "itxt itxt-error", id = "nloginpwd", placeholder = "请输入密码", tabindex = "2", autocomplete = "off" })
                                         @Html.ValidationMessageFor(m => m.Password)
-                                        <span class="clear-btn" style="display: inline;"></span>
-                                        <span class="capslock" style="display: none;">
-                                            <b></b>
-                                            大小写锁定已打开
-                                        </span>
                                     </div>
                                     <!-- 图片验证码开始 fore3-->
                                     <div id="o-authcode" class="item item-vcode item-fore3">
@@ -62,23 +56,23 @@
                                         <a href="javascript:void(0);" onclick='createCode();'>看不清换一张</a>
                                     </div>
                                         <!-- 自动登录开始fore4 -->
-                                        <div class="item item-fore4">
-                                            <div class="safe">
-                                                <span>
-                                                    <input type="checkbox" name="chkRememberMe" id="autologin" tabindex="3" style="vertical-align:middle;">
-                                                    <label for="autologin">自动登录</label>
-                                                </span>
-                                                <span class="forget-pw-safe">
-                                                    <a href="javascript:void(0)">忘记密码</a>
-                                                </span>
-                                            </div>
+                                    <div class="item item-fore4">
+                                        <div class="safe">
+                                            <span>
+                                                @Html.CheckBoxFor(m => m.RememberPwd, new { @id = "autologin", tabindex = "3", autocomplete = "off", style = "vertical-align:middle" })
+                                                <label for="autologin">记住密码</label>
+                                            </span>
+                                            <span class="forget-pw-safe">
+                                                <a href="javascript:void(0)">忘记密码</a>
+                                            </span>
                                         </div>
+                                    </div>
                                         <!-- 登录按钮开始 -->
-                                        <div class="item item-fore5">
-                                            <div class="login-btn">
-                                                <a href="javascript:;" class="btn-img btn-entry" id="loginsubmit" tabindex="6" onClick="validate()">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-                                            </div>
+                                    <div class="item item-fore5">
+                                        <div class="login-btn">
+                                            <a href="javascript:;" class="btn-img btn-entry" id="loginsubmit" tabindex="6" onclick="validate()">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
                                         </div>
+                                    </div>
                                 }
                             </div>
                         </div>

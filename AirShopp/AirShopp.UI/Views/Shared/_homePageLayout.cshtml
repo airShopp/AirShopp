@@ -16,38 +16,37 @@
         <div class="BHeader">
             <div class="yNavIndex">
                 <ul class="BHeaderl">
-                    <li style="display:none;"><a href="#" style="float:left;">嘻哈杂货铺</a> <a href="#" style="float:left;">退出</a> </li>
-                    @if (Session["customer"] != null)
+                    @if (Session["CUSTOMER"] != null)
                     {
-                        var user = Session["customer"] as AirShopp.Domain.Customer;
-                        <li>@Html.ActionLink(user.Account, "GetUser", "User", null, new { style = "color:#ea4949" })</li>
+                        var user = Session["CUSTOMER"] as AirShopp.Domain.Customer;
+                        <li>@Html.ActionLink(user.CustomerName, "UserInfo", "User")</li>
+                        <li>@Html.ActionLink("退出", "Logout", "User")</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("请登录", "Login", "User", null, new { style = "color:#ea4949" })</li>
+                        <li>@Html.ActionLink("您好，请登录", "Login", "User", null, new { style = "color:#ea4949" })</li>
+                        <li class="headerul">|</li>
+                        <li>@Html.ActionLink("免费注册", "Register", "User")</li>
                     }
                     <li class="headerul">|</li>
-                    <li>@Html.ActionLink("免费注册", "Register", "User")</li>
-                    <li class="headerul">|</li>
-                    <li>@Html.ActionLink("订单查询", "Index", "Order", null)</li>
-                    <li class="headerul">|</li>
-                    <li><a href="my-s.html">我的收藏</a> </li>
+                    <li>
+                        @if (Session["CUSTOMER"] != null)
+                        {
+                            var user = Session["CUSTOMER"] as AirShopp.Domain.Customer;
+                            @Html.ActionLink("订单查询", "Index", "Order", new { customerId = user.Id}, new { style = "color:#ea4949" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("订单查询", "Login", "User", null, new { style = "color:#ea4949" })
+                        }
                     <li class="headerul">|</li>
                     <li id="pc-nav" class="menu">
                         <a href="my-user.html" class="tit">我的商城</a>
                         <div class="subnav">
-                            @Html.ActionLink("我的订单", "Index", "Order", null)
-                            <a href="my-s.html">我的收藏</a>
+                            @Html.ActionLink("订单查询", "Index", "Order", null)
                             <a href="my-user.html">账户安全</a>
-                            <a href="my-add.html">地址管理</a>
+                            @Html.ActionLink("地址管理", "GetAddress", "Address", null)
                             <a href="my-p.html">我要评价</a>
-                        </div>
-                    </li>
-                    <li class="headerul">|</li>
-                    <li id="pc-nav1" class="menu">
-                        <a href="#" class="tit M-iphone">手机悦商城</a>
-                        <div class="subnav">
-                            <a href="#"><img src="~/Content/icon/ewm.png" width="115" height="115" title="扫一扫，有惊喜！"></a>
                         </div>
                     </li>
                 </ul>
@@ -58,10 +57,15 @@
             <div class="head-form fl">
                 <form class="clearfix">
                     <input type="text" class="search-text" accesskey="" id="key" autocomplete="off" placeholder="洗衣机">
-                    <button class="button" onClick="search('key');return false;">搜索</button>
+                    <button class="button" onclick="search('key');return false;">搜索</button>
                 </form>
             </div>
-            <div class="header-cart fr"><a href="/Product/ShopCart"><img src="~/Content/icon/car.png"></a> <i class="head-amount">@Model.CartProductAccount</i></div>
+            <div class="header-cart fr">
+                <a href="/Product/ShopCart">
+                    <img src="~/Content/icon/car.png">
+                </a>
+                <i class="head-amount">@Model.CartProductAccount</i>
+            </div>
             <div class="head-mountain"></div>
         </div>
         <div class="yHeader">
@@ -71,7 +75,7 @@
                         全部商品分类
                     </h2>
                     <ul class="pullDownList">
-                       @{var i = 1; }
+                        @{var i = 1; }
                         @foreach (var secondCategory in Model.SecondCategories)
                         {
                             var className = "listi" + i;
@@ -83,7 +87,7 @@
                             i++;
                         }
                     </ul>
-               
+
                 </div>
                 <ul class="yMenuIndex">
                     @foreach (var category in Model.Categories)

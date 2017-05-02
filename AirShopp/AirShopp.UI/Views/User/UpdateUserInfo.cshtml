@@ -1,0 +1,161 @@
+﻿@model AirShopp.UI.Models.ViewModel.UserViewModel
+@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+    <title>完善个人信息</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/icon/Air.ico">
+    @Scripts.Render("~/bundles/AirShopp/Login/js")
+    @Styles.Render("~/bundles/AirShopp/Login/Css")
+</head>
+<body>
+    <!--- header begin-->
+    <header id="pc-header">
+        <div class="login-header">
+            <a href="@Url.Action("Index", "Home")"><img src="~/Content/icon/AirShoppLogo.png"></a>
+        </div>
+    </header>
+    <!-- header End -->
+    <section id="login-content">
+        <div class="login-centre">
+            <div class="login-switch clearfix">
+                <p class="fr">我已经注册，现在就 @Html.ActionLink("登录", "Login", "User")</p>
+            </div>
+            <div class="login-back">
+                <div class="H-over">
+                    @using (Html.BeginForm("UpdateUserInfo", "User", FormMethod.Post, new { @id = "form" }))
+                    {
+                        <div class="login-input">
+                            <label><i class="heart">*</i>性别：</label>
+                            <input type="checkbox" class="gendercheckbox" name="Gender" checked="checked" value="1" />
+                            <span style="font-size:14px;">男</span>
+                            <input type="checkbox" class="gendercheckbox" name="Gender" value="0" style="margin-left:20px;" />
+                            <span style="font-size:14px;">女</span>
+                        </div>
+                        <div class="login-input">
+                            <label><i class="heart">*</i>姓名：</label>
+                            @Html.TextBoxFor(m => m.CustomerName, new { @class = "list-input", id = "name", tabindex = "1", autocomplete = "off", placeholder = "请输入姓名" })
+                            <p class="regmsg namemsg"></p>
+                        </div>
+                        <div class="login-input">
+                            <label><i class="heart">*</i>电话号码：</label>
+                            @Html.TextBoxFor(m => m.TelephoneNo, new { @class = "list-input", id="tel", tabindex = "2", autocomplete = "off", placeholder = "请输入电话号码" })
+                            <p class="regmsg phonemsg"></p>
+                        </div>
+                        <div class="login-input">
+                            <label><i class="heart">*</i>第一个密保问题：</label>
+                            @Html.TextBoxFor(m => m.QuestionA, new { @class = "list-input", id = "qu1", tabindex = "3", autocomplete = "off", placeholder = "请输入密保问题" })
+                            <p class="regmsg firstqumsg"></p>
+                        </div>
+                        <div class="login-input">
+                            <label><i class="heart">*</i>第一个密保答案：</label>
+                            @Html.TextBoxFor(m => m.AnswerA, new { @class = "list-input", id = "ans1", tabindex = "4", autocomplete = "off", placeholder = "请输入密保答案" })
+                            <p class="regmsg firstansmsg"></p>
+                        </div>
+                        <div class="login-input">
+                            <label><i class="heart">*</i>第二个密保问题：</label>
+                            @Html.TextBoxFor(m => m.QuestionB, new { @class = "list-input", id = "qu2", tabindex = "5", autocomplete = "off", placeholder = "请输入密保问题" })
+                            <p class="regmsg secondqumsg"></p>
+                        </div>
+                        <div class="login-input">
+                            <label><i class="heart">*</i>第二个密保答案：</label>
+                            @Html.TextBoxFor(m => m.AnswerB, new { @class = "list-input", id = "ans2", tabindex = "6", autocomplete = "off", placeholder = "请输入密保答案" })
+                            <p class="regmsg secondansmsg"></p>
+                        </div>
+                        <input type="hidden" name="UserName" value="@TempData["UserName"]" />
+                        <input type="hidden" name="Password" value="@TempData["Password"]" />
+                        <div class="login-button">
+                            <a href="javascript:void(0)" onclick="Submit1()">立即注册</a>
+                        </div>
+                    }
+                    <script>
+                        function Submit1() {
+                            var flag = true;
+
+                            if ($("#name").val() == "") {
+                                flag = false;
+                                $(".namemsg").text("请输入姓名");
+                            } else {
+                                $(".namemsg").text("");
+                            }
+
+                            if ($("#tel").val() == "") {
+                                flag = false;
+                                $(".phonemsg").text("请输入电话号码");
+                            } else {
+                                $(".phonemsg").text("");
+                            }
+
+                            if ($("#qu1").val() == "") {
+                                flag = false;
+                                $(".firstqumsg").text("请输入第一个密保问题");
+                            } else {
+                                $(".firstqumsg").text("");
+                            }
+
+                            if ($("#ans1").val() == "") {
+                                flag = false;
+                                $(".firstansmsg").text("请输入第一个密保答案");
+                            } else {
+                                $(".firstansmsg").text("");
+                            }
+
+                            if ($("#qu2").val() == "") {
+                                flag = false;
+                                $(".secondqumsg").text("请输入第二个密保问题");
+                            } else {
+                                $(".login-input .secondqumsg").text("");
+                            }
+
+                            if ($("#ans2").val() == "") {
+                                flag = false;
+                                $(".secondansmsg").text("请输入第二个密保答案");
+                            } else {
+                                $(".login-input .secondansmsg").text("");
+                            }
+
+                            if (flag) {
+                                $("#form").submit();
+                            }
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--- footer begin-->
+    <footer id="footer">
+        <div class="containers">
+            <div class="w" style="padding-top:30px">
+                <div id="footer-2013">
+                    <div class="links" style="padding:0 150px;">
+                        <a href="">关于我们</a>
+                        |
+                        <a href="">联系我们</a>
+                        |
+                        <a href="">人才招聘</a>
+                        |
+                        <a href="">商家入驻</a>
+                        |
+                        <a href="">广告服务</a>
+                        |
+                        <a href="">手机京东</a>
+                        |
+                        <a href="">友情链接</a>
+                        |
+                        <a href="">销售联盟</a>
+                        |
+                        <a href="">English site</a>
+                    </div>
+                    <div style="padding-left:10px">
+                        <p style="padding-top:10px; padding-bottom:10px; color:#999;text-align:center;">Copyright©2004-2016  AirShopp 版权所有</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer End -->
+</body>
+</html>

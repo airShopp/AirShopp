@@ -7,12 +7,11 @@ using Newtonsoft.Json;
 using System.Web.Mvc;
 using AirShopp.Domain;
 using AirShopp.Common;
-using AirShopp.Comman;
 using AirShopp.UI.Models;
 
 namespace AirShopp.UI.Controllers
 {
-    public class BMapRoutePlanningController : Controller
+    public class BMapRoutePlanningController : FliterController
     {
         private IAddressService _addressService;
         private IDeliveryStationService _deliveryStationService;
@@ -31,8 +30,16 @@ namespace AirShopp.UI.Controllers
         // GET: /BMapRoutePlanning/
         public ActionResult Index()
         {
+            Order order = new Order();
+
+            if (order.OrderStatus == OrderStatusEnumType.FINISHED.ToString())
+            {
+
+            }
+
             int orderId = 1;
-            // Pass Order model
+
+
 
             Address address = _addressService.GetAddress(orderId).FirstOrDefault();
 

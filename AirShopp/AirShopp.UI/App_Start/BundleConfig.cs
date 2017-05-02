@@ -39,6 +39,16 @@ namespace AirShopp.UI
                 "~/Content/base.css",
                 "~/Content/home.css"
                 ));
+
+            //BasicTemplate
+            bundles.Add(new StyleBundle("~/bundles/AirShopp/BasicTemplate/Css").Include(
+                "~/Content/base.css",
+                "~/Content/member.css"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/AirShopp/BasicTemplate/js").Include(
+                "~/Scripts/js/jquery.js"
+                ));
             //login
             bundles.Add(new StyleBundle("~/bundles/AirShopp/Login/Css").Include(
                 "~/Content/base.css",
