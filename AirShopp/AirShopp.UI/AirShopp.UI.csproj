@@ -433,7 +433,6 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\_airShoppLayout.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
-    <Content Include="Views\BMapRoutePlanning\Index.cshtml" />
     <Content Include="Views\Address\ViewAddress.cshtml" />
     <Content Include="Views\Order\OrderList.cshtml" />
     <Content Include="Views\Shared\_orderPageLayout.cshtml" />
