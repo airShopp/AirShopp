@@ -20,6 +20,7 @@ namespace AirShopp.UI.Models.ViewModel
             PendingDeliveryOrder = new List<Order>();
             PendingReceivedOrder = new List<Order>();
             FinishedOrder = new List<Order>();
+            AllOrder = new List<Order>();
         }
 
     }

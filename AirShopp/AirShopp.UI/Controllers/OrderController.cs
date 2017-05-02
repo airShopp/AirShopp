@@ -23,10 +23,10 @@ namespace AirShopp.UI.Controllers
             List<Order> orderList = _orderService.LoadOrderList(customerId);
             OrderViewModel orderViewModel = new OrderViewModel();
             orderViewModel.AllOrder.AddRange(orderList);
-            orderViewModel.PendingPaymentOrder.AddRange(orderList.Where(x => x.OrderStatus == "1").ToList());
-            orderViewModel.PendingDeliveryOrder.AddRange(orderList.Where(x => x.OrderStatus == "2").ToList());
-            orderViewModel.PendingReceivedOrder.AddRange(orderList.Where(x => x.OrderStatus == "3").ToList());
-            orderViewModel.FinishedOrder.AddRange(orderList.Where(x => x.OrderStatus == "4").ToList());
+            orderViewModel.PendingPaymentOrder.AddRange(orderList.Where(x => x.OrderStatus == "OBLIGATION").ToList());
+            orderViewModel.PendingDeliveryOrder.AddRange(orderList.Where(x => x.OrderStatus == "OBLIGATION").ToList());
+            orderViewModel.PendingReceivedOrder.AddRange(orderList.Where(x => x.OrderStatus == "OBLIGATION").ToList());
+            orderViewModel.FinishedOrder.AddRange(orderList.Where(x => x.OrderStatus == "OBLIGATION").ToList());
             return View("OrderList", orderViewModel);
         }
         public ActionResult OrderDetail()

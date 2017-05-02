@@ -46,7 +46,7 @@
                     <li>
                         @if (Session["User"] != null)
                         {
-                            var user = Session["User"] as AirShopp.Domain.Admin;
+                            var user = Session["customer"] as AirShopp.Domain.Customer;
                             @Html.ActionLink("订单查询", "Index", "Order", new { customerId = user.Id }, new { style = "color:#ea4949" })
                         }
                         else
@@ -114,7 +114,7 @@
                         <dd class="cur">
                             @if (Session["User"] != null)
                             {
-                                var user = Session["User"] as AirShopp.Domain.Admin;
+                                var user = Session["customer"] as AirShopp.Domain.Customer;
                                 @Html.ActionLink("我的订单", "Index", "Order", new { customerId = user.Id }, new { style = "color:#ea4949" })
                             }
                             else
@@ -124,13 +124,13 @@
                         </dd>
                         <dd><a href="#">我的收藏</a></dd>
                         <dd><a href="#">账户安全</a></dd>
-                        <dd>@Html.ActionLink("我的评价", "Index", new { Controller = "Comment", customerId = (Session["User"] as AirShopp.Domain.Admin).Id })</dd>
-                        <dd>@Html.ActionLink("地址管理", "GetAddress", new { Controller="Address", customerId = (Session["User"] as AirShopp.Domain.Admin).Id })</dd>
+                        <dd>@Html.ActionLink("我的评价", "Index", new { Controller = "Comment", customerId = (Session["customer"] as AirShopp.Domain.Customer).Id })</dd>
+                        <dd>@Html.ActionLink("地址管理", "GetAddress", new { Controller="Address", customerId = (Session["customer"] as AirShopp.Domain.Customer).Id })</dd>
                     </dl>
                     <dl>
                         <dt>客户服务</dt>
-                        <dd>@Html.ActionLink("退货申请", "GetReturnRequest", new { Controller = "Order", customerId = (Session["User"] as AirShopp.Domain.Admin).Id })</dd>
-                        <dd>@Html.ActionLink("退货/退款记录", "ReturnList", new { Controller = "Order", customerId = (Session["User"] as AirShopp.Domain.Admin).Id })</dd>
+                        <dd>@Html.ActionLink("退货申请", "GetReturnRequest", new { Controller = "Order", customerId = (Session["customer"] as AirShopp.Domain.Customer).Id })</dd>
+                        <dd>@Html.ActionLink("退货/退款记录", "ReturnList", new { Controller = "Order", customerId = (Session["customer"] as AirShopp.Domain.Customer).Id })</dd>
                     </dl>
                     <dl>
                         <dt>我的消息</dt>

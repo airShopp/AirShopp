@@ -12,8 +12,8 @@
     </div>
     <div class="member-switch clearfix">
         <ul id="H-table" class="H-table">
-            <li>@Html.ActionLink("退货申请", "ReturnList", new { Controller = "Order", customerId = (Session["User"] as AirShopp.Domain.Admin).Id })<em>(0)</em></li>
-            <li class="cur">@Html.ActionLink("退货/退款记录", "ReturnHistory", new { Controller = "Order", customerId = (Session["User"] as AirShopp.Domain.Admin).Id })<em>(44)</em></li>
+            <li>@Html.ActionLink("退货申请", "ReturnList", new { Controller = "Order", customerId = (Session["customer"] as AirShopp.Domain.Customer).Id })<em>(0)</em></li>
+            <li class="cur">@Html.ActionLink("退货/退款记录", "ReturnHistory", new { Controller = "Order", customerId = (Session["customer"] as AirShopp.Domain.Customer).Id })<em>(44)</em></li>
         </ul>
     </div>
     <div class="member-border">

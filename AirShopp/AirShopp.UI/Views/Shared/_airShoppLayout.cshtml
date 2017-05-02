@@ -62,7 +62,7 @@
                         <div class="subnav">
                             @if (Session["User"] != null)
                             {
-                                var user = Session["User"] as AirShopp.Domain.Admin;
+                                var user = Session["customer"] as AirShopp.Domain.Customer;
                                 @Html.ActionLink("订单查询", "Index", "Order", new { customerId = user.Id }, new { style = "color:#ea4949" })
                             }
                             else
