@@ -12,5 +12,10 @@ namespace AirShopp.Common
         {
             return (dateTime.ToShortDateString() + Constants.TEXT_SPACE + dateTime.ToShortTimeString());
         }
+
+        public static string GetDate(DateTime dateTime)
+        {
+            return dateTime.ToShortDateString();
+        }
     }
 }

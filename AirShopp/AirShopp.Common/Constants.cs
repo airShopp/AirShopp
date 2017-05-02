@@ -31,5 +31,7 @@ namespace AirShopp.Common
         public const string USER_NAME = "UserName";
         public const string PASSWORD = "Password";
         public const string SESSION_USER = "CUSTOMER";
+        public const string IP = "IP";
+        public const string TIME = "TIME";
     }
 }

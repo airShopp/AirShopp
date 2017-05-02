@@ -36,32 +36,32 @@
                         </div>
                         <div class="login-input">
                             <label><i class="heart">*</i>姓名：</label>
-                            @Html.TextBoxFor(m => m.CustomerName, new { @class = "list-input", tabindex = "1", autocomplete = "off", placeholder = "请输入姓名" })
+                            @Html.TextBoxFor(m => m.CustomerName, new { @class = "list-input", id = "name", tabindex = "1", autocomplete = "off", placeholder = "请输入姓名" })
                             <p class="regmsg namemsg"></p>
                         </div>
                         <div class="login-input">
                             <label><i class="heart">*</i>电话号码：</label>
-                            @Html.TextBoxFor(m => m.TelephoneNo, new { @class = "list-input", tabindex = "2", autocomplete = "off", placeholder = "请输入电话号码" })
+                            @Html.TextBoxFor(m => m.TelephoneNo, new { @class = "list-input", id="tel", tabindex = "2", autocomplete = "off", placeholder = "请输入电话号码" })
                             <p class="regmsg phonemsg"></p>
                         </div>
                         <div class="login-input">
                             <label><i class="heart">*</i>第一个密保问题：</label>
-                            @Html.TextBoxFor(m => m.QuestionA, new { @class = "list-input", tabindex = "3", autocomplete = "off", placeholder = "请输入密保问题" })
+                            @Html.TextBoxFor(m => m.QuestionA, new { @class = "list-input", id = "qu1", tabindex = "3", autocomplete = "off", placeholder = "请输入密保问题" })
                             <p class="regmsg firstqumsg"></p>
                         </div>
                         <div class="login-input">
                             <label><i class="heart">*</i>第一个密保答案：</label>
-                            @Html.TextBoxFor(m => m.AnswerA, new { @class = "list-input", tabindex = "4", autocomplete = "off", placeholder = "请输入密保答案" })
+                            @Html.TextBoxFor(m => m.AnswerA, new { @class = "list-input", id = "ans1", tabindex = "4", autocomplete = "off", placeholder = "请输入密保答案" })
                             <p class="regmsg firstansmsg"></p>
                         </div>
                         <div class="login-input">
                             <label><i class="heart">*</i>第二个密保问题：</label>
-                            @Html.TextBoxFor(m => m.QuestionB, new { @class = "list-input", tabindex = "5", autocomplete = "off", placeholder = "请输入密保问题" })
+                            @Html.TextBoxFor(m => m.QuestionB, new { @class = "list-input", id = "qu2", tabindex = "5", autocomplete = "off", placeholder = "请输入密保问题" })
                             <p class="regmsg secondqumsg"></p>
                         </div>
                         <div class="login-input">
                             <label><i class="heart">*</i>第二个密保答案：</label>
-                            @Html.TextBoxFor(m => m.AnswerB, new { @class = "list-input", tabindex = "6", autocomplete = "off", placeholder = "请输入密保答案" })
+                            @Html.TextBoxFor(m => m.AnswerB, new { @class = "list-input", id = "ans2", tabindex = "6", autocomplete = "off", placeholder = "请输入密保答案" })
                             <p class="regmsg secondansmsg"></p>
                         </div>
                         <input type="hidden" name="UserName" value="@TempData["UserName"]" />
@@ -71,9 +71,54 @@
                         </div>
                     }
                     <script>
-
                         function Submit1() {
-                            document.getElementById("form").submit();
+                            var flag = true;
+
+                            if ($("#name").val() == "") {
+                                flag = false;
+                                $(".namemsg").text("请输入姓名");
+                            } else {
+                                $(".namemsg").text("");
+                            }
+
+                            if ($("#tel").val() == "") {
+                                flag = false;
+                                $(".phonemsg").text("请输入电话号码");
+                            } else {
+                                $(".phonemsg").text("");
+                            }
+
+                            if ($("#qu1").val() == "") {
+                                flag = false;
+                                $(".firstqumsg").text("请输入第一个密保问题");
+                            } else {
+                                $(".firstqumsg").text("");
+                            }
+
+                            if ($("#ans1").val() == "") {
+                                flag = false;
+                                $(".firstansmsg").text("请输入第一个密保答案");
+                            } else {
+                                $(".firstansmsg").text("");
+                            }
+
+                            if ($("#qu2").val() == "") {
+                                flag = false;
+                                $(".secondqumsg").text("请输入第二个密保问题");
+                            } else {
+                                $(".login-input .secondqumsg").text("");
+                            }
+
+                            if ($("#ans2").val() == "") {
+                                flag = false;
+                                $(".secondansmsg").text("请输入第二个密保答案");
+                            } else {
+                                $(".login-input .secondansmsg").text("");
+                            }
+
+                            if (flag) {
+                                $("#form").submit();
+                            }
                         }
                     </script>
                 </div>

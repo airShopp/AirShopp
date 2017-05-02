@@ -90,6 +90,9 @@
 </body>
 </html>
 <script>
+    $.ajaxSetup({
+        async: false
+    });
     function Check() {
         var flag = true;
         var pwd = $("#password").val();

@@ -43,7 +43,7 @@ namespace AirShopp.UI.Controllers
             if (AccountCookie != null && PwdCookie != null && user.Password.Equals(PwdCookie.Value))
             {
                 user.UserName = AccountCookie.Value;
-                user.Password = AccountCookie.Value;
+                user.Password = PwdCookie.Value;
             }
             else
             {
@@ -57,7 +57,7 @@ namespace AirShopp.UI.Controllers
                 if (user.RememberPwd)
                 {
                     WebClientHelper.SetCookie(Constants.USER_NAME, Constants.USER_NAME, customer.Account, DateTime.Now.AddDays(1));
-                    WebClientHelper.SetCookie(Constants.PASSWORD, Constants.PASSWORD, MathHelper.MD5(customer.Password), DateTime.Now.AddDays(1));
+                    WebClientHelper.SetCookie(Constants.PASSWORD, Constants.PASSWORD, customer.Password, DateTime.Now.AddDays(1));
                 }
                 else
                 {
@@ -69,7 +69,7 @@ namespace AirShopp.UI.Controllers
                 customer.Password = null;
                 Session.Add(Constants.SESSION_USER, customer);
 
-                return RedirectToAction("Index", "Home", customer);
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
@@ -87,13 +87,12 @@ namespace AirShopp.UI.Controllers
         [HttpPost]
         public ActionResult Register(UserViewModel user)
         {
-            Console.WriteLine(this.GetHashCode());
             bool isExist = _customerRepository.GetCustomer(user.UserName);
             bool isEquals = user.Password.Equals(user.ConfirmPassword);
             if (!isExist && isEquals)
             {
-                TempData["UserName"] = user.UserName;
-                TempData["Password"] = MathHelper.MD5(user.Password);
+                TempData[Constants.USER_NAME] = user.UserName;
+                TempData[Constants.PASSWORD] = MathHelper.MD5(user.Password);
                 return View("UpdateUserInfo");
             }
             else
@@ -117,7 +116,38 @@ namespace AirShopp.UI.Controllers
             Customer customer = user.toCustomer();
             customer.LastSignInIpAddr = WebClientHelper.GetHostAddress();
             _customerRepository.AddCustomer(customer);
+
+            customer.Password = null;
+            string tel = customer.TelephoneNo;
+
+            Session.Add(Constants.SESSION_USER, customer);
+
+            return RedirectToAction("UserInfo");
+        }
+
+        [HttpGet]
+        public ActionResult UserInfo()
+        {
+            var customer = Session[Constants.SESSION_USER] as Customer;
+
+            try
+            {
+                customer.TelephoneNo = customer.TelephoneNo.Substring(0, 3) + "****" + customer.TelephoneNo.Substring(7, 4);
+                Session.Add(Constants.SESSION_USER, customer);
+            }
+            catch
+            {
+            }
+
+            Session.Add(Constants.IP, WebClientHelper.GetHostAddress());
+            Session.Add(Constants.TIME, DateTimeHelper.GetDate(DateTime.Now));
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult UpdateUserPwd()
+        {
+            return Content("");
         }
 
         [HttpGet]
