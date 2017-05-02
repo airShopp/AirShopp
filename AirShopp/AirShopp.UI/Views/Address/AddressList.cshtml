@@ -1,0 +1,242 @@
+﻿@model AirShopp.UI.Models.ViewModel.AddressListViewModel
+@{
+    ViewBag.Title = "AddressList";
+    Layout = "~/Views/Shared/_orderPageLayout.cshtml";
+}
+<script language="javascript">
+ 　 var cityJson;
+    $(function(){
+        //load city.json
+        $.getJSON(
+            "city.json",
+            function(obj) {
+                cityJson = obj;
+                var sb = new StringBuffer();
+                $.each(obj, function(i, val) {
+                    if(val.item_code.substr(2, 4) == '0000'){
+                        sb.append("<option value='"+val.item_code+"'>"+val.item_name+"</option>");
+                    }
+                });
+                $("#choosePro").after(sb.toString());
+            }
+        );
+    });
+
+    // 省值变化时 处理市
+    function doProvAndCityRelation(){
+        var city = $("#citys");
+        var county = $("#county");
+        if(city.children().length > 1){
+            city.empty();
+        }
+        if(county.children().length > 1){
+            county.empty();
+        }
+        if($("#chooseCity").length == 0){
+            city.append("<option id='chooseCity' value='-1'>请选择您所在城市</option>");
+        }
+        if($("#chooseCounty").length == 0){
+            county.append("<option id='chooseCounty' value='-1'>请选择您所在区/县</option>");
+        }
+        var sb = new StringBuffer();
+        $.each(cityJson, function(i, val) {
+            if(val.item_code.substr(0, 2) == $("#province").val().substr(0, 2) && val.item_code.substr(2, 4) != '0000' && val.item_code.substr(4, 2) == '00'){
+                sb.append("<option value='"+val.item_code+"'>"+val.item_name+"</option>");
+            }
+        });
+        $("#chooseCity").after(sb.toString());
+    }
+
+    // 市值变化时 处理区/县
+    function doCityAndCountyRelation(){
+        var cityVal = $("#citys").val();
+        var county = $("#county");
+        if(county.children().length > 1){
+            county.empty();
+        }
+        if($("#chooseCounty").length == 0){
+            county.append("<option id='chooseCounty' value='-1'>请选择您所在区/县</option>");
+        }
+        var sb = new StringBuffer();
+        $.each(cityJson, function(i, val) {
+            if(cityVal=='110100' || cityVal=="120100" || cityVal=="310100" || cityVal=="500100"){
+                if(val.item_code.substr(0, 3) == cityVal.substr(0, 3) && val.item_code.substr(4, 2) != '00'){
+                    sb.append("<option value='"+val.item_code+"'>"+val.item_name+"</option>");
+                }
+            }else{
+                if(val.item_code.substr(0, 4) == cityVal.substr(0, 4) && val.item_code.substr(4, 2) != '00'){
+                    sb.append("<option value='"+val.item_code+"'>"+val.item_name+"</option>");
+                }
+            }
+        });
+        $("#chooseCounty").after(sb.toString());
+
+    }
+
+    function StringBuffer(str){
+        var arr = [];
+        str = str || "";
+        var size = 0 ;  // 存放数组大小
+        arr.push(str);
+        // 追加字符串
+        this.append = function(str1) {
+            arr.push(str1);
+            return this;
+        };
+        // 返回字符串
+        this.toString = function(){
+            return arr.join("");
+        };
+        // 清空
+        this.clear = function(key){
+            size = 0 ;
+            arr = [] ;
+        }
+        // 返回数组大小
+        this.size = function(){
+            return size ;
+        }
+        // 返回数组
+        this.toArray = function(){
+            return buffer ;
+        }
+        // 倒序返回字符串
+        this.doReverse = function(){
+            var str = buffer.join('') ;
+            str = str.split('');
+            return str.reverse().join('');
+        }
+    };
+</script>
+<div class="member-right fr">
+    <div class="member-head">
+        <div class="member-heels fl"><h2>地址管理</h2></div>
+    </div>
+    <div class="member-border">
+        <div class="member-newly">
+            <div>新增收货地址</div>
+        </div>
+        <div>
+            <form id="J_FormDeliver" action="/member/fresh/deliver_address.htm" method="post">
+                <table border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>
+                            <!-- 暂无 港澳台 如需要可在city.json文件中添加-->
+                            <select id="province" name="province" onchange="doProvAndCityRelation();">
+                                <option id="choosePro" value="-1">请选择省份</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select id="citys" name="city" onchange="doCityAndCountyRelation();">
+                                <option id='chooseCity' value='-1'>请选择城市</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select id="county" name="county">
+                                <option id='chooseCounty' value='-1'>请选择区/县</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <div class="item item-street" id="J_ItemStreet">
+                    <span class="item-label tsl" data-phase-id="d_p_addressDetail">详细地址 <i>*</i></span>
+                    <textarea class="ks-combobox-input i-ta disabled tsl" style="width : 200px" aria-combobox="list" role="combobox" autocomplete="off" name="addressDetail" id="J_Street" aria-label="详细地址"
+          placeholder="建议您如实填写详细收货地址，例如街道名称，门牌号码，楼层和房间号等信息" data-inner_placeholder="d_p_input_inner_detailAddress" data-pattern="^[\s\S]{5,120}$" data-msg="d_p_detailAddress_msg"
+          data-ph="建议您如实填写详细收货地址，例如街道名称，门牌号码，楼层和房间号等信息" disabled="disabled">
+                    </textarea>
+                </div>
+                <div class="item item-name" id="J_ItemName">
+                    <span class="item-label tsl" data-phase-id="d_p_receiverName">收货人姓名 <i>*</i></span><input name="fullName" class="i-text tsl" aria-label="收货人姓名" type="text" id="J_Name" placeholder="长度不超过25个字符" data-inner_placeholder="d_p_input_inner_fullName" data-pattern="^.{2,25}$" data-msg="d_p_fullName_msg"
+       data-ph="长度不超过25个字符"
+       value="">
+                </div>
+                <div class="item item-mobile" id="J_ItemMobile">
+                    <span class="item-label tsl" data-phase-id="d_p_mobileNumber">手机号码 </span><input name="mobile" class="i-text tsl" aria-label="手机号码" type="text" id="J_Mobile" placeholder="手机号码必须" data-inner_placeholder="d_p_input_inner_mobile" data-pattern="^\d{6,20}$" data-ph="电话号码、手机号码必须填一项"
+       data-msg="d_p_mobile_msg" value="">
+                </div>
+                <div class="item item-set-default" id="j_ItemSetDefault">
+                    <input type="checkbox" class="i-chk" name="defaultAddress" id="J_SetDefault"> <label for="J_SetDefault" class="tsl" data-phase-id="d_p_saveAsDefaultAddress">设置为默认收货地址</label>
+                </div>
+                <div class="item">
+                    <button type="submit" class=" btn tsl" data-phase-id="d_p_saveSubmit">保存</button>
+                    <div class="msg hide" id="J_MsgSubmit">
+                        <i></i>
+                        <div class="msg-cnt"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="member-newly"><b>您已经创建了<i class="reds">@Model.AddressList.Count()</i>个收货地址了，最多可创建<i class="reds">20</i>个</b></div>
+        <div class="member-sites">
+            <ul>
+                @for(int i = 0; i< Model.AddressList.Count(); i++)
+                {
+                <li class="clearfix">
+                    @if (Model.AddressList[i].IsDefault)
+                    {
+                    <div class="default fl"><a href="#">默认地址</a> </div>
+                    }
+                    <div class="user-info1 fl clearfix">
+                        <div class="user-info">
+                            <span class="info1">收货人：</span>
+                            <span class="info2">@Model.AddressList[i].ReceiverName</span>
+                        </div>
+                        @*<div class="user-info">
+                            <span class="info1">所在地区：</span>
+                            <span class="info2">@</span>
+                        </div>*@
+                        <div class="user-info">
+                            <span class="info1">地址：</span>
+                            <span class="info2">@Model.AddressList[i].DeliveryAddress</span>
+                        </div>
+                        <div class="user-info">
+                            <span class="info1">手机：</span>
+                            <span class="info2">@Model.AddressList[i].ReceiverPhone</span>
+                        </div>
+                        @*<div class="user-info">
+                            <span class="info1">固定电话：</span>
+                            <span class="info2">010-81819191</span>
+                        </div>
+                        <div class="user-info">
+                            <span class="info1">电子邮箱：</span>
+                            <span class="info2">azneui@sina.com</span>
+                        </div>*@
+                    </div>
+
+                    <div class="pc-event">
+                        <a href="#" class="pc-event-d">设为默认地址</a>
+                        <a href="#">编辑 </a>
+                        <a href="#">删除</a>
+                    </div>
+                </li>
+                }
+            </ul>
+        </div>
+        <div class="member-pages clearfix">
+            <div class="fr pc-search-g">
+                <a href="#" class="fl pc-search-f">上一页</a>
+                <a class="current" href="#">1</a>
+                <a href="javascript:;">2</a>
+                <a href="javascript:;">3</a>
+                <a href="javascript:;">4</a>
+                <a href="javascript:;">5</a>
+                <a href="javascript:;">6</a>
+                <a href="javascript:;">7</a>
+                <span class="pc-search-di">…</span>
+                <a onClick="SEARCH.page(3, true)" href="javascript:;" class="pc-search-n" title="使用方向键右键也可翻到下一页哦！">下一页</a>
+                <span class="pc-search-y">
+                    <em>  共20页    到第</em>
+                    <input type="text" placeholder="1" class="pc-search-j">
+                    <em>页</em>
+                    <a class="confirm" href="#">确定</a>
+                </span>
+
+            </div>
+        </div>
+    </div>
+</div>
+

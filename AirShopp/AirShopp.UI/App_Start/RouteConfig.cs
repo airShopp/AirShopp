@@ -18,6 +18,41 @@ namespace AirShopp.UI
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "ToOrderList",
+                url: "{controller}/{action}/{customerId}",
+                defaults: new { controller = "Order", action = "Index", customerId = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "ToAddressList",
+                url: "{controller}/{action}/{customerId}",
+                defaults: new { controller = "Address", action = "GetAddress", customerId = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "ToCommentList",
+                url: "{controller}/{action}/{customerId}",
+                defaults: new { controller = "Comment", action = "Index", customerId = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "ToReturnRequest",
+                url: "{controller}/{action}/{customerId}",
+                defaults: new { controller = "Order", action = "GetReturnRequest", customerId = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "ToReturnList",
+                url: "{controller}/{action}/{customerId}",
+                defaults: new { controller = "Order", action = "ReturnList", customerId = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "ToReturnHistoryList",
+                url: "{controller}/{action}/{customerId}",
+                defaults: new { controller = "Order", action = "ReturnHistory", customerId = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+               name: "Default1",
+               url: "{controller}/{action}/{admin}",
+               defaults: new { controller = "Cart", action = "LoadCartList", admin = UrlParameter.Optional }
+           );
         }
     }
 }

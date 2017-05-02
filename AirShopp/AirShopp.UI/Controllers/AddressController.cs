@@ -1,4 +1,5 @@
 ﻿using AirShopp.Domain;
+using AirShopp.UI.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,11 +29,15 @@ namespace AirShopp.UI.Controllers
             return View();
         }
 
-
         public ActionResult GetAddress(long customerId)
         {
-            _addressService.GetAddress(customerId);
-            return View();
+            List<Address> addressList = _addressService.GetAddress(customerId);
+            AddressListViewModel addressListViewModel = new AddressListViewModel();
+            addressListViewModel.ProvinceList = null;
+            addressListViewModel.CityList = null;
+            addressListViewModel.AreaList = null;
+            addressListViewModel.AddressList = addressList;
+            return View("AddressList", addressListViewModel);
         }
 
         public ActionResult UpdateAddress(Address address)
