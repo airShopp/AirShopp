@@ -80,9 +80,6 @@ namespace AirShopp.UI.Models
             container.RegisterType<ICommentService, CommentService>();
             container.RegisterType<ICategoryService, CategoryService>();
             container.RegisterType<IDeliveryStationService, DeliveryStationService>();
-            container.RegisterType<IProvinceService, ProvinceService>();
-            container.RegisterType<ICityService, CityService>();
-            container.RegisterType<IAreaService, AreaService>();
             container.RegisterType<IDeliveryInfoService, DeliveryInfoService>();
             container.RegisterType<ICourierService, CourierService>();
 

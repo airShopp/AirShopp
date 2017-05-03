@@ -118,8 +118,6 @@ namespace AirShopp.UI.Controllers
             _customerRepository.AddCustomer(customer);
 
             customer.Password = null;
-            string tel = customer.TelephoneNo;
-
             Session.Add(Constants.SESSION_USER, customer);
 
             return RedirectToAction("UserInfo");

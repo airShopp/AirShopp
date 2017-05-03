@@ -12,7 +12,7 @@
                 <div class="fl"><a href="#"><img src="~/Content/img/bg/mem.png"></a></div>
                 <div class="fl">
                     <p>用户名：</p>
-                    <p><a href="#">@user.CustomerName</a></p>
+                    <p>@Html.ActionLink(@user.CustomerName, "UserInfo", "User")</p>
                     <p>宝宝号：</p>
                     <p>@user.Id</p>
                 </div>
@@ -23,8 +23,7 @@
                     <dd>
                         @Html.ActionLink("我的订单", "Index", "Order")
                     </dd>
-                    <dd><a href="#">我的收藏</a></dd>
-                    <dd><a href="#">账户安全</a></dd>
+                    <dd>@Html.ActionLink("账户安全", "UserInfo", "User")</dd>
                     <dd>@Html.ActionLink("我的评价", "Index", "Comment")</dd>
                     <dd>@Html.ActionLink("地址管理", "GetAddress","Address")</dd>
                 </dl>

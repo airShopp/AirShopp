@@ -87,7 +87,7 @@ namespace AirShopp.UI.Controllers
             String ak = "&ak=" + Constants.BMAP_AK;
 
             BMapDataModel bMapDataModel = JsonHelper.
-                DeserializeJsonToObject<BMapDataModel>(WebAPIHelper.Get(Constants.BMAP_BASE_URL + Constants.BMAP_OUTPUT_TYPE + origins + destinations + ak));
+                DeserializeJsonToObject<BMapDataModel>(WebAPIHelper.Get(Constants.BMAP_DRIVING_BASE_URL + Constants.BMAP_OUTPUT_TYPE + origins + destinations + ak));
 
             // Get min index of delivery station
             int minDistanceIndex = bMapDataModel.Result.FindIndex(x => x.Distance.Value == bMapDataModel.Result.Min(y => y.Distance.Value));

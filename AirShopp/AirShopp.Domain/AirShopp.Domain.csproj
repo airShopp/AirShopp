@@ -51,16 +51,10 @@
     <Compile Include="Admin\AdminService.cs" />
     <Compile Include="Admin\IAdminService.cs" />
     <Compile Include="Area\Area.cs" />
-    <Compile Include="Area\AreaService.cs" />
     <Compile Include="Area\City.cs" />
-    <Compile Include="Area\CityService.cs" />
     <Compile Include="Area\IAreaRepository.cs" />
-    <Compile Include="Area\IAreaService.cs" />
     <Compile Include="Area\ICityRepository.cs" />
-    <Compile Include="Area\ICityService.cs" />
-    <Compile Include="Area\IProvinceService.cs" />
     <Compile Include="Area\IProvinceRepository.cs" />
-    <Compile Include="Area\ProvinceService.cs" />
     <Compile Include="Cart\CartItem.cs" />
     <Compile Include="DeliveryStation\CourierService.cs" />
     <Compile Include="DeliveryStation\DeliveryStationService.cs" />
