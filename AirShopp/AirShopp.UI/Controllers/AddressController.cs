@@ -72,7 +72,7 @@ namespace AirShopp.UI.Controllers
 
             _addressService.AddAddress(DeliveryAddress);
 
-            return View("GetAddress", customerId);
+            return RedirectToAction("GetAddress");
         }
 
         public ActionResult GetAddress()
