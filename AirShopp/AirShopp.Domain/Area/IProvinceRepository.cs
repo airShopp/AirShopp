@@ -8,6 +8,7 @@ namespace AirShopp.Domain
 {
     public interface IProvinceRepository
     {
-        List<Province> GetProvince(long provinceId);
+        List<Province> GetProvince();
+        Province GetProvinceById(long provinceId);
     }
 }
