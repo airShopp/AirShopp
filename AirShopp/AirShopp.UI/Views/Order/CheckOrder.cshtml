@@ -1,4 +1,4 @@
-﻿
+﻿@model AirShopp.UI.Models.ViewModel.OrderConfirmViewModel
 @{
     ViewBag.Title = "CheckOrder";
 }
@@ -36,9 +36,6 @@
              $("#pc-nav").hoverClass("current");
          });
 
-
-
-
          $(document).ready(function($){
 
              $(".btn1").click(function(event){
@@ -69,8 +66,6 @@
 
          });
     </script>
-
-
 </head>
 <body>
 
@@ -163,17 +158,17 @@
     <section>
         <div class="containers">
             <div class="pc-space">
-                <div class="pc-order-title clearfix"><h3 class="fl">收货人信息</h3> <a href="#" class="fr pc-order-add btn1">新增收货地址</a> </div>
+                <div class="pc-order-title clearfix"><h3 class="fl">收货人信息</h3> <a href="#" class="fr pc-order-add btn1">新增收货地址</a> <a href="#" class="fr pc-order-add btn1">更改地址</a></div>
                 <div class="pc-border">
                     <div class="pc-order-text clearfix">
                         <ul class=" clearfix">
                             <li class="clearfix fl">
                                 <div class="fl pc-frame pc-frams"> <a href="#">默认地址</a></div>
-                                <div class="fl pc-address"><span>嘻哈杂货铺</span> <span>186****4832 </span> <span>北京北京市海淀区首享科技大厦9层</span></div>
+                                <div class="fl pc-address"><span>@Model.order.Address.ReceiverName</span> <span> @Model.order.Address.ReceiverPhone </span> <span>@Model.order.Address.DeliveryAddress</span></div>
                             </li>
-                            <li class="fr">
+                            @*<li class="fr">
                                 <div class="pc-click"><a href="#">设为默认地址</a> <a href="#">编辑</a> <a href="#">删除</a> </div>
-                            </li>
+                            </li>*@
                         </ul>
                     </div>
                 </div>
@@ -197,18 +192,12 @@
                         <div class="pc-order-text pc-order-l clearfix">
                             <ul id="H-table" class="clearfix H-table">
                                 <li class="cur">
-                                    <a href="javascript:void(0);">百事汇通</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">顺风快递</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">中通快递</a>
+                                    <a href="javascript:void(0);">自营快递</a>
                                 </li>
                             </ul>
                             <div class="" style="height:211px"></div>
                             <div class="pc-line"></div>
-                            <div class="pc-freight"><p>运费：  8.00元</p></div>
+                            <div class="pc-freight"><p>运费：  0.00元</p></div>
                         </div>
                     </div>
                 </div>
@@ -216,49 +205,35 @@
                     <div class="pc-order-title clearfix"><h3 class="fl">商品信息</h3></div>
                     <div class="pc-border">
                         <div class="pc-order-text clearfix">
-                            <div class="pc-wares-t"><h4>商家：  阿卡官方旗舰店</h4></div>
-                            <div class="clearfix pc-wares-p">
-                                <div class="fl pc-wares"><a href="#"><img src="theme/img/pd/pc1.png"></a></div>
-                                <div class="fl pc-wares-w"> <a href="#">小米（MI）小米USB插线板 3个USB充电口 支持2A快充 3重安全保护</a> <p class="clearfix"><span class="fl">颜色：白色</span><span class="fr">版本：联通高</span></p></div>
-                                <div class="fl pc-wares-s"><span class="reds">￥49.00</span><span>x1</span><span>有货</span></div>
-                            </div>
-                            <div class="clearfix pc-wares-p">
-                                <div class="fl pc-wares"><a href="#"><img src="theme/img/pd/pc1.png"></a></div>
-                                <div class="fl pc-wares-w"> <a href="#">小米（MI）小米USB插线板 3个USB充电口 支持2A快充 3重安全保护</a> <p class="clearfix"><span class="fl">颜色：白色</span><span class="fr">版本：联通高</span></p></div>
-                                <div class="fl pc-wares-s"><span class="reds">￥49.00</span><span>x1</span><span>有货</span></div>
-                            </div>
+                            @for(int i = 0; i < Model.order.OrderItems.Count(); i++)
+                            {
+                                var orderItems = @Model.order.OrderItems.ToList();
+                                AirShopp.Domain.OrderItem orderItem = orderItems[i] as AirShopp.Domain.OrderItem;
+                                <div class="clearfix pc-wares-p">
+                                    <div class="fl pc-wares"><a href="#"><img src="@orderItem.Product.Url" width="80" height="80"></a></div>
+                                    <div class="fl pc-wares-w"> <a href="#">@orderItem.Product.ProductName</a> <p class="clearfix"><span class="fl">颜色：白色</span><span class="fr">版本：联通高</span></p></div>
+                                    <div class="fl pc-wares-s"><span class="reds">￥@(orderItem.DiscountPrice * orderItem.Quantity)</span><span>x @orderItem.Quantity</span><span>有货</span></div>
+                                </div>
+                            }
                             <div class="pc-written"><p>订单留言</p></div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="pc-space">
-                <div class="pc-order-title clearfix"><h3 class="fl">发票信息</h3></div>
-                <div class="pc-border">
-                    <div class="pc-order-text clearfix">
-                        <ul class=" clearfix">
-                            <li class="clearfix fl">
-                                <div class="fl pc-address pc-wares-l"><span>普通发票（纸质）</span> <span> 个人</span> <span>明细</span><span><a href="#">修改</a> </span></div>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
             <div class="clearfix">
                 <div class="fr pc-list-t">
                     <ul>
-                        <li><span><b>2</b> 件商品，总商品金额：</span> <em>￥558.00</em></li>
-                        <li><span>减额：</span> <em>￥558.00</em></li>
-                        <li><span>运费：</span> <em>￥558.00</em></li>
-                        <li><span>应付总额：</span> <em>￥558.00</em></li>
-                        <li><span>减额：</span> <em>￥558.00</em></li>
+                        <li><span><b>2</b> 件商品，总商品金额：</span> <em>￥@Model.ActuallyAmount</em></li>
+                        <li><span>减额：</span> <em>￥@Model.DisCountAmount</em></li>
+                        <li><span>运费：</span> <em>￥0.00</em></li>
+                        <li><span>应付总额：</span> <em>￥@Model.order.TotalAmount</em></li>
                     </ul>
                 </div>
             </div>
             <div class="pc-space-n"></div>
             <div class="clearfix">
                 <div class="fr pc-space-j">
-                    <spna>应付总额：<strong>￥558.00</strong></spna>
+                    <spna>应付总额：<strong>￥@Model.order.TotalAmount</strong></spna>
                     @Html.ActionLink("提交订单", "SubmitOrder", new { Controller = "Order" }, new { style = "color:#ea4949" })
                     @*<button class="pc-submit">提交订单</button>*@
                 </div>

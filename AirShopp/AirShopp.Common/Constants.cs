@@ -33,5 +33,10 @@ namespace AirShopp.Common
         public const string SESSION_USER = "CUSTOMER";
         public const string IP = "IP";
         public const string TIME = "TIME";
+
+        public const string OBLIGATION = "OBLIGATION";
+        public const string TRANSFER = "TRANSFER";
+        public const string DELIVERY = "DELIVERY";
+        public const string FINISHED = "FINISHED";
     }
 }
