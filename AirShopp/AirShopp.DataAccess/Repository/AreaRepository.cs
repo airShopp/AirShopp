@@ -11,9 +11,14 @@ namespace AirShopp.DataAccess
     {
         public AirShoppContext _context = new AirShoppContext();
 
-        public List<Area> GetAreaByProvinceId(long provinceId)
+        public List<Area> GetArea()
         {
-            return null;
+            return _context.Area.ToList();
+        }
+
+        public Area GetAreaById(long areaId)
+        {
+            return _context.Area.Where(x => x.Id == areaId).ToList().FirstOrDefault();
         }
     }
 }

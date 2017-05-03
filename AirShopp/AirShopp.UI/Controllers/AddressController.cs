@@ -1,5 +1,6 @@
 ﻿using AirShopp.Common;
 using AirShopp.Domain;
+using AirShopp.UI.Models;
 using AirShopp.UI.Models.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,16 @@ namespace AirShopp.UI.Controllers
     public class AddressController : FliterController
     {
         private IAddressService _addressService;
+        private IProvinceRepository _provinceRepository;
+        private ICityRepository _cityRepository;
+        private IAreaRepository _areaRepository;
 
-        public AddressController(IAddressService addressService)
+        public AddressController(IAddressService addressService, IProvinceRepository provinceRepository, ICityRepository cityRepository, IAreaRepository areaRepository)
         {
             _addressService = addressService;
+            _provinceRepository = provinceRepository;
+            _cityRepository = cityRepository;
+            _areaRepository = areaRepository;
         }
 
         // GET: Address
@@ -24,10 +31,48 @@ namespace AirShopp.UI.Controllers
             return View();
         }
 
-        public ActionResult AddAddress(Address address)
+        public ActionResult AddAddress(string areaId, string address, string receiverName, string receiverPhone, bool isDefault)
         {
-            _addressService.AddAddress(address);
-            return View();
+
+            Area area = _areaRepository.GetAreaById(int.Parse(areaId));
+            City city = _cityRepository.GetCityById(area.CityId);
+            Province province = _provinceRepository.GetProvinceById(city.ProvinceId);
+
+            long customerId = (Session[Constants.SESSION_USER] as Customer).Id;
+
+            if (isDefault)
+            {
+                List<Address> addressList = _addressService.GetAddress(customerId);
+                Address defaultAddress = addressList.Where(x => x.IsDefault == isDefault).ToList().FirstOrDefault();
+                if (defaultAddress != null)
+                {
+                    defaultAddress.IsDefault = false;
+                    _addressService.UpdateAddress(defaultAddress);
+                }
+            }
+
+            string fullAddress = province.ProvinceName + city.CityName + area.AreaName + address;
+            string addressParam = "&address=" + fullAddress;
+
+            string ak = "&ak=" + Constants.BMAP_AK;
+
+            LocationDataModel locationDataModel = JsonHelper.DeserializeJsonToObject<LocationDataModel>(WebAPIHelper.Get(Constants.BMAP_GEOCODER_BASE_URL + Constants.BMAP_OUTPUT_TYPE + addressParam + ak));
+
+            Address DeliveryAddress = new Address()
+            {
+                ReceiverName = receiverName,
+                ReceiverPhone = receiverPhone,
+                DeliveryAddress = fullAddress,
+                IsDefault = isDefault,
+                Latitude = locationDataModel.Result.Location.Lat,
+                Longitude = locationDataModel.Result.Location.Lng,
+                AreaId = int.Parse(areaId),
+                CustomerId = customerId
+            };
+
+            _addressService.AddAddress(DeliveryAddress);
+
+            return View("GetAddress", customerId);
         }
 
         public ActionResult GetAddress()
@@ -35,9 +80,9 @@ namespace AirShopp.UI.Controllers
             Customer customer = Session[Constants.SESSION_USER] as Customer;
             List<Address> addressList = _addressService.GetAddress(customer.Id);
             AddressListViewModel addressListViewModel = new AddressListViewModel();
-            addressListViewModel.ProvinceList = null;
-            addressListViewModel.CityList = null;
-            addressListViewModel.AreaList = null;
+            addressListViewModel.ProvinceList = _provinceRepository.GetProvince();
+            addressListViewModel.CityList = _cityRepository.GetCity();
+            addressListViewModel.AreaList = _areaRepository.GetArea();
             addressListViewModel.AddressList = addressList;
             return View("AddressList", addressListViewModel);
         }

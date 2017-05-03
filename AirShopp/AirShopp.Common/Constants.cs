@@ -18,7 +18,8 @@ namespace AirShopp.Common
 
         // BMap
         public const string BMAP_AK = "BZpwjUXFrAlT6g87xFxY4c3Cf82zen93";
-        public const string BMAP_BASE_URL = "http://api.map.baidu.com/routematrix/v2/driving?";
+        public const string BMAP_DRIVING_BASE_URL = "http://api.map.baidu.com/routematrix/v2/driving?";
+        public const string BMAP_GEOCODER_BASE_URL = "http://api.map.baidu.com/geocoder/v2/?";
         public const string BMAP_OUTPUT_TYPE = "output=json";
 
         // DeliveryInfo

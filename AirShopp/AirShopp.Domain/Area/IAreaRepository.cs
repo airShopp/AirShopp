@@ -8,6 +8,7 @@ namespace AirShopp.Domain
 {
     public interface IAreaRepository
     {
-
+        List<Area> GetArea();
+        Area GetAreaById(long areaId);
     }
 }

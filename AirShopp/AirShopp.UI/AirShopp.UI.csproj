@@ -192,6 +192,7 @@
     <Compile Include="Models\Common\PageListBaseModel.cs" />
     <Compile Include="Models\CustomerCommentDataModel.cs" />
     <Compile Include="Models\Enum\OrderStatusEnumType.cs" />
+    <Compile Include="Models\LocationDataModel.cs" />
     <Compile Include="Models\ProductDataModel.cs" />
     <Compile Include="Models\ViewModel\AddressListViewModel.cs" />
     <Compile Include="Models\ViewModel\UserViewModel.cs" />

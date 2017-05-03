@@ -8,6 +8,7 @@ namespace AirShopp.Domain
 {
     public interface ICityRepository
     {
-        //List<City> GetCity(long cityId);
+        List<City> GetCity();
+        City GetCityById(long cityId);
     }
 }
