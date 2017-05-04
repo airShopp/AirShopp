@@ -13,11 +13,19 @@ namespace AirShopp.UI.Controllers
     {
         private IOrderservice _orderService;
         private readonly IReadFromDb _readFromDb;
+        private IOrderRepository _orderRepository;
+        private IProvinceRepository _provinceRepository;
+        private ICityRepository _cityRepository;
+        private IAreaRepository _areaRepository;
 
-        public OrderController(IOrderservice orderService,IReadFromDb readFromDb)
+        public OrderController(IOrderservice orderService, IOrderRepository orderRepository, IReadFromDb readFromDb, IProvinceRepository provinceRepository, ICityRepository cityRepository, IAreaRepository areaRepository)
         {
             _orderService = orderService;
+            _orderRepository = orderRepository;
             _readFromDb = readFromDb;
+            _provinceRepository = provinceRepository;
+            _cityRepository = cityRepository;
+            _areaRepository = areaRepository;
         }
 
         // GET: Order
@@ -28,9 +36,9 @@ namespace AirShopp.UI.Controllers
             OrderViewModel orderViewModel = new OrderViewModel();
             orderViewModel.AllOrder.AddRange(orderList);
             orderViewModel.PendingPaymentOrder.AddRange(orderList.Where(x => x.OrderStatus == "OBLIGATION").ToList());
-            orderViewModel.PendingDeliveryOrder.AddRange(orderList.Where(x => x.OrderStatus == "OBLIGATION").ToList());
-            orderViewModel.PendingReceivedOrder.AddRange(orderList.Where(x => x.OrderStatus == "OBLIGATION").ToList());
-            orderViewModel.FinishedOrder.AddRange(orderList.Where(x => x.OrderStatus == "OBLIGATION").ToList());
+            orderViewModel.PendingDeliveryOrder.AddRange(orderList.Where(x => x.OrderStatus == "TRANSFER").ToList());
+            orderViewModel.PendingReceivedOrder.AddRange(orderList.Where(x => x.OrderStatus == "DELIVERY").ToList());
+            orderViewModel.PendingComment.AddRange(orderList.Where(x => x.OrderStatus == "FINISHED" && x.Comments.Count()==0).ToList());
             return View("OrderList", orderViewModel);
         }
         public ActionResult OrderDetail(long orderId)
@@ -39,18 +47,21 @@ namespace AirShopp.UI.Controllers
             return View("OrderDetail", order);
         }
 
-        public ActionResult ReturnHistory(long customerId)
+        public ActionResult ReturnHistory()
         {
+            Customer customer = Session[Constants.SESSION_USER] as Customer;
             return View("ReturnHistory", null);
         }
 
-        public ActionResult ReturnList(long customerId)
+        public ActionResult ReturnList()
         {
+            Customer customer = Session[Constants.SESSION_USER] as Customer;
             return View("ReturnList", null);
         }
 
-        public ActionResult GetReturnRequest(long customerId)
+        public ActionResult GetReturnRequest()
         {
+            Customer customer = Session[Constants.SESSION_USER] as Customer;
             return View("ReturnRequest", null);
         }
         public ActionResult CheckOrder()
@@ -125,6 +136,9 @@ namespace AirShopp.UI.Controllers
                 orderConfirmViewModel.ActuallyAmount = actuallyAmount;
                 orderConfirmViewModel.DisCountAmount = actuallyAmount - order.TotalAmount;
                 orderConfirmViewModel.order = order;
+                orderConfirmViewModel.ProvinceList = _provinceRepository.GetProvince();
+                orderConfirmViewModel.CityList = _cityRepository.GetCity();
+                orderConfirmViewModel.AreaList = _areaRepository.GetArea();
             }
             catch (Exception ex)
             {
@@ -132,9 +146,34 @@ namespace AirShopp.UI.Controllers
             }
             return View(orderConfirmViewModel);
         }
-        public ActionResult SubmitOrder()
+        public ActionResult SubmitOrder(long orderId)
         {
-            return View();
+            Order order = new Order();
+            try
+            {
+                order =  _readFromDb.Orders.Where(x => x.Id == orderId).First();
+                //order.AddressId = addressId;  ,long addressId
+                _orderRepository.UpdateOrder(order);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View("SubmitOrder",order);
         }
+
+        public ActionResult CancelOrder(long orderId)
+        {
+            try
+            {
+                _orderRepository.CancelOrder(orderId);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return RedirectToAction("Index");
+        }
+        
     }
 }

@@ -12,7 +12,13 @@ namespace AirShopp.DataAccess
         private readonly AirShoppContext _context = new AirShoppContext();
         public void AddComment(Comment comment)
         {
-            throw new NotImplementedException();
+            _context.Comments.Add(comment);
+            _context.SaveChanges();
+        }
+
+        public List<Comment> GetAllComment(long customerId)
+        {
+            return _context.Comments.Where(x => x.Order.CustomerId == customerId).ToList();
         }
 
         public List<Comment> GetCommentsByProductId(long productId)

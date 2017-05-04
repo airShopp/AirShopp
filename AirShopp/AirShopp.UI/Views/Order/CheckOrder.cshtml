@@ -1,6 +1,9 @@
 ﻿@model AirShopp.UI.Models.ViewModel.OrderConfirmViewModel
 @{
     ViewBag.Title = "CheckOrder";
+    Layout = null;
+    @Scripts.Render("~/bundles/AirShopp/js")
+    @Styles.Render("~/bundles/AirShopp/Layout")
 }
 <!doctype html>
 <html>
@@ -66,6 +69,72 @@
 
          });
     </script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=BZpwjUXFrAlT6g87xFxY4c3Cf82zen93"></script>
+    <script>
+    function addAddress(){
+        var areaId = $("#selDistrict").val();
+        if (areaId == 0){
+            alert("请选择省市区");
+            return;
+        }
+
+        var address = $("#Address").val();
+        if (address ==""){
+            alert("请输入详细地址");
+            return;
+        }
+
+        var name = $("#ReceiverName").val();
+        if (name == ""){
+            alert("请输入收货人姓名");
+            return;
+        }
+
+        var phone = $("#ReceiverPhone").val();
+        if (phone ==""){
+            alert("请输入手机号码");
+            return;
+        }
+        $("#defaultAddress").prop('checked', true);
+        $("#form").submit();
+    }
+    </script>
+    <script language="javascript">
+
+    var province = @Html.Raw(Json.Encode(Model.ProvinceList));
+
+    var city = @Html.Raw(Json.Encode(Model.CityList));
+
+    var area = @Html.Raw(Json.Encode(Model.AreaList));
+
+    $(function() {
+        $.each(province, function(k, p) {
+            var option = "<option value='" + p.ProvinceId + "'>" + p.ProvinceName + "</option>";
+            $("#selProvince").append(option);
+        });
+        $("#selProvince").change(function() {
+            var selValue = $(this).val();
+            $("#selCity option:gt(0)").remove();
+            $("#selDistrict option:gt(0)").remove();
+            $.each(city, function(k, p) {
+                if (p.ProvinceId == selValue) {
+                    var option = "<option value='" + p.CityId + "'>" + p.CityName + "</option>";
+                    $("#selCity").append(option);
+                }
+            });
+        });
+        $("#selCity").change(function() {
+            var selValue = $(this).val();
+            $("#selDistrict option:gt(0)").remove();
+            $.each(area, function(k, p) {
+                if (p.CityId == selValue) {
+                    var option = "<option value='" + p.Id + "'>" + p.AreaName + "</option>";
+                    $("#selDistrict").append(option);
+                }
+            });
+        });
+    });
+    </script>
 </head>
 <body>
 
@@ -76,42 +145,49 @@
                 <div class="hint3"></div>
             </div>
 
-
-            <div class="pc-label"><label><i class="reds ">*</i>收货人:</label><input type="text" placeholder="请您填写收货人姓名"></div>
+        @using (Html.BeginForm("AddAddress", "Address", FormMethod.Post, new { @id = "form" }))
+        {
+            <div class="pc-label"><label><i class="reds ">*</i>收货人:</label>@Html.TextBoxFor(m => m.ReceiverName, new { id = "ReceiverName", tabindex = "5", autocomplete = "off", placeholder = "长度不超过25个字符" })</div>
             <div id="sjld" style="margin-top:10px; padding-left:40px; position:relative;" class="clearfix">
 
                 <div class="clearfix" style="padding-bottom:5px;"><i class="reds fl">*</i><p class="fl">所在地区:</p></div>
 
                 <div class="m_zlxg" id="shenfen">
-
-                    <p title="">选择省份</p>
+                    <select id="selProvince" name="Province">
+                        <option value="0">--请选择省份--</option>
+                    </select>
                     <div class="m_zlxg2">
                         <ul></ul>
                     </div>
                 </div>
                 <div class="m_zlxg" id="chengshi">
-                    <p title="">选择城市</p>
+                    <select id="selCity" name="City">
+                        <option value="0">--请选择城市--</option>
+                    </select>
                     <div class="m_zlxg2">
                         <ul></ul>
                     </div>
                 </div>
                 <div class="m_zlxg" id="quyu">
-                    <p title="">选择区域</p>
+                    <select id="selDistrict" name="AreaId">
+                        <option value="0">--请选择区/县--</option>
+                    </select>
                     <div class="m_zlxg2">
                         <ul></ul>
                     </div>
                 </div>
-                <input id="sfdq_num" type="hidden" value="" />
+                @*<input id="sfdq_num" type="hidden" value="" />
                 <input id="csdq_num" type="hidden" value="" />
                 <input id="sfdq_tj" type="hidden" value="" />
                 <input id="csdq_tj" type="hidden" value="" />
-                <input id="qydq_tj" type="hidden" value="" />
+                <input id="qydq_tj" type="hidden" value="" />*@
             </div>
 
-            <div class="pc-label"><label><i class="reds ">*</i>详细地址:</label><input type="text" style="width:400px; " placeholder="请您填写收货人详细地址"></div>
-            <div class="pc-label"><label><i class="reds ">*</i>手机号码:</label><input type="text" style="width:400px;" placeholder="请您填写收货人手机号码"></div>
-            <div class="pc-label"><label>邮箱:</label><input type="text" style="width:400px;" placeholder="请您填写邮箱地址"></div>
-            <a href="javascript:;" class="hint-in3">保存收货地址</a>
+            <div class="pc-label"><i class="reds ">*</i>详细地址:@Html.TextBoxFor(m => m.Address, new { id = "Address", tabindex = "4", autocomplete = "off", placeholder = "建议您如实填写详细收货地址，例如街道名称，门牌号码，楼层和房间号等信息" })</div>
+            <div class="pc-label"><i class="reds ">*</i>手机号码:@Html.TextBoxFor(m => m.ReceiverPhone, new { id = "ReceiverPhone", tabindex = "6", autocomplete = "off" })</div>
+            <div class="pc-label" style="display:none;" >@Html.CheckBoxFor(m => m.IsDefault, new { @id = "defaultAddress", tabindex = "7", autocomplete = "off", style = "vertical-align:middle" })<label for="defaultAddress">设置为默认收货地址</label></div>
+            <a href="javascript:void(0);" class="hint-in3" onclick="addAddress()">保存收货地址</a>
+        }
         </div>
 
     </div>
@@ -234,8 +310,9 @@
             <div class="clearfix">
                 <div class="fr pc-space-j">
                     <spna>应付总额：<strong>￥@Model.order.TotalAmount</strong></spna>
+                    <a class="pc-submit" href="/Order/SubmitOrder?orderId=@Model.order.Id">提交订单</a>
                     @Html.ActionLink("提交订单", "SubmitOrder", new { Controller = "Order" }, new { style = "color:#ea4949" })
-                    @*<button class="pc-submit">提交订单</button>*@
+                    @*<button class="pc-submit" onclick="">提交订单</button>*@
                 </div>
             </div>
         </div>

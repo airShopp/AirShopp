@@ -16,6 +16,14 @@ namespace AirShopp.DataAccess
             return order;
         }
 
+        public void CancelOrder(long orderId)
+        {
+            var order = _context.Order.Find(orderId);
+            order.OrderStatus = "CANCELED";
+            _context.Entry<Order>(order).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
         public void DeleteOrder(long orderId)
         {
             var order = _context.Order.Find(orderId);
@@ -90,6 +98,7 @@ namespace AirShopp.DataAccess
         public void UpdateOrder(Order order)
         {
             _context.Entry<Order>(order).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }

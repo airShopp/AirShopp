@@ -13,5 +13,6 @@ namespace AirShopp.Domain
         void UpdateOrder(Order order);
         List<Order> LoadOrderList(long customerId);
         Order GetOrderByOrderId(long orderId);
+        void CancelOrder(long orderId);
     }
 }

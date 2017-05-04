@@ -195,6 +195,7 @@
     <Compile Include="Models\LocationDataModel.cs" />
     <Compile Include="Models\ProductDataModel.cs" />
     <Compile Include="Models\ViewModel\AddressListViewModel.cs" />
+    <Compile Include="Models\ViewModel\CommentViewModel.cs" />
     <Compile Include="Models\ViewModel\OrderConfirmViewModel.cs" />
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
     <Compile Include="Models\ProductListDataModel.cs" />
