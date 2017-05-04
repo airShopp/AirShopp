@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AirShopp.Domain
 {
@@ -12,7 +13,6 @@ namespace AirShopp.Domain
             Orders = new List<Order>();
             Addresses = new List<Address>();
         }
-
         public long Id { get; set; }
         public string Account { get; set; }
         public string Password { get; set; }
@@ -28,7 +28,6 @@ namespace AirShopp.Domain
         public DateTime LastSignInTime { get; set; }
         public DateTime RegisterDate { get; set; }
 
-        public virtual Cart Cart { get; set; }
         public virtual ICollection<Address> Addresses { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }

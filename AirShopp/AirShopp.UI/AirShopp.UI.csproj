@@ -193,6 +193,7 @@
     <Compile Include="Models\CustomerCommentDataModel.cs" />
     <Compile Include="Models\Enum\OrderStatusEnumType.cs" />
     <Compile Include="Models\ProductDataModel.cs" />
+    <Compile Include="Models\ShopCartDataModel.cs" />
     <Compile Include="Models\ViewModel\AddressListViewModel.cs" />
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
     <Compile Include="Models\ProductListDataModel.cs" />
@@ -446,7 +447,7 @@
     <Content Include="Views\Address\AddressList.cshtml" />
     <Content Include="Views\Product\ProductList.cshtml" />
     <Content Include="Views\Comment\AddComment.cshtml" />
-    <Content Include="Views\Product\ShopCart.cshtml" />
+    <Content Include="Views\Cart\ShopCart.cshtml" />
     <Content Include="Views\Order\ReturnRequest.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Order\ReturnList.cshtml" />
@@ -491,7 +492,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\QRImages\" />
-    <Folder Include="Views\Cart\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
