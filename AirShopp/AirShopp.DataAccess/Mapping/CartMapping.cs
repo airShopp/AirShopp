@@ -9,8 +9,6 @@ namespace AirShopp.DataAccess.Mapping
         public CartMapping()
         {
             HasKey(e => e.Id).Property(e => e.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-
-            HasRequired(e => e.Customer).WithOptional(e => e.Cart);
         }
     }
 }

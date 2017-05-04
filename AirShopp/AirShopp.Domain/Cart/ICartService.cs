@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace AirShopp.Domain
 {
     public interface ICartService
     {
-        List<Cart> LoadCartList(long CustomerId);
+        IQueryable LoadCartList(long CustomerId);
         //TODO Cart_Kenneth
-        //int GetProductAmoutByUser(long customerId);
+        int GetProductAmoutByUser(long customerId);
     }
 }

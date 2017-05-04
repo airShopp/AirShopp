@@ -101,6 +101,7 @@ namespace AirShopp.UI.Models
             container.RegisterType<IOrderItemRepository, OrderItemRepository>();
             container.RegisterType<IDeliveryInfoRepository, DeliveryInfoRepository>();
             container.RegisterType<ICourierRepository, CourierRepository>();
+            container.RegisterType<ICartItemRepository, CartItemRepository>();
             //
             container.RegisterType<IReadFromDb, ReadFromDb>();
             return container;

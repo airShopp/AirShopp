@@ -8,6 +8,6 @@ namespace AirShopp.Domain
 {
     public interface ICartRepository
     {
-        List<Cart> LoadCartList(long CustomerId);
+        long AddCart(Cart cart);
     }
 }

@@ -10,15 +10,11 @@ namespace AirShopp.UI.Models.ViewModel
 
         public long ProductId { get; set; } 
         public string ProductName { get; set; }
-        [DefaultValue("")]
+        public double Price { get; set; }
         public string Description { get; set; }
-        [DefaultValue("")]
         public List<string> ProductUrl { get; set; }
-        [DefaultValue(0)]
         public int Sales { get; set; }
-        [DefaultValue(0)]
         public int CommentAmount { get; set; }
-        [DefaultValue(0)]
         public int ProductAmount { get; set; }
         public DateTime BuyTime { get; set; } //OrderItem => OrderDate
         public List<CustomerCommentDataModel> comments { get; set; }

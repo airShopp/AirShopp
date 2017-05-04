@@ -39,5 +39,10 @@ namespace AirShopp.Common
         public const string TRANSFER = "TRANSFER";
         public const string DELIVERY = "DELIVERY";
         public const string FINISHED = "FINISHED";
+        //PENDING DELETE BOUGHT
+
+        public const string PENDING = "PENDING";
+        public const string DELETE = "DELETE";
+        public const string BOUGHT = "BOUGHT";
     }
 }
