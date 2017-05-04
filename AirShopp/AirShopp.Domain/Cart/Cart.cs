@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AirShopp.Domain
 {
+    [Table("Cart")]
     public class Cart
     {
         public Cart()
@@ -12,10 +13,7 @@ namespace AirShopp.Domain
         }
 
         public long Id { get; set; }
-
         public long CustomerId { get; set; }
-        public virtual Customer Customer { get; set; }
-
         public virtual ICollection<CartItem> CartItems { get; set; }
     }
 }

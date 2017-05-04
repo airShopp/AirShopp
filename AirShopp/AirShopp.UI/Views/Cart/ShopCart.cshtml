@@ -1,0 +1,90 @@
+﻿@model AirShopp.UI.Models.ViewModel.ShopCartViewModel
+@{
+    ViewBag.Title = "ShopCart";
+    Layout = "~/Views/Shared/_shopCartLayout.cshtml";
+}
+@Scripts.Render("~/bundles/AirShopp/Cart/js")
+@Styles.Render("~/bundles/AirShopp/Cart/Css")
+<section>
+    <div class="pc-details">
+        <div id="content">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" id="shopping">
+                <tr>
+                    <td class="title_1"><input id="allCheckBox" type="checkbox" value="" onclick="selectAll()" />全选</td>
+                    <td class="title_2" colspan="2">店铺宝贝</td>
+                    <td class="title_3">获积分</td>
+                    <td class="title_4">单价（元）</td>
+                    <td class="title_5">数量</td>
+                    <td class="title_6">小计（元）</td>
+                    <td class="title_7">操作</td>
+                </tr>
+                <tr>
+                    <td colspan="8" class="line"></td>
+                </tr>
+                @{ var i = 1;}
+                @foreach (var cartProduct in Model.ShopCart)
+                {
+                    var trId = "product" + i;
+                    var tdClass = "select" + (i + 2);
+                    <tr id="@trId" class="cartItem">
+                        <td class="cart_td_1"><input name="cartCheckBox" class="@tdClass" type="checkbox" value="@trId" onclick="selectSingle()" /></td>
+                        <td class="cart_td_2"><img style="width:80px;height:80px;" src="@cartProduct.PictureUrl" alt="shopping" /></td>
+                        <td class="cart_td_3">
+                            <a href="#">@cartProduct.ProductName</a><br />
+                            保障：<img src="~/Content/img/cart/taobao_icon_01.jpg" alt="icon" />
+                        </td>
+                        <td class="cart_td_4">@cartProduct.ProductCredit</td>
+                        <td class="cart_td_5">@cartProduct.Price</td>
+                        <td class="cart_td_6"><img src="~/Content/img/cart/taobao_minus.jpg" alt="minus" onclick="changeNum('num_@i','minus')" class="hand" /> <input id="num_@i" type="text" value="@cartProduct.ProductAmount" class="num_input" readonly="readonly" /> <img src="~/Content/img/cart/taobao_adding.jpg" alt="add" onclick="changeNum('num_@i','add')" class="hand" /></td>
+                        <td class="cart_td_7"></td>
+                        <td class="cart_td_8"><a href="javascript:deleteRow('@trId');">删除</a></td>
+                    </tr>
+                    i++;
+                }
+                <tr>
+                    <td colspan="3"><a href="javascript:deleteSelectRow()"><img src="~/Content/img/cart/taobao_del.jpg" alt="delete" /></a></td>
+                    <td colspan="5" class="shopend">
+                        商品总价（不含运费）：<label id="total" class="yellow"></label> 元<br />
+                        可获积分 <label class="yellow" id="integral"></label> 点<br />
+                        @*@Html.ActionLink("立即购买", "CheckOrder", new { Controller = "Order"}, new { style = "color:#ea4949" })*@
+                        <input name="" type="image" src="~/Content/img/cart/taobao_subtn.jpg" onclick="CheckOrder()" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="page" style="padding:0 0 5px 0;">
+            <div class="pagination">
+                <a style="display:none" class="fl " href="#">上一页</a>
+                <a href="#" class="current">1</a>
+                <a href="javascript:;">2</a>
+                <a href="javascript:;">3</a>
+                <a href="javascript:;">4</a>
+                <a href="javascript:;">5</a>
+                <a href="javascript:;">6</a>
+                <a href="javascript:;">7</a>
+                <span class="pc-search-di">…</span>
+                <a href="javascript:;">1088</a>
+                <a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function CheckOrder()
+    {
+        //var str = "";
+        //var cartItemList = document.getElementsByClassName('cartItem').forEach(function () {
+        //    $(this).ch
+        //});
+
+        //for(var cartItem in cartItemList)
+        //{
+
+        //    if (isSelected)
+        //    {
+        //        str = str + tdArr.eq(0).find("input").val();
+        //        alert(str);
+        //    }
+        //}
+    }
+</script>

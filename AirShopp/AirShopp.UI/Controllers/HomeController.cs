@@ -59,11 +59,15 @@ namespace AirShopp.UI.Controllers
                               }).OrderBy(hp => hp.Sales).Take(20).OrderBy(x => Guid.NewGuid()).Take(6).ToList();
 
             var customer = Session[Constants.SESSION_USER] as Customer;
+            var cartProductAccount = 0;
+            if (customer != null)
+            {
+                cartProductAccount = _cartService.GetProductAmoutByUser(customer.Id);
+            }
             HomeViewModel homeViewModel = new HomeViewModel()
             {
                 //TODO Cart_Kenneth
-                CartProductAccount = 0,
-                //CartProductAccount = _cartService.GetProductAmoutByUser(customer.Id),
+                CartProductAccount = cartProductAccount,
                 Categories = _categoryRepository.GetCategories().ToList(),
                 HotProducts = hotProducts,
                 SecondCategories = secondCategories,

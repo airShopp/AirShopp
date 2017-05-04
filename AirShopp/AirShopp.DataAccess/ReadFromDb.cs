@@ -94,5 +94,13 @@ namespace AirShopp.DataAccess
                 return _context.CartItem;
             }
         }
+
+        public IQueryable<Customer> Customers
+        {
+            get
+            {
+                return _context.Customer;
+            }
+        }
     }
 }

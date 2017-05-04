@@ -34,5 +34,11 @@ namespace AirShopp.Common
         public const string SESSION_USER = "CUSTOMER";
         public const string IP = "IP";
         public const string TIME = "TIME";
+
+        //PENDING DELETE BOUGHT
+
+        public const string PENDING = "PENDING";
+        public const string DELETE = "DELETE";
+        public const string BOUGHT = "BOUGHT";
     }
 }
