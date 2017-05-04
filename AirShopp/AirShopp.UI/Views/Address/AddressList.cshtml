@@ -156,6 +156,10 @@
                         {
                             <div class="default fl"><a href="#">默认地址</a> </div>
                         }
+                        else
+                        {
+                            <div class="default fl" style="visibility:hidden"><a href="#">默认地址</a> </div>
+                        }
                         <div class="user-info1 fl clearfix">
                             <div class="user-info">
                                 <span class="info1">收货人：</span>
@@ -171,9 +175,12 @@
                             </div>
                         </div>
                         <div class="pc-event">
-                            <a href="#" class="pc-event-d">设为默认地址</a>
+                            @if (!@Model.AddressList[i].IsDefault)
+                            {
+                                <a href="/Address/SetDefaultAddress?addressId=@Model.AddressList[i].Id">设为默认地址</a>
+                            }
                             <a href="#">编辑 </a>
-                            <a href="#">删除</a>
+                            <a href="/Address/DeleteAddress?addressId=@Model.AddressList[i].Id">删除</a>
                         </div>
                     </li>
                 }

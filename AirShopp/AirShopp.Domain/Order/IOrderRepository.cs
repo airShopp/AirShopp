@@ -8,10 +8,11 @@ namespace AirShopp.Domain
 {
     public interface IOrderRepository
     {
-        void AddOrder(Order order);
+        Order AddOrder(Order order);
         void DeleteOrder(long orderId);
         void UpdateOrder(Order order);
         List<Order> LoadOrderList(long customerId);
         Order GetOrderByOrderId(long orderId);
+        void CancelOrder(long orderId);
     }
 }

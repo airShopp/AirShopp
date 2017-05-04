@@ -1,6 +1,9 @@
-﻿
+﻿@model AirShopp.UI.Models.ViewModel.OrderConfirmViewModel
 @{
     ViewBag.Title = "CheckOrder";
+    Layout = null;
+    @Scripts.Render("~/bundles/AirShopp/js")
+    @Styles.Render("~/bundles/AirShopp/Layout")
 }
 <!doctype html>
 <html>
@@ -36,9 +39,6 @@
              $("#pc-nav").hoverClass("current");
          });
 
-
-
-
          $(document).ready(function($){
 
              $(".btn1").click(function(event){
@@ -69,8 +69,72 @@
 
          });
     </script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=BZpwjUXFrAlT6g87xFxY4c3Cf82zen93"></script>
+    <script>
+    function addAddress(){
+        var areaId = $("#selDistrict").val();
+        if (areaId == 0){
+            alert("请选择省市区");
+            return;
+        }
 
+        var address = $("#Address").val();
+        if (address ==""){
+            alert("请输入详细地址");
+            return;
+        }
 
+        var name = $("#ReceiverName").val();
+        if (name == ""){
+            alert("请输入收货人姓名");
+            return;
+        }
+
+        var phone = $("#ReceiverPhone").val();
+        if (phone ==""){
+            alert("请输入手机号码");
+            return;
+        }
+        $("#defaultAddress").prop('checked', true);
+        $("#form").submit();
+    }
+    </script>
+    <script language="javascript">
+
+    var province = @Html.Raw(Json.Encode(Model.ProvinceList));
+
+    var city = @Html.Raw(Json.Encode(Model.CityList));
+
+    var area = @Html.Raw(Json.Encode(Model.AreaList));
+
+    $(function() {
+        $.each(province, function(k, p) {
+            var option = "<option value='" + p.ProvinceId + "'>" + p.ProvinceName + "</option>";
+            $("#selProvince").append(option);
+        });
+        $("#selProvince").change(function() {
+            var selValue = $(this).val();
+            $("#selCity option:gt(0)").remove();
+            $("#selDistrict option:gt(0)").remove();
+            $.each(city, function(k, p) {
+                if (p.ProvinceId == selValue) {
+                    var option = "<option value='" + p.CityId + "'>" + p.CityName + "</option>";
+                    $("#selCity").append(option);
+                }
+            });
+        });
+        $("#selCity").change(function() {
+            var selValue = $(this).val();
+            $("#selDistrict option:gt(0)").remove();
+            $.each(area, function(k, p) {
+                if (p.CityId == selValue) {
+                    var option = "<option value='" + p.Id + "'>" + p.AreaName + "</option>";
+                    $("#selDistrict").append(option);
+                }
+            });
+        });
+    });
+    </script>
 </head>
 <body>
 
@@ -81,42 +145,49 @@
                 <div class="hint3"></div>
             </div>
 
-
-            <div class="pc-label"><label><i class="reds ">*</i>收货人:</label><input type="text" placeholder="请您填写收货人姓名"></div>
+        @using (Html.BeginForm("AddAddress", "Address", FormMethod.Post, new { @id = "form" }))
+        {
+            <div class="pc-label"><label><i class="reds ">*</i>收货人:</label>@Html.TextBoxFor(m => m.ReceiverName, new { id = "ReceiverName", tabindex = "5", autocomplete = "off", placeholder = "长度不超过25个字符" })</div>
             <div id="sjld" style="margin-top:10px; padding-left:40px; position:relative;" class="clearfix">
 
                 <div class="clearfix" style="padding-bottom:5px;"><i class="reds fl">*</i><p class="fl">所在地区:</p></div>
 
                 <div class="m_zlxg" id="shenfen">
-
-                    <p title="">选择省份</p>
+                    <select id="selProvince" name="Province">
+                        <option value="0">--请选择省份--</option>
+                    </select>
                     <div class="m_zlxg2">
                         <ul></ul>
                     </div>
                 </div>
                 <div class="m_zlxg" id="chengshi">
-                    <p title="">选择城市</p>
+                    <select id="selCity" name="City">
+                        <option value="0">--请选择城市--</option>
+                    </select>
                     <div class="m_zlxg2">
                         <ul></ul>
                     </div>
                 </div>
                 <div class="m_zlxg" id="quyu">
-                    <p title="">选择区域</p>
+                    <select id="selDistrict" name="AreaId">
+                        <option value="0">--请选择区/县--</option>
+                    </select>
                     <div class="m_zlxg2">
                         <ul></ul>
                     </div>
                 </div>
-                <input id="sfdq_num" type="hidden" value="" />
+                @*<input id="sfdq_num" type="hidden" value="" />
                 <input id="csdq_num" type="hidden" value="" />
                 <input id="sfdq_tj" type="hidden" value="" />
                 <input id="csdq_tj" type="hidden" value="" />
-                <input id="qydq_tj" type="hidden" value="" />
+                <input id="qydq_tj" type="hidden" value="" />*@
             </div>
 
-            <div class="pc-label"><label><i class="reds ">*</i>详细地址:</label><input type="text" style="width:400px; " placeholder="请您填写收货人详细地址"></div>
-            <div class="pc-label"><label><i class="reds ">*</i>手机号码:</label><input type="text" style="width:400px;" placeholder="请您填写收货人手机号码"></div>
-            <div class="pc-label"><label>邮箱:</label><input type="text" style="width:400px;" placeholder="请您填写邮箱地址"></div>
-            <a href="javascript:;" class="hint-in3">保存收货地址</a>
+            <div class="pc-label"><i class="reds ">*</i>详细地址:@Html.TextBoxFor(m => m.Address, new { id = "Address", tabindex = "4", autocomplete = "off", placeholder = "建议您如实填写详细收货地址，例如街道名称，门牌号码，楼层和房间号等信息" })</div>
+            <div class="pc-label"><i class="reds ">*</i>手机号码:@Html.TextBoxFor(m => m.ReceiverPhone, new { id = "ReceiverPhone", tabindex = "6", autocomplete = "off" })</div>
+            <div class="pc-label" style="display:none;" >@Html.CheckBoxFor(m => m.IsDefault, new { @id = "defaultAddress", tabindex = "7", autocomplete = "off", style = "vertical-align:middle" })<label for="defaultAddress">设置为默认收货地址</label></div>
+            <a href="javascript:void(0);" class="hint-in3" onclick="addAddress()">保存收货地址</a>
+        }
         </div>
 
     </div>
@@ -163,17 +234,17 @@
     <section>
         <div class="containers">
             <div class="pc-space">
-                <div class="pc-order-title clearfix"><h3 class="fl">收货人信息</h3> <a href="#" class="fr pc-order-add btn1">新增收货地址</a> </div>
+                <div class="pc-order-title clearfix"><h3 class="fl">收货人信息</h3> <a href="#" class="fr pc-order-add btn1">新增收货地址</a> <a href="#" class="fr pc-order-add btn1">更改地址</a></div>
                 <div class="pc-border">
                     <div class="pc-order-text clearfix">
                         <ul class=" clearfix">
                             <li class="clearfix fl">
                                 <div class="fl pc-frame pc-frams"> <a href="#">默认地址</a></div>
-                                <div class="fl pc-address"><span>嘻哈杂货铺</span> <span>186****4832 </span> <span>北京北京市海淀区首享科技大厦9层</span></div>
+                                <div class="fl pc-address"><span>@Model.order.Address.ReceiverName</span> <span> @Model.order.Address.ReceiverPhone </span> <span>@Model.order.Address.DeliveryAddress</span></div>
                             </li>
-                            <li class="fr">
+                            @*<li class="fr">
                                 <div class="pc-click"><a href="#">设为默认地址</a> <a href="#">编辑</a> <a href="#">删除</a> </div>
-                            </li>
+                            </li>*@
                         </ul>
                     </div>
                 </div>
@@ -197,18 +268,12 @@
                         <div class="pc-order-text pc-order-l clearfix">
                             <ul id="H-table" class="clearfix H-table">
                                 <li class="cur">
-                                    <a href="javascript:void(0);">百事汇通</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">顺风快递</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);">中通快递</a>
+                                    <a href="javascript:void(0);">自营快递</a>
                                 </li>
                             </ul>
                             <div class="" style="height:211px"></div>
                             <div class="pc-line"></div>
-                            <div class="pc-freight"><p>运费：  8.00元</p></div>
+                            <div class="pc-freight"><p>运费：  0.00元</p></div>
                         </div>
                     </div>
                 </div>
@@ -216,51 +281,38 @@
                     <div class="pc-order-title clearfix"><h3 class="fl">商品信息</h3></div>
                     <div class="pc-border">
                         <div class="pc-order-text clearfix">
-                            <div class="pc-wares-t"><h4>商家：  阿卡官方旗舰店</h4></div>
-                            <div class="clearfix pc-wares-p">
-                                <div class="fl pc-wares"><a href="#"><img src="theme/img/pd/pc1.png"></a></div>
-                                <div class="fl pc-wares-w"> <a href="#">小米（MI）小米USB插线板 3个USB充电口 支持2A快充 3重安全保护</a> <p class="clearfix"><span class="fl">颜色：白色</span><span class="fr">版本：联通高</span></p></div>
-                                <div class="fl pc-wares-s"><span class="reds">￥49.00</span><span>x1</span><span>有货</span></div>
-                            </div>
-                            <div class="clearfix pc-wares-p">
-                                <div class="fl pc-wares"><a href="#"><img src="theme/img/pd/pc1.png"></a></div>
-                                <div class="fl pc-wares-w"> <a href="#">小米（MI）小米USB插线板 3个USB充电口 支持2A快充 3重安全保护</a> <p class="clearfix"><span class="fl">颜色：白色</span><span class="fr">版本：联通高</span></p></div>
-                                <div class="fl pc-wares-s"><span class="reds">￥49.00</span><span>x1</span><span>有货</span></div>
-                            </div>
+                            @for(int i = 0; i < Model.order.OrderItems.Count(); i++)
+                            {
+                                var orderItems = @Model.order.OrderItems.ToList();
+                                AirShopp.Domain.OrderItem orderItem = orderItems[i] as AirShopp.Domain.OrderItem;
+                                <div class="clearfix pc-wares-p">
+                                    <div class="fl pc-wares"><a href="#"><img src="@orderItem.Product.Url" width="80" height="80"></a></div>
+                                    <div class="fl pc-wares-w"> <a href="#">@orderItem.Product.ProductName</a> <p class="clearfix"><span class="fl">颜色：白色</span><span class="fr">版本：联通高</span></p></div>
+                                    <div class="fl pc-wares-s"><span class="reds">￥@(orderItem.DiscountPrice * orderItem.Quantity)</span><span>x @orderItem.Quantity</span><span>有货</span></div>
+                                </div>
+                            }
                             <div class="pc-written"><p>订单留言</p></div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="pc-space">
-                <div class="pc-order-title clearfix"><h3 class="fl">发票信息</h3></div>
-                <div class="pc-border">
-                    <div class="pc-order-text clearfix">
-                        <ul class=" clearfix">
-                            <li class="clearfix fl">
-                                <div class="fl pc-address pc-wares-l"><span>普通发票（纸质）</span> <span> 个人</span> <span>明细</span><span><a href="#">修改</a> </span></div>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
             <div class="clearfix">
                 <div class="fr pc-list-t">
                     <ul>
-                        <li><span><b>2</b> 件商品，总商品金额：</span> <em>￥558.00</em></li>
-                        <li><span>减额：</span> <em>￥558.00</em></li>
-                        <li><span>运费：</span> <em>￥558.00</em></li>
-                        <li><span>应付总额：</span> <em>￥558.00</em></li>
-                        <li><span>减额：</span> <em>￥558.00</em></li>
+                        <li><span><b>2</b> 件商品，总商品金额：</span> <em>￥@Model.ActuallyAmount</em></li>
+                        <li><span>减额：</span> <em>￥@Model.DisCountAmount</em></li>
+                        <li><span>运费：</span> <em>￥0.00</em></li>
+                        <li><span>应付总额：</span> <em>￥@Model.order.TotalAmount</em></li>
                     </ul>
                 </div>
             </div>
             <div class="pc-space-n"></div>
             <div class="clearfix">
                 <div class="fr pc-space-j">
-                    <spna>应付总额：<strong>￥558.00</strong></spna>
+                    <spna>应付总额：<strong>￥@Model.order.TotalAmount</strong></spna>
+                    <a class="pc-submit" href="/Order/SubmitOrder?orderId=@Model.order.Id">提交订单</a>
                     @Html.ActionLink("提交订单", "SubmitOrder", new { Controller = "Order" }, new { style = "color:#ea4949" })
-                    @*<button class="pc-submit">提交订单</button>*@
+                    @*<button class="pc-submit" onclick="">提交订单</button>*@
                 </div>
             </div>
         </div>

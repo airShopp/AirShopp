@@ -13,16 +13,18 @@ namespace AirShopp.UI.Controllers
     public class AddressController : FliterController
     {
         private IAddressService _addressService;
+        private IAddressRepository _addressRepository;
         private IProvinceRepository _provinceRepository;
         private ICityRepository _cityRepository;
         private IAreaRepository _areaRepository;
 
-        public AddressController(IAddressService addressService, IProvinceRepository provinceRepository, ICityRepository cityRepository, IAreaRepository areaRepository)
+        public AddressController(IAddressService addressService, IAddressRepository addressRepository, IProvinceRepository provinceRepository, ICityRepository cityRepository, IAreaRepository areaRepository)
         {
             _addressService = addressService;
             _provinceRepository = provinceRepository;
             _cityRepository = cityRepository;
             _areaRepository = areaRepository;
+            _addressRepository = addressRepository;
         }
 
         // GET: Address
@@ -95,8 +97,21 @@ namespace AirShopp.UI.Controllers
 
         public ActionResult DeleteAddress(long addressId)
         {
-            _addressService.DeleteAddress(addressId);
-            return View();
+            try
+            {
+                _addressService.DeleteAddress(addressId);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return RedirectToAction("GetAddress");
+        }
+
+        public ActionResult SetDefaultAddress(long addressId)
+        {
+            _addressRepository.SetDefaultAddress(addressId);
+            return RedirectToAction("GetAddress");
         }
     }
 }

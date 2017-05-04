@@ -95,6 +95,13 @@ namespace AirShopp.DataAccess
             }
         }
 
+        public IQueryable<Address> Address
+        {
+            get
+            {
+                return _context.Address;
+            }
+        }
         public IQueryable<Customer> Customers
         {
             get

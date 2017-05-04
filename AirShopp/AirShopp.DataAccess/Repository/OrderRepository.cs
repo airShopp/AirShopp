@@ -9,9 +9,18 @@ namespace AirShopp.DataAccess
     public class OrderRepository : IOrderRepository
     {
         public AirShoppContext _context = new AirShoppContext();
-        public void AddOrder(Order order)
+        public Order AddOrder(Order order)
         {
-            _context.Order.Add(order);
+            order = _context.Order.Add(order);
+            _context.SaveChanges();
+            return order;
+        }
+
+        public void CancelOrder(long orderId)
+        {
+            var order = _context.Order.Find(orderId);
+            order.OrderStatus = "CANCELED";
+            _context.Entry<Order>(order).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
@@ -89,6 +98,7 @@ namespace AirShopp.DataAccess
         public void UpdateOrder(Order order)
         {
             _context.Entry<Order>(order).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }
