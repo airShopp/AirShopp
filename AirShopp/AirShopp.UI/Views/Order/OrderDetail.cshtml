@@ -13,7 +13,7 @@
         <div class="member-order">
             <dl>
                 <dt>发货信息</dt>
-                <dd class="member-seller">卖家已发货 <a href="#">（物流查询）</a> </dd>
+                <dd class="member-seller">卖家已发货 <a href="@Url.Action("Index", "BMapRoutePlanning", new { orderId = @Model.Id })">（物流查询）</a></dd>
             </dl>
             <dl class="member-custom clearfix ">
                 <dt>订单信息</dt>

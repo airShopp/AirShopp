@@ -1,12 +1,8 @@
 ﻿@charset "utf-8";
-*{margin:0;padding:0;list-style-type:none;}
-a,img{border:0;}
-body{_background-image:url(about:blank);/*用浏览器空白页面作为背景*/_background-attachment:fixed; /* prevent screen flash in IE6 确保滚动条滚动时，元素不闪动*/ } 
-body{color:#535353;font-size:12px;font-family: "arial","微软雅黑";background:#f0f1f1;}
 .clear{clear:both;display:block;height:0;overflow:hidden;}
 
 /* history */
-#history{width:540px;height:360px;position:relative;margin:50px auto 0 auto;}
+#history{width:100%;height:220px;position:relative;margin:10px 20px 0;}
 #content{height:360px;width:540px;overflow:hidden;background:url(img/TimeLine/vertical.png) no-repeat 105px 2px;padding-top:10px;}
 
 .list{overflow:hidden;position:relative;}
@@ -33,8 +29,7 @@ body{color:#535353;font-size:12px;font-family: "arial","微软雅黑";background
 }
 .thiscur .point b{border:7px solid rgba(107,195,13,0.6);margin:12px 0px 0px 14px;border-radius:52px;}
 .thiscur .hisct{color:#6bc30d;}
-#arrow{position:fixed;top:50%;right:30px;}
-*html #arrow{position:absolute;top:expression(eval(document.documentElement.scrollTop));margin-top:350px;}
+#arrow{position:absolute;top:35%;right:20px;}
 
 #arrow ul li{
 	display:block;height:20px;width:20px;background:url(img/TimeLine/icons.png) no-repeat 0 0;cursor:pointer;

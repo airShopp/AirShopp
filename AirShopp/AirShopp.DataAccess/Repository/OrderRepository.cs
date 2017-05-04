@@ -89,6 +89,7 @@ namespace AirShopp.DataAccess
         public void UpdateOrder(Order order)
         {
             _context.Entry<Order>(order).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }

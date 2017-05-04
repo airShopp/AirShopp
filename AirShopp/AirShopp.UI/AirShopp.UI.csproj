@@ -199,7 +199,7 @@
     <Compile Include="Models\ProductListDataModel.cs" />
     <Compile Include="Models\ViewModel\Admin\Class1.cs" />
     <Compile Include="Models\ViewModel\HomeViewModel.cs" />
-    <Compile Include="Models\ViewModel\OriginPointsViewModel.cs" />
+    <Compile Include="Models\ViewModel\BMapViewModel.cs" />
     <Compile Include="Models\ViewModel\ProductDetailViewModel.cs" />
     <Compile Include="Models\ViewModel\ProductListViewModel.cs" />
     <Compile Include="Models\ViewModel\ProductViewModel.cs" />
@@ -408,7 +408,6 @@
     <Content Include="Scripts\js\jquery-3.1.1.min.js" />
     <Content Include="Scripts\js\jquery.easing.js" />
     <Content Include="Scripts\js\jquery.js" />
-    <Content Include="Scripts\js\jquery.mousewheel.js" />
     <Content Include="Scripts\js\js-tab.js" />
     <Content Include="Scripts\js\LuShu.js" />
     <Content Include="Scripts\js\MSClass.js" />
@@ -439,7 +438,6 @@
     <Content Include="Views\Shared\_airShoppLayout.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
     <Content Include="Views\Address\ViewAddress.cshtml" />
-    <Content Include="Views\BMapRoutePlanning\Index.cshtml" />
     <Content Include="Views\Order\OrderList.cshtml" />
     <Content Include="Views\Shared\_orderPageLayout.cshtml" />
     <Content Include="Views\Order\OrderDetail.cshtml" />
