@@ -75,11 +75,6 @@ namespace AirShopp.UI.Controllers
             };
             return View("ProductDetail", detailViewModel);
         }
-        public ActionResult ShopCart()
-        {
-            return View();
-        }
-
         public ProductListViewModel GetProductList(int? indexNum, int? pageSize, int categoryId)
         {
 

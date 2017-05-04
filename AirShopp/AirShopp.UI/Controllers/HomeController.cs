@@ -64,6 +64,7 @@ namespace AirShopp.UI.Controllers
             {
                 cartProductAccount = _cartService.GetProductAmoutByUser(customer.Id);
             }
+            Session.Add("CARTPRODUCTCOUNT", cartProductAccount);
             HomeViewModel homeViewModel = new HomeViewModel()
             {
                 //TODO Cart_Kenneth

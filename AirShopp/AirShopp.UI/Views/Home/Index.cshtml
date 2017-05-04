@@ -102,7 +102,7 @@
                             @foreach (var timeProduct in Model.TimeLimitProduct)
                             {
                                 <li>
-                                    <a href="/Product/getProduct">
+                                    <a href="/Product/getProduct?productId=@timeProduct.ProductId">
                                         <img src="@timeProduct.PictureUrl" />
                                         <p class="head-name pc-pa10" title="@timeProduct.ProductName">@timeProduct.ProductName.Substring(0, 20) ···</p>
                                         <p><span class="price">￥@timeProduct.DiscountPrice</span><span class="discount">￥@timeProduct.Price</span></p>

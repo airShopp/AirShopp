@@ -5,6 +5,5 @@
         public int PageIndex { get; set; }
         public int TotalPage { get; set; }
         public int TotalCount { get; set; }
-        public int TotalAccount { get; set; }
     }
 }
