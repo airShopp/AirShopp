@@ -6,8 +6,6 @@ namespace AirShopp.UI.Models.ViewModel
 {
     public class ShopCartViewModel : PageListBaseModel
     {
-        public Product Product { get; set; }
-        public int ProductAmount { get; set; }
-        public int TotalPrice { get; set; }
+        public List<ShopCartDataModel> ShopCart { get; set; }
     }
 }

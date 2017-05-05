@@ -3,7 +3,31 @@
     ViewBag.Title = "OrderList";
     Layout = "~/Views/Shared/_orderPageLayout.cshtml";
 }
+<script>
+         $(function(){
 
+             $("#H-table li").each(function(i){
+                 $(this).click((function(k){
+                     var _index = k;
+                     return function(){
+                         $(this).addClass("cur").siblings().removeClass("cur");
+                         $(".H-over").hide();
+                         $(".H-over:eq(" + _index + ")").show();
+                     }
+                 })(i));
+             });
+             $("#H-table1 li").each(function(i){
+                 $(this).click((function(k){
+                     var _index = k;
+                     return function(){
+                         $(this).addClass("cur").siblings().removeClass("cur");
+                         $(".H-over1").hide();
+                         $(".H-over1:eq(" + _index + ")").show();
+                     }
+                 })(i));
+             });
+         });
+</script>
 <div class="member-right fr">
     <div class="member-head">
         <div class="member-heels fl"><h2>我的订单</h2></div>
@@ -13,13 +37,12 @@
     <div class="member-whole clearfix">
         <ul id="H-table" class="H-table">
             <li class="cur">
-               @Html.ActionLink("订单查询", "Index", "Order")
+               @Html.ActionLink("全部订单", "Index", "Order");
             </li>
-            <li><a href="#">待付款<em>(44)</em></a></li>
-            <li><a href="#">待发货</a></li>
-            <li><a href="#">待收货</a></li>
-            <li><a href="#">交易完成</a></li>
-            <li><a href="#">订单信息</a></li>
+            <li><a href="javascript:void(0)">待付款<em>(@Model.PendingPaymentOrder.Count())</em></a></li>
+            <li><a href="javascript:void(0)">待发货<em>(@Model.PendingDeliveryOrder.Count())</em></a></li>
+            <li><a href="javascript:void(0)">待收货<em>(@Model.PendingReceivedOrder.Count())</em></a></li>
+            <li><a href="javascript:void(0)">待评价</a></li>
         </ul>
     </div>
     <div class="member-border">
@@ -55,10 +78,12 @@
                                     }
                                 </div>
                                 <div class="ci2 amanda1">@Model.AllOrder[i].Customer.CustomerName</div>
-                                <div class="ci3 amanda1"><b>￥@Model.AllOrder[i].TotalAmount.ToString()</b><p>货到付款</p><p class="iphone">手机订单</p></div>
+                                <div class="ci3 amanda1"><b>￥@Model.AllOrder[i].TotalAmount.ToString()</b></div>
                                 <div class="ci4 amanda1"><p>@Model.AllOrder[i].OrderDate.ToShortDateString()</p></div>
+                                @if (Model.AllOrder[i].OrderStatus.Equals("FINISHED"))
+                                {
                                 <div class="ci5 amanda1">
-                                    <p>等待付款</p>
+                                    <p>交易成功</p>
                                     <div style="position:relative;">
                                         <a id ="linkToDelivery">物流跟踪</a>
                                         <div id="deliveryDiv" style="z-index:3; display:none; position:absolute;top:30px;width:300px; background-color:white;">
@@ -78,9 +103,29 @@
                                         </div>
                                     </div>
                                     <a href="/Order/OrderDetail?orderId=@Model.AllOrder[i].Id">订单详情</a>
-                                       @* <p>@Html.ActionLink("订单详情", "OrderDetail", "OrderDetail", null, new { style = "color:#ea4949" })</p>*@
                                   </div>
-                                <div class="ci5 ci8 amanda1"><p>剩余15时20分</p> <p><a href="#" class="member-touch">立即支付</a> </p> <p><a href="#">取消订单</a> </p></div>
+                                <div class="ci5 ci8 amanda1"><p>评价</p> <p><a href="#" class="member-touch">再次购买</a> </p> <p><a href="/Order/CancelOrder?orderId=@Model.AllOrder[i].Id">取消订单</a> </p></div>
+                                }
+                                @if (Model.AllOrder[i].OrderStatus.Equals("OBLIGATION"))
+                                {
+                                    <div class="ci5 amanda1"><p>等待买家付款</p> <p><a href="/Order/OrderDetail?orderId=@Model.AllOrder[i].Id">订单详情</a></p></div>
+                                    <div class="ci5 ci8 amanda1"><p>剩余15时20分</p> <p><a href="#" class="member-touch">立即支付</a> </p> <p><a href="/Order/CancelOrder?orderId=@Model.AllOrder[i].Id">取消订单</a> </p></div>
+                                }
+                                @if (Model.AllOrder[i].OrderStatus.Equals("TRANSFER"))
+                                {
+                                    <div class="ci5 amanda1"><p>买家已付款</p> <p><a href="/Order/OrderDetail?orderId=@Model.AllOrder[i].Id">订单详情</a></p></div>
+                                    <div class="ci6 amanda1"><p><a href="#">退货</a> </p></div>
+                                }
+                                @if (Model.AllOrder[i].OrderStatus.Equals("DELIVERY"))
+                                {
+                                    <div class="ci5 amanda1"><p>物流运输中</p> <p><a href="/Order/OrderDetail?orderId=@Model.AllOrder[i].Id">订单详情</a></p><p><a href="#">查看物流</a></p></div>
+                                    <div class="ci6 amanda1"><p><a href="#">确认收货</a> </p></div>
+                                }
+                                @if (Model.AllOrder[i].OrderStatus.Equals("CANCELED"))
+                                {
+                                    <div class="ci5 amanda1"><p>交易关闭</p> <p><a href="/Order/OrderDetail?orderId=@Model.AllOrder[i].Id">订单详情</a></p></div>
+                                    <div class="ci6 amanda1"><p></p></div>
+                                }
                             </div>
                         </li>
                     }
@@ -119,17 +164,17 @@
                                     }
                                 </div>
                                 <div class="ci2 amanda1">@Model.PendingPaymentOrder[i].Customer.CustomerName</div>
-                                <div class="ci3 amanda1"><b>￥@Model.PendingPaymentOrder[i].TotalAmount.ToString()</b><p>货到付款</p><p class="iphone">手机订单</p></div>
+                                <div class="ci3 amanda1"><b>￥@Model.PendingPaymentOrder[i].TotalAmount.ToString()</b></div>
                                 <div class="ci4 amanda1"><p>@Model.PendingPaymentOrder[i].OrderDate.ToShortDateString()</p></div>
-                                <div class="ci5 amanda1"><p>已申请退货</p> <p><a href="#">退货日志</a></p></div>
-                                <div class="ci6 amanda1"><p><a href="#">取消退货</a> </p></div>
+                                <div class="ci5 amanda1"><p>等待买家付款</p> <p><a href="/Order/OrderDetail?orderId=@Model.PendingPaymentOrder[i].Id">订单详情</a></p></div>
+                                <div class="ci5 ci8 amanda1"><p>剩余15时20分</p> <p><a href="#" class="member-touch">立即支付</a> </p> <p><a href="/Order/CancelOrder?orderId=@Model.PendingPaymentOrder[i].Id">取消订单</a> </p></div>
                             </div>
                         </li>
                     }
                 </ul>
             </div>
         </div>
-        <div class="H-over member-over" style="display:none;">
+        <div class="H-over" style="display:none;">
             <div class="member-cancel clearfix">
                 <span class="be1">订单信息</span>
                 <span class="be2">收货人</span>
@@ -160,18 +205,18 @@
                                         </div>
                                     }
                                 </div>
-                                <div class="ci2">@Model.PendingDeliveryOrder[i].Customer.CustomerName</div>
-                                <div class="ci3"><b>￥@Model.PendingDeliveryOrder[i].TotalAmount.ToString()</b><p>货到付款</p><p class="iphone">手机订单</p></div>
-                                <div class="ci4"><p>@Model.PendingDeliveryOrder[i].OrderDate.ToShortDateString()</p></div>
-                                <div class="ci5"><p>已申请退货</p> <p><a href="#">退货日志</a></p></div>
-                                <div class="ci6"><p><a href="#">取消退货</a> </p></div>
+                                <div class="ci2 amanda1">@Model.PendingDeliveryOrder[i].Customer.CustomerName</div>
+                                <div class="ci3 amanda1"><b>￥@Model.PendingDeliveryOrder[i].TotalAmount.ToString()</b></div>
+                                <div class="ci4 amanda1"><p>@Model.PendingDeliveryOrder[i].OrderDate.ToShortDateString()</p></div>
+                                <div class="ci5 amanda1"><p>买家已付款</p> <p><a href="/Order/OrderDetail?orderId=@Model.PendingDeliveryOrder[i].Id">订单详情</a></p></div>
+                                <div class="ci6 amanda1"><p><a href="#">退货</a> </p></div>
                             </div>
                         </li>
                     }
                 </ul>
             </div>
         </div>
-        <div class="H-over member-over" style="display:none;">
+        <div class="H-over" style="display:none;">
             <div class="member-cancel clearfix">
                 <span class="be1">订单信息</span>
                 <span class="be2">收货人</span>
@@ -202,18 +247,18 @@
                                         </div>
                                     }
                                 </div>
-                                <div class="ci2">@Model.PendingReceivedOrder[i].Customer.CustomerName</div>
-                                <div class="ci3"><b>￥@Model.PendingReceivedOrder[i].TotalAmount.ToString()</b><p>货到付款</p><p class="iphone">手机订单</p></div>
-                                <div class="ci4"><p>@Model.PendingReceivedOrder[i].OrderDate.ToShortDateString()</p></div>
-                                <div class="ci5"><p>已申请退货</p> <p><a href="#">退货日志</a></p></div>
-                                <div class="ci6"><p><a href="#">取消退货</a> </p></div>
+                                <div class="ci2 amanda1">@Model.PendingReceivedOrder[i].Customer.CustomerName</div>
+                                <div class="ci3 amanda1"><b>￥@Model.PendingReceivedOrder[i].TotalAmount.ToString()</b></div>
+                                <div class="ci4 amanda1"><p>@Model.PendingReceivedOrder[i].OrderDate.ToShortDateString()</p></div>
+                                <div class="ci5 amanda1"><p>物流运输中</p> <p><a href="/Order/OrderDetail?orderId=@Model.PendingDeliveryOrder[i].Id">订单详情</a></p><p><a href="#">查看物流</a></p></div>
+                                <div class="ci6 amanda1"><p><a href="#">确认收货</a> </p></div>
                             </div>
                         </li>
                     }
                 </ul>
             </div>
         </div>
-        <div class="H-over member-over" style="display:none;">
+        <div class="H-over" style="display:none;">
             <div class="member-cancel clearfix">
                 <span class="be1">订单信息</span>
                 <span class="be2">收货人</span>
@@ -224,18 +269,18 @@
             </div>
             <div class="member-sheet clearfix">
                 <ul>
-                    @for (int i = 0; i < Model.FinishedOrder.Count(); i++)
+                    @for (int i = 0; i < Model.PendingComment.Count(); i++)
                     {
                         <li>
                             <div class="member-minute clearfix">
-                                <span>@Model.FinishedOrder[i].OrderDate</span>
-                                <span>订单号：<em>@Model.FinishedOrder[i].Id</em></span>
+                                <span>@Model.PendingComment[i].OrderDate</span>
+                                <span>订单号：<em>@Model.PendingComment[i].Id</em></span>
                             </div>
                             <div class="member-circle clearfix">
                                 <div class="ci1">
-                                    @for (int j = 0; j < @Model.FinishedOrder[i].OrderItems.Count(); j++)
+                                    @for (int j = 0; j < @Model.PendingComment[i].OrderItems.Count(); j++)
                                     {
-                                        var orderItems = @Model.FinishedOrder[i].OrderItems.ToList();
+                                        var orderItems = @Model.PendingComment[i].OrderItems.ToList();
                                         AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
                                         <div class="ci7 clearfix">
                                             <span class="gr1"><a href="#"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
@@ -244,18 +289,18 @@
                                         </div>
                                     }
                                 </div>
-                                <div class="ci2">@Model.FinishedOrder[i].Customer.CustomerName</div>
-                                <div class="ci3"><b>￥@Model.FinishedOrder[i].TotalAmount.ToString()</b><p>货到付款</p><p class="iphone">手机订单</p></div>
-                                <div class="ci4"><p>@Model.FinishedOrder[i].OrderDate.ToShortDateString()</p></div>
-                                <div class="ci5"><p>已申请退货</p> <p><a href="#">退货日志</a></p></div>
-                                <div class="ci6"><p><a href="#">取消退货</a> </p></div>
+                                <div class="ci2 amanda1">@Model.PendingComment[i].Customer.CustomerName</div>
+                                <div class="ci3 amanda1"><b>￥@Model.PendingComment[i].TotalAmount.ToString()</b></div>
+                                <div class="ci4 amanda1"><p>@Model.PendingComment[i].OrderDate.ToShortDateString()</p></div>
+                                <div class="ci5 amanda1"><p>交易成功</p> <p><a id ="linkToDelivery">查看物流</a></p></div>
+                                <div class="ci6 amanda1"><p><a href="/Comment/Index?orderId=@Model.PendingComment[i].Id">评价</a></p></div>
                             </div>
                         </li>
                     }
                 </ul>
             </div>
         </div>
-        <div class="H-over member-over" style="display:none;"><h2>订单信息</h2></div>
+        @*<div class="H-over member-over" style="display:none;"><h2>订单信息</h2></div>*@
 
         <div class="clearfix" style="padding:30px 20px;">
             <div class="fr pc-search-g pc-search-gs">

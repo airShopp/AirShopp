@@ -2,8 +2,8 @@
 {
     public class PageListBaseModel
     {
-        public int TotalModel { get; set; }
-        public int PageCount { get; set; }
-        public int TotalAccount { get; set; }
+        public int PageIndex { get; set; }
+        public int TotalPage { get; set; }
+        public int TotalCount { get; set; }
     }
 }

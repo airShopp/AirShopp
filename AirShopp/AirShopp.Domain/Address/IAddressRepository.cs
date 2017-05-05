@@ -8,5 +8,6 @@ namespace AirShopp.Domain
         List<Address> GetAddress(long customerId);
         void UpdateAddress(Address address);
         void DeleteAddress(long addressId);
+        void SetDefaultAddress(long addressId);
     }
 }

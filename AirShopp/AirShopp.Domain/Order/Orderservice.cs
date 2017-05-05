@@ -13,9 +13,9 @@ namespace AirShopp.Domain
         {
             _orderRepository = orderRepository;
         }
-        public void AddOrder(Order order)
+        public Order AddOrder(Order order)
         {
-            _orderRepository.AddOrder(order);
+            return _orderRepository.AddOrder(order);
         }
         public void DeleteOrder(long orderId)
         {

@@ -55,12 +55,18 @@ namespace AirShopp.UI.Controllers
 
             var product = _productRepository.GetProductById(productId);
             var comment = _commentRepository.GetCommentsByProductId(productId);
-
+            List<CustomerCommentDataModel> commentList = new List<CustomerCommentDataModel>();
+            foreach (var c in comment)
+            {
+                CustomerCommentDataModel customerComment = new CustomerCommentDataModel();
+                customerComment.Comment = c;
+            }
             ProductDetailViewModel detailViewModel = new ProductDetailViewModel
             {
                 ProductId = product.Id,
                 ProductName = product.ProductName,
                 Description = product.Description,
+                Price = Convert.ToDouble(product.Price),
                 Sales = salesAmount,
                 ProductUrl = product.Url.Split(',').ToList(),
                 CommentAmount = comment.Count(),
@@ -69,11 +75,6 @@ namespace AirShopp.UI.Controllers
             };
             return View("ProductDetail", detailViewModel);
         }
-        public ActionResult ShopCart()
-        {
-            return View();
-        }
-
         public ProductListViewModel GetProductList(int? indexNum, int? pageSize, int categoryId)
         {
 
@@ -111,8 +112,8 @@ namespace AirShopp.UI.Controllers
 
             ProductListViewModel products = new ProductListViewModel()
             {
-                Index = pagenationList.PageIndex,
-                PageCount = pagenationList.TotalPage,
+                PageIndex = pagenationList.PageIndex,
+                TotalPage = pagenationList.TotalPage,
                 CategoryId = categoryId,
                 productList = pl
             };
