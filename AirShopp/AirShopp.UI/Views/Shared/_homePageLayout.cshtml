@@ -94,7 +94,7 @@
                     {
                         <li>@Html.ActionLink(category.CategoryName, "GetProducts", new { Controller = "Product", categoryId = category.Id })</li>
                     }
-                    <li>@Html.ActionLink("BMap", "Index", "BMapRoutePlanning")</li>
+                    @Html.ActionLink("AddDeliveryStation", "AddDeliveryStation","Delivery")
                 </ul>
             </div>
         </div>

@@ -172,6 +172,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DeliveryController.cs" />
     <Compile Include="Controllers\FliterController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\BMapRoutePlanningController.cs" />
@@ -454,6 +455,8 @@
     <Content Include="Views\Order\SubmitOrder.cshtml" />
     <Content Include="Views\Shared\_orderFlowLayout.cshtml" />
     <Content Include="Views\Shared\_basicTemplateLayout.cshtml" />
+    <Content Include="Views\Shared\_backEndLayout.cshtml" />
+    <Content Include="Views\Delivery\AddDeliveryStation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_homePageLayout.cshtml" />

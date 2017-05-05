@@ -1,0 +1,77 @@
+﻿<!doctype html>
+<html>
+<head>
+    <title>AirShopp</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/icon/Air.ico">
+    @Scripts.Render("~/bundles/AirShopp/js")
+    @Styles.Render("~/bundles/AirShopp/Layout")
+</head>
+<body>
+    <!--- header begin-->
+    <header id="pc-header">
+        <div class="BHeader">
+            <div class="yNavIndex">
+                <ul class="BHeaderl">
+                    <li style="display:none;"><a href="#" style="float:left;">嘻哈杂货铺</a> <a href="#" style="float:left;">退出</a> </li>
+                    @if (Session["customer"] != null)
+                    {
+                        var user = Session["customer"] as AirShopp.Domain.Customer;
+                        <li>@Html.ActionLink(user.Account, "GetUser", "User", null, new { style = "color:#ea4949" })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("请登录", "Login", "User", null, new { style = "color:#ea4949" })</li>
+                    }
+                    <li class="headerul">|</li>
+                    <li>@Html.ActionLink("回到首页", "Index", "Home")</li>
+                    <li class="headerul">|</li>
+                    <li>@Html.ActionLink("订单查询", "Index", "Order", null)</li>
+                    <li class="headerul">|</li>
+                    <li><a href="my-s.html">我的收藏</a> </li>
+                </ul>
+            </div>
+        </div>
+
+    </header>
+    <!-- header End -->
+    <!-- 商城快讯 begin -->
+    <section id="member">
+        <div class="member-center clearfix">
+            <div class="member-left fl">
+                <div class="member-apart clearfix">
+                    <div class="fl"><a href="#"><img src="~/Content/img/bg/mem.png"></a></div>
+                    <div class="fl">
+                        <p>用户名：</p>
+                        <p><a href="#">亚里士多德</a></p>
+                    </div>
+                </div>
+                <div class="member-lists">
+                    <dl>
+                        <dt>选择操作</dt>
+                        <dd class="cur"><a href="#">出库记录</a></dd>
+                        <dd><a href="#">入库记录</a></dd>
+                        <dd><a href="#">商品入库</a></dd>
+                        <dd><a href="#">热销商品</a></dd>
+                        <dd><a href="#">待发货</a></dd>
+                    </dl>
+                    <dl>
+                        <dt>物流管理</dt>
+                        <dd><a href="#">派送点管理</a></dd>
+                        <dd><a href="#">入库记录</a></dd>
+                        <dd><a href="#">商品入库</a></dd>
+                        <dd><a href="#">热销商品</a></dd>
+                        <dd><a href="#">待发货</a></dd>
+                    </dl>
+                    <dl>
+                        <dt>我的消息</dt>
+                        <dd><a href="#">商城快讯</a></dd>
+                        <dd><a href="#">帮助中心</a></dd>
+                    </dl>
+                </div>
+            </div>
+            <!-- 商城快讯 End -->
+            @RenderBody()
+        </div>
+    </section>
+</body>
+</html>
