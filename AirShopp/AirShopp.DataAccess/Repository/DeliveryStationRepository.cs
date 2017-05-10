@@ -14,25 +14,37 @@ namespace AirShopp.DataAccess
 
         public List<DeliveryStation> GetDeliveryStations(long areaId, int stationLevel)
         {
-            /*
-            return (from o in _context.DeliveryStation
-                   where o.AreaId == areaId && o.StationLevel == 2
-                   select o).ToList();
-             * */
             return _context.DeliveryStation.Where(x => (x.AreaId == areaId && x.StationLevel == stationLevel)).ToList();
+        }
+
+        public List<DeliveryStation> GetInitDeliveryStations()
+        {
+            return null;
         }
 
         public List<DeliveryStation> GetDeliveryStation(double lng, double lat)
         {
             return _context.DeliveryStation.Where(x => (x.Longitude == lng && x.Latitude == lat)).ToList();
         }
-        /*
+
         public void AddDeliveryStation(DeliveryStation deliveryStation)
         {
             _context.DeliveryStation.Add(deliveryStation);
             _context.SaveChanges();
         }
 
+        public long GetParentDeliveryStation(string name)
+        {
+            long id = 0;
+            List<DeliveryStation> deliveryStationList = _context.DeliveryStation.Where(x => x.Name.Contains(name)).ToList();
+            if (deliveryStationList != null || deliveryStationList.Count > 0)
+            {
+                id = deliveryStationList.FirstOrDefault().Id;
+            }
+
+            return id;
+        }
+        /*
         public void UpdateDeliveryStation(DeliveryStation deliveryStation)
         {
             _context.Entry<DeliveryStation>(deliveryStation).State = EntityState.Modified;

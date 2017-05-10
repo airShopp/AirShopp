@@ -21,6 +21,9 @@ namespace AirShopp.Domain
         IQueryable<CartItem> CartItems { get; }
         IQueryable<Address> Address { get; }
         IQueryable<Customer> Customers { get; }
-
+        IQueryable<Province> Provinces { get; }
+        IQueryable<Area> Areas { get; }
+        IQueryable<City> Cities { get; }
+        IQueryable<DeliveryStation> DeliveryStations {get;}
     }
 }

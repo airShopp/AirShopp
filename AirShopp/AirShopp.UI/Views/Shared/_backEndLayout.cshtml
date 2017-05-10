@@ -8,8 +8,63 @@
     <link rel="shortcut icon" type="image/x-icon" href="~/Content/icon/Air.ico">
     @Scripts.Render("~/bundles/AirShopp/js")
     @Styles.Render("~/bundles/AirShopp/Layout")
+    <style>
+        .hint dl{
+            width:100%;
+            padding:30px 20px;
+        }
+        .hint dt{
+            width:35%;
+            height:50px;
+            line-height:50px;
+            text-align:right;
+            float:left;
+        }
+        .hint dd{
+            text-align:left;
+            width:65%;
+            height:50px;
+            line-height:50px;
+            float:left;
+        }
+         .hint dd span{
+             padding-left:15px;
+         }
+    </style>
+    <script>
+        function addDeliveryStation(){
+            $("#form").submit();
+        }
+    </script>
 </head>
 <body>
+    <div class="box">
+        <div class="hint" style="height:370px;">
+            <div class="hint-in1">
+                <div class="hint2">新增当前位置为派送点</div>
+                <div class="hint3"></div>
+            </div>
+            @using (Html.BeginForm("AddDeliveryStation", "Delivery", FormMethod.Post, new { @id = "form" }))
+            {
+                <dl class="clearfix">
+                    <dt>派送点名称：</dt>
+                    <dd><input type="text" name="name" style="margin-left:15px;height:25px;line-height:25px"/></dd>
+                    <dt>所属区域：</dt>
+                    <dd><span id="location"></span></dd>
+                    <dt>派送点地址：</dt>
+                    <dd><span id="address"></span></dd>
+                    <dt>当前派送点经纬度：</dt>
+                    <dd><span id="point"></span></dd>
+                    <dt></dt>
+                    <dd><span><a href="javascript:void(0);" class="hint-in3" onclick="addDeliveryStation()" style="margin:0;margin-left:15px;margin-top:30px;">保存收货地址</a></span></dd>
+                </dl>
+                <input type="hidden" name="address" />
+                <input type="hidden" name="lat" />
+                <input type="hidden" name="lng"/>
+                <input type="hidden" name="location" />
+            }
+        </div>
+    </div>
     <!--- header begin-->
     <header id="pc-header">
         <div class="BHeader">
@@ -61,5 +116,6 @@
             @RenderBody()
         </div>
     </section>
+
 </body>
 </html>

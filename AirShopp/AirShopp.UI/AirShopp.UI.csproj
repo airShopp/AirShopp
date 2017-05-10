@@ -201,6 +201,7 @@
     <Compile Include="Models\ViewModel\DeliveryNoteListViewModel.cs" />
     <Compile Include="Models\ViewModel\DeliveryOrderDetailViewModel.cs" />
     <Compile Include="Models\ViewModel\DeliveryOrderListViewModel.cs" />
+    <Compile Include="Models\ViewModel\DeliveryStationListViewModel.cs" />
     <Compile Include="Models\ViewModel\OrderConfirmViewModel.cs" />
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
     <Compile Include="Models\ProductListDataModel.cs" />

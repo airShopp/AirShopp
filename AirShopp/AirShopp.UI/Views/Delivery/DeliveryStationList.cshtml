@@ -1,8 +1,45 @@
-﻿@{
+﻿@model AirShopp.UI.Models.ViewModel.DeliveryStationListViewModel
+@{
     Layout = "~/Views/Shared/_backEndLayout.cshtml";
 }
 @Styles.Render("~/bundles/AirShopp/Inventory/Css")
 @Scripts.Render("~/bundles/AirShopp/Inventory/js")
+<script language="javascript">
+
+    var province = @Html.Raw(Json.Encode(Model.Provinces));
+
+    var city = @Html.Raw(Json.Encode(Model.Cities));
+
+    var area = @Html.Raw(Json.Encode(Model.Areas));
+
+    $(function() {
+        $.each(province, function(k, p) {
+            var option = "<option value='" + p.ProvinceId + "'>" + p.ProvinceName + "</option>";
+            $("#selProvince").append(option);
+        });
+        $("#selProvince").change(function() {
+            var selValue = $(this).val();
+            $("#selCity option:gt(0)").remove();
+            $("#selDistrict option:gt(0)").remove();
+            $.each(city, function(k, p) {
+                if (p.ProvinceId == selValue) {
+                    var option = "<option value='" + p.CityId + "'>" + p.CityName + "</option>";
+                    $("#selCity").append(option);
+                }
+            });
+        });
+        $("#selCity").change(function() {
+            var selValue = $(this).val();
+            $("#selDistrict option:gt(0)").remove();
+            $.each(area, function(k, p) {
+                if (p.CityId == selValue) {
+                    var option = "<option value='" + p.Id + "'>" + p.AreaName + "</option>";
+                    $("#selDistrict").append(option);
+                }
+            });
+        });
+    });
+</script>
 <!-- 商城快讯 begin -->
 <style>
     .member-cancel span {
@@ -108,16 +145,19 @@
             </div>
             <div class="member-sheet clearfix">
                 <ul>
-                    <li>
-                        <div class="member-circle clearfix">
-                            <div class="ci22">1</div>
-                            <div class="ci33">1</div>
-                            <div class="ci11">1</div>
-                            <div class="ci44">1</div>
-                            <div class="ci44">1</div>
-                            <div class="ci55" style="border:none;">1</div>
-                        </div>
-                    </li>
+                    @foreach (var item in Model.DeliveryStations)
+                    {
+                        <li>
+                            <div class="member-circle clearfix">
+                                <div class="ci22">@item.Location</div>
+                                <div class="ci33">@item.DeliverStation.Name</div>
+                                <div class="ci11">@item.DeliverStation.Address</div>
+                                <div class="ci44">@item.DeliverStation.Latitude</div>
+                                <div class="ci44">@item.DeliverStation.Longitude</div>
+                                <div class="ci55" style="border:none;">@item.DeliverStation.StationLevel</div>
+                            </div>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
