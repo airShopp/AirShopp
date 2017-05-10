@@ -4,198 +4,64 @@
 @Styles.Render("~/bundles/AirShopp/Inventory/Css")
 @Scripts.Render("~/bundles/AirShopp/Inventory/js")
 <!-- 商城快讯 begin -->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=BZpwjUXFrAlT6g87xFxY4c3Cf82zen93"></script>
+<style>
+    .contentWrapper {
+        width: 90%;
+        margin: 0 auto;
+    }
 
+</style>
 <div class="member-right fr">
     <div class="member-head">
-        <div class="member-heels fl"><h2>全部商品</h2></div>
-        <div class="member-backs member-icons fr"><a href="#">搜索</a></div>
-        <div class="member-about fr"><input type="text" placeholder="商品名称/商品编号/订单编号"></div>
+        <div class="member-heels fl"><h2>新增派送点</h2></div>
     </div>
     <div class="member-border">
-        <div class="member-return H-over">
-            <div class="member-sheet clearfix">
-                <ul>
-                    <li>
-                        <div class="member-circle clearfix">
-                            <div class="ci1">
-                                <div class="ci7 clearfix">
-                                    <span class="gr1"><a href="#"><img src="~/Content/img/pd/m1.png" width="60" height="60" title="" about=""></a></span>
-                                    <span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
-                                    <span class="gr3">X1</span>
-                                </div>
-                            </div>
-                            <div class="ci2">$2000</div>
-                            <div class="ci3">200件</div>
-                            <div class="ci4"><p>已上架</p></div>
-                            <div class="ci5"><p>商品分类</p></div>
-                            <div class="ci5 ci8"><p>销售量</p></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="member-circle clearfix">
-                            <div class="ci1">
-                                <div class="ci7 clearfix">
-                                    <span class="gr1"><a href="#"><img src="~/Content/img/pd/m1.png" width="60" height="60" title="" about=""></a></span>
-                                    <span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
-                                    <span class="gr3">X1</span>
-                                </div>
-                            </div>
-                            <div class="ci2">$2000</div>
-                            <div class="ci3">200件</div>
-                            <div class="ci4"><p>已上架</p></div>
-                            <div class="ci5"><p>商品分类</p></div>
-                            <div class="ci5 ci8"><p>销售量</p></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="member-circle clearfix">
-                            <div class="ci1">
-                                <div class="ci7 clearfix">
-                                    <span class="gr1"><a href="#"><img src="~/Content/img/pd/m1.png" width="60" height="60" title="" about=""></a></span>
-                                    <span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
-                                    <span class="gr3">X1</span>
-                                </div>
-                            </div>
-                            <div class="ci2">$2000</div>
-                            <div class="ci3">200件</div>
-                            <div class="ci4"><p>已上架</p></div>
-                            <div class="ci5"><p>商品分类</p></div>
-                            <div class="ci5 ci8"><p>销售量</p></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="member-circle clearfix">
-                            <div class="ci1">
-                                <div class="ci7 clearfix">
-                                    <span class="gr1"><a href="#"><img src="~/Content/img/pd/m1.png" width="60" height="60" title="" about=""></a></span>
-                                    <span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
-                                    <span class="gr3">X1</span>
-                                </div>
-                            </div>
-                            <div class="ci2">$2000</div>
-                            <div class="ci3">200件</div>
-                            <div class="ci4"><p>已上架</p></div>
-                            <div class="ci5"><p>商品分类</p></div>
-                            <div class="ci5 ci8"><p>销售量</p></div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="member-return H-over" style="display:none;">
-            <div class="member-cancel clearfix">
-                <span class="be1">订单信息</span>
-                <span class="be2">收货人</span>
-                <span class="be2">订单金额</span>
-                <span class="be2">订单时间</span>
-                <span class="be2">订单状态</span>
-                <span class="be2">订单操作</span>
-            </div>
-            <div class="member-sheet clearfix">
-                <ul>
-                    <li>
-                        <div class="member-minute clearfix">
-                            <span>2015-09-22 18:22:33</span>
-                            <span>订单号：<em>98653056821</em></span>
-                            <span><a href="#">以纯甲醇旗舰店</a></span>
-                            <span class="member-custom">客服电话：<em>010-6544-0986</em></span>
-                        </div>
-                        <div class="member-circle clearfix">
-                            <div class="ci1">
-                                <div class="ci7 clearfix">
-                                    <span class="gr1"><a href="#"><img src="~/Content/img/pd/m1.png" width="60" height="60" title="" about=""></a></span>
-                                    <span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
-                                    <span class="gr3">X1</span>
-                                </div>
-                                <div class="ci7 clearfix">
-                                    <span class="gr1"><a href="#"><img src="~/Content/img/pd/m2.png" width="60" height="60" title="" about=""></a></span>
-                                    <span class="gr2"><a href="#">AXON天机mini NBA限量版</a></span>
-                                    <span class="gr3">X9</span>
-                                </div>
-                            </div>
-                            <div class="ci2">张子琪</div>
-                            <div class="ci3"><b>￥120.00</b><p>货到付款</p><p class="iphone">手机订单</p></div>
-                            <div class="ci4"><p>2015-09-22</p></div>
-                            <div class="ci5"><p>已申请退货</p> <p><a href="#">退货日志</a></p></div>
-                            <div class="ci6"><p><a href="#">取消退货</a> </p></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="member-minute clearfix">
-                            <span>2015-09-22 18:22:33</span>
-                            <span>订单号：<em>98653056821</em></span>
-                            <span><a href="#">以纯甲醇旗舰店</a></span>
-                            <span class="member-custom">客服电话：<em>010-6544-0986</em></span>
-                        </div>
-                        <div class="member-circle clearfix">
-                            <div class="ci1">
-                                <div class="ci7 clearfix">
-                                    <span class="gr1"><a href="#"><img src="~/Content/img/pd/m1.png" width="60" height="60" title="" about=""></a></span>
-                                    <span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
-                                    <span class="gr3">X1</span>
-                                </div>
-                                <div class="ci7 clearfix">
-                                    <span class="gr1"><a href="#"><img src="~/Content/img/pd/m2.png" width="60" height="60" title="" about=""></a></span>
-                                    <span class="gr2"><a href="#">AXON天机mini NBA限量版</a></span>
-                                    <span class="gr3">X9</span>
-                                </div>
-                            </div>
-                            <div class="ci2">张子琪</div>
-                            <div class="ci3"><b>￥120.00</b><p>货到付款</p><p class="iphone">手机订单</p></div>
-                            <div class="ci4"><p>2015-09-22</p></div>
-                            <div class="ci5"><p>已完成</p> <p><a href="#">订单详情</a></p></div>
-                            <div class="ci6"><p><a href="#">取消退货</a> </p></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="member-minute clearfix">
-                            <span>2015-09-22 18:22:33</span>
-                            <span>订单号：<em>98653056821</em></span>
-                            <span><a href="#">以纯甲醇旗舰店</a></span>
-                            <span class="member-custom">客服电话：<em>010-6544-0986</em></span>
-                        </div>
-                        <div class="member-circle clearfix">
-                            <div class="ci1">
-                                <div class="ci7 clearfix">
-                                    <span class="gr1"><a href="#"><img src="~/Content/img/pd/m1.png" width="60" height="60" title="" about=""></a></span>
-                                    <span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
-                                    <span class="gr3">X1</span>
-                                </div>
-                                <div class="ci7 clearfix">
-                                    <span class="gr1"><a href="#"><img src="~/Content/img/pd/m2.png" width="60" height="60" title="" about=""></a></span>
-                                    <span class="gr2"><a href="#">AXON天机mini NBA限量版</a></span>
-                                    <span class="gr3">X9</span>
-                                </div>
-                            </div>
-                            <div class="ci2">张子琪</div>
-                            <div class="ci3"><b>￥120.00</b><p>货到付款</p><p class="iphone">手机订单</p></div>
-                            <div class="ci4"><p>2015-09-22</p></div>
-                            <div class="ci5"><p>已完成</p> <p><a href="#">订单详情</a></p></div>
-                            <div class="ci6"><p><a href="#">取消退货</a> </p></div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="H-over member-over" style="display:none;"><h2>待发货</h2></div>
-        <div class="H-over member-over" style="display:none;"><h2>待收货</h2></div>
-        <div class="H-over member-over" style="display:none;"><h2>交易完成</h2></div>
-        <div class="H-over member-over" style="display:none;"><h2>订单信息</h2></div>
-        <div class="clearfix" style="padding:30px 20px;">
-            <div class="fr pc-search-g pc-search-gs">
-                <a style="display:none" class="fl " href="#">上一页</a>
-                <a href="#" class="current">1</a>
-                <a href="javascript:;">2</a>
-                <a href="javascript:;">3</a>
-                <a href="javascript:;">4</a>
-                <a href="javascript:;">5</a>
-                <a href="javascript:;">6</a>
-                <a href="javascript:;">7</a>
-                <span class="pc-search-di">…</span>
-                <a href="javascript:;">1088</a>
-                <a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>
+
+        <div class="member-return H-over" style="min-height:520px;">
+            <div class="contentWrapper">
+                <div class="clearfix" style="padding:20px 0">
+                    <div class="fl">
+                        <div class="member-about fl"><input id="text_" type="text" placeholder="要查询的地址" style="border:1px solid #e0e0e0;"></div>
+                        <div class="member-backs member-icons fl" style="padding:0"><a href="javascript:void(0)" onclick="searchByStationName();" style="height:28px;line-height:28px;">查询</a></div>
+                    </div>
+                    <div class="fr" style="height:28px;line-height:28px;">
+                        <p class="fl">查询结果(经纬度)：</p><p id="result_" class="fl" style="width:125px;"></p>
+                    </div>
+                </div>
+                <div id="container" style="width:100%; height:400px; border:1px solid gray; overflow:hidden;"></div>
+                <a href="#" class="fr pc-order-add btn1" style="margin-top:15px;">新增此位置为派送点并完善信息</a>
             </div>
         </div>
     </div>
 </div>
 <!-- 商城快讯 End -->
+<script type="text/javascript">
+    var map = new BMap.Map("container");
+    map.centerAndZoom("宁波", 12);
+    map.enableScrollWheelZoom();    //启用滚轮放大缩小，默认禁用
+    map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+
+    map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
+    map.addControl(new BMap.OverviewMapControl()); //添加默认缩略地图控件
+    map.addControl(new BMap.OverviewMapControl({ isOpen: true, anchor: BMAP_ANCHOR_BOTTOM_RIGHT }));   //右下角，打开
+
+    var localSearch = new BMap.LocalSearch(map);
+    localSearch.enableAutoViewport(); //允许自动调节窗体大小
+    function searchByStationName() {
+        map.clearOverlays();//清空原来的标注
+        var keyword = document.getElementById("text_").value;
+        localSearch.setSearchCompleteCallback(function (searchResult) {
+            var poi = searchResult.getPoi(0);
+            document.getElementById("result_").innerHTML = poi.point.lng + "," + poi.point.lat;
+            map.centerAndZoom(poi.point, 13);
+            var marker = new BMap.Marker(new BMap.Point(poi.point.lng, poi.point.lat));  // 创建标注，为要查询的地方对应的经纬度
+            map.addOverlay(marker);
+            var content = document.getElementById("text_").value + "<br/><br/>经度：" + poi.point.lng + "<br/>纬度：" + poi.point.lat;
+            var infoWindow = new BMap.InfoWindow("<p style='font-size:14px;'>" + content + "</p>");
+            marker.addEventListener("click", function () { this.openInfoWindow(infoWindow); });
+            // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+        });
+        localSearch.search(keyword);
+    }
+</script>

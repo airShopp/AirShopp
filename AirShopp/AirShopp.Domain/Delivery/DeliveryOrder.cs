@@ -21,7 +21,6 @@ namespace AirShopp.Domain
         public string TotalRMBInNumberic { get; set; }// Summary money in numberic
 
         public long OrderId { get; set; }// Foreign key ref Order (Id)
-        public virtual Order Order { get; set; }// Contains receiver related information
 
         public virtual ICollection<DeliveryOrderItem> DeliveryOrderItems { get; set; }// Items in Delivery order
     }

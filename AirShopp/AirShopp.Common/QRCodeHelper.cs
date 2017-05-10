@@ -28,7 +28,7 @@ namespace AirShopp.Common
             string fileName = HttpRuntime.AppDomainAppPath.ToString() + Constants.IMG_LOCATION + timeStr + Constants.PIC_SUFFIX_JPG;
 
             bitmap.Save(fileName);//Save bitmap
-            string imageUrl = Constants.VIRGULE + Constants.IMG_LOCATION + timeStr + Constants.PIC_SUFFIX_JPG;
+            string imageUrl = Constants.IMG_LOCATION + timeStr + Constants.PIC_SUFFIX_JPG;
 
             return imageUrl;
         }

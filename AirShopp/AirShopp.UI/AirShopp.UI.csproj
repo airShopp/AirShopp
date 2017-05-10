@@ -198,6 +198,9 @@
     <Compile Include="Models\ShopCartDataModel.cs" />
     <Compile Include="Models\ViewModel\AddressListViewModel.cs" />
     <Compile Include="Models\ViewModel\CommentViewModel.cs" />
+    <Compile Include="Models\ViewModel\DeliveryNoteListViewModel.cs" />
+    <Compile Include="Models\ViewModel\DeliveryOrderDetailViewModel.cs" />
+    <Compile Include="Models\ViewModel\DeliveryOrderListViewModel.cs" />
     <Compile Include="Models\ViewModel\OrderConfirmViewModel.cs" />
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
     <Compile Include="Models\ProductListDataModel.cs" />
@@ -458,7 +461,11 @@
     <Content Include="Views\Shared\_orderFlowLayout.cshtml" />
     <Content Include="Views\Shared\_basicTemplateLayout.cshtml" />
     <Content Include="Views\Shared\_backEndLayout.cshtml" />
+    <Content Include="Views\Delivery\DeliveryOrderList.cshtml" />
+    <Content Include="Views\Delivery\DeliveryOrderDetail.cshtml" />
+    <Content Include="Views\Delivery\DeliveryNoteList.cshtml" />
     <Content Include="Views\Delivery\AddDeliveryStation.cshtml" />
+    <Content Include="Views\Delivery\DeliveryStationList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_homePageLayout.cshtml" />

@@ -1,0 +1,183 @@
+﻿@model IEnumerable<AirShopp.UI.Models.ViewModel.DeliveryNoteListViewModel>
+@{
+    Layout = "~/Views/Shared/_backEndLayout.cshtml";
+}
+@Styles.Render("~/bundles/AirShopp/Inventory/Css")
+@Scripts.Render("~/bundles/AirShopp/Inventory/js")
+<!-- 商城快讯 begin -->
+<style>
+    .be11 {
+        width: 380px;
+        text-align: center;
+        float: left;
+        height: 48px;
+        line-height: 48px;
+        color: #a3a3a3;
+    }
+
+    .be22 {
+        width: 193px;
+        text-align: center;
+        float: left;
+        height: 48px;
+        line-height: 48px;
+        color: #a3a3a3;
+    }
+
+    .ci11 {
+        width: 380px;
+        text-align: center;
+        float: left;
+        height: 60px;
+        line-height: 60px;
+        border-right: 1px solid #e0e0e0;
+    }
+
+    .ci22 {
+        width: 193px;
+        text-align: center;
+        float: left;
+        height: 60px;
+        line-height: 60px;
+        border-right: 1px solid #e0e0e0;
+    }
+
+    .ci33 {
+        width: 193px;
+        text-align: center;
+        float: left;
+        height: 60px;
+        line-height: 60px;
+    }
+
+    .fl {
+        float: left;
+    }
+
+    .firstPart {
+        height: 101px;
+        line-height: 101px;
+        text-align: center;
+        font-size: 14px;
+        width: 180px;
+    }
+
+    .secondPart {
+        height: 80px;
+        line-height: 40px;
+    }
+
+        .secondPart p {
+            line-height: 25px;
+            height: 25px;
+            width: 526px;
+        }
+
+            .secondPart p span {
+                margin-left: 50px;
+            }
+
+    .thirdPart {
+        height: 81px;
+        line-height: 81px;
+    }
+
+    .topPart {
+    }
+
+    .buttomPart {
+    }
+
+    .thirdPart {
+        width: 101px;
+        height: 101px;
+    }
+
+    .borderStyle {
+        border: 2px solid black;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        margin: 3px 5px;
+    }
+
+    .contentWrapper {
+        width: 90%;
+        margin: 0 auto;
+        padding: 15px;
+    }
+</style>
+<div class="member-right fr">
+    <div class="member-head">
+        <div class="member-heels fl"><h2>派送单</h2></div>
+        <div class="member-backs member-icons fr"><a href="javascript:void(0)">搜索</a></div>
+        <div class="member-about fr"><input type="text" placeholder="派送单编号"></div>
+    </div>
+    <div class="member-border">
+        <div class="member-return H-over">
+            <div class="contentWrapper">
+                @foreach (var item in Model)
+                {
+                    <div class="member-sheet clearfix" style="margin-bottom:5px">
+                        <div class="firstPart fl">
+                            @item.DeliveryNoteNumber
+                        </div>
+                        <div class="secondPart fl">
+                            <div class="topPart clearfix">
+                                <div class="borderStyle fl">
+                                    收
+                                </div>
+                                <div class="fl">
+                                    <p>
+                                        @item.ReceiverName<span>@item.ReceiverPhone</span>
+                                    </p>
+                                    <p>
+                                        @item.ReceiverAddress
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="buttomPart clearfix">
+                                <div class="borderStyle fl">
+                                    寄
+                                </div>
+                                <div class="fl">
+                                    <p>
+                                        @item.SenderName<span>@item.SenderPhone</span>
+                                    </p>
+                                    <p>
+                                        @item.SenderAddress
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="thirdPart fl">
+                            <img src="@item.QRCodeImgSrc" style="width:100%;height:100%;" />
+                        </div>
+                    </div>
+                    if (item.Id != Model.LastOrDefault().Id)
+                    {
+                        <hr style="height:1px;border:none;border-top:1px dashed #0066CC;width:100%" />
+                    }
+                }
+            </div>
+        </div>
+        <div class="clearfix" style="padding:30px 20px;">
+            <div class="fr pc-search-g pc-search-gs">
+                <a style="display:none" class="fl " href="#">上一页</a>
+                <a href="#" class="current">1</a>
+                <a href="javascript:;">2</a>
+                <a href="javascript:;">3</a>
+                <a href="javascript:;">4</a>
+                <a href="javascript:;">5</a>
+                <a href="javascript:;">6</a>
+                <a href="javascript:;">7</a>
+                <span class="pc-search-di">…</span>
+                <a href="javascript:;">1088</a>
+                <a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 商城快讯 End -->
