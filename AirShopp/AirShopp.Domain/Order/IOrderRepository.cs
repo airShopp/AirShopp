@@ -14,5 +14,8 @@ namespace AirShopp.Domain
         List<Order> LoadOrderList(long customerId);
         Order GetOrderByOrderId(long orderId);
         void CancelOrder(long orderId);
+        void ReturnOrder(Return returnOrder);
+        List<Return> GetReturnList(string customerName);
+        void ToPayment(long orderId);
     }
 }

@@ -76,7 +76,7 @@
                 <ul class="BHeaderl">
                     <li><a href="#">登录</a> </li>
                     <li class="headerul">|</li>
-                    <li><a href="#">订单查询</a> </li>
+                    <li>@Html.ActionLink("我的订单", "Index", "Order")</li>
                     <li class="headerul">|</li>
                     <li><a href="#">我的收藏</a> </li>
                     <li class="headerul">|</li>
@@ -94,7 +94,7 @@
             </div>
         </div>
         <div class="container clearfix">
-            <div class="header-logo fl" style="width:212px;"><h1><a href="#"><img src="theme/icon/logo.png"></a></h1></div>
+            <div class="header-logo fl" style="width:212px;"><h1><a href="#"><img src="~/Content/icon/AirShoppLogo.png"></a></h1></div>
             <div class="pc-order-titlei fl"><h2>填写订单</h2></div>
             <div class="pc-step-title fl">
                 <ul>
@@ -137,87 +137,9 @@
     <div class="pc-buying clearfix" style="margin-top:-10px">
         <div class="time-list time-list-w fl">
             <div class="time-title">
-                @*<ul class="brand-tab H-table H-table-shop clearfix fl" id="H-table">
-                    <li class="cur"><a href="javascript:void(0);" class="cur">支付宝</a></li>
-                    <li><a href="javascript:void(0);">储蓄卡</a></li>
-                    <li><a href="javascript:void(0);">信用卡</a></li>
-                </ul>*@
                 <span class="pc-order-price">总价：￥@Model.TotalAmount</span>
             </div>
-            @*<div class="time-border time-border-h clearfix">
-                <div class="time-border-list pc-shop-clear pc-order-clear H-over clearfix">
-                    <ul class="pc-order-list clearfix">
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    </ul>
-                </div>
-                <div style="display:none;" class="time-border-list  pc-shop-clear pc-order-clear H-over clearfix">
-                    <ul class="pc-order-list">
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    </ul>
-                </div>
-                <div style="display:none;" class="time-border-list  pc-shop-clear pc-order-clear H-over clearfix">
-                    <ul class="pc-order-list">
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                        <li><a href="#"><img src="theme/bank/1.png"></a> </li>
-                    </ul>
-                </div>*@
-                <div class="pc-order-go" style="float:right"><a href="#">去支付</a></div>
+                <div class="pc-order-go" style="float:right"><a href="/Order/Topayment?orderId=@Model.Id">去支付</a></div>
             </div>
         </div>
     </div>
@@ -227,7 +149,7 @@
         <div class="time-lists aui-footer-pd clearfix">
             <div class="aui-footer-list clearfix">
                 <h4>
-                    <span><img src="theme/icon/icon-d1.png"></span>
+                    <span><img src="~/Content/icon/icon-d1.png"></span>
                     <em>消费者权益</em>
                 </h4>
                 <ul>
@@ -240,7 +162,7 @@
             </div>
             <div class="aui-footer-list clearfix">
                 <h4>
-                    <span><img src="theme/icon/icon-d2.png"></span>
+                    <span><img src="~/Content/icon/icon-d2.png"></span>
                     <em>新手上路</em>
                 </h4>
                 <ul>
@@ -252,7 +174,7 @@
             </div>
             <div class="aui-footer-list clearfix">
                 <h4>
-                    <span><img src="theme/icon/icon-d3.png"></span>
+                    <span><img src="~/Content/icon/icon-d3.png"></span>
                     <em>保障正品</em>
                 </h4>
                 <ul>
@@ -264,7 +186,7 @@
             </div>
             <div class="aui-footer-list clearfix">
                 <h4>
-                    <span><img src="theme/icon/icon-d1.png"></span>
+                    <span><img src="~/Content/icon/icon-d1.png"></span>
                     <em>消费者权益</em>
                 </h4>
                 <ul>

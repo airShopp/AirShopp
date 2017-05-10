@@ -20,6 +20,6 @@ namespace AirShopp.Domain
         public virtual Order Order { get; set; }
 
         public long OrderItemId { get; set; }
-        public virtual OrderItem OrderItem { get; set; }
+        //public virtual OrderItem OrderItem { get; set; }
     }
 }

@@ -30,15 +30,7 @@
                     }
                     <li class="headerul">|</li>
                     <li>
-                        @if (Session["CUSTOMER"] != null)
-                        {
-                            var user = Session["CUSTOMER"] as AirShopp.Domain.Customer;
-                            @Html.ActionLink("订单查询", "Index", "Order", new { customerId = user.Id}, new { style = "color:#ea4949" })
-                        }
-                        else
-                        {
-                            @Html.ActionLink("订单查询", "Login", "User", null, new { style = "color:#ea4949" })
-                        }
+                        @Html.ActionLink("订单查询", "Index", "Order")
                     <li class="headerul">|</li>
                     <li id="pc-nav" class="menu">
                         <a href="my-user.html" class="tit">我的商城</a>

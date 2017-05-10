@@ -86,6 +86,13 @@ namespace AirShopp.DataAccess
                 return _context.Order;
             }
         }
+        public IQueryable<OrderItem> OrderItems
+        {
+            get
+            {
+                return _context.OrderItem;
+            }
+        }
 
         public IQueryable<CartItem> CartItems
         {

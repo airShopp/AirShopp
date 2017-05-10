@@ -16,7 +16,7 @@ namespace AirShopp.DataAccess.Mapping
 
             HasRequired(e => e.Order).WithMany(e => e.Returns).HasForeignKey(fk => fk.OrderId);
 
-            HasRequired(e => e.OrderItem).WithOptional(e => e.Return);
+            //HasRequired(e => e.OrderItem).WithOptional(e => e.Return);
         }
     }
 }
