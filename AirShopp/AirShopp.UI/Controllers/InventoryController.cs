@@ -72,7 +72,7 @@ namespace AirShopp.UI.Controllers
             return View("ProductOut", outFactoryViewModel);
         }
 
-        public ActionResult getAllInventoryProduct(int? indexNum, int? pageSize = 10)
+        public ActionResult getAllInventoryProduct(int? indexNum, int? pageSize = 6)
         {
             var inventoryProductList = (from i in _readFromDb.Inventories
                                         join w in _readFromDb.Warehouses on i.WarehouseId equals w.Id
