@@ -22,5 +22,25 @@ namespace AirShopp.DataAccess
             });
             return CategoryList;
         }
+
+        public string GetCategoryNameByChildcategoryId(long childCategoryid)
+        {
+            Category category = null;
+            string categoryName = null;
+            long parentId = 0;
+            _context.Category.Where(e => e.Id == childCategoryid).ToList().ForEach(c =>
+            {
+                category = new Category()
+                {
+                    Id = c.Id,
+                    ParentId = c.ParentId
+                };
+            });
+            _context.Category.Where(e => e.Id == parentId).ToList().ForEach(c =>
+            {
+                categoryName = c.CategoryName;
+            });
+            return categoryName;
+        }
     }
 }

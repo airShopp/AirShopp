@@ -135,10 +135,6 @@
     <Compile Include="Migrations\201704241613177_AddDiscountInitialData.Designer.cs">
       <DependentUpon>201704241613177_AddDiscountInitialData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704241613393_AddProductOutFactoryInitialData.cs" />
-    <Compile Include="Migrations\201704241613393_AddProductOutFactoryInitialData.Designer.cs">
-      <DependentUpon>201704241613393_AddProductOutFactoryInitialData.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201704241614017_AddAdminInitialData.cs" />
     <Compile Include="Migrations\201704241614017_AddAdminInitialData.Designer.cs">
       <DependentUpon>201704241614017_AddAdminInitialData.cs</DependentUpon>
@@ -174,6 +170,14 @@
     <Compile Include="Migrations\201705080858428_RefineDeliveryOrder.cs" />
     <Compile Include="Migrations\201705080858428_RefineDeliveryOrder.Designer.cs">
       <DependentUpon>201705080858428_RefineDeliveryOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705101453485_ModifyTableProductOutFactory.cs" />
+    <Compile Include="Migrations\201705101453485_ModifyTableProductOutFactory.Designer.cs">
+      <DependentUpon>201705101453485_ModifyTableProductOutFactory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705101454575_AddProductOutFactoryInitialData.cs" />
+    <Compile Include="Migrations\201705101454575_AddProductOutFactoryInitialData.Designer.cs">
+      <DependentUpon>201705101454575_AddProductOutFactoryInitialData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -256,9 +260,6 @@
     <EmbeddedResource Include="Migrations\201704241613177_AddDiscountInitialData.resx">
       <DependentUpon>201704241613177_AddDiscountInitialData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704241613393_AddProductOutFactoryInitialData.resx">
-      <DependentUpon>201704241613393_AddProductOutFactoryInitialData.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704241614017_AddAdminInitialData.resx">
       <DependentUpon>201704241614017_AddAdminInitialData.cs</DependentUpon>
     </EmbeddedResource>
@@ -285,6 +286,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705080858428_RefineDeliveryOrder.resx">
       <DependentUpon>201705080858428_RefineDeliveryOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705101453485_ModifyTableProductOutFactory.resx">
+      <DependentUpon>201705101453485_ModifyTableProductOutFactory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705101454575_AddProductOutFactoryInitialData.resx">
+      <DependentUpon>201705101454575_AddProductOutFactoryInitialData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
