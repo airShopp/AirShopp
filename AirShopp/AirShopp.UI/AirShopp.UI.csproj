@@ -202,6 +202,7 @@
     <Compile Include="Models\ViewModel\DeliveryOrderDetailViewModel.cs" />
     <Compile Include="Models\ViewModel\DeliveryOrderListViewModel.cs" />
     <Compile Include="Models\ViewModel\OrderConfirmViewModel.cs" />
+    <Compile Include="Models\ViewModel\ReturnManageListViewModel.cs" />
     <Compile Include="Models\ViewModel\ReturnRequestListViewModel.cs" />
     <Compile Include="Models\ViewModel\ReturnRequestViewModel.cs" />
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
@@ -468,6 +469,8 @@
     <Content Include="Views\Delivery\DeliveryNoteList.cshtml" />
     <Content Include="Views\Delivery\AddDeliveryStation.cshtml" />
     <Content Include="Views\Delivery\DeliveryStationList.cshtml" />
+    <Content Include="Views\Order\OrderManage.cshtml" />
+    <Content Include="Views\Order\ReturnManage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_homePageLayout.cshtml" />

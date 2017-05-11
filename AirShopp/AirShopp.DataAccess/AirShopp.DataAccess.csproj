@@ -174,10 +174,10 @@
     <Compile Include="Migrations\201705081424343_ModifyReturnModel.cs" />
     <Compile Include="Migrations\201705081424343_ModifyReturnModel.Designer.cs">
       <DependentUpon>201705081424343_ModifyReturnModel.cs</DependentUpon>
-	</Compile>
-    <Compile Include="Migrations\201705080858428_RefineDeliveryOrder.cs" />
-    <Compile Include="Migrations\201705080858428_RefineDeliveryOrder.Designer.cs">
-      <DependentUpon>201705080858428_RefineDeliveryOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705100223100_RefineDeliveryOrder.cs" />
+    <Compile Include="Migrations\201705100223100_RefineDeliveryOrder.Designer.cs">
+      <DependentUpon>201705100223100_RefineDeliveryOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -287,13 +287,11 @@
     <EmbeddedResource Include="Migrations\201705031756500_ModifyCartTable.resx">
       <DependentUpon>201705031756500_ModifyCartTable.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
     <EmbeddedResource Include="Migrations\201705081424343_ModifyReturnModel.resx">
       <DependentUpon>201705081424343_ModifyReturnModel.cs</DependentUpon>
-=======
-    <EmbeddedResource Include="Migrations\201705080858428_RefineDeliveryOrder.resx">
-      <DependentUpon>201705080858428_RefineDeliveryOrder.cs</DependentUpon>
->>>>>>> 8eb6f1c8d3618036271db6133d5a59ffb12d8916
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705100223100_RefineDeliveryOrder.resx">
+      <DependentUpon>201705100223100_RefineDeliveryOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -88,6 +88,12 @@
 .member-circle .ci5 { width:114px; float:left;  border-right:1px solid #e0e0e0; line-height: 50px; text-align:center; padding-top:20px; height:64px;}
 .member-circle .ci6 { width:114px; float:left;  border-right:1px solid #ffffff; line-height: 50px; text-align:center; padding-top:20px; height:64px;}
 
+.member-circle .cci1 { width:412.8px; float:left;  border-right:1px solid #e0e0e0;}
+.member-circle .cci2 { width:136.8px; float:left;  border-right:1px solid #e0e0e0; line-height: 50px; text-align:center; padding-top:20px; height:64px; background:url("icon/member-u.png") 80px 20px no-repeat;}
+.member-circle .cci3 { width:136.8px; float:left;  border-right:1px solid #e0e0e0; line-height: 50px; text-align:center; padding-top:20px; height:64px;}
+.member-circle .cci4 { width:136.8px; float:left;  border-right:1px solid #e0e0e0; line-height: 50px; text-align:center; padding-top:20px; height:64px;}
+.member-circle .cci5 { width:139.8px; float:left;  border-right:1px solid #e0e0e0; line-height: 50px; text-align:center; padding-top:20px; height:64px;}
+
 .member-cancel {border-bottom:1px solid #e0e0e0; }
 .member-minute {border-bottom:1px solid #e0e0e0; line-height:30px; height:30px;}
 .member-minute span { float:left; display:block; padding-left:30px; color:#a3a3a3; font-size:13px;}

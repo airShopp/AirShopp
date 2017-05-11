@@ -30,8 +30,6 @@ namespace AirShopp.Domain
         public virtual Address Address { get; set; }
 
         public virtual ICollection<Return> Returns { get; set; }
-        public virtual DeliveryOrder DeliveryOrder { get; set; }
-        public virtual DeliveryNote DeliveryNote { get; set; }
         public virtual ICollection<DeliveryInfo> DeliveryInfos { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<OrderItem> OrderItems { get; set; }

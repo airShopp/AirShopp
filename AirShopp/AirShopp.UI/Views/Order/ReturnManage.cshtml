@@ -1,0 +1,345 @@
+﻿@model AirShopp.UI.Models.ViewModel.ReturnManageListViewModel
+@{
+    ViewBag.Title = "ReturnManage";
+    Layout = "~/Views/Shared/_backEndLayout.cshtml";
+    @Styles.Render("~/bundles/AirShopp/Inventory/Css")
+    @Scripts.Render("~/bundles/AirShopp/Inventory/js")
+}
+<script>
+         $(function(){
+
+             $("#H-table li").each(function(i){
+                 $(this).click((function(k){
+                     var _index = k;
+                     return function(){
+                         $(this).addClass("cur").siblings().removeClass("cur");
+                         $(".H-over").hide();
+                         $(".H-over:eq(" + _index + ")").show();
+                     }
+                 })(i));
+             });
+             $("#H-table1 li").each(function(i){
+                 $(this).click((function(k){
+                     var _index = k;
+                     return function(){
+                         $(this).addClass("cur").siblings().removeClass("cur");
+                         $(".H-over1").hide();
+                         $(".H-over1:eq(" + _index + ")").show();
+                     }
+                 })(i));
+             });
+         });
+         $(document).ready(function($){
+
+             $(".btn1").click(function(event){
+                 $(".hint").css({"display":"block"});
+                 $(".box").css({"display":"block"});
+             });
+
+             $(".hint-in3").click(function(event) {
+                 $(".hint").css({"display":"none"});
+                 $(".box").css({"display":"none"});
+             });
+
+             $(".hint3").click(function(event) {
+                 $(this).parent().parent().css({"display":"none"});
+                 $(".box").css({"display":"none"});
+             });
+
+             $("#H-table li").each(function(i){
+                 $(this).click((function(k){
+                     var _index = k;
+                     return function(){
+                         $(this).addClass("cur").siblings().removeClass("cur");
+                         $(".H-over").hide();
+                         $(".H-over:eq(" + _index + ")").show();
+                     }
+                 })(i));
+             });
+
+         });
+</script>
+<div class="member-right fr">
+    <div class="member-head">
+        <div class="member-heels fl"><h2>退货管理</h2></div>
+        <div class="member-backs member-icons fr"><a href="#">搜索</a></div>
+        <div class="member-about fr"><input type="text" placeholder="商品名称/商品编号/订单编号"></div>
+    </div>
+    <div class="member-whole clearfix">
+        <ul id="H-table" class="H-table">
+            <li class="cur"><a href="javascript:void(0)">退货申请<em>(@Model.RequestingList.Count())</em></a></li>
+            <li><a href="javascript:void(0)">退货中<em>(@Model.ReturningList.Count())</em></a></li>
+            <li><a href="javascript:void(0)">已退货<em>(@Model.ReturnFinishedList.Count())</em></a></li>
+        </ul>
+    </div>
+    <div class="member-border">
+        <div class="member-return H-over">
+            <div class="member-cancel clearfix">
+                <span class="be1">订单信息</span>
+                <span class="be2">收货人</span>
+                <span class="be2">订单金额</span>
+                <span class="be2">订单时间</span>
+                <span class="be2">订单状态</span>
+                <span class="be2">订单操作</span>
+            </div>
+            <div class="member-sheet clearfix">
+                <ul>
+                    @for (int i = 0; i < Model.RequestingList.Count(); i++)
+                    {
+                        <li>
+                            <div class="member-minute clearfix">
+                                <span>@Model.RequestingList[i].OrderDate</span>
+                                <span>订单号：<em>@Model.RequestingList[i].Id</em></span>
+                            </div>
+                            <div class="member-circle clearfix">
+                                <div class="ci1">
+                                    @for (int j = 0; j < @Model.RequestingList[i].OrderItems.Count(); j++)
+                                    {
+                                        var orderItems = @Model.RequestingList[i].OrderItems.ToList();
+                                        AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
+                                        <div class="ci7 clearfix">
+                                            <span class="gr1"><a href="/Product/getProduct?productId=@orderItem.Product.Id"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
+                                            <span class="gr2" style="width:260px"><a href="/Product/getProduct?productId=@orderItem.Product.Id">@orderItem.Product.ProductName</a></span>
+                                            <span class="gr3">X @orderItem.Quantity</span>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="ci2 amanda1">@Model.RequestingList[i].Customer.CustomerName</div>
+                                <div class="ci3 amanda1"><b>￥@Model.RequestingList[i].TotalAmount.ToString()</b></div>
+                                <div class="ci4 amanda1"><p>@Model.RequestingList[i].OrderDate.ToShortDateString()</p></div>
+                                @if (Model.RequestingList[i].OrderStatus.Equals("FINISHED"))
+                                {
+                                    <div class="ci5 amanda1">
+                                        <p>交易成功</p>
+                                        <div style="position:relative;">
+                                            <a id="linkToDelivery">查看物流</a>
+                                            <div id="deliveryDiv" style="z-index:3; display:none; position:absolute;top:30px;width:300px; background-color:white;">
+                                                <table>
+                                                    @for (int k = 0; k < Model.RequestingList[i].DeliveryInfos.Count(); k++)
+                                                    {
+                                                        var deliveryInfos = Model.RequestingList[i].DeliveryInfos.ToList();
+                                                        AirShopp.Domain.DeliveryInfo deliveryInfo = deliveryInfos[k] as AirShopp.Domain.DeliveryInfo;
+                                                        <tr style="line-height:22px">
+                                                            <td>@deliveryInfo.UpdateTime.ToShortDateString();</td>
+                                                            <td>@deliveryInfo.UpdateTime.Day;</td>
+                                                            <td>@deliveryInfo.UpdateTime.ToShortTimeString();</td>
+                                                            <td>@deliveryInfo.Description;</td>
+                                                        </tr>
+                                                    }
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <a href="/Order/OrderDetail?orderId=@Model.RequestingList[i].Id">订单详情</a>
+                                    </div>
+                                }
+                                <div class="ci5 amanda1">
+                                <p>
+                                    @if ("TRANSFER".Equals(@Model.RequestingList[i].OrderStatus))
+                                    {
+                                        <label>买家已付款</label>
+                                    }
+                                    @if ("DELIVERY".Equals(@Model.RequestingList[i].OrderStatus))
+                                    {
+                                        <label>已发货</label>
+                                    }
+                                </p> 
+                                <p><a href="/Order/OrderDetail?orderId=@Model.RequestingList[i].Id">订单详情</a></p></div>
+                                <div class="ci6 amanda1">
+                                    @for (int k = 0; k < @Model.RequestingList[i].OrderItems.Count(); k++)
+                                    {
+                                        var orderItems = @Model.RequestingList[i].OrderItems.ToList();
+                                        AirShopp.Domain.OrderItem orderItem = orderItems[k] as AirShopp.Domain.OrderItem;
+                                        <p>
+                                        @if (Model.RequestingList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault() != null &&
+                                            Model.RequestingList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault().ReturnStatus == "REQUESTING")
+                                        {
+                                            <a class="btn1" href="/Order/AgreeRequest?orderId=@Model.RequestingList[i].Id&orderItemId=@orderItem.Id">同意退货</a>
+                                        }
+                                        else if (Model.RequestingList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault() != null &&
+                                          Model.RequestingList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault().ReturnStatus == "FINISHED")
+                                        {
+                                            <label>退货完成</label>
+                                        }
+                                        else if (Model.RequestingList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault() != null &&
+                                           Model.RequestingList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault().ReturnStatus == "RETURNING")
+                                        {
+                                            <label>退货中</label>
+                                        }
+                                        else
+                                        {
+                                            <label>正常</label>
+                                        }
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="member-return H-over" style="display:none;">
+            <div class="member-cancel clearfix">
+                <span class="be1">订单信息</span>
+                <span class="be2">收货人</span>
+                <span class="be2">订单金额</span>
+                <span class="be2">订单时间</span>
+                <span class="be2">订单状态</span>
+                <span class="be2">订单操作</span>
+            </div>
+            <div class="member-sheet clearfix">
+                <ul>
+                    @for (int i = 0; i < Model.ReturningList.Count(); i++)
+                    {
+                        <li>
+                            <div class="member-minute clearfix">
+                                <span>@Model.ReturningList[i].OrderDate</span>
+                                <span>订单号：<em>@Model.ReturningList[i].Id</em></span>
+                            </div>
+                            <div class="member-circle clearfix">
+                                <div class="ci1">
+                                    @for (int j = 0; j < @Model.ReturningList[i].OrderItems.Count(); j++)
+                                    {
+                                        var orderItems = @Model.ReturningList[i].OrderItems.ToList();
+                                        AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
+                                        <div class="ci7 clearfix">
+                                            <span class="gr1"><a href="/Product/getProduct?productId=@orderItem.Product.Id"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
+                                            <span class="gr2" style="width:260px"><a href="/Product/getProduct?productId=@orderItem.Product.Id">@orderItem.Product.ProductName</a></span>
+                                            <span class="gr3">X @orderItem.Quantity</span>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="ci2 amanda1">@Model.ReturningList[i].Customer.CustomerName</div>
+                                <div class="ci3 amanda1"><b>￥@Model.ReturningList[i].TotalAmount.ToString()</b></div>
+                                <div class="ci4 amanda1"><p>@Model.ReturningList[i].OrderDate.ToShortDateString()</p></div>
+                                <div class="ci5 amanda1">
+                                <p>
+                                    @if ("TRANSFER".Equals(@Model.RequestingList[i].OrderStatus))
+                                    {
+                                        <label>买家已付款</label>
+                                    }
+                                    @if ("DELIVERY".Equals(@Model.RequestingList[i].OrderStatus))
+                                    {
+                                        <label>已发货</label>
+                                    }
+                                </p> 
+                                <p><a href="/Order/OrderDetail?orderId=@Model.ReturningList[i].Id">订单详情</a></p></div>
+                                <div class="ci6 amanda1">
+                                    @for (int k = 0; k < @Model.ReturningList[i].OrderItems.Count(); k++)
+                                    {
+                                        var orderItems = @Model.ReturningList[i].OrderItems.ToList();
+                                        AirShopp.Domain.OrderItem orderItem = orderItems[k] as AirShopp.Domain.OrderItem;
+                                        <p>
+                                            @if (Model.RequestingList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault() != null &&
+                                              Model.RequestingList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault().ReturnStatus == "FINISHED")
+                                            {
+                                                <label>退货完成</label>
+                                            }
+                                            else if (Model.RequestingList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault() != null &&
+                                               Model.RequestingList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault().ReturnStatus == "RETURNING")
+                                            {
+                                                <label>退货中</label>
+                                            }
+                                            else
+                                            {
+                                                <label>正常</label>
+                                            }
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="H-over" style="display:none;">
+            <div class="member-cancel clearfix">
+                <span class="be1">订单信息</span>
+                <span class="be2">收货人</span>
+                <span class="be2">订单金额</span>
+                <span class="be2">订单时间</span>
+                <span class="be2">订单状态</span>
+                <span class="be2">订单操作</span>
+            </div>
+            <div class="member-sheet clearfix">
+                <ul>
+                    @for (int i = 0; i < Model.ReturnFinishedList.Count(); i++)
+                    {
+                        <li>
+                            <div class="member-minute clearfix">
+                                <span>@Model.ReturnFinishedList[i].OrderDate</span>
+                                <span>订单号：<em>@Model.ReturnFinishedList[i].Id</em></span>
+                            </div>
+                            <div class="member-circle clearfix">
+                                <div class="ci1">
+                                    @for (int j = 0; j < @Model.ReturnFinishedList[i].OrderItems.Count(); j++)
+                                    {
+                                        var orderItems = @Model.ReturnFinishedList[i].OrderItems.ToList();
+                                        AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
+                                        <div class="ci7 clearfix">
+                                            <span class="gr1"><a href="/Product/getProduct?productId=@orderItem.Product.Id"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
+                                            <span class="gr2" style="width:260px"><a href="/Product/getProduct?productId=@orderItem.Product.Id">@orderItem.Product.ProductName</a></span>
+                                            <span class="gr3">X @orderItem.Quantity</span>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="ci2 amanda1">@Model.ReturnFinishedList[i].Customer.CustomerName</div>
+                                <div class="ci3 amanda1"><b>￥@Model.ReturnFinishedList[i].TotalAmount.ToString()</b></div>
+                                <div class="ci4 amanda1"><p>@Model.ReturnFinishedList[i].OrderDate.ToShortDateString()</p></div>
+                                <div class="ci5 amanda1"><p>买家已付款</p> <p><a href="/Order/OrderDetail?orderId=@Model.ReturnFinishedList[i].Id">订单详情</a></p></div>
+                                <div class="ci6 amanda1">
+                                    @for (int k = 0; k < @Model.ReturnFinishedList[i].OrderItems.Count(); k++)
+                                    {
+                                        var orderItems = @Model.ReturnFinishedList[i].OrderItems.ToList();
+                                        AirShopp.Domain.OrderItem orderItem = orderItems[k] as AirShopp.Domain.OrderItem;
+                                        <p>
+                                            @if (Model.ReturnFinishedList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault() != null)
+                                            {
+                                                <label>退货完成</label>
+                                            }
+                                            else
+                                            {
+                                                <label>正常</label>
+                                            }
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="clearfix" style="padding:30px 20px;">
+            <div class="fr pc-search-g pc-search-gs">
+                <a style="display:none" class="fl " href="#">上一页</a>
+                <a href="#" class="current">1</a>
+                <a href="javascript:;">2</a>
+                <a href="javascript:;">3</a>
+                <a href="javascript:;">4</a>
+                <a href="javascript:;">5</a>
+                <a href="javascript:;">6</a>
+                <a href="javascript:;">7</a>
+                <span class="pc-search-di">…</span>
+                <a href="javascript:;">1088</a>
+                <a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#linkToDelivery").mouseover(function () {
+        $("#deliveryDiv").show();
+    }).mouseout(function () {
+        $("#deliveryDiv").hide();
+    });
+    $(".amanda1").onload(function () {
+        $(this).height($(this).parent().height());
+    });
+    $(".amanda1").css("paddingTop", "0");
+</script>
+
+
