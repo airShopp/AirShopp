@@ -29,7 +29,7 @@ namespace AirShopp.Domain
         public long AddressId { get; set; }
         public virtual Address Address { get; set; }
 
-        public ICollection<Return> Returns { get; set; }
+        public virtual ICollection<Return> Returns { get; set; }
         public virtual ICollection<DeliveryInfo> DeliveryInfos { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<OrderItem> OrderItems { get; set; }

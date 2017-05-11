@@ -2,6 +2,7 @@
 {
     public class ShopCartDataModel
     {
+        public long Id { get; set; }
         public long ProductId { get; set; }
         public string PictureUrl { get; set; }
         public string ProductName { get; set; }

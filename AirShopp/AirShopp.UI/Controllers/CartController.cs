@@ -89,6 +89,7 @@ namespace AirShopp.UI.Controllers
                                    where ct.Id == customer.Id
                                    select new ShopCartDataModel()
                                    {
+                                       Id = ci.Id,
                                        ProductId = p.Id,
                                        ProductName = p.ProductName,
                                        PictureUrl = p.Url,
@@ -108,7 +109,8 @@ namespace AirShopp.UI.Controllers
                     ProductCredit = cart.ProductCredit,
                     ProductId = cart.ProductId,
                     ProductName = cart.ProductName,
-                    TotalPrice = cart.TotalPrice
+                    TotalPrice = cart.TotalPrice,
+                    Id = cart.Id
                 });
             });
             return new ShopCartViewModel()

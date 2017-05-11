@@ -35,66 +35,49 @@ namespace AirShopp.DataAccess
             return _context.Order.Find(orderId); 
         }
 
+        public Return GetReturn(long orderId, long orderItemId)
+        {
+            return _context.Return.Where(x => x.OrderId == orderId && x.OrderItemId == orderItemId).FirstOrDefault();
+        }
+
+        public List<Return> GetReturnList(string customerName)
+        {
+            return _context.Return.Where(x => x.CustomerName == customerName).ToList();
+        }
+
+        public List<Return> GetReturnListByOrderId(long orderId)
+        {
+            return _context.Return.Where(x => x.OrderId == orderId).ToList();
+        }
+
         public List<Order> LoadOrderList(long customerId)
         {
-            List<Order> orders = new List<Order>();
-            #region just for mock delivery info
-            List<DeliveryInfo> deliveryInfoList = new List<DeliveryInfo>()
-            {
-                new DeliveryInfo() {
-                    Id = 1,
-                    Index = 1,
-                    OrderId = 1,
-                    Description = "卖家已发货",
-                    UpdateTime = DateTime.Now.AddHours(-5),
-                },
-                new DeliveryInfo() {
-                    Id = 2,
-                    Index = 2,
-                    OrderId = 1,
-                    Description = "洛阳市已揽件",
-                    UpdateTime = DateTime.Now.AddHours(-3),
+            return _context.Order.Where(x => x.CustomerId == customerId).OrderBy(y => y.DeliveryDate).ToList();
+        }
 
-                },
-                new DeliveryInfo() {
-                    Id = 3,
-                    Index = 3,
-                    OrderId = 1,
-                    Description = "洛阳已发出",
-                    UpdateTime = DateTime.Now.AddHours(-1),
-                },
-                new DeliveryInfo() {
-                    Id = 4,
-                    Index = 4,
-                    OrderId = 1,
-                    Description = "正在派送",
-                    UpdateTime = DateTime.Now.AddHours(2),
-                },
-            };
-            #endregion
-            _context.Order.Where(x => x.CustomerId == customerId).OrderBy(y  => y.DeliveryDate).ToList().ForEach(order => {
-                orders.Add(new Order()
-                {
-                    Id = order.Id,
-                    TotalAmount = order.TotalAmount,
-                    OrderDate = order.OrderDate,
-                    OrderStatus = order.OrderStatus,
-                    DeliveryDate = order.DeliveryDate,
-                    IsSpecialOrder = order.IsSpecialOrder,
-                    SpecialType = order.SpecialType,
-                    Customer = order.Customer,
-                    Address = order.Address,
-                    DeliveryInfos = deliveryInfoList,
-                    Comments = order.Comments,
-                    OrderItems = order.OrderItems,
-                });
-            });
-            return orders;
+        public void ReturnOrder(Return returnOrder)
+        {
+            _context.Return.Add(returnOrder);
+            _context.SaveChanges();
+        }
+
+        public void ToPayment(long orderId)
+        {
+            var order = _context.Order.Find(orderId);
+            order.OrderStatus = "TRANSFER";
+            _context.Entry<Order>(order).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         public void UpdateOrder(Order order)
         {
             _context.Entry<Order>(order).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        public void UpdateReturn(Return returnItem)
+        {
+            _context.Entry<Return>(returnItem).State = EntityState.Modified;
             _context.SaveChanges();
         }
     }

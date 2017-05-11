@@ -22,20 +22,30 @@ namespace AirShopp.UI.Controllers
             _readFromDb = readFromDb;
         }
         // GET: Comment
-        public ActionResult Index(long orderId)
+        public ActionResult Index(long? orderId)
         {
             Customer customer = Session[Constants.SESSION_USER] as Customer;
             List<Comment> comments = _commentRepository.GetAllComment(customer.Id);
             CommentViewModel commentViewModel = new CommentViewModel();
             commentViewModel.CommentList = comments;
-            commentViewModel.Order = _readFromDb.Orders.Where(x => x.Id == orderId).FirstOrDefault();
-            return View("AddComment", comments);
+            OrderItem OrderItem = _readFromDb.OrderItems.Where(x => x.Id == orderId).FirstOrDefault();
+            commentViewModel.OrderItem = OrderItem;
+            if (OrderItem != null)
+            {
+                commentViewModel.OrderDate = _readFromDb.Orders.Where(x => x.Id == OrderItem.OrderId).First().OrderDate;
+            }
+            return View("AddComment", commentViewModel);
         }
 
-        public ActionResult AddComment(Comment comment)
+        public ActionResult AddComment(long orderItemId, long productId, string commentStr)
         {
-            _commentService.AddComment(comment);
-            return View();
+            Comment comment = new Comment();
+            comment.OrderId = _readFromDb.OrderItems.Where(x => x.Id == orderItemId).First().OrderId;
+            comment.ProductId = productId;
+            comment.Comments = commentStr;
+            comment.CommentDate = DateTime.Now;
+            _commentRepository.AddComment(comment);
+            return RedirectToAction("Index");
         }
     }
 }

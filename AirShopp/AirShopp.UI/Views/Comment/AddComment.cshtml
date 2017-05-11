@@ -1,4 +1,5 @@
-﻿@{
+﻿@model AirShopp.UI.Models.ViewModel.CommentViewModel
+@{
     ViewBag.Title = "AddComment";
     Layout = "~/Views/Shared/_orderPageLayout.cshtml";
 
@@ -13,42 +14,34 @@
             <span class="co2">购买时间</span>
             <span class="co3">评价状态</span>
         </div>
+        @if (Model.OrderItem != null)
+        {
+        using (Html.BeginForm("AddComment", "Comment", FormMethod.Post, new { @id = "form" }))
+        {
+            <input name="productId" value="@Model.OrderItem.ProductId" type="hidden"/>
+            <input name="orderItemId" value="@Model.OrderItem.Id" type="hidden" />
         <div class="member-class clearfix">
             <ul>
                 <li class="clearfix">
                     <div class="sp1">
-                        <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="~/Content/img/pd/m1.png"></a></span>
-                        <span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
-                        <span class="gr3">X1</span>
+                        <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="@Model.OrderItem.Product.Url"></a></span>
+                        <span class="gr2"><a href="#">@Model.OrderItem.Product.ProductName</a></span>
+                        <span class="gr3">X @Model.OrderItem.Quantity</span>
                     </div>
-                    <div class="sp2">2015 - 09 -  02</div>
-                    <div class="sp3"><a href="#">发表评价</a> </div>
+                    <div class="sp2">@Model.OrderDate</div>
+                    <div class="sp3"><input type="submit" value="发表评论"></div>
                 </li>
             </ul>
         </div>
         <div class="member-setup clearfix">
             <ul>
                 <li class="clearfix">
-                    <div class="member-score fl"><i class="reds">*</i>评分：</div>
-                    <div class="member-star fl">
-                        <ul>
-                            <li class="on"></li>
-                            <li class="on"></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                    </div>
-                    <div class="member-judge fr"><input type="checkbox"> 匿名评价</div>
-                </li>
-
-                <li class="clearfix">
                     <div class="member-score fl"><i class="reds">*</i>商品评价：</div>
                     <div class="member-star fl">
-                        <textarea maxlength="200"></textarea>
+                        <textarea maxlength="200" name="commentStr"></textarea>
                     </div>
                 </li>
-                <li class="clearfix">
+                @*<li class="clearfix">
                     <div class="member-score fl">晒单：</div>
                     <div class="member-star fl">
                         <a href="#"><img src="~/Content/img/pd/m2.png"></a>
@@ -57,21 +50,26 @@
                     </div>
                 </li>
                 <li class="clearfix">
-                    <div style="padding-left:85px;">最多可以增加<i class="reds">10</i>张</div>
-                </li>
+                    <div style="padding-left:85px;">最多可以增加<i class="reds">3</i>张</div>
+                </li>*@
             </ul>
         </div>
+        }
+        }
         <div class="member-class clearfix">
             <ul>
-                <li class="clearfix">
-                    <div class="sp1">
-                        <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="~/Content/img/pd/m1.png"></a></span>
-                        <span class="gr2"><a href="#">红米Note2 标准版 白色 移动4G手机 双卡双待</a></span>
-                        <span class="gr3">X1</span>
-                    </div>
-                    <div class="sp2">2015 - 09 -  02</div>
-                    <div class="sp3"><a href="#">发表评价</a> </div>
-                </li>
+                @for (int i = 0; i < Model.CommentList.Count(); i++)
+                {
+                    <li class="clearfix">
+                        <div class="sp1">
+                            <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="@Model.CommentList[i].Product.Url"></a></span>
+                            <span class="gr2"><a href="#">@Model.CommentList[i].Product.ProductName</a></span>
+                            @*<span class="gr3">X @Model.CommentList[i].</span>*@
+                        </div>
+                        <div class="sp2">@Model.CommentList[i].CommentDate</div>
+                        <div class="sp3"><label>@Model.CommentList[i].Comments</label></div>
+                    </li>
+                }
             </ul>
         </div>
         <div class="member-pages clearfix">
