@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AirShopp.UI.Models.ViewModel.DeliveryNoteListViewModel>
+﻿@model AirShopp.UI.Models.ViewModel.DeliveryNoteListViewModel
 @{
     Layout = "~/Views/Shared/_backEndLayout.cshtml";
 }
@@ -118,7 +118,7 @@
     <div class="member-border">
         <div class="member-return H-over">
             <div class="contentWrapper">
-                @foreach (var item in Model)
+                @foreach (var item in Model.DelvieryNoteDataModelList)
                 {
                     <div class="member-sheet clearfix" style="margin-bottom:5px">
                         <div class="firstPart fl">
@@ -156,7 +156,7 @@
                             <img src="@item.QRCodeImgSrc" style="width:100%;height:100%;" />
                         </div>
                     </div>
-                    if (item.Id != Model.LastOrDefault().Id)
+                    if (item.Id != Model.DelvieryNoteDataModelList.LastOrDefault().Id)
                     {
                         <hr style="height:1px;border:none;border-top:1px dashed #0066CC;width:100%" />
                     }
@@ -165,17 +165,21 @@
         </div>
         <div class="clearfix" style="padding:30px 20px;">
             <div class="fr pc-search-g pc-search-gs">
-                <a style="display:none" class="fl " href="#">上一页</a>
-                <a href="#" class="current">1</a>
-                <a href="javascript:;">2</a>
-                <a href="javascript:;">3</a>
-                <a href="javascript:;">4</a>
-                <a href="javascript:;">5</a>
-                <a href="javascript:;">6</a>
-                <a href="javascript:;">7</a>
-                <span class="pc-search-di">…</span>
-                <a href="javascript:;">1088</a>
-                <a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>
+                @foreach (var pageNum in Model.pageBar)
+                {
+                    if (pageNum == Model.PageIndex)
+                    {
+                        @Html.ActionLink(pageNum.ToString(), "DeliveryNoteList", "Delivery", new { @class = "current", indexNum = pageNum });
+                    }
+                    else if (pageNum == 0)
+                    {
+                        <span class="pc-search-di">…</span>
+                    }
+                    else
+                    {
+                        @Html.ActionLink(pageNum.ToString(), "DeliveryNoteList", "Delivery", new { indexNum = pageNum }, new { Target = "_self" });
+                    }
+                }
             </div>
         </div>
     </div>

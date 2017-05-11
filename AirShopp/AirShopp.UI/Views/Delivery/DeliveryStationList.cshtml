@@ -150,11 +150,11 @@
                         <li>
                             <div class="member-circle clearfix">
                                 <div class="ci22">@item.Location</div>
-                                <div class="ci33">@item.DeliverStation.Name</div>
-                                <div class="ci11">@item.DeliverStation.Address</div>
-                                <div class="ci44">@item.DeliverStation.Latitude</div>
-                                <div class="ci44">@item.DeliverStation.Longitude</div>
-                                <div class="ci55" style="border:none;">@item.DeliverStation.StationLevel</div>
+                                <div class="ci33">@item.Name</div>
+                                <div class="ci11">@item.Address</div>
+                                <div class="ci44">@item.Latitude</div>
+                                <div class="ci44">@item.Longitude</div>
+                                <div class="ci55" style="border:none;">@item.StationLevel</div>
                             </div>
                         </li>
                     }
@@ -163,17 +163,21 @@
         </div>
         <div class="clearfix" style="padding:30px 20px;">
             <div class="fr pc-search-g pc-search-gs">
-                <a style="display:none" class="fl " href="#">上一页</a>
-                <a href="#" class="current">1</a>
-                <a href="javascript:;">2</a>
-                <a href="javascript:;">3</a>
-                <a href="javascript:;">4</a>
-                <a href="javascript:;">5</a>
-                <a href="javascript:;">6</a>
-                <a href="javascript:;">7</a>
-                <span class="pc-search-di">…</span>
-                <a href="javascript:;">1088</a>
-                <a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>
+               @foreach (var pageNum in Model.pageBar)
+               {
+                   if (pageNum == Model.PageIndex)
+                   {
+                    @Html.ActionLink(pageNum.ToString(), "DeliveryStationList", "Delivery", new { @class = "current", indexNum = pageNum });
+                   }
+                   else if (pageNum == 0)
+                   {
+                    <span class="pc-search-di">…</span>
+                   }
+                   else
+                   {
+                    @Html.ActionLink(pageNum.ToString(), "DeliveryStationList", "Delivery", new { indexNum = pageNum }, new { Target = "_self" });
+                   }
+               }
             </div>
         </div>
     </div>

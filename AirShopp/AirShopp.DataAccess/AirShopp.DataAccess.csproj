@@ -167,10 +167,6 @@
     <Compile Include="Migrations\201705031756500_ModifyCartTable.Designer.cs">
       <DependentUpon>201705031756500_ModifyCartTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705081424343_ModifyReturnModel.cs" />
-    <Compile Include="Migrations\201705081424343_ModifyReturnModel.Designer.cs">
-      <DependentUpon>201705081424343_ModifyReturnModel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201705100223100_RefineDeliveryOrder.cs" />
     <Compile Include="Migrations\201705100223100_RefineDeliveryOrder.Designer.cs">
       <DependentUpon>201705100223100_RefineDeliveryOrder.cs</DependentUpon>
@@ -182,6 +178,10 @@
     <Compile Include="Migrations\201705101454575_AddProductOutFactoryInitialData.cs" />
     <Compile Include="Migrations\201705101454575_AddProductOutFactoryInitialData.Designer.cs">
       <DependentUpon>201705101454575_AddProductOutFactoryInitialData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705110820210_ModifyReturnModel.cs" />
+    <Compile Include="Migrations\201705110820210_ModifyReturnModel.Designer.cs">
+      <DependentUpon>201705110820210_ModifyReturnModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -288,9 +288,6 @@
     <EmbeddedResource Include="Migrations\201705031756500_ModifyCartTable.resx">
       <DependentUpon>201705031756500_ModifyCartTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705081424343_ModifyReturnModel.resx">
-      <DependentUpon>201705081424343_ModifyReturnModel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705100223100_RefineDeliveryOrder.resx">
       <DependentUpon>201705100223100_RefineDeliveryOrder.cs</DependentUpon>
     </EmbeddedResource>
@@ -299,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705101454575_AddProductOutFactoryInitialData.resx">
       <DependentUpon>201705101454575_AddProductOutFactoryInitialData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705110820210_ModifyReturnModel.resx">
+      <DependentUpon>201705110820210_ModifyReturnModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
