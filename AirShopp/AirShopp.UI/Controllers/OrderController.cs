@@ -20,6 +20,11 @@ namespace AirShopp.UI.Controllers
         private ICartItemRepository _cartItemRepository;
 
         public OrderController(ICartItemRepository cartItemRepository, IOrderservice orderService, IOrderRepository orderRepository, IReadFromDb readFromDb, IProvinceRepository provinceRepository, ICityRepository cityRepository, IAreaRepository areaRepository)
+        private IDeliveryOrderRepository _deliveryOrderRepository;
+        private IDeliveryOrderItemRepository _deliveryOrderItemRepository;
+        private IDeliveryNoteRepository _deliveryNoteRepository;
+
+        public OrderController(IOrderservice orderService, IOrderRepository orderRepository, IReadFromDb readFromDb, IProvinceRepository provinceRepository, ICityRepository cityRepository, IAreaRepository areaRepository, IDeliveryOrderRepository deliveryOrderRepository, IDeliveryOrderItemRepository deliverOrderItemRepository, IDeliveryNoteRepository deliveryNoteRepository)
         {
             _orderService = orderService;
             _orderRepository = orderRepository;
@@ -28,6 +33,9 @@ namespace AirShopp.UI.Controllers
             _cityRepository = cityRepository;
             _areaRepository = areaRepository;
             _cartItemRepository = cartItemRepository;
+            _deliveryOrderRepository = deliveryOrderRepository;
+            _deliveryOrderItemRepository = deliverOrderItemRepository;
+            _deliveryNoteRepository = deliveryNoteRepository;
         }
 
         // GET: Order
@@ -40,7 +48,7 @@ namespace AirShopp.UI.Controllers
             orderViewModel.PendingPaymentOrder.AddRange(orderList.Where(x => x.OrderStatus == "OBLIGATION").ToList());
             orderViewModel.PendingDeliveryOrder.AddRange(orderList.Where(x => x.OrderStatus == "TRANSFER").ToList());
             orderViewModel.PendingReceivedOrder.AddRange(orderList.Where(x => x.OrderStatus == "DELIVERY").ToList());
-            orderViewModel.PendingComment.AddRange(orderList.Where(x => x.OrderStatus == "FINISHED" && x.Comments.Count()==0).ToList());
+            orderViewModel.PendingComment.AddRange(orderList.Where(x => x.OrderStatus == "FINISHED" && x.Comments.Count() == 0).ToList());
             return View("OrderList", orderViewModel);
         }
         public ActionResult OrderDetail(long orderId)
@@ -121,7 +129,7 @@ namespace AirShopp.UI.Controllers
             }
 
             long customerId = (Session[Constants.SESSION_USER] as Customer).Id;
-            Address address =  _readFromDb.Address.Where(x => x.CustomerId == customerId && x.IsDefault).FirstOrDefault();
+            Address address = _readFromDb.Address.Where(x => x.CustomerId == customerId && x.IsDefault).FirstOrDefault();
 
             Order order = new Order();
             order.CustomerId = customerId;
@@ -162,15 +170,51 @@ namespace AirShopp.UI.Controllers
             Order order = new Order();
             try
             {
-                order =  _readFromDb.Orders.Where(x => x.Id == orderId).First();
+                order = _orderRepository.GetOrderByOrderId(orderId);
                 //order.AddressId = addressId;  ,long addressId
                 _orderRepository.UpdateOrder(order);
+
+                //Generate delivery order
+                string beginSerialNumber = "CK-" + DateTime.Now.ToString("yyyyMMdd");
+                string maxDeliveryNumberStr = _deliveryOrderRepository.GetMaxDeliveryOrderNumber(beginSerialNumber);
+
+                DeliveryOrder deliveryOrder = new DeliveryOrder();
+                deliveryOrder.DeliveryOrderNumber = beginSerialNumber + "-" + maxDeliveryNumberStr;
+                deliveryOrder.DeliveryDate = DateTime.Now;
+                deliveryOrder.TotalRMBInChinese = MathHelper.ConvertToChinese((Double)order.TotalAmount);
+                deliveryOrder.TotalRMBInNumberic = order.TotalAmount.ToString();
+                deliveryOrder.OrderId = order.Id;
+
+                long currentDeliveryOrderId = _deliveryOrderRepository.AddDeliveryOrder(deliveryOrder);
+                List<OrderItem> orderItems = order.OrderItems.ToList();
+                foreach (var item in orderItems)
+                {
+                    DeliveryOrderItem deliveryOrderItem = new DeliveryOrderItem();
+                    deliveryOrderItem.ProductName = item.Product.ProductName;
+                    deliveryOrderItem.Unit = "件";
+                    deliveryOrderItem.OutNumber = item.Quantity;
+                    deliveryOrderItem.PricePerProduct = item.UnitPrice;
+                    deliveryOrderItem.TotalPrice = item.Quantity * item.UnitPrice;
+                    deliveryOrderItem.DeliveryOrderId = currentDeliveryOrderId;
+
+                    _deliveryOrderItemRepository.AddDeliveryOrderItem(deliveryOrderItem);
+                }
+
+                //Generate delivery note
+                DeliveryNote deliveryNote = new DeliveryNote();
+                deliveryNote.DeliveryNoteNumber = "PS-" + DateTime.Now.ToString("yyyyMMdd") + "-" + maxDeliveryNumberStr;
+                //Generate QR Code
+                deliveryNote.QRCodeImgURL = QRCodeHelper.GetQRImage(deliveryNote.DeliveryNoteNumber);
+                deliveryNote.OrderId = order.Id;
+
+                _deliveryNoteRepository.AddDeliveryNote(deliveryNote);
             }
             catch (Exception ex)
             {
 
+
             }
-            return View("SubmitOrder",order);
+            return View("SubmitOrder", order);
         }
 
         public ActionResult CancelOrder(long orderId)

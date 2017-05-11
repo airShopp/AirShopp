@@ -172,6 +172,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DeliveryController.cs" />
     <Compile Include="Controllers\FliterController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\BMapRoutePlanningController.cs" />
@@ -197,6 +198,9 @@
     <Compile Include="Models\ShopCartDataModel.cs" />
     <Compile Include="Models\ViewModel\AddressListViewModel.cs" />
     <Compile Include="Models\ViewModel\CommentViewModel.cs" />
+    <Compile Include="Models\ViewModel\DeliveryNoteListViewModel.cs" />
+    <Compile Include="Models\ViewModel\DeliveryOrderDetailViewModel.cs" />
+    <Compile Include="Models\ViewModel\DeliveryOrderListViewModel.cs" />
     <Compile Include="Models\ViewModel\OrderConfirmViewModel.cs" />
     <Compile Include="Models\ViewModel\ReturnRequestListViewModel.cs" />
     <Compile Include="Models\ViewModel\ReturnRequestViewModel.cs" />
@@ -204,7 +208,7 @@
     <Compile Include="Models\ProductListDataModel.cs" />
     <Compile Include="Models\ViewModel\Admin\Class1.cs" />
     <Compile Include="Models\ViewModel\HomeViewModel.cs" />
-    <Compile Include="Models\ViewModel\OriginPointsViewModel.cs" />
+    <Compile Include="Models\ViewModel\BMapViewModel.cs" />
     <Compile Include="Models\ViewModel\ProductDetailViewModel.cs" />
     <Compile Include="Models\ViewModel\ProductListViewModel.cs" />
     <Compile Include="Models\ViewModel\ProductViewModel.cs" />
@@ -413,7 +417,6 @@
     <Content Include="Scripts\js\jquery-3.1.1.min.js" />
     <Content Include="Scripts\js\jquery.easing.js" />
     <Content Include="Scripts\js\jquery.js" />
-    <Content Include="Scripts\js\jquery.mousewheel.js" />
     <Content Include="Scripts\js\js-tab.js" />
     <Content Include="Scripts\js\LuShu.js" />
     <Content Include="Scripts\js\MSClass.js" />
@@ -444,7 +447,6 @@
     <Content Include="Views\Shared\_airShoppLayout.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
     <Content Include="Views\Address\ViewAddress.cshtml" />
-    <Content Include="Views\BMapRoutePlanning\Index.cshtml" />
     <Content Include="Views\Order\OrderList.cshtml" />
     <Content Include="Views\Shared\_orderPageLayout.cshtml" />
     <Content Include="Views\Order\OrderDetail.cshtml" />
@@ -460,6 +462,12 @@
     <Content Include="Views\Order\SubmitOrder.cshtml" />
     <Content Include="Views\Shared\_orderFlowLayout.cshtml" />
     <Content Include="Views\Shared\_basicTemplateLayout.cshtml" />
+    <Content Include="Views\Shared\_backEndLayout.cshtml" />
+    <Content Include="Views\Delivery\DeliveryOrderList.cshtml" />
+    <Content Include="Views\Delivery\DeliveryOrderDetail.cshtml" />
+    <Content Include="Views\Delivery\DeliveryNoteList.cshtml" />
+    <Content Include="Views\Delivery\AddDeliveryStation.cshtml" />
+    <Content Include="Views\Delivery\DeliveryStationList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_homePageLayout.cshtml" />

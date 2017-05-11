@@ -10,11 +10,10 @@ namespace AirShopp.Common
     {
         // Common
         public const char TEXT_SPACE = ' ';
-        public const char VIRGULE = '/';
 
         // QRCode
         public const string PIC_SUFFIX_JPG = ".jpg";
-        public const string IMG_LOCATION = "Content\\Images\\QRImages\\";
+        public const string IMG_LOCATION = "\\Content\\Images\\QRImages\\";
 
         // BMap
         public const string BMAP_AK = "BZpwjUXFrAlT6g87xFxY4c3Cf82zen93";

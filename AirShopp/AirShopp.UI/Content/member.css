@@ -7,7 +7,7 @@
 .member-title  { width:120px; height:40px;  text-align:center; font-size:16px; padding-right:15px; padding-top:22px; }
 .member-center { width:1200px; margin:0 auto;}
 .member-left   { width:208px; height:auto; margin-top:10px; border:1px solid #e0e0e0; }
-.member-right  { width:970px; height:auto; margin-top:10px;padding-bottom:50px;}
+.member-right  { width:970px; height:auto; margin-top:10px;}
 .member-head   { width:970px; height:42px; margin-bottom:12px; line-height:42px;background:#ea4949; }
 .member-border { width:968px; height:auto;margin-bottom:10px; border:1px solid #e0e0e0;}
 .member-lists  { width:208px; height:auto;}

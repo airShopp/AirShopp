@@ -1,0 +1,138 @@
+﻿@model AirShopp.UI.Models.ViewModel.DeliveryOrderDetailViewModel
+@{
+    Layout = "~/Views/Shared/_backEndLayout.cshtml";
+}
+@Styles.Render("~/bundles/AirShopp/Inventory/Css")
+@Scripts.Render("~/bundles/AirShopp/Inventory/js")
+<!-- 商城快讯 begin -->
+<style>
+    .contentWrapper {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .DeliveryOrdertitle1 {
+        text-decoration: underline;
+        text-align: center;
+        font-size: 30px;
+        font-weight: 600;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .DeliveryOrdertitle2 {
+        text-align: center;
+        height: 35px;
+        line-height: 35px;
+        font-size: 24px;
+    }
+
+        .DeliveryOrdertitle2 em {
+            text-wrap: normal;
+            float: right;
+        }
+
+    .DeliveryOrdertitle3 {
+        font-size: 14px;
+        height: 35px;
+        line-height: 35px;
+    }
+
+        .DeliveryOrdertitle3 span:first-of-type {
+            float: left;
+        }
+
+        .DeliveryOrdertitle3 span:last-of-type {
+            float: right;
+        }
+
+    .member-sheet td {
+        border: solid #add9c0;
+        border-width: 0px 1px 1px 0px;
+        text-align: center;
+    }
+
+    .member-sheet tr {
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .member-sheet table {
+        width: 100%;
+        border: solid #add9c0;
+        border-width: 1px 0px 0px 1px;
+    }
+
+    tbody tr td:first-of-type div{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width:200px;
+    }
+</style>
+<div class="member-right fr">
+    <div class="member-head">
+        <div class="member-heels fl"><h2>出库单    <span style="font-size:14px">@Model.DeliverOrderNumber</span></h2></div>
+        <div class="member-backs fr">
+            @Html.ActionLink("返回", "DeliveryOrderList", "Delivery", new { style = "color:#FFFFFF" })
+        </div>
+    </div>
+    <div class="member-border">
+        <div class="member-return H-over" style="min-height:538px;">
+            <div class="contentWrapper">
+                <br />
+                <div class="DeliveryOrdertitle1">
+                    AirShopp
+                </div>
+                <div class="DeliveryOrdertitle2">
+                    出 库 单
+                </div>
+                <div class="DeliveryOrdertitle3 clearfix">
+                    <span>收货单位（人）：@Model.ReciverAndAddress</span>
+                    <span>@Model.TimeFormat</span>
+                </div>
+                <div class="member-sheet clearfix">
+                    <table cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <td>商品名称</td>
+                                <td>单位</td>
+                                <td>数量</td>
+                                <td>单价</td>
+                                <td>金额</td>
+                                <td>备注</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.deliverOrderItems)
+                            {
+                                <tr>
+                                    <td align="center" style="width:250px;"><div style="margin: 0 auto;">@item.ProductName</div></td>
+                                    <td>@item.Unit</td>
+                                    <td>@item.OutNumber</td>
+                                    <td>@item.PricePerProduct</td>
+                                    <td>@item.TotalPrice</td>
+                                    @if (item.Id == Model.deliverOrderItems.First().Id)
+                                    {
+                                        <td rowspan="@Model.deliverOrderItems.Count">1</td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">合计金额（大写）</td>
+                                <td colspan="4">@Model.TotalAmountInChinese</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="DeliveryOrdertitle3 clearfix">
+                    <span style="margin-left:60px">审核人：@Model.AuditPerson</span>
+                    <span style="margin-right:60px">制表人：@Model.MakeTablePerson</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 商城快讯 End -->

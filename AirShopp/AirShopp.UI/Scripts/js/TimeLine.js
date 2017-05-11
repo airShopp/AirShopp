@@ -38,14 +38,6 @@ $(function() {
             $(".arrowup").removeClass("arrow_active")
         }));
     });
-    $(".list").mousewheel(function(b, c) {
-        h = refreshF() - row;
-        Math.abs(c);
-        if (a) {
-            var d = parseInt($(".list li:first").css("marginTop"));
-            0 < c ? 0 != d && ($(".arrowup").addClass("arrow_active"), $(".arrowup").trigger("click")) : d > -60 * h && ($(".arrowdown").addClass("arrow_active"), $(".arrowdown").trigger("click"))
-        }
-    });
 });
 
 function refreshF() {

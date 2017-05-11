@@ -87,6 +87,9 @@
     <Compile Include="Delivery\DeliveryOrderItem.cs" />
     <Compile Include="Delivery\IDeliveryInfoRepository.cs" />
     <Compile Include="Delivery\IDeliveryInfoService.cs" />
+    <Compile Include="Delivery\IDeliveryNoteRepository.cs" />
+    <Compile Include="Delivery\IDeliveryOrderItemRepository.cs" />
+    <Compile Include="Delivery\IDeliveryOrderRepository.cs" />
     <Compile Include="Discount\Discount.cs" />
     <Compile Include="Order\IOrderItemRepository.cs" />
     <Compile Include="Order\IOrderRepository.cs" />

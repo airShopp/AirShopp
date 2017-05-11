@@ -14,13 +14,15 @@ namespace AirShopp.UI.Controllers
     public class BMapRoutePlanningController : FliterController
     {
         private IAddressService _addressService;
+        private IOrderservice _orderService;
         private IDeliveryStationService _deliveryStationService;
         private IDeliveryInfoService _deliveryInfoService;
         private ICourierService _courierService;
 
-        public BMapRoutePlanningController(IAddressService addressService, IDeliveryStationService deliveryStationService, IDeliveryInfoService deliveryInfoService, ICourierService courierService)
+        public BMapRoutePlanningController(IAddressService addressService, IOrderservice orderService, IDeliveryStationService deliveryStationService, IDeliveryInfoService deliveryInfoService, ICourierService courierService)
         {
             _addressService = addressService;
+            _orderService = orderService;
             _deliveryStationService = deliveryStationService;
             _deliveryInfoService = deliveryInfoService;
             _courierService = courierService;
@@ -28,18 +30,14 @@ namespace AirShopp.UI.Controllers
 
         //
         // GET: /BMapRoutePlanning/
-        public ActionResult Index()
+        public ActionResult Index(long orderId)
         {
-            Order order = new Order();
+            Order order = _orderService.GetOrderByOrderId(orderId);
 
             if (order.OrderStatus == OrderStatusEnumType.FINISHED.ToString())
             {
-
+                return Content("<script>alert('订单已派送结束');location.href='/Order/OrderDetail?orderId=" + orderId + "'</script>");
             }
-
-            int orderId = 1;
-
-
 
             Address address = _addressService.GetAddress(orderId).FirstOrDefault();
 
@@ -93,42 +91,60 @@ namespace AirShopp.UI.Controllers
             int minDistanceIndex = bMapDataModel.Result.FindIndex(x => x.Distance.Value == bMapDataModel.Result.Min(y => y.Distance.Value));
 
             // init originPoint
-            OriginPointsViewModel startUpPoint = new OriginPointsViewModel(Constants.START_POINT_NAME, Constants.START_POINT_ADDRESS, Constants.START_POINT_LONGITUDE, Constants.START_POINT_LATITUDE);
+            OriginPointViewModel startUpPoint = new OriginPointViewModel(Constants.START_POINT_NAME, Constants.START_POINT_ADDRESS, Constants.START_POINT_LONGITUDE, Constants.START_POINT_LATITUDE);
 
-            OriginPointsViewModel firstPoint = new OriginPointsViewModel(deliveryStation.ParentDeliveryStation.Name, deliveryStation.ParentDeliveryStation.Address, deliveryStation.ParentDeliveryStation.Longitude, deliveryStation.ParentDeliveryStation.Latitude);
+            OriginPointViewModel firstPoint = new OriginPointViewModel(deliveryStation.ParentDeliveryStation.Name, deliveryStation.ParentDeliveryStation.Address, deliveryStation.ParentDeliveryStation.Longitude, deliveryStation.ParentDeliveryStation.Latitude);
 
-            OriginPointsViewModel secondPoint = new OriginPointsViewModel(deliveryStation.Name, deliveryStation.Address, deliveryStation.Longitude, deliveryStation.Latitude);
+            OriginPointViewModel secondPoint = new OriginPointViewModel(deliveryStation.Name, deliveryStation.Address, deliveryStation.Longitude, deliveryStation.Latitude);
 
-            OriginPointsViewModel thirdPoint = new OriginPointsViewModel(stationList[minDistanceIndex].Name, stationList[minDistanceIndex].Address, stationList[minDistanceIndex].Longitude, stationList[minDistanceIndex].Latitude);
+            OriginPointViewModel thirdPoint = new OriginPointViewModel(stationList[minDistanceIndex].Name, stationList[minDistanceIndex].Address, stationList[minDistanceIndex].Longitude, stationList[minDistanceIndex].Latitude);
 
-            OriginPointsViewModel endPoint = new OriginPointsViewModel(address.DeliveryAddress, address.DeliveryAddress, address.Longitude, address.Latitude);
+            OriginPointViewModel endPoint = new OriginPointViewModel(address.DeliveryAddress, address.DeliveryAddress, address.Longitude, address.Latitude);
 
-            return View(new List<OriginPointsViewModel>(){
+            List<DeliveryInfoViewModel> deliveryinfos = new List<DeliveryInfoViewModel>();
+
+            List<DeliveryInfo> initDeliveryInfos = _deliveryInfoService.GetDeliveryInfo(orderId);
+
+            foreach(var item in initDeliveryInfos)
+            {
+                DeliveryInfoViewModel temp = new DeliveryInfoViewModel(item.Description, item.UpdateTime);
+                deliveryinfos.Add(temp);
+            }
+
+            BMapViewModel bMapViewModel = new BMapViewModel()
+            {
+                DeliveryInfos = deliveryinfos,
+                OriginPoints = new List<OriginPointViewModel>(){
                     startUpPoint,
                     firstPoint,
                     secondPoint,
                     thirdPoint,
                     endPoint
-            });
+                }
+            };
+
+            return View(bMapViewModel);
         }
 
         public ActionResult GetDeliveryInfo(string point, int index, string nextPoint, int orderId)
         {
-            //TODO Need to modify order status. transferring -> delivering -> done
+            Order order = _orderService.GetOrderByOrderId(orderId);
+
             int maxIndex = _deliveryInfoService.GetMaxIndex(orderId);
             int backUpIndex = maxIndex;
 
-            OriginPointsViewModel currentLocation = JsonHelper.DeserializeJsonToObject<OriginPointsViewModel>(point);
-            OriginPointsViewModel nextLocation = JsonHelper.DeserializeJsonToObject<OriginPointsViewModel>(nextPoint);
+            OriginPointViewModel currentLocation = JsonHelper.DeserializeJsonToObject<OriginPointViewModel>(point);
+            OriginPointViewModel nextLocation = JsonHelper.DeserializeJsonToObject<OriginPointViewModel>(nextPoint);
             switch (index)
             {
                 case 1:
                     {
-                        DeliveryInfo startDeliveryInfo = new DeliveryInfo(MessageConstants.DELIVERYINFO_START_MESSAGE, ++maxIndex, orderId);
+                        order.OrderStatus = OrderStatusEnumType.DELIVERY.ToString();
+                        _orderService.UpdateOrder(order);
+
                         DeliveryInfo packageDeliveryInfo = new DeliveryInfo(string.Format(MessageConstants.DELIVERYINFO_PACKAGE_MESSAGE, currentLocation.Name), ++maxIndex, orderId);
                         DeliveryInfo transferDeliveryInfo = new DeliveryInfo(string.Format(MessageConstants.DELIVERYINFO_TRANSFER_MESSAGE, currentLocation.Name, nextLocation.Name), ++maxIndex, orderId);
                         AddDeliveryInfo(new List<DeliveryInfo>(){
-                            startDeliveryInfo,
                             packageDeliveryInfo,
                             transferDeliveryInfo
                         });
@@ -155,6 +171,9 @@ namespace AirShopp.UI.Controllers
                                 string.Format(MessageConstants.DELIVERYINFO_END_MESSAGE, currentLocation.Name), ++maxIndex, orderId
                                 );
                         _deliveryInfoService.AddDeliverInfo(endDeliveryInfo);
+
+                        order.OrderStatus = OrderStatusEnumType.FINISHED.ToString();
+                        _orderService.UpdateOrder(order);
                     }
                     break;
                 default:

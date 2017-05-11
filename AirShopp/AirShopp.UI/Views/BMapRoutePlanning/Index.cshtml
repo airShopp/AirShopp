@@ -1,178 +1,177 @@
-﻿@model IEnumerable<AirShopp.UI.Models.ViewModel.OriginPointsViewModel>
-    @{
-        ViewBag.Title = "Index";
-        Layout = "~/Views/Shared/_orderPageLayout.cshtml";
-    }
-    <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>test</title>
-        <style type="text/css">
-            #map_canvas {
-                width: 500px;
-                height: 500px;
-            }
-        </style>
-        <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=BZpwjUXFrAlT6g87xFxY4c3Cf82zen93"></script>
-        @Scripts.Render("~/bundles/AirShopp/Delivery/js")
-        @Styles.Render("~/bundles/AirShopp/Delivery/Css")
-        @Styles.Render("~/bundles/AirShopp/Layout")
-    </head>
-    <body>
-        <button onclick="run()">开始</button>
-        <div id="map_canvas"></div>
-        <div id="arrow">
-            <ul>
-                <li class="arrowup"></li>
-                <li class="arrowdown"></li>
-            </ul>
+﻿@model AirShopp.UI.Models.ViewModel.BMapViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_orderPageLayout.cshtml";
+}
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=BZpwjUXFrAlT6g87xFxY4c3Cf82zen93"></script>
+@Scripts.Render("~/bundles/AirShopp/Delivery/js")
+@Styles.Render("~/bundles/AirShopp/Delivery/Css")
+
+<div class="member-right fr">
+    <div class="member-head">
+        <div class="member-heels fl"><h2>订单号：1</h2></div>
+        <div class="member-backs fr" style="padding-top:0;">
+            <a href="javascript:void(0)" id="beginBtn" style="color:#FFFFFF;display:inline-block">开始配送</a>
+            @Html.ActionLink("返回订单首页", "Index", "Order", new { customerId = (Session["customer"] as AirShopp.Domain.Customer).Id }, new { style = "color:#FFFFFF;display:inline-block;" })
         </div>
+    </div>
+    <div class="member-border">
+        <div id="map_canvas" style="width:100%;height:400px"></div>
         <div id="history">
-            <div id="content">
-                <ul class="list">
+            <div id="arrow">
+                <ul>
+                    <li class="arrowup"></li>
+                    <li class="arrowdown"></li>
                 </ul>
             </div>
+            <div id="content">
+                <ul class="list"></ul>
+            </div>
         </div>
+    </div>
+</div>
 
-        <script>
+<script>
+    // Init deliveryInfo
+    var deliveryInfos = @Html.Raw(Json.Encode(Model.DeliveryInfos));
+    fillInDeliveryInfo(deliveryInfos);
 
-            var originPoints = @Html.Raw(Json.Encode(Model));
+    /* BMap start */
+    var lushu;
+    var originPoints = @Html.Raw(Json.Encode(Model.OriginPoints));
 
-            drawRoute(originPoints);
+    var map = new BMap.Map('map_canvas');
 
-            var lushu;
+    initMap(map);
 
-            // Pass all points
-            function drawRoute(originPoints) {
+    drawRoute(originPoints);
 
-                var length = originPoints.length;
+    // Pass all points
+    function drawRoute(originPoints) {
 
-                if (length >= 2) {
-                    var map = new BMap.Map('map_canvas');
+        var length = originPoints.length;
 
-                    initMap(map);
+        // init BMapPoint
+        var points = initPoints(originPoints, []);
 
-                    // init BMapPoint
-                    var points = initPoints(originPoints, []);
+        // init BMapDriving
+        var drivings = initDrivings(map, length, []);
 
-                    // init BMapDriving
-                    var drivings = initDrivings(map, length, []);
+        for (var i = 0; i < length - 1; i++) {
+            drivings[i].search(points[i], points[i + 1]);
+        }
 
-                    for (var i = 0; i < length - 1; i++) {
-                        drivings[i].search(points[i], points[i + 1]);
-                    }
+        var lastDrivingIndex = drivings.length - 1;
+        drivings[lastDrivingIndex].setSearchCompleteCallback(function () {
+            var pts = [];
+            var actualPoints = [];
 
-                    var lastDrivingIndex = drivings.length - 1;
-                    drivings[lastDrivingIndex].setSearchCompleteCallback(function () {
-                        var pts = [];
-                        var actualPoints = [];
-
-                        try
-                        {
-                            for (var i = 0; i < length - 1; i++) {
-                                var temp = drivings[i].getResults().getPlan(0).getRoute(0).getPath();
-                                if (i == 0) {
-                                    actualPoints.push(0);
-                                    actualPoints.push(temp.length - 1);
-                                } else {
-                                    actualPoints.push(actualPoints[i] + temp.length - 1);
-                                }
-                                pts = pts.concat(temp);
-                            }
-                        }
-                        catch(err)
-                        {
-                            drawRoute(originPoints);
-                        }
-
-                        var polyline = new BMap.Polyline(pts);
-                        map.addOverlay(polyline);
-
-                        for (var i = 0; i < points.length; i++) {
-                            var marker = new BMap.Marker(points[i]);
-                            var label = new BMap.Label(originPoints[i].Name, { position: points[i] });
-                            map.addOverlay(marker);
-                            map.addOverlay(label);
-                        }
-
-                        map.setViewport(points);
-
-                        lushu = new BMapLib.LuShu(map, pts, {
-                            defaultContent: "",
-                            autoView: true,//是否开启自动视野调整，如果开启那么路书在运动过程中会根据视野自动调整
-                            icon: new BMap.Icon('http://developer.baidu.com/map/jsdemo/img/car.png', new BMap.Size(52, 26), { anchor: new BMap.Size(27, 13) }),
-                            speed: 10000,
-                            enableRotation: true,//是否设置marker随着道路的走向进行旋转
-                            landmarkPois: [],
-                            originPoints: originPoints,
-                            currentIndex: 0
-                        }, actualPoints, setArrivedCallBack);
-                    });
-                }
-            }
-
-            function initMap(map) {
-                map.clearOverlays();
-                map.enableScrollWheelZoom();
-                map.centerAndZoom(new BMap.Point(116.404, 39.915), 15);
-                map.addControl(new BMap.NavigationControl());
-                map.addControl(new BMap.ScaleControl());
-                map.addControl(new BMap.OverviewMapControl());
-            }
-
-            function initPoints(originPoints, points){
-                for (var i = 0; i < originPoints.length; i++) {
-                    var point = new BMap.Point(originPoints[i].Longitude, originPoints[i].Latitude);
-                    points.push(point);
-                }
-                return points;
-            }
-
-            function initDrivings(map, length, drivings){
+            try
+            {
                 for (var i = 0; i < length - 1; i++) {
-                    var driving = new BMap.DrivingRoute(map);
-                    drivings.push(driving);
+                    var temp = drivings[i].getResults().getPlan(0).getRoute(0).getPath();
+                    if (i == 0) {
+                        actualPoints.push(0);
+                        actualPoints.push(temp.length - 1);
+                    } else {
+                        actualPoints.push(actualPoints[i] + temp.length - 1);
+                    }
+                    pts = pts.concat(temp);
                 }
-                return drivings;
+            }
+            catch(err)
+            {
+                drawRoute(originPoints);
             }
 
-            function originalPoint(name, address, lng, lat, remark) {
-                this.Name = name;
-                this.Address = address;
-                this.Longitude = lng;
-                this.Latitude = lat;
-                this.Remark = remark;
+            var polyline = new BMap.Polyline(pts);
+            map.addOverlay(polyline);
+
+            for (var i = 0; i < points.length; i++) {
+                var marker = new BMap.Marker(points[i]);
+                var label = new BMap.Label(originPoints[i].Name, { position: points[i] });
+                map.addOverlay(marker);
+                map.addOverlay(label);
             }
 
-            function setArrivedCallBack(point, index, nextPoint) {
-                $.post('@Url.Action("GetDeliveryInfo", "BMapRoutePlanning")',
-                    {
-                        point: JSON.stringify(point),
-                        index: index,
-                        nextPoint: JSON.stringify(nextPoint),
-                        orderId: 1
-                    },
-                    function(data){
-                        for(var i = 0; i < data.length; i++){
-                            var item = data[i];
-                            item.UpdateTime.replace(/Date\([\d+]+\)/, function(a) { eval('date = new '+a) });
-                            var time = padNumber(date.getHours(), 2) + ":" + padNumber(date.getMinutes(),2);
-                            var date = date.getFullYear()  +  "-" + padNumber((date.getMonth() + 1), 2) + "-" + padNumber(date.getDate(), 2);
-                            $(".list").prepend( '<li><div class="liwrap clear"><div class="lileft"><div class="date"><p class="md">'+ time +'</p><p class="year">'+ date +'</p></div></div><div class="point"><b></b></div><div class="liright"><div class="hisct">'+ item.Description+'</div></div></div></li>');
-                        }
-                    });
-            }
+            map.setViewport(points);
 
-            function run() {
-                lushu.start();
-            }
+            lushu = new BMapLib.LuShu(map, pts, {
+                defaultContent: "",
+                autoView: true,//是否开启自动视野调整，如果开启那么路书在运动过程中会根据视野自动调整
+                icon: new BMap.Icon('http://developer.baidu.com/map/jsdemo/img/car.png', new BMap.Size(52, 26), { anchor: new BMap.Size(27, 13) }),
+                speed: 10000,
+                enableRotation: true,//是否设置marker随着道路的走向进行旋转
+                landmarkPois: [],
+                originPoints: originPoints,
+                currentIndex: 0
+            }, actualPoints, setArrivedCallBack);
+        });
+    }
 
-            function padNumber(num, fill) {
-                var len = ('' + num).length;
-                return (Array(
-                    fill > len ? fill - len + 1 || 0 : 0
-                ).join(0) + num);
-            }
-        </script>
-    </body>
-</html>
+    function initMap(map) {
+        map.clearOverlays();
+        map.enableScrollWheelZoom();
+        map.centerAndZoom(new BMap.Point(116.404, 39.915), 15);
+        map.addControl(new BMap.NavigationControl());
+        map.addControl(new BMap.ScaleControl());
+        map.addControl(new BMap.OverviewMapControl());
+    }
+
+    function initPoints(originPoints, points){
+        for (var i = 0; i < originPoints.length; i++) {
+            var point = new BMap.Point(originPoints[i].Longitude, originPoints[i].Latitude);
+            points.push(point);
+        }
+        return points;
+    }
+
+    function initDrivings(map, length, drivings){
+        for (var i = 0; i < length - 1; i++) {
+            var driving = new BMap.DrivingRoute(map);
+            drivings.push(driving);
+        }
+        return drivings;
+    }
+
+    function setArrivedCallBack(point, index, nextPoint) {
+        $.post('@Url.Action("GetDeliveryInfo", "BMapRoutePlanning")',
+            {
+                point: JSON.stringify(point),
+                index: index,
+                nextPoint: JSON.stringify(nextPoint),
+                orderId: 1
+            },
+            function(data){
+                fillInDeliveryInfo(data);
+            });
+    }
+
+    $('#beginBtn').one("click",function(){
+        try{
+            lushu.start();
+            $(this).unbind("click");
+        }
+        catch(err)
+        {
+            alert("地图加载中")
+        }
+    });
+
+    function fillInDeliveryInfo(data){
+        for(var i = 0; i < data.length; i++){
+            var item = data[i];
+            item.UpdateTime.replace(/Date\([\d+]+\)/, function(a) { eval('date = new '+a) });
+            var time = padNumber(date.getHours(), 2) + ":" + padNumber(date.getMinutes(),2);
+            var date = date.getFullYear()  +  "-" + padNumber((date.getMonth() + 1), 2) + "-" + padNumber(date.getDate(), 2);
+            $(".list").prepend( '<li><div class="liwrap clear"><div class="lileft"><div class="date"><p class="md">'+ time +'</p><p class="year">'+ date +'</p></div></div><div class="point"><b></b></div><div class="liright"><div class="hisct">'+ item.Description+'</div></div></div></li>');
+        }
+    }
+
+    function padNumber(num, fill) {
+        var len = ('' + num).length;
+        return (Array(
+            fill > len ? fill - len + 1 || 0 : 0
+        ).join(0) + num);
+    }
+</script>

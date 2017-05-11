@@ -18,8 +18,6 @@ namespace AirShopp.DataAccess.Mapping
             Property(e => e.DeliveryDate).IsRequired();
             Property(e => e.TotalRMBInChinese).HasMaxLength(50).IsRequired();
             Property(e => e.TotalRMBInNumberic).HasMaxLength(50).IsRequired();
-
-            HasRequired(e => e.Order).WithOptional(k => k.DeliveryOrder);
         }
     }
 }

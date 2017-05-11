@@ -73,9 +73,7 @@ namespace AirShopp.UI
             bundles.Add(new ScriptBundle("~/bundles/AirShopp/Delivery/js").Include(
                 "~/Scripts/js/LuShu.js",
                 "~/Scripts/js/TimeLine.js",
-                "~/Scripts/js/jquery.js",
-                "~/Scripts/js/jquery.easing.js",
-                "~/Scripts/js/jquery.mousewheel.js"
+                "~/Scripts/js/jquery.easing.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/AirShopp/Cart/js").Include(

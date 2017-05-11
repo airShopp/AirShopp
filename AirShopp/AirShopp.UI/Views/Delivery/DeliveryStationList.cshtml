@@ -1,0 +1,141 @@
+﻿@{
+    Layout = "~/Views/Shared/_backEndLayout.cshtml";
+}
+@Styles.Render("~/bundles/AirShopp/Inventory/Css")
+@Scripts.Render("~/bundles/AirShopp/Inventory/js")
+<!-- 商城快讯 begin -->
+<style>
+    .member-cancel span {
+        text-align: center;
+        float: left;
+        height: 35px;
+        line-height: 35px;
+        color: #a3a3a3;
+    }
+
+    .be11 {
+        width: 380px;
+    }
+
+    .be22 {
+        width: 180px;
+    }
+
+    .be33 {
+        width: 185px;
+    }
+
+    .be44 {
+        width: 85px;
+    }
+
+    .be55 {
+        width: 53px;
+    }
+
+    .member-circle div {
+        text-align: center;
+        float: left;
+        height: 35px;
+        line-height: 35px;
+        border-right: 1px solid #e0e0e0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .ci11 {
+        width: 380px;
+    }
+
+    .ci22 {
+        width: 179px;
+    }
+
+    .ci33 {
+        width: 184px;
+    }
+
+    .ci44 {
+        width: 84px;
+    }
+
+    .ci55 {
+        width: 52px;
+    }
+
+    .member-about select {
+        width: 100px;
+        height: 26px;
+        line-height: 26px;
+        border-radius: 3px;
+        margin-right: 10px;
+        border: 1px solid #e0e0e0;
+    }
+</style>
+<div class="member-right fr">
+    <div class="member-head">
+        <div class="member-heels fl"><h2>派送点</h2></div>
+    </div>
+    <div class="member-border">
+        <div class="member-newly">
+            <div class="member-backs member-icons fr" style="padding-top:4px;"><a href="javascript:void(0)">搜索</a></div>
+            <div class="member-about fr"><input type="text" placeholder="派送点名称" style="border:1px solid #e0e0e0;"></div>
+            <div class="member-about fr">
+                <select id="selDistrict" name="AreaId">
+                    <option value="0">--请选择区/县--</option>
+                </select>
+            </div>
+            <div class="member-about fr">
+                <select id="selCity" name="City">
+                    <option value="0">--请选择城市--</option>
+                </select>
+            </div>
+            <div class="member-about fr">
+                <select id="selProvince" name="Province">
+                    <option value="0">--请选择省份--</option>
+                </select>
+            </div>
+        </div>
+        <div class="member-return H-over">
+            <div class="member-cancel clearfix">
+                <span class="be22">区域</span>
+                <span class="be33">名称</span>
+                <span class="be11">地址</span>
+                <span class="be44">经度</span>
+                <span class="be44">纬度</span>
+                <span class="be55">等级</span>
+            </div>
+            <div class="member-sheet clearfix">
+                <ul>
+                    <li>
+                        <div class="member-circle clearfix">
+                            <div class="ci22">1</div>
+                            <div class="ci33">1</div>
+                            <div class="ci11">1</div>
+                            <div class="ci44">1</div>
+                            <div class="ci44">1</div>
+                            <div class="ci55" style="border:none;">1</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="clearfix" style="padding:30px 20px;">
+            <div class="fr pc-search-g pc-search-gs">
+                <a style="display:none" class="fl " href="#">上一页</a>
+                <a href="#" class="current">1</a>
+                <a href="javascript:;">2</a>
+                <a href="javascript:;">3</a>
+                <a href="javascript:;">4</a>
+                <a href="javascript:;">5</a>
+                <a href="javascript:;">6</a>
+                <a href="javascript:;">7</a>
+                <span class="pc-search-di">…</span>
+                <a href="javascript:;">1088</a>
+                <a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 商城快讯 End -->
