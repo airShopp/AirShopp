@@ -116,5 +116,53 @@ namespace AirShopp.DataAccess
                 return _context.Customer;
             }
         }
+
+        public IQueryable<Province> Provinces
+        {
+            get
+            {
+                return _context.Province;
+            }
+        }
+
+        public IQueryable<Area> Areas
+        {
+            get
+            {
+                return _context.Area;
+            }
+        }
+
+        public IQueryable<City> Cities
+        {
+            get
+            {
+                return _context.City;
+            }
+        }
+
+        public IQueryable<DeliveryStation> DeliveryStations
+        {
+            get
+            {
+                return _context.DeliveryStation;
+            }
+        }
+
+        public IQueryable<Warehouse> Warehouses
+        {
+            get
+            {
+                return _context.Warehouse;
+            }
+        }
+
+        public IQueryable<Provider> Providers
+        {
+            get
+            {
+                return _context.Provider;
+            }
+        }
     }
 }

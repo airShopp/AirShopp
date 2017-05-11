@@ -10,7 +10,6 @@
         width: 90%;
         margin: 0 auto;
     }
-
 </style>
 <div class="member-right fr">
     <div class="member-head">
@@ -22,7 +21,7 @@
             <div class="contentWrapper">
                 <div class="clearfix" style="padding:20px 0">
                     <div class="fl">
-                        <div class="member-about fl"><input id="text_" type="text" placeholder="要查询的地址" style="border:1px solid #e0e0e0;"></div>
+                        <div class="member-about fl"><input id="text_" type="text" placeholder="要查询的精确地址" style="border:1px solid #e0e0e0;"></div>
                         <div class="member-backs member-icons fl" style="padding:0"><a href="javascript:void(0)" onclick="searchByStationName();" style="height:28px;line-height:28px;">查询</a></div>
                     </div>
                     <div class="fr" style="height:28px;line-height:28px;">
@@ -35,19 +34,62 @@
         </div>
     </div>
 </div>
+
 <!-- 商城快讯 End -->
 <script type="text/javascript">
-    var map = new BMap.Map("container");
-    map.centerAndZoom("宁波", 12);
-    map.enableScrollWheelZoom();    //启用滚轮放大缩小，默认禁用
-    map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
 
-    map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
-    map.addControl(new BMap.OverviewMapControl()); //添加默认缩略地图控件
-    map.addControl(new BMap.OverviewMapControl({ isOpen: true, anchor: BMAP_ANCHOR_BOTTOM_RIGHT }));   //右下角，打开
+    $(function () {
+        $(".btn1").click(function (event) {
+            if ($("#result_").text() == "") {
+                alert("没有位置怎么添加派送点");
+                return;
+            }
+            else {
+                var keyword = document.getElementById("text_").value;
+                var myGeo = new BMap.Geocoder();
+                var str = $("#result_").text();
+                var lng = str.split(',')[0];
+                var lat = str.split(',')[1];
+                var pt = new BMap.Point(lng * 1, lat * 1);
+                myGeo.getLocation(pt, function (rs) {
+                    var addComp = rs.addressComponents;
+
+                    if (addComp.province != "上海市") {
+                        alert("目前仅支持上海市");
+                        return;
+                    }
+                    $("#location").text(addComp.province + " " + addComp.city + " " + addComp.district);
+                    $("#point").text(pt.lng + ", " + pt.lat);
+                    $("#address").text(keyword);
+
+                    $("input[name='location']").val(addComp.province + " " + addComp.city + " " + addComp.district);
+                    $("input[name='address']").val(keyword);
+                    $("input[name='lat']").val(pt.lat);
+                    $("input[name='lng']").val(pt.lng);
+                    $(".hint").css({ "display": "block" });
+                    $(".box").css({ "display": "block" });
+                });
+            }
+        });
+
+        $(".hint-in3").click(function (event) {
+            $(".hint").css({ "display": "none" });
+            $(".box").css({ "display": "none" });
+        });
+
+        $(".hint3").click(function (event) {
+            $(this).parent().parent().css({ "display": "none" });
+            $(".box").css({ "display": "none" });
+        });
+    });
+
+    var map = new BMap.Map("container");
+
+    initMap(map);
 
     var localSearch = new BMap.LocalSearch(map);
     localSearch.enableAutoViewport(); //允许自动调节窗体大小
+
     function searchByStationName() {
         map.clearOverlays();//清空原来的标注
         var keyword = document.getElementById("text_").value;
@@ -61,7 +103,18 @@
             var infoWindow = new BMap.InfoWindow("<p style='font-size:14px;'>" + content + "</p>");
             marker.addEventListener("click", function () { this.openInfoWindow(infoWindow); });
             // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+            $("#form")[0].reset();
         });
         localSearch.search(keyword);
+    }
+
+    function initMap(map) {
+        map.centerAndZoom(new BMap.Point(116.404, 39.915), 15);
+        map.enableScrollWheelZoom();    //启用滚轮放大缩小，默认禁用
+        map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+
+        map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
+        map.addControl(new BMap.OverviewMapControl()); //添加默认缩略地图控件
+        map.addControl(new BMap.OverviewMapControl({ isOpen: true, anchor: BMAP_ANCHOR_BOTTOM_RIGHT }));   //右下角，打开
     }
 </script>
