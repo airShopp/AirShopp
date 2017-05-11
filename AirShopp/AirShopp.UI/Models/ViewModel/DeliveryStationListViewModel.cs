@@ -13,9 +13,8 @@ namespace AirShopp.UI.Models.ViewModel
         public List<City> Cities { get; set; }
         public List<Area> Areas { get; set; }
     }
-    public class DeliveryStationViewModel
+    public class DeliveryStationViewModel : DeliveryStation
     {
         public string Location { get; set; }
-        public DeliveryStation DeliverStation { get; set; }
     }
 }

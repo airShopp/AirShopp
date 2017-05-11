@@ -1,4 +1,5 @@
 ﻿using AirShopp.Common;
+using AirShopp.Common.Page;
 using AirShopp.Domain;
 using AirShopp.UI.Models;
 using AirShopp.UI.Models.ViewModel;
@@ -41,30 +42,36 @@ namespace AirShopp.UI.Controllers
             _readFromDb = readFromDb;
         }
 
-        // GET: Delivery
-        public ActionResult Index()
+        public ActionResult DeliveryOrderList(int? indexNum = 1, int? pageSize = 10)
+        {
+
+            var deliveryOrderDataModelList = (from c in _readFromDb.DeliveryOrders
+                                              join o in _readFromDb.Orders on c.OrderId equals o.Id
+                                              select new DeliveryOrderDataModel()
+                                              {
+                                                  Id = c.Id,
+                                                  AddressAndReceiver = o.Address.DeliveryAddress + "(" + o.Address.ReceiverName + ")",
+                                                  TotalAmount = c.TotalRMBInNumberic,
+                                                  DeliveryOrderNumber = c.DeliveryOrderNumber,
+                                                  DeliveryDate = c.DeliveryDate.ToString()
+                                              }).OrderBy(x => x.DeliveryOrderNumber).ToPagedList(indexNum, pageSize); ;
+
+            var list = deliveryOrderDataModelList.ToList();
+            list.ForEach(x => x.DeliveryDate = (DateTime.Parse(x.DeliveryDate)).ToShortDateString());
+
+            return View(new DeliveryOrderListViewModel()
+            {
+                DeliveryOrderDataModelList = list,
+                PageIndex = deliveryOrderDataModelList.PageIndex,
+                TotalCount = deliveryOrderDataModelList.TotalCount,
+                TotalPage = deliveryOrderDataModelList.TotalPage
+            });
+        }
+        [HttpPost]
+        public ActionResult DeliveryOrderList()
         {
             return View();
         }
-
-        public ActionResult DeliveryOrderList()
-        {
-            List<DeliveryOrder> deliveryOrderList = _deliveryOrderRepository.GetDeliveryOrders();
-            List<DeliveryOrderListViewModel> deliveryOrderViewModelList = new List<DeliveryOrderListViewModel>();
-            foreach (var item in deliveryOrderList)
-            {
-                DeliveryOrderListViewModel temp = new DeliveryOrderListViewModel();
-                temp.DeliveryOrderNumber = item.DeliveryOrderNumber;
-                Order order = _orderRepository.GetOrderByOrderId(item.OrderId);
-                temp.AddressAndReceiver = order.Address.DeliveryAddress + "(" + order.Address.ReceiverName + ")";
-                temp.TotalAmount = item.TotalRMBInNumberic;
-                temp.DeliveryDate = item.DeliveryDate.ToShortDateString();
-                temp.Id = item.Id;
-                deliveryOrderViewModelList.Add(temp);
-            }
-            return View(deliveryOrderViewModelList);
-        }
-
         public ActionResult DeliveryOrderDetail(long deliveryOrderId)
         {
             DeliveryOrder deliveryOrder = _deliveryOrderRepository.GetDeliveryOrderByPK(deliveryOrderId);
@@ -88,86 +95,67 @@ namespace AirShopp.UI.Controllers
             return View(deliveryOrderDetail);
         }
 
-        public ActionResult DeliveryNoteList()
+        public ActionResult DeliveryNoteList(int? indexNum = 1, int? pageSize = 5)
         {
-            List<DeliveryNote> deliveryNoteList = _deliveryNoteRepository.GetDeliveryNotes();
-            List<DeliveryNoteListViewModel> deliveryNoteListViewModel = new List<DeliveryNoteListViewModel>();
-            foreach (var item in deliveryNoteList)
+
+            var deliveryNoteDataModelList = (from c in _readFromDb.DeliveryNotes
+                                             join o in _readFromDb.Orders on c.OrderId equals o.Id
+                                             select new DeliveryNoteDataModel()
+                                             {
+                                                 Id = c.Id,
+                                                 ReceiverName = o.Address.ReceiverName,
+                                                 ReceiverPhone = o.Address.ReceiverPhone,
+                                                 ReceiverAddress = o.Address.DeliveryAddress,
+                                                 SenderName = "AirShopp官方商城",
+                                                 SenderPhone = "0101-12345678",
+                                                 SenderAddress = Constants.START_POINT_ADDRESS,
+                                                 DeliveryNoteNumber = c.DeliveryNoteNumber,
+                                                 QRCodeImgSrc = c.QRCodeImgURL
+                                             }).OrderBy(x => x.DeliveryNoteNumber).ToPagedList(indexNum, pageSize);
+
+            return View(new DeliveryNoteListViewModel()
             {
-                DeliveryNoteListViewModel temp = new DeliveryNoteListViewModel();
-                Order order = _orderRepository.GetOrderByOrderId(item.OrderId);
-                temp.Id = item.Id;
-                temp.ReceiverName = order.Address.ReceiverName;
-                temp.ReceiverPhone = order.Address.ReceiverPhone;
-                temp.ReceiverAddress = order.Address.DeliveryAddress;
-                temp.SenderName = "AirShopp官方商城";
-                temp.SenderPhone = "0101-12345678";
-                temp.SenderAddress = Constants.START_POINT_ADDRESS;
-                temp.DeliveryNoteNumber = item.DeliveryNoteNumber;
-                temp.QRCodeImgSrc = item.QRCodeImgURL;
-                deliveryNoteListViewModel.Add(temp);
-            }
-            return View(deliveryNoteListViewModel);
+                DelvieryNoteDataModelList = deliveryNoteDataModelList.ToList(),
+                PageIndex = deliveryNoteDataModelList.PageIndex,
+                TotalCount = deliveryNoteDataModelList.TotalCount,
+                TotalPage = deliveryNoteDataModelList.TotalPage
+            });
         }
 
-        public ActionResult DeliveryStationList()
+        public ActionResult DeliveryStationList(int? indexNum = 1, int? pageSize = 10)
         {
-            //List<DeliveryStation> deliveryStationList = _deliveryStationRepository.GetInitDeliveryStations();
-
             var deliveryStationViewModel = (from p in _readFromDb.Provinces
-                                                join c in _readFromDb.Cities on p.ProvinceId equals c.ProvinceId
-                                                join a in _readFromDb.Areas on c.CityId equals a.CityId
-                                                join d in _readFromDb.DeliveryStations on a.Id equals d.AreaId
-                                                select new
-                                                {
-                                                    Location = p.ProvinceName + c.CityName + a.AreaName,
-                                                        Id = d.Id,
-                                                        Name = d.Name,
-                                                        Address = d.Address,
-                                                        Area = d.Area,
-                                                        AreaId = d.AreaId,
-                                                        Couriers = d.Couriers,
-                                                        DeliveryStations = d.DeliveryStations,
-                                                        Latitude = d.Latitude,
-                                                        Longitude = d.Longitude,
-                                                        ParentDeliveryStation = d.ParentDeliveryStation,
-                                                        ParentStationId = d.ParentStationId,
-                                                        StationLevel = d.StationLevel
-                                                }).ToList();
+                                            join c in _readFromDb.Cities on p.ProvinceId equals c.ProvinceId
+                                            join a in _readFromDb.Areas on c.CityId equals a.CityId
+                                            join d in _readFromDb.DeliveryStations on a.Id equals d.AreaId
+                                            select new DeliveryStationViewModel
+                                            {
+                                                Location = p.ProvinceName + c.CityName + a.AreaName,
+                                                Id = d.Id,
+                                                Name = d.Name,
+                                                Address = d.Address,
+                                                Area = d.Area,
+                                                AreaId = d.AreaId,
+                                                Couriers = d.Couriers,
+                                                DeliveryStations = d.DeliveryStations,
+                                                Latitude = d.Latitude,
+                                                Longitude = d.Longitude,
+                                                ParentDeliveryStation = d.ParentDeliveryStation,
+                                                ParentStationId = d.ParentStationId,
+                                                StationLevel = d.StationLevel
+                                            }).OrderBy(x => x.Id).ToPagedList(indexNum, pageSize);
 
             List<Province> provinceList = _provinceRepository.GetProvince();
             List<City> CityList = _cityRepository.GetCity();
             List<Area> AreaList = _areaRepository.GetArea();
 
-
-
-            DeliveryStationListViewModel deliveryStationListViewModel = new DeliveryStationListViewModel()
+            return View(new DeliveryStationListViewModel()
             {
-                DeliveryStations = deliveryStationViewModel.ConvertAll<DeliveryStationViewModel>(item => new DeliveryStationViewModel()
-                {
-                    DeliverStation = new DeliveryStation()
-                    {
-                        Id = item.Id,
-                        Name = item.Name,
-                        Address = item.Address,
-                        Area = item.Area,
-                        AreaId = item.AreaId,
-                        Couriers = item.Couriers,
-                        DeliveryStations = item.DeliveryStations,
-                        Latitude = item.Latitude,
-                        Longitude = item.Longitude,
-                        ParentDeliveryStation = item.ParentDeliveryStation,
-                        ParentStationId = item.ParentStationId,
-                        StationLevel = item.StationLevel
-                    },
-                    Location = item.Location
-                }),
+                DeliveryStations = deliveryStationViewModel.ToList(),
                 Provinces = provinceList,
                 Cities = CityList,
                 Areas = AreaList
-            };
-
-            return View(deliveryStationListViewModel);
+            });
         }
 
         public ActionResult AddDeliveryStation()

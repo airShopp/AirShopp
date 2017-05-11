@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AirShopp.UI.Models.ViewModel.DeliveryNoteListViewModel>
+﻿@model AirShopp.UI.Models.ViewModel.DeliveryNoteListViewModel
 @{
     Layout = "~/Views/Shared/_backEndLayout.cshtml";
 }
@@ -118,7 +118,7 @@
     <div class="member-border">
         <div class="member-return H-over">
             <div class="contentWrapper">
-                @foreach (var item in Model)
+                @foreach (var item in Model.DelvieryNoteDataModelList)
                 {
                     <div class="member-sheet clearfix" style="margin-bottom:5px">
                         <div class="firstPart fl">
@@ -156,7 +156,7 @@
                             <img src="@item.QRCodeImgSrc" style="width:100%;height:100%;" />
                         </div>
                     </div>
-                    if (item.Id != Model.LastOrDefault().Id)
+                    if (item.Id != Model.DelvieryNoteDataModelList.LastOrDefault().Id)
                     {
                         <hr style="height:1px;border:none;border-top:1px dashed #0066CC;width:100%" />
                     }

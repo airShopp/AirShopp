@@ -25,5 +25,7 @@ namespace AirShopp.Domain
         IQueryable<Area> Areas { get; }
         IQueryable<City> Cities { get; }
         IQueryable<DeliveryStation> DeliveryStations {get;}
+        IQueryable<DeliveryOrder> DeliveryOrders { get; }
+        IQueryable<DeliveryNote> DeliveryNotes { get; }
     }
 }

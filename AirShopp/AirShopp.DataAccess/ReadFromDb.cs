@@ -141,5 +141,21 @@ namespace AirShopp.DataAccess
                 return _context.DeliveryStation;
             }
         }
+
+        public IQueryable<DeliveryOrder> DeliveryOrders
+        {
+            get
+            {
+                return _context.DeliveryOrder;
+            }
+        }
+
+        public IQueryable<DeliveryNote> DeliveryNotes
+        {
+            get
+            {
+                return _context.DeliveryNote;
+            }
+        }
     }
 }
