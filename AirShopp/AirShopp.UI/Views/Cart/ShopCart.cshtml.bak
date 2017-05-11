@@ -27,7 +27,7 @@
                     var trId = "product" + i;
                     var tdClass = "select" + (i + 2);
                     <tr id="@trId" class="cartItem">
-                        <td class="cart_td_1"><input name="cartCheckBox" class="@tdClass" type="checkbox" value="@cartProduct.Id" onclick="selectSingle()" /></td>
+                        <td class="cart_td_1"><input name="cartCheckBox" class="@tdClass" type="checkbox" value="@trId" onclick="selectSingle()" /></td>
                         <td class="cart_td_2"><img style="width:80px;height:80px;" src="@cartProduct.PictureUrl" alt="shopping" /></td>
                         <td class="cart_td_3">
                             <a href="#">@cartProduct.ProductName</a><br />
@@ -47,7 +47,7 @@
                         商品总价（不含运费）：<label id="total" class="yellow"></label> 元<br />
                         可获积分 <label class="yellow" id="integral"></label> 点<br />
                         @*@Html.ActionLink("立即购买", "CheckOrder", new { Controller = "Order"}, new { style = "color:#ea4949" })*@
-                        <input name="" type="image" src="~/Content/img/cart/taobao_subtn.jpg" onclick="CheckOrder()"/>
+                        <input name="" type="image" src="~/Content/img/cart/taobao_subtn.jpg" onclick="CheckOrder()" />
                     </td>
                 </tr>
             </table>
@@ -72,12 +72,19 @@
 <script>
     function CheckOrder()
     {
-        var cartItemStr = "";
-        $("input[type='checkbox']:checked").each(function () {
-            cartItemStr += $(this).val();
-            cartItemStr += ";";
-        })
-        var totalAmount = $("#total").html();
-        window.location.href = "/Order/CheckOrder?cartItemStr=" + cartItemStr + "&totalAmount=" + totalAmount ;
+        //var str = "";
+        //var cartItemList = document.getElementsByClassName('cartItem').forEach(function () {
+        //    $(this).ch
+        //});
+
+        //for(var cartItem in cartItemList)
+        //{
+
+        //    if (isSelected)
+        //    {
+        //        str = str + tdArr.eq(0).find("input").val();
+        //        alert(str);
+        //    }
+        //}
     }
 </script>

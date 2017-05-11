@@ -17,11 +17,13 @@ namespace AirShopp.UI.Controllers
         private IProvinceRepository _provinceRepository;
         private ICityRepository _cityRepository;
         private IAreaRepository _areaRepository;
+        private ICartItemRepository _cartItemRepository;
+
         private IDeliveryOrderRepository _deliveryOrderRepository;
         private IDeliveryOrderItemRepository _deliveryOrderItemRepository;
         private IDeliveryNoteRepository _deliveryNoteRepository;
 
-        public OrderController(IOrderservice orderService, IOrderRepository orderRepository, IReadFromDb readFromDb, IProvinceRepository provinceRepository, ICityRepository cityRepository, IAreaRepository areaRepository, IDeliveryOrderRepository deliveryOrderRepository, IDeliveryOrderItemRepository deliverOrderItemRepository, IDeliveryNoteRepository deliveryNoteRepository)
+        public OrderController(ICartItemRepository cartItemRepository, IOrderservice orderService, IOrderRepository orderRepository, IReadFromDb readFromDb, IProvinceRepository provinceRepository, ICityRepository cityRepository, IAreaRepository areaRepository, IDeliveryOrderRepository deliveryOrderRepository, IDeliveryOrderItemRepository deliverOrderItemRepository, IDeliveryNoteRepository deliveryNoteRepository)
         {
             _orderService = orderService;
             _orderRepository = orderRepository;
@@ -29,6 +31,7 @@ namespace AirShopp.UI.Controllers
             _provinceRepository = provinceRepository;
             _cityRepository = cityRepository;
             _areaRepository = areaRepository;
+            _cartItemRepository = cartItemRepository;
             _deliveryOrderRepository = deliveryOrderRepository;
             _deliveryOrderItemRepository = deliverOrderItemRepository;
             _deliveryNoteRepository = deliveryNoteRepository;
@@ -62,56 +65,58 @@ namespace AirShopp.UI.Controllers
         public ActionResult ReturnList()
         {
             Customer customer = Session[Constants.SESSION_USER] as Customer;
-            return View("ReturnList", null);
+            List<Return> returnList = _orderRepository.GetReturnList(customer.CustomerName);
+            returnList = returnList.Where(x => x.ReturnStatus == Constants.REQUESTING).ToList();
+
+            List<Order> orderList = new List<Order>();
+            foreach (Return returnItem in returnList)
+            {
+                orderList.Add(_readFromDb.Orders.Where(x => x.Id == returnItem.OrderId).First());
+            }
+            OrderViewModel orderViewModel = new OrderViewModel();
+            orderViewModel.AllOrder = orderList;
+            return View("ReturnList", orderViewModel);
         }
 
         public ActionResult GetReturnRequest()
         {
             Customer customer = Session[Constants.SESSION_USER] as Customer;
-            return View("ReturnRequest", null);
+            List<Return> returnList = _orderRepository.GetReturnList(customer.CustomerName);
+            returnList = returnList.Where(x => x.ReturnStatus == Constants.REQUESTING).ToList();
+
+            ReturnRequestListViewModel returnRequestListViewModel = new ReturnRequestListViewModel();
+            foreach (Return returnItem in returnList)
+            {
+                ReturnRequestViewModel returnRequestViewModel = new ReturnRequestViewModel();
+                returnRequestViewModel.Ordrer = _readFromDb.Orders.Where(x => x.Id == returnItem.OrderId).First();
+                returnRequestViewModel.OrderItem = _readFromDb.OrderItems.Where(x => x.Id == returnItem.OrderItemId).First();
+                returnRequestViewModel.ReturnOrder = returnItem;
+                returnRequestViewModel.Customer = _readFromDb.Customers.Where(x => x.CustomerName == returnItem.CustomerName).First();
+                returnRequestListViewModel.ReturnRequestViewModelList.Add(returnRequestViewModel);
+            }
+
+            return View("ReturnRequest", returnRequestListViewModel);
         }
-        public ActionResult CheckOrder()
+        public ActionResult CheckOrder(string cartItemStr, string totalAmount)
         {
-            string cartItemStr = "1;2;3;";
-            int totalAmount = 126;
             string[] cartItemsIdList = cartItemStr.Split(';');
             OrderConfirmViewModel orderConfirmViewModel = new OrderConfirmViewModel();
 
-            List<CartItem> CartItems = new List<CartItem>()
-            {
-                new CartItem() {
-                    Id = 1,
-                    ProductId = 1,
-                    Quantity = 1,
-                    PricePerProduct = 22,
-                },
-                new CartItem() {
-                    Id = 2,
-                    ProductId = 2,
-                    Quantity = 1,
-                    PricePerProduct = 42,
-                },
-                new CartItem() {
-                    Id = 3,
-                    ProductId = 3,
-                    Quantity = 1,
-                    PricePerProduct = 62,
-                },
-            };
-
             List<OrderItem> orderItems = new List<OrderItem>();
-            for (int i = 0; i < cartItemsIdList.Length; i++)
+            for (int i = 0; i < cartItemsIdList.Length-1; i++)
             {
                 if (!string.IsNullOrEmpty(cartItemsIdList[i]))
                 {
-                    //CartItem cartItem = _readFromDb.CartItems.Where(x => x.Id == long.Parse(cartItemsIdList[i])).FirstOrDefault();
-                    CartItem cartItem = CartItems.Where(x => x.Id == long.Parse(cartItemsIdList[i])).FirstOrDefault();
+                    long cartItemsId = Convert.ToInt64(cartItemsIdList[i]);
+                    CartItem cartItem = _readFromDb.CartItems.Where(x => x.Id == cartItemsId).FirstOrDefault();
                     OrderItem orderItem = new OrderItem();
                     orderItem.ProductId = cartItem.ProductId;
                     orderItem.Quantity = cartItem.Quantity;
                     orderItem.UnitPrice = cartItem.PricePerProduct;
                     orderItem.DiscountPrice = cartItem.PricePerProduct;
                     orderItems.Add(orderItem);
+
+                    _cartItemRepository.UpdateCartItem(cartItem.Id);
                 }
             }
 
@@ -120,7 +125,7 @@ namespace AirShopp.UI.Controllers
 
             Order order = new Order();
             order.CustomerId = customerId;
-            order.TotalAmount = totalAmount;
+            order.TotalAmount = Convert.ToDecimal(totalAmount);
             order.OrderStatus = Constants.OBLIGATION;
             order.OrderDate = DateTime.Now;
             order.DeliveryDate = Convert.ToDateTime("1970-01-01 00:00:00.000");
@@ -157,7 +162,6 @@ namespace AirShopp.UI.Controllers
             Order order = new Order();
             try
             {
-                order = _readFromDb.Orders.Where(x => x.Id == orderId).First();
                 order = _orderRepository.GetOrderByOrderId(orderId);
                 //order.AddressId = addressId;  ,long addressId
                 _orderRepository.UpdateOrder(order);
@@ -218,5 +222,112 @@ namespace AirShopp.UI.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult ReturnOrder(long orderId, long orderItemId, string returnReason)
+        {
+            Return returnOrder = new Return();
+            returnOrder.CustomerName = (Session[Constants.SESSION_USER] as Customer).CustomerName;
+            returnOrder.DeliveryDate = DateTime.Now;
+            returnOrder.OrderId = orderId;
+            returnOrder.OrderItemId = orderItemId;
+            returnOrder.ReturnReason = returnReason;
+            returnOrder.ReturnStatus = Constants.REQUESTING;
+            try
+            {
+                _orderRepository.ReturnOrder(returnOrder);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return RedirectToAction("GetReturnRequest");
+        }
+
+        public ActionResult ToPayment(long orderId)
+        {
+            try
+            {
+                _orderRepository.ToPayment(orderId);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult OrderManageList()
+        {
+            List<Order> orderList = _readFromDb.Orders.ToList();
+            OrderViewModel orderViewModel = new OrderViewModel();
+
+            orderViewModel.AllOrder.AddRange(orderList);
+            orderViewModel.PendingPaymentOrder.AddRange(orderList.Where(x => x.OrderStatus == "OBLIGATION").ToList());
+            orderViewModel.PendingDeliveryOrder.AddRange(orderList.Where(x => x.OrderStatus == "TRANSFER").ToList());
+            orderViewModel.PendingReceivedOrder.AddRange(orderList.Where(x => x.OrderStatus == "DELIVERY").ToList());
+            orderViewModel.PendingComment.AddRange(orderList.Where(x => x.OrderStatus == "FINISHED" && x.Comments.Count() == 0).ToList());
+            return View("OrderManage", orderViewModel);
+        }
+        public ActionResult ReturnManageList()
+        {
+            List<Order> orderList = _readFromDb.Orders.Where(x => x.Returns.FirstOrDefault()!=null).ToList();
+            ReturnManageListViewModel returnManageListViewModel = new ReturnManageListViewModel();
+
+            List<Order> requestingList = new List<Order>();
+            List<Order> returningList = new List<Order>();
+            List<Order> finishedList = new List<Order>();
+            foreach(Order order in orderList)
+            {
+                if(order.Returns.Where(x => x.ReturnStatus == Constants.REQUESTING).Count()>0)
+                {
+                    requestingList.Add(order);
+                }
+                if (order.Returns.Where(x => x.ReturnStatus == Constants.REQUESTING).Count() == 0
+                    && order.Returns.Where(x => x.ReturnStatus == Constants.RETURNING).Count()>0)
+                {
+                    returningList.Add(order);
+                }
+                if (order.Returns.Where(x => x.ReturnStatus == Constants.REQUESTING).Count() == 0
+                    && order.Returns.Where(x => x.ReturnStatus == Constants.RETURNING).Count() == 0
+                    && order.Returns.Where(x => x.ReturnStatus == Constants.FINISHED).Count() > 0)
+                {
+                    finishedList.Add(order);
+                }
+            }
+
+            returnManageListViewModel.RequestingList = requestingList;
+            returnManageListViewModel.ReturningList = returningList;
+            returnManageListViewModel.ReturnFinishedList = finishedList;
+            return View("ReturnManage", returnManageListViewModel);
+        }
+
+        public ActionResult AgreeRequest(long orderId, long orderItemId)
+        {
+            try
+            {
+                Order order = _orderRepository.GetOrderByOrderId(orderId);
+                Return returnItem = _orderRepository.GetReturn(orderId, orderItemId);
+                if (Constants.TRANSFER.Equals(order.OrderStatus))
+                {
+                    returnItem.ReturnStatus = Constants.FINISHED;
+                    _orderRepository.UpdateReturn(returnItem);
+                }
+                else if (Constants.DELIVERY.Equals(order.OrderStatus))
+                {
+                    returnItem.ReturnStatus = Constants.RETURNING;
+                    _orderRepository.UpdateReturn(returnItem);
+                    //退货物流规划 结束后  returnItem.ReturnStatus = Constants.FINISHED;
+                }
+
+                if (_orderRepository.GetReturnListByOrderId(orderId).Where(x => x.ReturnStatus == Constants.FINISHED).Count() == order.OrderItems.Count())
+                {
+                    order.OrderStatus = Constants.FINISHED;
+                    _orderRepository.UpdateOrder(order);
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return RedirectToAction("ReturnManageList");
+        }
     }
 }

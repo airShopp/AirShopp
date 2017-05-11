@@ -10,7 +10,6 @@ namespace AirShopp.Domain
     {
         public void AddComment(Comment comment)
         {
-            throw new NotImplementedException();
         }
     }
 }

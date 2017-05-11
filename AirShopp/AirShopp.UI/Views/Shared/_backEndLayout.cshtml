@@ -94,7 +94,7 @@
                     <li class="headerul">|</li>
                     <li>@Html.ActionLink("回到首页", "Index", "Home")</li>
                     <li class="headerul">|</li>
-                    <li>@Html.ActionLink("订单查询", "Index", "Order", null)</li>
+                    <li>@Html.ActionLink("订单查询", "Index", "Order")</li>
                     <li class="headerul">|</li>
                     <li><a href="my-s.html">我的收藏</a> </li>
                 </ul>
@@ -129,6 +129,11 @@
                         <dd><a href="@Url.Action("DeliveryStationList", "Delivery")">派送点管理</a></dd>
                         <dd><a href="@Url.Action("DeliveryOrderList", "Delivery")">出库单管理</a></dd>
                         <dd><a href="@Url.Action("DeliveryNoteList", "Delivery")">派送单管理</a></dd>
+                    </dl>
+                    <dl>
+                        <dt>订单管理</dt>
+                        <dd><a href="@Url.Action("OrderManageList", "Order")">订单管理</a></dd>
+                        <dd><a href="@Url.Action("ReturnManageList", "Order")">退货管理</a></dd>
                     </dl>
                 </div>
             </div>

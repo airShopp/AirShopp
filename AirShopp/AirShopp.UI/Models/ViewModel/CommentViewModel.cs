@@ -9,6 +9,8 @@ namespace AirShopp.UI.Models.ViewModel
     public class CommentViewModel
     {
         public List<Comment> CommentList { get; set; }
-        public Order Order { get; set; }
+        public OrderItem OrderItem { get; set; }
+
+        public DateTime OrderDate { get; set; }
     }
 }

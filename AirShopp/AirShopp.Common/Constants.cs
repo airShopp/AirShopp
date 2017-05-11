@@ -43,5 +43,8 @@ namespace AirShopp.Common
         public const string PENDING = "PENDING";
         public const string DELETE = "DELETE";
         public const string BOUGHT = "BOUGHT";
+
+        public const string REQUESTING = "REQUESTING";
+        public const string RETURNING = "RETURNING";
     }
 }

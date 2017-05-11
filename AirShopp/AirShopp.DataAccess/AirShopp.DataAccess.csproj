@@ -167,9 +167,13 @@
     <Compile Include="Migrations\201705031756500_ModifyCartTable.Designer.cs">
       <DependentUpon>201705031756500_ModifyCartTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705080858428_RefineDeliveryOrder.cs" />
-    <Compile Include="Migrations\201705080858428_RefineDeliveryOrder.Designer.cs">
-      <DependentUpon>201705080858428_RefineDeliveryOrder.cs</DependentUpon>
+    <Compile Include="Migrations\201705081424343_ModifyReturnModel.cs" />
+    <Compile Include="Migrations\201705081424343_ModifyReturnModel.Designer.cs">
+      <DependentUpon>201705081424343_ModifyReturnModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705100223100_RefineDeliveryOrder.cs" />
+    <Compile Include="Migrations\201705100223100_RefineDeliveryOrder.Designer.cs">
+      <DependentUpon>201705100223100_RefineDeliveryOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201705101453485_ModifyTableProductOutFactory.cs" />
     <Compile Include="Migrations\201705101453485_ModifyTableProductOutFactory.Designer.cs">
@@ -284,8 +288,11 @@
     <EmbeddedResource Include="Migrations\201705031756500_ModifyCartTable.resx">
       <DependentUpon>201705031756500_ModifyCartTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705080858428_RefineDeliveryOrder.resx">
-      <DependentUpon>201705080858428_RefineDeliveryOrder.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705081424343_ModifyReturnModel.resx">
+      <DependentUpon>201705081424343_ModifyReturnModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705100223100_RefineDeliveryOrder.resx">
+      <DependentUpon>201705100223100_RefineDeliveryOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705101453485_ModifyTableProductOutFactory.resx">
       <DependentUpon>201705101453485_ModifyTableProductOutFactory.cs</DependentUpon>
