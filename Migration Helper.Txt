@@ -14,5 +14,5 @@ Update-Database -Verbose -ProjectName AirShopp.DataAccess -StartUpProjectName Ai
 
 
 
-Add-Migration -Verbose -Name Initial -ProjectName AirShopp.DataAccess -StartUpProjectName AirShopp.DataAccess -ConnectionString "Server=YT00674-109\SQLEXPRESS;Database=airShopp;User Id=sa; Password=sa;" -ConnectionProviderName "System.Data.SqlClient¡°
+Add-Migration -Verbose -Name Initial -ProjectName AirShopp.DataAccess -StartUpProjectName AirShopp.DataAccess -ConnectionString "Server=DESKTOP-KH2LP5L;Database=airShopp;User Id=sa; Password=sa;" -ConnectionProviderName "System.Data.SqlClient"
 Update-Database -Verbose -ProjectName AirShopp.DataAccess -StartUpProjectName AirShopp.DataAccess -ConnectionString "Server=DESKTOP-KH2LP5L;Database=airShopp;User Id=sa; Password=sa;" -ConnectionProviderName "System.Data.SqlClient"

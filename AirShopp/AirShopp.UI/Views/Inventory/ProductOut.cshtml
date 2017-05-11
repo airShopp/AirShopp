@@ -1,0 +1,136 @@
+﻿@model AirShopp.UI.Models.ViewModel.ProductOutFactoryViewModel
+@{
+    Layout = "~/Views/Shared/_backEndLayout.cshtml";
+}
+@Styles.Render("~/bundles/AirShopp/Inventory/Css")
+@Scripts.Render("~/bundles/AirShopp/Inventory/js")
+<!-- 商城快讯 begin -->
+<style>
+    .be11 {
+        width: 105px;
+        text-align: center;
+        float: left;
+        height: 40px;
+        line-height: 48px;
+        color: #a3a3a3;
+    }
+
+    .be22 {
+        width: 84px;
+        text-align: center;
+        float: left;
+        height: 40px;
+        line-height: 48px;
+        color: #a3a3a3;
+    }
+    .be33 {
+        width: 294px;
+        text-align: center;
+        float: left;
+        height: 40px;
+        line-height: 48px;
+        color: #a3a3a3;
+    }
+    .be44 {
+        width: 120px;
+        text-align: center;
+        float: left;
+        height: 40px;
+        line-height: 48px;
+        color: #a3a3a3;
+    }
+    .ci11 {
+        width: 105px;
+        text-align: center;
+        float: left;
+        height: 60px;
+        line-height: 60px;
+        border-right: 1px solid #e0e0e0;
+    }
+
+    .ci22 {
+        width: 84px;
+        text-align: center;
+        float: left;
+        height: 60px;
+        line-height: 60px;
+        border-right: 1px solid #e0e0e0;
+    }
+
+    .ci33 {
+        width: 294px;
+        text-align: center;
+        float: left;
+        height: 60px;
+        line-height: 60px;
+        border-right: 1px solid #e0e0e0;
+    }
+    .ci44 {
+        width: 120px;
+        text-align: center;
+        float: left;
+        height: 60px;
+        line-height: 60px;
+        border-right: 1px solid #e0e0e0;
+    }
+</style>
+<div class="member-right fr">
+    <div class="member-head">
+        <div class="member-heels fl"><h2>出库单</h2></div>
+        <div class="member-backs member-icons fr"><a href="javascript:void(0)">搜索</a></div>
+        <div class="member-about fr"><input type="text" placeholder="出库单编号"></div>
+    </div>
+    <div class="member-border">
+        <div class="member-return H-over">
+            <div class="member-cancel clearfix">
+                <span class="be22">出库单编号</span>
+                <span class="be11">图片</span>
+                <span class="be33">商品名</span>
+                <span class="be22">购买数量</span>
+                <span class="be44">客户名</span>
+                <span class="be22">售卖价</span>
+                <span class="be11">购买时间</span>
+                <span class="be22">库存量</span>
+            </div>
+            <div class="member-sheet clearfix">
+                <ul>
+                    @{ var i = 1;}
+                    @foreach (var item in Model.outList)
+                    {
+                        <li>
+                            <div class="member-circle clearfix">
+                                <div class="ci22">
+                                   @i
+                                </div>
+                                <div class="ci11"><img src="@item.PictureUrl" style="width:48px;height:48px;position:relative;top:5px;"/></div>
+                                <div class="ci33" title="@item.ProductName">@item.ProductName.Substring(0,25) ···</div>
+                                <div class="ci22">@item.SaleCount</div>
+                                <div class="ci44">@item.CustomerName</div>
+                                <div class="ci22">￥@item.SalePrice</div>
+                                <div class="ci11">@item.OutDate.ToString().Substring(0,9)</div>
+                                <div class="ci22">@item.ProductCount</div>
+                            </div>
+                        </li>
+                        i++;
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="clearfix" style="padding:30px 20px;">
+            <div class="fr pc-search-g pc-search-gs">
+                <a style="display:none" class="fl " href="#">上一页</a>
+                <a href="#" class="current">1</a>
+                <a href="javascript:;">2</a>
+                <a href="javascript:;">3</a>
+                <a href="javascript:;">4</a>
+                <a href="javascript:;">5</a>
+                <a href="javascript:;">6</a>
+                <a href="javascript:;">7</a>
+                <span class="pc-search-di">…</span>
+                <a href="javascript:;">1088</a>
+                <a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 商城快讯 End -->
