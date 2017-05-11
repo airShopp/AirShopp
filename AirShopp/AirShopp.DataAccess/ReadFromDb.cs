@@ -157,5 +157,20 @@ namespace AirShopp.DataAccess
                 return _context.DeliveryNote;
             }
         }
+        public IQueryable<Warehouse> Warehouses
+        {
+            get
+            {
+                return _context.Warehouse;
+            }
+        }
+
+        public IQueryable<Provider> Providers
+        {
+            get
+            {
+                return _context.Provider;
+            }
+        }
     }
 }

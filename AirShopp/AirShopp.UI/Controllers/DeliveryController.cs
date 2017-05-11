@@ -42,11 +42,17 @@ namespace AirShopp.UI.Controllers
             _readFromDb = readFromDb;
         }
 
-        public ActionResult DeliveryOrderList(int? indexNum = 1, int? pageSize = 10)
+        public ActionResult DeliveryOrderList(string deliveryOrderNum, int? indexNum = 1, int? pageSize = 6)
         {
+
+            if (deliveryOrderNum == null)
+            {
+                deliveryOrderNum = string.Empty;
+            }
 
             var deliveryOrderDataModelList = (from c in _readFromDb.DeliveryOrders
                                               join o in _readFromDb.Orders on c.OrderId equals o.Id
+                                              where c.DeliveryOrderNumber.Contains(deliveryOrderNum)
                                               select new DeliveryOrderDataModel()
                                               {
                                                   Id = c.Id,
@@ -64,14 +70,11 @@ namespace AirShopp.UI.Controllers
                 DeliveryOrderDataModelList = list,
                 PageIndex = deliveryOrderDataModelList.PageIndex,
                 TotalCount = deliveryOrderDataModelList.TotalCount,
-                TotalPage = deliveryOrderDataModelList.TotalPage
+                TotalPage = deliveryOrderDataModelList.TotalPage,
+                pageBar = deliveryOrderDataModelList.getPageBar()
             });
         }
-        [HttpPost]
-        public ActionResult DeliveryOrderList()
-        {
-            return View();
-        }
+
         public ActionResult DeliveryOrderDetail(long deliveryOrderId)
         {
             DeliveryOrder deliveryOrder = _deliveryOrderRepository.GetDeliveryOrderByPK(deliveryOrderId);
@@ -95,7 +98,7 @@ namespace AirShopp.UI.Controllers
             return View(deliveryOrderDetail);
         }
 
-        public ActionResult DeliveryNoteList(int? indexNum = 1, int? pageSize = 5)
+        public ActionResult DeliveryNoteList(int? indexNum = 1, int? pageSize = 4)
         {
 
             var deliveryNoteDataModelList = (from c in _readFromDb.DeliveryNotes
@@ -118,7 +121,8 @@ namespace AirShopp.UI.Controllers
                 DelvieryNoteDataModelList = deliveryNoteDataModelList.ToList(),
                 PageIndex = deliveryNoteDataModelList.PageIndex,
                 TotalCount = deliveryNoteDataModelList.TotalCount,
-                TotalPage = deliveryNoteDataModelList.TotalPage
+                TotalPage = deliveryNoteDataModelList.TotalPage,
+                pageBar = deliveryNoteDataModelList.getPageBar()
             });
         }
 
@@ -154,7 +158,11 @@ namespace AirShopp.UI.Controllers
                 DeliveryStations = deliveryStationViewModel.ToList(),
                 Provinces = provinceList,
                 Cities = CityList,
-                Areas = AreaList
+                Areas = AreaList,
+                pageBar = deliveryStationViewModel.getPageBar(),
+                PageIndex = deliveryStationViewModel.PageIndex,
+                TotalCount = deliveryStationViewModel.TotalCount,
+                TotalPage = deliveryStationViewModel.TotalPage
             });
         }
 

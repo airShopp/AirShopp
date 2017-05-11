@@ -65,6 +65,26 @@
             }
         </div>
     </div>
+    <!--
+    <div class="box1">
+        <div class="hint1" style="height:580px;">
+            <div class="hint-in11">
+                <div class="hint2">Kenneth1</div>
+                <div class="hint33"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box11">
+        <div class="hint11" style="height:580px;">
+            <div class="hint-in111">
+                <div class="hint2">Kenneth2</div>
+                <div class="hint333"></div>
+            </div>
+        </div>
+    </div>
+    -->
+
     <!--- header begin-->
     <header id="pc-header">
         <div class="BHeader">
@@ -97,9 +117,9 @@
                 <div class="member-lists">
                     <dl>
                         <dt>选择操作</dt>
-                        <dd class="cur"><a href="#">出库记录</a></dd>
+                        <dd><a href="@Url.Action("getAllInventoryProduct", "Inventory")">所有商品</a></dd>
+                        <dd><a href="@Url.Action("GetProductOutList", "Inventory")">出库记录</a></dd>
                         <dd><a href="#">入库记录</a></dd>
-                        <dd><a href="#">商品入库</a></dd>
                         <dd><a href="#">热销商品</a></dd>
                         <dd><a href="#">待发货</a></dd>
                     </dl>

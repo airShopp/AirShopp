@@ -622,6 +622,21 @@ body{min-width: 1200px; _width:expression(document.documentElement.clientWidth>1
 .hint3{width:15px;height:15px;background:url("../Content/icon/col.png") no-repeat;position:absolute;top:13px;right:15px;cursor:pointer;}
 .hint-in3{  width:85px; height:27px; line-height:27px; text-align:center; display:block; float:left; margin-left:40px; background:#f5f5f5; color:#333; border:1px solid #dddddd; border-radius:2px; margin-top:15px;}
 
+.box1{width:100%;height:100%;background:rgba(0,0,0,0.3);position:fixed;z-index:100;display:none;}
+.hint1{width:600px;height:460px; text-align:center; margin:0 auto;background:#fff;position:fixed;top:50%;left:50%;margin-left:-300px;margin-top:-230px;z-index:111;display:none;  border-radius:4px 4px 0 0;}
+.hint-in11{width:600px;height:42px;line-height:42px; font-size:16px; background:#f5f5f5;position:relative; background-image:-moz-linear-gradient(center top , #fafafa, #ededed); border-radius:4px 4px 0 0; text-align:center;}
+
+
+.hint33{width:15px;height:15px;background:url("../Content/icon/col.png") no-repeat;position:absolute;top:13px;right:15px;cursor:pointer;}
+.hint-in33{  width:85px; height:27px; line-height:27px; text-align:center; display:block; float:left; margin-left:40px; background:#f5f5f5; color:#333; border:1px solid #dddddd; border-radius:2px; margin-top:15px;}
+
+.box11{width:100%;height:100%;background:rgba(0,0,0,0.3);position:fixed;z-index:100;display:none;}
+.hint11{width:600px;height:460px; text-align:center; margin:0 auto;background:#fff;position:fixed;top:50%;left:50%;margin-left:-300px;margin-top:-230px;z-index:111;display:none;  border-radius:4px 4px 0 0;}
+.hint-in111{width:600px;height:42px;line-height:42px; font-size:16px; background:#f5f5f5;position:relative; background-image:-moz-linear-gradient(center top , #fafafa, #ededed); border-radius:4px 4px 0 0; text-align:center;}
+
+
+.hint333{width:15px;height:15px;background:url("../Content/icon/col.png") no-repeat;position:absolute;top:13px;right:15px;cursor:pointer;}
+.hint-in333{  width:85px; height:27px; line-height:27px; text-align:center; display:block; float:left; margin-left:40px; background:#f5f5f5; color:#333; border:1px solid #dddddd; border-radius:2px; margin-top:15px;}
 
 /* m_zlxg */
 .m_zlxg{ width:93px; height:30px; line-height:30px;cursor:pointer;float:left;margin:0 10px 0 0;display:inline;background:url("../Content/icon/zlxg2.jpg") no-repeat;}

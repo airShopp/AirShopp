@@ -193,8 +193,10 @@
     <Compile Include="Models\Common\PageListBaseModel.cs" />
     <Compile Include="Models\CustomerCommentDataModel.cs" />
     <Compile Include="Models\Enum\OrderStatusEnumType.cs" />
+    <Compile Include="Models\InventoryProductListDataModel.cs" />
     <Compile Include="Models\LocationDataModel.cs" />
     <Compile Include="Models\ProductDataModel.cs" />
+    <Compile Include="Models\ProductOutDataModel.cs" />
     <Compile Include="Models\ShopCartDataModel.cs" />
     <Compile Include="Models\ViewModel\AddressListViewModel.cs" />
     <Compile Include="Models\ViewModel\CommentViewModel.cs" />
@@ -202,7 +204,9 @@
     <Compile Include="Models\ViewModel\DeliveryOrderDetailViewModel.cs" />
     <Compile Include="Models\ViewModel\DeliveryOrderListViewModel.cs" />
     <Compile Include="Models\ViewModel\DeliveryStationListViewModel.cs" />
+    <Compile Include="Models\ViewModel\InventoryProductListViewModel.cs" />
     <Compile Include="Models\ViewModel\OrderConfirmViewModel.cs" />
+    <Compile Include="Models\ViewModel\ProductOutFactoryViewModel.cs" />
     <Compile Include="Models\ViewModel\UserViewModel.cs" />
     <Compile Include="Models\ProductListDataModel.cs" />
     <Compile Include="Models\ViewModel\Admin\Class1.cs" />
@@ -467,6 +471,8 @@
     <Content Include="Views\Delivery\DeliveryNoteList.cshtml" />
     <Content Include="Views\Delivery\AddDeliveryStation.cshtml" />
     <Content Include="Views\Delivery\DeliveryStationList.cshtml" />
+    <Content Include="Views\Inventory\ProductOut.cshtml" />
+    <Content Include="Views\Inventory\InventoryProductList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_homePageLayout.cshtml" />
