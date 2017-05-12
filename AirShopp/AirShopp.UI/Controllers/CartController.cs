@@ -31,7 +31,7 @@ namespace AirShopp.UI.Controllers
             _readFromDb = readFromDb;
         }
 
-        public ActionResult LoadCartList(int? indexNum, int? pageSize)
+        public ActionResult LoadCartList(int? indexNum, int? pageSize = 6)
         {
            
             ShopCartViewModel shopCartViewModel = GetCartPageViewData(indexNum, pageSize);
@@ -118,7 +118,8 @@ namespace AirShopp.UI.Controllers
                 TotalPage = cartPagination.TotalPage,
                 TotalCount = cartPagination.TotalCount,
                 PageIndex = cartPagination.PageIndex,
-                ShopCart = shopCartList
+                ShopCart = shopCartList,
+                pageBar = cartPagination.getPageBar()
             };
         }
     }

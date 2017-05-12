@@ -37,7 +37,7 @@ namespace AirShopp.UI.Controllers
             return View("ProductList", products);
         }
 
-        //Get: Pagination
+        //Get: Pagination/Ajax
         public ActionResult GetPageProduct(int? indexNum, int? pageSize, int categoryId)
         {
             var products = GetProductList(indexNum, pageSize, categoryId);
@@ -95,9 +95,9 @@ namespace AirShopp.UI.Controllers
                                });
 
             List<ProductListDataModel> pl = new List<ProductListDataModel>();
-            var pagenationList = productList.OrderBy(x => x.ProductId).ToPagedList(indexNum, pageSize);
+            var paginationList = productList.OrderBy(x => x.ProductId).ToPagedList(indexNum, pageSize);
 
-            pagenationList.ForEach(x => {
+            paginationList.ForEach(x => {
                 pl.Add(new ProductListDataModel
                 {
                     ProductId = x.ProductId,
@@ -112,10 +112,11 @@ namespace AirShopp.UI.Controllers
 
             ProductListViewModel products = new ProductListViewModel()
             {
-                PageIndex = pagenationList.PageIndex,
-                TotalPage = pagenationList.TotalPage,
+                PageIndex = paginationList.PageIndex,
+                TotalPage = paginationList.TotalPage,
                 CategoryId = categoryId,
-                productList = pl
+                productList = pl,
+                pageBar = paginationList.getPageBar()
             };
             return products;
         }

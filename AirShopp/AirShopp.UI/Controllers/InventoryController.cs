@@ -5,10 +5,11 @@ using AirShopp.UI.Models;
 using AirShopp.Common.Page;
 using AirShopp.UI.Models.ViewModel;
 using System.Collections.Generic;
+using AirShopp.UI.Controllers;
 
 namespace AirShopp.UI.Controllers
 {
-    public class InventoryController : Controller
+    public class InventoryController : FliterController
     {
         private readonly IReadFromDb _readFromDb;
         private readonly ICategoryRepository _categoryRepository;
@@ -26,7 +27,7 @@ namespace AirShopp.UI.Controllers
             return View();
         }
 
-        public ActionResult GetProductOutList(int? indexNum, int? pageSize)
+        public ActionResult GetProductOutList(int? indexNum, int? pageSize = 8)
         {
             var productOutList = (from ia in _readFromDb.InventoryActions
                                   join i in _readFromDb.Inventories on ia.InventoryId equals i.Id
@@ -66,7 +67,8 @@ namespace AirShopp.UI.Controllers
                 PageIndex = productOutList.PageIndex,
                 TotalCount = productOutList.TotalCount,
                 TotalPage = productOutList.TotalPage,
-                outList = outDataList
+                outList = outDataList,
+                pageBar = productOutList.getPageBar()
             };
 
             return View("ProductOut", outFactoryViewModel);

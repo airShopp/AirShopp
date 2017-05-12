@@ -84,7 +84,7 @@ function selectSingle(){
 function deleteRow(rowId){
     var Index=document.getElementById(rowId).rowIndex; //获取当前行的索引号
     document.getElementById("shopping").deleteRow(Index);
-    document.getElementById("shopping").deleteRow(Index-1);
+    //document.getElementById("shopping").deleteRow(Index-1);
     productCount();
     }
 
@@ -96,7 +96,7 @@ function deleteSelectRow(){
        if(oInput[i].checked==true){
          Index=document.getElementById(oInput[i].value).rowIndex; /*获取选中行的索引号*/
          document.getElementById("shopping").deleteRow(Index);
-         document.getElementById("shopping").deleteRow(Index-1);
+         //document.getElementById("shopping").deleteRow(Index-1);
         }
     }
     productCount();
