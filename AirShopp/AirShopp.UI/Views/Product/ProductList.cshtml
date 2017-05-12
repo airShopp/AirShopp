@@ -12,21 +12,21 @@
         </div>
         <div class="clearfix" style="padding:30px 20px;">
             <div class="fr pc-search-g pc-search-gs">
-                <a style="display:none" class="fl " href="#">上一页</a>
-                @for (var i = 1; i <= 6; i++)
+                @foreach (var pageNum in Model.pageBar)
                 {
-                    if (i == 1)
+                    if (pageNum == Model.PageIndex)
                     {
-                         @Ajax.ActionLink(i.ToString(), "GetPageProduct", new {Controller="Product", indexNum = i, categoryId = Model.CategoryId },new AjaxOptions { UpdateTargetId = "product_list", HttpMethod = "Get" })
+                        @Html.ActionLink(pageNum.ToString(), "GetPageProduct", "Product", new { indexNum = pageNum }, new { @class = "current", Target = "_self" });
+                    }
+                    else if (pageNum == 0)
+                    {
+                        <span class="pc-search-di">…</span>
                     }
                     else
                     {
-                        @Ajax.ActionLink(i.ToString(), "GetPageProduct", new { Controller = "Product", indexNum = i, categoryId = Model.CategoryId}, new AjaxOptions { UpdateTargetId = "product_list", HttpMethod = "Get" })
+                        @Html.ActionLink(pageNum.ToString(), "GetPageProduct", "Product", new { indexNum = pageNum }, new { Target = "_self" });
                     }
                 }
-                <span class="pc-search-di">…</span>
-                <a href="javascript:;">@Model.TotalPage</a>
-                <a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>
             </div>
         </div>
     </div>

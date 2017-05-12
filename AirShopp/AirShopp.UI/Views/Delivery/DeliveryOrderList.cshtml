@@ -54,7 +54,7 @@
     <div class="member-head">
         <div class="member-heels fl"><h2>出库单</h2></div>
         <div class="member-backs member-icons fr"><a href="@Url.Action("DeliveryOrderList", "Delivery")" class="search">搜索</a></div>
-        <div class="member-about fr"><input type="text" placeholder="出库单编号" id="num"></div>
+        <div class="member-about fr"><input type="text" placeholder="出库单编号" id="num" value="@Model.searchDeliveryOrderNum"></div>
     </div>
     <div class="member-border">
         <div class="member-return H-over">
@@ -88,7 +88,7 @@
                 {
                     if (pageNum == Model.PageIndex)
                     {
-                        @Html.ActionLink(pageNum.ToString(), "DeliveryOrderList", "Delivery", new { @class = "search current", indexNum = pageNum });
+                        <a class="search current" href="javascript:void(0)">@pageNum.ToString()</a>
                     }
                     else if (pageNum == 0)
                     {
@@ -96,31 +96,11 @@
                     }
                     else
                     {
-                        @Html.ActionLink(pageNum.ToString(), "DeliveryOrderList", "Delivery", new { @class = "search", indexNum = pageNum });
-                    }
+                        <a class="search" href="/Delivery/DeliveryOrderList?indexNum=@pageNum">@pageNum.ToString()</a>
+                   }
                 }
             </div>
         </div>
     </div>
 </div>
 <!-- 商城快讯 End -->
-<script>
-    $(function () {
-        $(".search").click(function (event) {
-            event.preventDefault();
-            var str = $(this).attr("href");
-            if ($("#num").val() == "") {
-                location.href = str;
-                return;
-            }
-            if (str.indexOf('?')!= -1) {
-                str += "&";
-            }
-            else {
-                str += "?";
-            }
-            str += "deliveryOrderNum=" + $("#num").val();
-            location.href = str;
-        });
-    })
-</script>
