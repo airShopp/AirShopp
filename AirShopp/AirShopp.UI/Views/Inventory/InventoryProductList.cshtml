@@ -84,7 +84,7 @@
         line-height: 60px;
         border-right: 1px solid #e0e0e0;
     }
-    .ci55{
+    .ci55 {
         width: 35px;
         text-align: center;
         float: left;
@@ -92,13 +92,109 @@
         line-height: 60px;
         border-right: 1px solid #e0e0e0;
     }
+    .hint11 dt{
+    width:35%;
+    height:50px;
+    line-height:50px;
+    text-align:right;
+    float:left;
+    }
+
+    .hint11 dd{
+    width:35%;
+    height:50px;
+    line-height:50px;
+    text-align:right;
+    float:left;
+}
+    .hint11 select{
+    width:50%;
+    height:30px;
+    text-align:right;
+    float:left;
+}
 </style>
+<script>
+    $(function () {
+        $(".btn1").click(function (event) {
+            $(".box11").css({ "display": "block" });
+            $(".hint11").css({ "display": "block" });
+        });
+        $(".hint-in3").click(function (event) {
+            $(".hint11").css({ "display": "none" });
+            $(".box11").css({ "display": "none" });
+        });
+
+        $(".hint333").click(function (event) {
+            $(this).parent().parent().css({ "display": "none" });
+            $(".box11").css({ "display": "none" });
+        });
+    });
+</script>
+
+<div class="box11">
+    <div class="hint11" style="height:580px;">
+        <div class="hint-in111">
+            <div class="hint2">添加新商品</div>
+            <div class="hint333"></div>
+        </div>
+        @using (Html.BeginForm("AddNewProduct", "Inventory", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <dl class="clearfix">
+                <dt>商品名：</dt>
+                <dd><input type="text" name="product.productName" style="margin-left:60px;height:25px;line-height:25px" /></dd>
+                <dt>商品类别：</dt>
+                <dd>
+                    <select name="product.categoryId" id="category" style="margin-left:60px; margin-top:10px;width:150px; height:29px;line-height:25px">
+                        @foreach (var c in Model.categoryList)
+                        {
+                            <option value="@c.Id">@c.CategoryName</option>
+                        }
+                    </select>
+                </dd>
+                <dt>商家：</dt>
+                <dd>
+                    <select name="product.provider" id="provider" style="margin-left:60px; margin-top:10px;width:150px; height:29px;line-height:25px">
+                        @foreach (var p in Model.providerList)
+                        {
+                            <option value="@p.Id">@p.ProviderName</option>
+                        }
+                    </select>
+                </dd>
+
+                <dt>仓库：</dt>
+                <dd>
+                    <select name="product.warehouse" id="warehouse" style="margin-left:60px; margin-top:10px;width:150px; height:29px;line-height:25px">
+                        @foreach (var w in Model.warehouseList)
+                        {
+                            <option value="@w.Id">@w.Name</option>
+                        }
+                    </select>
+                </dd>
+                <dt>生产日期：</dt>
+                <dd><input type="date" name="product.productionTime" id="price" style="margin-left:15px;height:25px;line-height:25px" /></dd>
+                <dt>保质期：</dt>
+                <dd><input type="text" name="product.keepTime" id="price" style="margin-left:15px;height:25px;line-height:25px" /></dd>
+                <dt>商品价格：</dt>
+                <dd><input type="text" name="product.price" id="price" style="margin-left:15px;height:25px;line-height:25px" /></dd>
+                <dt>数量：</dt>
+                <dd><input type="text" name="product.productCount" id="price" style="margin-left:15px;height:25px;line-height:25px" /></dd>
+                <dt>选择图片：</dt>
+                <dd><input type="file" name="image" style="margin-left:60px;height:25px;line-height:25px" /></dd>
+                <dt><input type="submit" value="确定添加" /></dt>
+                @*<dt></dt>
+                <dd><span><a href="javascript:void(0);" class="hint-in3" onclick="addDeliveryStation()" style="margin:0;margin-left:15px;margin-top:30px;">保存收货地址</a></span></dd>*@
+            </dl>
+        }
+    </div>
+</div>
 <div class="member-right fr">
     <div class="member-head">
         <div class="member-heels fl"><h2>所有商品</h2></div>
         <div class="member-backs member-icons fr"><a href="javascript:void(0)">搜索</a></div>
         <div class="member-about fr"><input type="text" placeholder="出库单编号"></div>
     </div>
+    <span class="btn1">添加新商品</span>
     <div class="member-border">
         <div class="member-return H-over">
             <div class="member-cancel clearfix">
@@ -126,7 +222,14 @@
                                     @i
                                 </div>
                                 <div class="ci11"><img src="@item.ProductUrl" style="width:48px;height:48px;position:relative;top:5px;" /></div>
-                                <div class="ci33" title="@item.ProductName">@item.ProductName.Substring(0, 15) ···</div>
+                                @if (item.ProductName.Length > 15)
+                                {
+                                    <div class="ci33" title="@item.ProductName">@item.ProductName.Substring(0, 15) ···</div>
+                                }
+                                else
+                                {
+                                    <div class="ci33" title="@item.ProductName">@item.ProductName</div>
+                                }
                                 @if (item.IsOnSale == true)
                                 {
                                     <div class="ci22">已上架</div>

@@ -63,7 +63,7 @@ namespace AirShopp.UI
                 "~/Content/member.css"
                 ));
             bundles.Add(new ScriptBundle("~/bundles/AirShopp/Inventory/js").Include(
-                "~/Scripts/js/jquery"
+                
                 ));
 
             //Delivery

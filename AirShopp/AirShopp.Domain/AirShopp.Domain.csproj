@@ -91,6 +91,7 @@
     <Compile Include="Delivery\IDeliveryOrderItemRepository.cs" />
     <Compile Include="Delivery\IDeliveryOrderRepository.cs" />
     <Compile Include="Discount\Discount.cs" />
+    <Compile Include="Discount\IDiscountRepository.cs" />
     <Compile Include="Order\IOrderItemRepository.cs" />
     <Compile Include="Order\IOrderRepository.cs" />
     <Compile Include="Order\IOrderservice.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Order\OrderItem.cs" />
     <Compile Include="Order\Order.cs" />
     <Compile Include="Product\IProductRepository.cs" />
+    <Compile Include="Product\IWarehouseRepository.cs" />
     <Compile Include="Product\ProductSales.cs" />
     <Compile Include="Product\Warehouse.cs" />
     <Compile Include="Product\InventoryAction.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Product\ProductInFactory.cs" />
     <Compile Include="Product\ProductOutFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider\IProviderRepository.cs" />
     <Compile Include="Provider\Provider.cs" />
     <Compile Include="Area\Province.cs" />
     <Compile Include="Order\Return.cs" />

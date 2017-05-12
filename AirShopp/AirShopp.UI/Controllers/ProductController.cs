@@ -31,7 +31,7 @@ namespace AirShopp.UI.Controllers
             _readFromDb = readFromDb;
         }
         // GET: ProductList
-        public ActionResult GetProducts(int? indexNum, int? pageSize,int categoryId)
+        public ActionResult GetProducts(int categoryId, int? indexNum, int? pageSize = 8)
         {
             var products = GetProductList(indexNum,pageSize,categoryId);
             return View("ProductList", products);

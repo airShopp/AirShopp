@@ -10,6 +10,13 @@ namespace AirShopp.DataAccess
     {
         public readonly AirShoppContext _context = new AirShoppContext();
 
+        public long AddProduct(Product product)
+        {
+            _context.Product.Add(product);
+            _context.SaveChanges();
+            return product.Id;
+        }
+
         public Product GetProductById(long productId)
         {
             Product product = null;

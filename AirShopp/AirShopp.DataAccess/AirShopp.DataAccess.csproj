@@ -201,11 +201,14 @@
     <Compile Include="Repository\DeliveryOrderItemRepository.cs" />
     <Compile Include="Repository\DeliveryOrderRepository.cs" />
     <Compile Include="Repository\DeliveryStationRepository.cs" />
+    <Compile Include="Repository\DiscountRepository.cs" />
     <Compile Include="Repository\InventoryRepository.cs" />
     <Compile Include="Repository\OrderItemRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
+    <Compile Include="Repository\ProviderRepository.cs" />
     <Compile Include="Repository\ProvinceRepository.cs" />
+    <Compile Include="Repository\WarehouseRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
