@@ -126,7 +126,7 @@
                                     @i
                                 </div>
                                 <div class="ci11"><img src="@item.ProductUrl" style="width:48px;height:48px;position:relative;top:5px;" /></div>
-                                <div class="ci33" title="@item.ProductName">@item.ProductName.Substring(0, 20) ···</div>
+                                <div class="ci33" title="@item.ProductName">@item.ProductName.Substring(0, 15) ···</div>
                                 @if (item.IsOnSale == true)
                                 {
                                     <div class="ci22">已上架</div>
@@ -170,7 +170,7 @@
                 {
                     if (pageNum == Model.PageIndex)
                     {
-                        @Html.ActionLink(pageNum.ToString(), "getAllInventoryProduct","Inventory", new { @class="current", indexNum = pageNum});
+                        @Html.ActionLink(pageNum.ToString(), "getAllInventoryProduct","Inventory", new { indexNum = pageNum}, new { @class = "current", Target ="_self"} );
                     }
                     else if (pageNum == 0)
                     {

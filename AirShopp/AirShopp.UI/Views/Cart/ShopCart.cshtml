@@ -27,7 +27,7 @@
                     var trId = "product" + i;
                     var tdClass = "select" + (i + 2);
                     <tr id="@trId" class="cartItem">
-                        <td class="cart_td_1"><input name="cartCheckBox" class="@tdClass" type="checkbox" value="@cartProduct.Id" onclick="selectSingle()" /></td>
+                        <td class="cart_td_1"><input name="cartCheckBox" class="@tdClass" type="checkbox" id="@cartProduct.Id" value="@cartProduct.Id" onclick="selectSingle()" /></td>
                         <td class="cart_td_2"><img style="width:80px;height:80px;" src="@cartProduct.PictureUrl" alt="shopping" /></td>
                         <td class="cart_td_3">
                             <a href="#">@cartProduct.ProductName</a><br />
@@ -54,17 +54,21 @@
         </div>
         <div class="page" style="padding:0 0 5px 0;">
             <div class="pagination">
-                <a style="display:none" class="fl " href="#">上一页</a>
-                <a href="#" class="current">1</a>
-                <a href="javascript:;">2</a>
-                <a href="javascript:;">3</a>
-                <a href="javascript:;">4</a>
-                <a href="javascript:;">5</a>
-                <a href="javascript:;">6</a>
-                <a href="javascript:;">7</a>
-                <span class="pc-search-di">…</span>
-                <a href="javascript:;">1088</a>
-                <a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>
+                @foreach (var pageNum in Model.pageBar)
+                {
+                    if (pageNum == Model.PageIndex)
+                    {
+                        @Html.ActionLink(pageNum.ToString(), "LoadCartList", "Cart", new { indexNum = pageNum }, new { @class = "current", Target = "_self" });
+                    }
+                    else if (pageNum == 0)
+                    {
+                        <span class="pc-search-di">…</span>
+                    }
+                    else
+                    {
+                        @Html.ActionLink(pageNum.ToString(), "LoadCartList", "Cart", new { indexNum = pageNum }, new { Target = "_self" });
+                    }
+                }
             </div>
         </div>
     </div>
