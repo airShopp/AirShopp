@@ -46,5 +46,8 @@ namespace AirShopp.Common
 
         public const string REQUESTING = "REQUESTING";
         public const string RETURNING = "RETURNING";
+
+
+        public const decimal DEFAULTDISCOUNT = 1;
     }
 }

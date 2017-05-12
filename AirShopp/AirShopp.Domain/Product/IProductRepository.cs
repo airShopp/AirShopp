@@ -10,5 +10,6 @@ namespace AirShopp.Domain
     {
         List<Product> Products();
         Product GetProductById(long productId);
+        long AddProduct(Product product);
     }
 }

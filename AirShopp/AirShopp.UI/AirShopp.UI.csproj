@@ -197,6 +197,7 @@
     <Compile Include="Models\LocationDataModel.cs" />
     <Compile Include="Models\ProductDataModel.cs" />
     <Compile Include="Models\ProductOutDataModel.cs" />
+    <Compile Include="Models\request\ProductRequestModel.cs" />
     <Compile Include="Models\ShopCartDataModel.cs" />
     <Compile Include="Models\ViewModel\AddressListViewModel.cs" />
     <Compile Include="Models\ViewModel\CommentViewModel.cs" />

@@ -6,6 +6,12 @@ using AirShopp.Common.Page;
 using AirShopp.UI.Models.ViewModel;
 using System.Collections.Generic;
 using AirShopp.UI.Controllers;
+using System.Collections;
+using AirShopp.UI.Models.request;
+using System.Web;
+using System;
+using System.IO;
+using AirShopp.Common;
 
 namespace AirShopp.UI.Controllers
 {
@@ -13,20 +19,32 @@ namespace AirShopp.UI.Controllers
     {
         private readonly IReadFromDb _readFromDb;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryService _categoryService;
+        private readonly IProviderRepository _providerRepository;
+        private readonly IWarehouseRepository _warehouseRepository;
+        private readonly IProductRepository _productRepository;
+        private readonly IInventoryRepository _inventoryRepository;
+        private readonly IDiscountRepository _discountRepository;
 
         public InventoryController(
             IReadFromDb readFromDb,
-            ICategoryRepository categoryRepository)
+            ICategoryRepository categoryRepository,
+            ICategoryService categoryService,
+            IProviderRepository providerRepository,
+            IWarehouseRepository warehouseRepository,
+            IProductRepository productRepository,
+            IInventoryRepository inventoryRepository,
+            IDiscountRepository discountRepository)
         {
             _readFromDb = readFromDb;
             _categoryRepository = categoryRepository;
+            _categoryService = categoryService;
+            _providerRepository = providerRepository;
+            _warehouseRepository = warehouseRepository;
+            _productRepository = productRepository;
+            _inventoryRepository = inventoryRepository;
+            _discountRepository = discountRepository;
         }
-        // GET: Inventory
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult GetProductOutList(int? indexNum, int? pageSize = 8)
         {
             var productOutList = (from ia in _readFromDb.InventoryActions
@@ -76,6 +94,67 @@ namespace AirShopp.UI.Controllers
 
         public ActionResult getAllInventoryProduct(int? indexNum, int? pageSize = 6)
         {
+
+            InventoryProductListViewModel productViewModel = GetInventoryProducts(indexNum, pageSize);
+
+            return View("InventoryProductList", productViewModel);
+        }
+       
+        [HttpPost]
+        public ActionResult AddNewProduct(ProductRequestModel product, HttpPostedFileBase image)
+        {
+            var path = Request.MapPath("~/Content/" + product.categoryId);
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            var filePath = Path.Combine(path, Path.GetFileName(image.FileName));
+
+            try
+            {
+                image.SaveAs(filePath);
+            }
+            catch
+            {
+                throw new Exception();
+            }
+            string imgPath = filePath.Substring(path.IndexOf("\\Content"));
+            string RealPath = imgPath.Replace("\\", "/");
+            Product p = new Product()
+            {
+                CategoryId = product.categoryId,
+                IsOnSale = false,
+                ProductionDate = product.productionTime,
+                ProviderId = product.provider,
+                Url = RealPath,
+                KeepDate = product.keepTime,
+                Price = product.price,
+                ProductName = product.productName
+            };
+            long productId = _productRepository.AddProduct(p);
+            Inventory inventory = new Inventory()
+            {
+                Amount = product.productCount,
+                ProductId = productId,
+                WarehouseId = product.warehouse,
+            };
+            long inventoryId = _inventoryRepository.AddInventory(inventory);
+            Discount discount = new Discount()
+            {
+                Discounts = Constants.DEFAULTDISCOUNT,
+                IsUsed = false,
+                ProductId = productId,
+                StartTime = DateTime.UtcNow,
+                EndTime = DateTime.UtcNow
+            };
+            _discountRepository.AddProductDiscount(discount);
+            InventoryProductListViewModel productViewModel = GetInventoryProducts(null,null);
+            return View("InventoryProductList", productViewModel);
+        }
+
+        //Get Inventory Product View Data
+        public InventoryProductListViewModel GetInventoryProducts(int? indexNum, int? pageSize = 6)
+        {
             var inventoryProductList = (from i in _readFromDb.Inventories
                                         join w in _readFromDb.Warehouses on i.WarehouseId equals w.Id
                                         join p in _readFromDb.Products on i.ProductId equals p.Id
@@ -113,17 +192,31 @@ namespace AirShopp.UI.Controllers
                     WarehouseName = x.WarehouseName
                 });
             });
-            InventoryProductListViewModel productViewModel = new InventoryProductListViewModel()
+            return new InventoryProductListViewModel()
             {
                 PageIndex = inventoryProductList.PageIndex,
                 TotalCount = inventoryProductList.TotalCount,
                 TotalPage = inventoryProductList.TotalPage,
                 pageBar = inventoryProductList.getPageBar(),
-                productList = productListDataModel
-                
-            };
+                productList = productListDataModel,
+                categoryList = getCategoryList(),
+                providerList = _providerRepository.getProvider(),
+                warehouseList = _warehouseRepository.getWarehouseList()
 
-            return View("InventoryProductList", productViewModel);
+            };
+        }
+        //Get Category
+        public List<CategoryModel> getCategoryList()
+        {
+            var secondCategories = (from category in _categoryService.Categories()
+                                    where category.ParentId > 0
+                                    select new CategoryModel
+                                    {
+                                        Id = category.Id,
+                                        CategoryName = category.CategoryName,
+                                        ParentId = category.ParentId
+                                    }).ToList();
+            return secondCategories;
         }
     }
 }
