@@ -37,7 +37,7 @@ namespace AirShopp.UI.Controllers
                                                   CommentDate = c.CommentDate,
                                                   Comments = c.Comments,
                                                   ProductUrl = c.Product.Url
-                                              }).OrderBy(x => x.CommentDate).ToPagedList(indexNum, pageSize);
+                                              }).OrderByDescending(x => x.CommentDate).ToPagedList(indexNum, pageSize);
             var commentList = commentDataModellList.ToList();
 
             CommentViewModel commentViewModel = new CommentViewModel();

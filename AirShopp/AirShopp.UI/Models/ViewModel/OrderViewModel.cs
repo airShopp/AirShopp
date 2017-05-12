@@ -10,6 +10,7 @@ namespace AirShopp.UI.Models.ViewModel
     public class OrderViewModel 
     {
         public int CurrentTab { get; set; }
+        public string searchDeliveryNoteNum { get; set; }
         public PendingPaymentStatusViewModel PendingPaymentStatusViewModel { get; set; }
         public PendingDeliveryStatusViewModel PendingDeliveryStatusViewModel { get; set; }
         public PendingReceivedStatusViewModel PendingReceivedStatusViewModel { get; set; }

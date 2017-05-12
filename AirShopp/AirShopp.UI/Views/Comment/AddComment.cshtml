@@ -24,8 +24,8 @@
             <ul>
                 <li class="clearfix">
                     <div class="sp1">
-                        <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="@Model.OrderItem.Product.Url"></a></span>
-                        <span class="gr2"><a href="#">@Model.OrderItem.Product.ProductName</a></span>
+                        <span class="gr1"><a href="/Product/getProduct?productId=@Model.OrderItem.Product.Id"><img width="60" height="60" about="" title="" src="@Model.OrderItem.Product.Url"></a></span>
+                        <span class="gr2"><a href="/Product/getProduct?productId=@Model.OrderItem.Product.Id">@Model.OrderItem.Product.ProductName</a></span>
                         <span class="gr3">X @Model.OrderItem.Quantity</span>
                     </div>
                     <div class="sp2">@Model.OrderDate</div>
@@ -51,11 +51,11 @@
                 {
                     <li class="clearfix">
                         <div class="sp1">
-                            <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="@Model.CommentList[i].ProductUrl"></a></span>
-                            <span class="gr2"><a href="#">@Model.CommentList[i].ProductName</a></span>
+                            <span class="gr1"><a href="/Product/getProduct?productId=@Model.CommentList[i].ProductId"><img width="60" height="60" about="" title="" src="@Model.CommentList[i].ProductUrl"></a></span>
+                            <span class="gr2"><a href="/Product/getProduct?productId=@Model.CommentList[i].ProductId">@Model.CommentList[i].ProductName</a></span>
                         </div>
                         <div class="sp2">@Model.CommentList[i].CommentDate</div>
-                        <div class="sp3"><label>@Model.CommentList[i].Comments</label></div>
+                        <div class="sp3" style="position:relative"><div style="position:absolute;left: 50%;top: 50%; transform: translate(-50%,-50%);"><label>@Model.CommentList[i].Comments</label></div></div>
                     </li>
                 }
             </ul>
