@@ -153,7 +153,7 @@
                                         @if (Model.RequestingList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault() != null &&
                                             Model.RequestingList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault().ReturnStatus == "REQUESTING")
                                         {
-                                            <a class="btn1" href="/Order/AgreeRequest?orderId=@Model.RequestingList[i].Id&orderItemId=@orderItem.Id">同意退货</a>
+                                            <a href="/Order/AgreeRequest?orderId=@Model.RequestingList[i].Id&orderItemId=@orderItem.Id">同意退货</a>
                                         }
                                         else if (Model.RequestingList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault() != null &&
                                           Model.RequestingList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault().ReturnStatus == "FINISHED")

@@ -1,4 +1,4 @@
-﻿@model AirShopp.UI.Models.ViewModel.OrderViewModel
+﻿@model AirShopp.UI.Models.ViewModel.AllStatusViewModel
 @{
     ViewBag.Title = "ReturnList";
     Layout = "~/Views/Shared/_orderPageLayout.cshtml";
@@ -47,7 +47,7 @@
                             }
                             </div>
                             <div class="ci2">@Model.AllOrder[i].Customer.CustomerName</div>
-                            <div class="ci3"><b>￥@Model.AllOrder[i].TotalAmount</b><p>货到付款</p><p class="iphone">手机订单</p></div>
+                            <div class="ci3"><b>￥@Model.AllOrder[i].TotalAmount</b></div>
                             <div class="ci4"><p>@Model.AllOrder[i].DeliveryDate.ToShortDateString()</p></div>
                             <div class="ci5">
                             <p>
@@ -63,19 +63,22 @@
         
         <div class="clearfix" style="padding:30px 20px;">
             <div class="fr pc-search-g pc-search-gs">
-                <a style="display:none" class="fl " href="#">上一页</a>
-                <a href="#" class="current">1</a>
-                <a href="javascript:;">2</a>
-                <a href="javascript:;">3</a>
-                <a href="javascript:;">4</a>
-                <a href="javascript:;">5</a>
-                <a href="javascript:;">6</a>
-                <a href="javascript:;">7</a>
-                <span class="pc-search-di">…</span>
-                <a href="javascript:;">1088</a>
-                <a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>
+                @foreach (var pageNum in Model.pageBar)
+            {
+                if (pageNum == Model.PageIndex)
+                {
+                        @Html.ActionLink(pageNum.ToString(), "ReturnList", "Order", new { @class = "current", indexNum = pageNum });
+                }
+                else if (pageNum == 0)
+                {
+                        <span class="pc-search-di">…</span>
+                    }
+                    else
+                    {
+                        @Html.ActionLink(pageNum.ToString(), "ReturnList", "Order", new { indexNum = pageNum }, new { Target = "_self" });
+                }
+            }
             </div>
         </div>
-
     </div>
 </div>

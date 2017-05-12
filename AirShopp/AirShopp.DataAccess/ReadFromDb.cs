@@ -179,5 +179,13 @@ namespace AirShopp.DataAccess
                 return _context.Provider;
             }
         }
+
+        public IQueryable<Return> Returns
+        {
+            get
+            {
+                return _context.Return;
+            }
+        }
     }
 }

@@ -97,7 +97,7 @@
     <div class="member-border">
         <div class="member-newly">
             <b>新增收货地址</b>
-            您已经创建了<i class="reds">@Model.AddressList.Count()</i>个收货地址了，最多可创建<i class="reds">20</i>个
+            您已经创建了<i class="reds">@Model.AddressList.Count()</i>个收货地址了，最多可创建<i class="reds">10</i>个
         </div>
         <div style="border-bottom:1px solid #e0e0e0;padding:10px 0;">
             @using (Html.BeginForm("AddAddress", "Address", FormMethod.Post, new { @id = "form" }))
@@ -185,26 +185,6 @@
                     </li>
                 }
             </ul>
-        </div>
-        <div class="member-pages clearfix">
-            <div class="fr pc-search-g">
-                <a href="#" class="fl pc-search-f">上一页</a>
-                <a class="current" href="#">1</a>
-                <a href="javascript:;">2</a>
-                <a href="javascript:;">3</a>
-                <a href="javascript:;">4</a>
-                <a href="javascript:;">5</a>
-                <a href="javascript:;">6</a>
-                <a href="javascript:;">7</a>
-                <span class="pc-search-di">…</span>
-                <a onClick="SEARCH.page(3, true)" href="javascript:;" class="pc-search-n" title="使用方向键右键也可翻到下一页哦！">下一页</a>
-                <span class="pc-search-y">
-                    <em>  共20页    到第</em>
-                    <input type="text" placeholder="1" class="pc-search-j">
-                    <em>页</em>
-                    <a class="confirm" href="#">确定</a>
-                </span>
-            </div>
         </div>
     </div>
 </div>

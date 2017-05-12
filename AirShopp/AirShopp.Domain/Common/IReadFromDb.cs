@@ -19,6 +19,7 @@ namespace AirShopp.Domain
         IQueryable<Comment> Comments { get; }
         IQueryable<Order> Orders { get; }
         IQueryable<OrderItem> OrderItems { get; }
+        IQueryable<Return> Returns { get; }
         IQueryable<CartItem> CartItems { get; }
         IQueryable<Address> Address { get; }
         IQueryable<Customer> Customers { get; }

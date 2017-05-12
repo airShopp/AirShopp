@@ -52,6 +52,26 @@
         </div>
     </div>
     }
+    <div class="clearfix" style="padding:30px 20px;">
+        <div class="fr pc-search-g pc-search-gs">
+            @foreach (var pageNum in Model.pageBar)
+            {
+                if (pageNum == Model.PageIndex)
+                {
+                    @Html.ActionLink(pageNum.ToString(), "GetReturnRequest", "Order", new { @class = "current", indexNum = pageNum });
+                }
+                else if (pageNum == 0)
+                {
+                    <span class="pc-search-di">…</span>
+                }
+                else
+                {
+                    @Html.ActionLink(pageNum.ToString(), "GetReturnRequest", "Order", new { indexNum = pageNum }, new { Target = "_self" });
+                }
+            }
+        </div>
+    </div>
+
 </div>
 
 
