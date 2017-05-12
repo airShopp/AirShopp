@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace AirShopp.UI.Controllers
 {
-    public class DeliveryController : Controller
+    public class DeliveryController : FliterController
     {
         private IDeliveryOrderRepository _deliveryOrderRepository;
         private IOrderRepository _orderRepository;
@@ -42,17 +42,15 @@ namespace AirShopp.UI.Controllers
             _readFromDb = readFromDb;
         }
 
-        public ActionResult DeliveryOrderList(string deliveryOrderNum, int? indexNum = 1, int? pageSize = 6)
+        public ActionResult DeliveryOrderList(string num, int? indexNum = 1, int? pageSize = 6)
         {
-
-            if (deliveryOrderNum == null)
+            if (num == null)
             {
-                deliveryOrderNum = string.Empty;
+                num = string.Empty;
             }
-
             var deliveryOrderDataModelList = (from c in _readFromDb.DeliveryOrders
                                               join o in _readFromDb.Orders on c.OrderId equals o.Id
-                                              where c.DeliveryOrderNumber.Contains(deliveryOrderNum)
+                                              where c.DeliveryOrderNumber.Contains(num)
                                               select new DeliveryOrderDataModel()
                                               {
                                                   Id = c.Id,
@@ -60,7 +58,7 @@ namespace AirShopp.UI.Controllers
                                                   TotalAmount = c.TotalRMBInNumberic,
                                                   DeliveryOrderNumber = c.DeliveryOrderNumber,
                                                   DeliveryDate = c.DeliveryDate.ToString()
-                                              }).OrderBy(x => x.DeliveryOrderNumber).ToPagedList(indexNum, pageSize); ;
+                                              }).OrderBy(x => x.DeliveryOrderNumber).ToPagedList(indexNum, pageSize);
 
             var list = deliveryOrderDataModelList.ToList();
             list.ForEach(x => x.DeliveryDate = (DateTime.Parse(x.DeliveryDate)).ToShortDateString());
@@ -71,7 +69,8 @@ namespace AirShopp.UI.Controllers
                 PageIndex = deliveryOrderDataModelList.PageIndex,
                 TotalCount = deliveryOrderDataModelList.TotalCount,
                 TotalPage = deliveryOrderDataModelList.TotalPage,
-                pageBar = deliveryOrderDataModelList.getPageBar()
+                pageBar = deliveryOrderDataModelList.getPageBar(),
+                searchDeliveryOrderNum = num
             });
         }
 
@@ -98,11 +97,16 @@ namespace AirShopp.UI.Controllers
             return View(deliveryOrderDetail);
         }
 
-        public ActionResult DeliveryNoteList(int? indexNum = 1, int? pageSize = 4)
+        public ActionResult DeliveryNoteList(string num, int? indexNum = 1, int? pageSize = 4)
         {
+            if (num == null)
+            {
+                num = string.Empty;
+            }
 
             var deliveryNoteDataModelList = (from c in _readFromDb.DeliveryNotes
                                              join o in _readFromDb.Orders on c.OrderId equals o.Id
+                                             where c.DeliveryNoteNumber.Contains(num)
                                              select new DeliveryNoteDataModel()
                                              {
                                                  Id = c.Id,
@@ -122,16 +126,38 @@ namespace AirShopp.UI.Controllers
                 PageIndex = deliveryNoteDataModelList.PageIndex,
                 TotalCount = deliveryNoteDataModelList.TotalCount,
                 TotalPage = deliveryNoteDataModelList.TotalPage,
-                pageBar = deliveryNoteDataModelList.getPageBar()
+                pageBar = deliveryNoteDataModelList.getPageBar(),
+                searchDeliveryNoteNum = num
             });
         }
 
-        public ActionResult DeliveryStationList(int? indexNum = 1, int? pageSize = 10)
+        public ActionResult DeliveryStationList(string provinceName, string cityName, string areaName, string deliveryStationName, int? indexNum = 1, int? pageSize = 10)
         {
+            if (provinceName == null)
+            {
+                provinceName = string.Empty;
+            }
+
+            if (cityName == null)
+            {
+                cityName = string.Empty;
+            }
+
+            if (areaName == null)
+            {
+                areaName = string.Empty;
+            }
+
+            if (deliveryStationName == null)
+            {
+                deliveryStationName = string.Empty;
+            }
             var deliveryStationViewModel = (from p in _readFromDb.Provinces
                                             join c in _readFromDb.Cities on p.ProvinceId equals c.ProvinceId
                                             join a in _readFromDb.Areas on c.CityId equals a.CityId
                                             join d in _readFromDb.DeliveryStations on a.Id equals d.AreaId
+                                            where p.ProvinceName.Contains(provinceName) && c.CityName.Contains(cityName) &&
+                                                a.AreaName.Contains(areaName) && d.Name.Contains(deliveryStationName)
                                             select new DeliveryStationViewModel
                                             {
                                                 Location = p.ProvinceName + c.CityName + a.AreaName,
@@ -162,7 +188,14 @@ namespace AirShopp.UI.Controllers
                 pageBar = deliveryStationViewModel.getPageBar(),
                 PageIndex = deliveryStationViewModel.PageIndex,
                 TotalCount = deliveryStationViewModel.TotalCount,
-                TotalPage = deliveryStationViewModel.TotalPage
+                TotalPage = deliveryStationViewModel.TotalPage,
+                stationSearchCondition = new StationSearchCondition()
+                {
+                    provinceName = provinceName,
+                    cityName = cityName,
+                    areaName = areaName,
+                    deliveryStationName = deliveryStationName
+                }
             });
         }
 

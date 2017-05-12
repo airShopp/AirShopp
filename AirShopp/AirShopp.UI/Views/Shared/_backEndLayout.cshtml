@@ -35,6 +35,24 @@
         function addDeliveryStation(){
             $("#form").submit();
         }
+    $(function () {
+        $(".search").click(function (event) {
+            event.preventDefault();
+            var str = $(this).attr("href");
+            if ($("#num").val() == "") {
+                location.href = str;
+                return;
+            }
+            if (str.indexOf('?')!= -1) {
+                str += "&";
+            }
+            else {
+                str += "?";
+            }
+            str += "num=" + $("#num").val();
+            location.href = str;
+        });
+    })
     </script>
 </head>
 <body>

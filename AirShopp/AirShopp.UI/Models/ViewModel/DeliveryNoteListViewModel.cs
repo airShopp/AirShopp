@@ -9,6 +9,7 @@ namespace AirShopp.UI.Models.ViewModel
     public class DeliveryNoteListViewModel: PageListBaseModel
     {
         public List<DeliveryNoteDataModel> DelvieryNoteDataModelList { get; set; }
+        public string searchDeliveryNoteNum { get; set; }
     }
 
     public class DeliveryNoteDataModel
