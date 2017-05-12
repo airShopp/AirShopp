@@ -7,8 +7,6 @@
 <div class="member-right fr">
     <div class="member-head">
         <div class="member-heels fl"><h2>退货申请</h2></div>
-        @*<div class="member-backs member-icons fr"><a href="#">搜索</a></div>
-        <div class="member-about fr"><input type="text" placeholder="商品名称/商品编号/订单编号"></div>*@
     </div>
     @for (int i = 0; i < Model.ReturnRequestViewModelList.Count(); i++)
     {
@@ -52,6 +50,26 @@
         </div>
     </div>
     }
+    <div class="clearfix" style="padding:30px 20px;">
+        <div class="fr pc-search-g pc-search-gs">
+            @foreach (var pageNum in Model.pageBar)
+            {
+                if (pageNum == Model.PageIndex)
+                {
+                    @Html.ActionLink(pageNum.ToString(), "GetReturnRequest", "Order", new { @class = "current", indexNum = pageNum });
+                }
+                else if (pageNum == 0)
+                {
+                    <span class="pc-search-di">…</span>
+                }
+                else
+                {
+                    @Html.ActionLink(pageNum.ToString(), "GetReturnRequest", "Order", new { indexNum = pageNum }, new { Target = "_self" });
+                }
+            }
+        </div>
+    </div>
+
 </div>
 
 

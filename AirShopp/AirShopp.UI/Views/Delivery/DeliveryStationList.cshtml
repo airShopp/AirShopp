@@ -38,6 +38,26 @@
                 }
             });
         });
+
+        var obj = @Html.Raw(Json.Encode(@Model.stationSearchCondition));
+
+        if (obj.provinceName != ""){
+            $("#selProvince option:contains('"+ obj.provinceName +"')").attr("selected", true);
+            $("#selProvince").trigger("change");
+        }
+
+        if (obj.cityName != ""){
+            $("#selCity option:contains('"+ obj.cityName +"')").attr("selected", true);
+            $("#selCity").trigger("change");
+        }
+
+        if (obj.areaName != ""){
+            $("#selDistrict option:contains('"+ obj.areaName +"')").attr("selected", true);
+        }
+
+        if (obj.deliveryStationName !=""){
+            $("input[name='deliveryStationName']").val(obj.deliveryStationName);
+        }
     });
 </script>
 <!-- 商城快讯 begin -->
@@ -116,8 +136,8 @@
     </div>
     <div class="member-border">
         <div class="member-newly">
-            <div class="member-backs member-icons fr" style="padding-top:4px;"><a href="javascript:void(0)">搜索</a></div>
-            <div class="member-about fr"><input type="text" placeholder="派送点名称" style="border:1px solid #e0e0e0;"></div>
+            <div class="member-backs member-icons fr" style="padding-top:4px;"><a href="@Url.Action("DeliveryStationList", "Delivery")" class="searchStation">搜索</a></div>
+            <div class="member-about fr"><input type="text" placeholder="派送点名称" style="border:1px solid #e0e0e0;" name="deliveryStationName" /></div>
             <div class="member-about fr">
                 <select id="selDistrict" name="AreaId">
                     <option value="0">--请选择区/县--</option>
@@ -163,23 +183,62 @@
         </div>
         <div class="clearfix" style="padding:30px 20px;">
             <div class="fr pc-search-g pc-search-gs">
-               @foreach (var pageNum in Model.pageBar)
-               {
-                   if (pageNum == Model.PageIndex)
-                   {
-                    @Html.ActionLink(pageNum.ToString(), "DeliveryStationList", "Delivery", new { @class = "current", indexNum = pageNum });
-                   }
-                   else if (pageNum == 0)
-                   {
-                    <span class="pc-search-di">…</span>
-                   }
-                   else
-                   {
-                    @Html.ActionLink(pageNum.ToString(), "DeliveryStationList", "Delivery", new { indexNum = pageNum }, new { Target = "_self" });
-                   }
-               }
+                @foreach (var pageNum in Model.pageBar)
+                {
+                    if (pageNum == Model.PageIndex)
+                    {
+                        <a class="searchStation current" href="javascript:void(0)">@pageNum.ToString()</a>
+                    }
+                    else if (pageNum == 0)
+                    {
+                        <span class="pc-search-di">…</span>
+                    }
+                    else
+                    {
+                        <a class="searchStation" href="/Delivery/DeliveryStationList?indexNum=@pageNum">@pageNum.ToString()</a>
+                    }
+                }
             </div>
         </div>
     </div>
 </div>
 <!-- 商城快讯 End -->
+<script>
+    $(".searchStation").click(function(event){
+        event.preventDefault();
+        var str = $(this).attr("href");
+        var deliveryStationName = $("input[name='deliveryStationName']").val();
+        var provinceName = $("#selProvince").val();
+        var cityName = $("#selCity").val();
+        var areaName = $("#selDistrict").val();
+
+        if (deliveryStationName != "") {
+            str = padLetter(str) 
+            str += "deliveryStationName=" + deliveryStationName;
+        }
+        if (provinceName != 0){
+            str = padLetter(str) 
+            str += "provinceName=" + $("#selProvince option:selected").text();
+        }
+        if (cityName != 0){
+            str = padLetter(str) 
+            str += "cityName=" + $("#selCity option:selected").text();
+        }
+        if (areaName != 0){
+            str = padLetter(str) 
+            str += "areaName=" + $("#selDistrict option:selected").text();
+        }
+
+        location.href = str;
+    });
+
+    function padLetter(str){
+        if (str.indexOf('?')!= -1) {
+            str += "&";
+        }
+        else {
+            str += "?";
+        }
+        return str;
+    }
+</script>

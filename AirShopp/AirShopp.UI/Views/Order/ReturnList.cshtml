@@ -1,17 +1,42 @@
-﻿@model AirShopp.UI.Models.ViewModel.OrderViewModel
+﻿@model AirShopp.UI.Models.ViewModel.AllStatusViewModel
 @{
     ViewBag.Title = "ReturnList";
     Layout = "~/Views/Shared/_orderPageLayout.cshtml";
 
 }
+<script>
+    $(function () {
+        $(".member-circle").each(function (i) {
+            $(this).css("height", $(this).children("div.ci1").css("height"));
+        });
+    });
+</script>
+<style>
+    .member-circle .amanda1 {
+        height: 100%;
+        padding-top: 0;
+        position: relative;
+        background: none;
+    }
+
+    .amanda1 div {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+    .member-circle .ci5 {
+        line-height: 25px;
+    }
+</style>
 <div class="member-right fr">
     <div class="member-head">
         <div class="member-heels fl"><h2>退货/退款记录</h2></div>
     </div>
     <div class="member-switch clearfix">
         <ul id="H-table" class="H-table">
-           @* <li class="cur">@Html.ActionLink("退货/退款记录", "ReturnHistory", new { Controller = "Order", customerId = (Session["customer"] as AirShopp.Domain.Customer).Id })<em>(44)</em></li>*@
-            @*<li>退货/退款记录<em>(@Model.AllOrder.Count())</em></li>*@
+
         </ul>
     </div>
     <div class="member-border">
@@ -40,20 +65,23 @@
                                 var orderItems = @Model.AllOrder[i].OrderItems.ToList();
                                 AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
                                 <div class="ci7 clearfix">
-                                    <span class="gr1"><a href="#"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
-                                    <span class="gr2"><a href="#">@orderItem.Product.ProductName</a></span>
+                                    <span class="gr1"><a href="/Product/getProduct?productId=@orderItem.Product.Id"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
+                                    <span class="gr2" style="width:260px"><a href="/Product/getProduct?productId=@orderItem.Product.Id">@orderItem.Product.ProductName</a></span>
                                     <span class="gr3">X @orderItem.Quantity</span>
                                 </div>
                             }
                             </div>
-                            <div class="ci2">@Model.AllOrder[i].Customer.CustomerName</div>
-                            <div class="ci3"><b>￥@Model.AllOrder[i].TotalAmount</b><p>货到付款</p><p class="iphone">手机订单</p></div>
-                            <div class="ci4"><p>@Model.AllOrder[i].DeliveryDate.ToShortDateString()</p></div>
-                            <div class="ci5">
-                            <p>
-                                交易关闭
-                            </p> 
-                            <p>@Html.ActionLink("订单详情", "OrderDetail", "Order")</p></div>
+                            <div class="ci2 amanda1"><div>@Model.AllOrder[i].Customer.CustomerName</div></div>
+                            <div class="ci3 amanda1"><div><b>￥@Model.AllOrder[i].TotalAmount</b></div></div>
+                            <div class="ci4 amanda1"><div><p>@Model.AllOrder[i].DeliveryDate.ToShortDateString()</p></div></div>
+                            <div class="ci5 amanda1">
+                                <div>
+                                    <p>
+                                        交易关闭
+                                    </p>
+                                    <p>@Html.ActionLink("订单详情", "OrderDetail", "Order")</p>
+                                </div>
+                            </div>
                         </div>
                     </li>
                     }
@@ -63,19 +91,22 @@
         
         <div class="clearfix" style="padding:30px 20px;">
             <div class="fr pc-search-g pc-search-gs">
-                <a style="display:none" class="fl " href="#">上一页</a>
-                <a href="#" class="current">1</a>
-                <a href="javascript:;">2</a>
-                <a href="javascript:;">3</a>
-                <a href="javascript:;">4</a>
-                <a href="javascript:;">5</a>
-                <a href="javascript:;">6</a>
-                <a href="javascript:;">7</a>
-                <span class="pc-search-di">…</span>
-                <a href="javascript:;">1088</a>
-                <a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>
+                @foreach (var pageNum in Model.pageBar)
+            {
+                if (pageNum == Model.PageIndex)
+                {
+                        @Html.ActionLink(pageNum.ToString(), "ReturnList", "Order", new { @class = "current", indexNum = pageNum });
+                }
+                else if (pageNum == 0)
+                {
+                        <span class="pc-search-di">…</span>
+                    }
+                    else
+                    {
+                        @Html.ActionLink(pageNum.ToString(), "ReturnList", "Order", new { indexNum = pageNum }, new { Target = "_self" });
+                }
+            }
             </div>
         </div>
-
     </div>
 </div>

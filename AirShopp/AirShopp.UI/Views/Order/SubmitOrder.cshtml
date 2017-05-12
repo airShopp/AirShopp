@@ -4,6 +4,8 @@
     Layout = null;
     @Scripts.Render("~/bundles/AirShopp/js")
     @Styles.Render("~/bundles/AirShopp/Layout")
+    var user = Session["CUSTOMER"] as AirShopp.Domain.Customer;
+
 }
 <!doctype html>
 <html>
@@ -74,33 +76,42 @@
         <div class="BHeader">
             <div class="yNavIndex">
                 <ul class="BHeaderl">
-                    <li><a href="#">登录</a> </li>
+                    @if (Session["CUSTOMER"] != null)
+                    {
+                        //var user = Session["CUSTOMER"] as AirShopp.Domain.Customer;
+                        <li>@Html.ActionLink(@user.CustomerName, "UserInfo", "User")</li>
+                        <li>@Html.ActionLink("退出", "Logout", "User")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("您好，请登录", "Login", "User", null, new { style = "color:#ea4949" })</li>
+                        <li class="headerul">|</li>
+                        <li>@Html.ActionLink("免费注册", "Register", "User")</li>
+                    }
                     <li class="headerul">|</li>
-                    <li>@Html.ActionLink("我的订单", "Index", "Order")</li>
-                    <li class="headerul">|</li>
-                    <li><a href="#">我的收藏</a> </li>
+                    <li>
+                        @Html.ActionLink("订单查询", "Index", "Order")
                     <li class="headerul">|</li>
                     <li id="pc-nav" class="menu">
-                        <a href="#" class="tit">我的商城</a>
+                        <a href="javascript:void(0)" class="tit">我的商城</a>
                         <div class="subnav">
-                            <a href="#">我的山城</a>
-                            <a href="#">我的山城</a>
-                            <a href="#">我的山城</a>
+                            @Html.ActionLink("我的订单", "Index", "Order")
+                            <a href="/User/UserInfo">账户安全</a>
+                            @Html.ActionLink("地址管理", "GetAddress", "Address")
+                            <a href="/Comment/Index">我的评价</a>
                         </div>
                     </li>
-                    <li class="headerul">|</li>
-                    <li><a href="#" class="M-iphone">手机悦商城</a> </li>
                 </ul>
             </div>
         </div>
         <div class="container clearfix">
-            <div class="header-logo fl" style="width:212px;"><h1><a href="#"><img src="~/Content/icon/AirShoppLogo.png"></a></h1></div>
+            <div class="header-logo fl" style="width:212px;"><h1><a href="@Url.Action("Index", "Home")"><img src="~/Content/icon/AirShoppLogo.png"></a></h1></div>
             <div class="pc-order-titlei fl"><h2>填写订单</h2></div>
             <div class="pc-step-title fl">
                 <ul>
-                    <li class="cur2"><a href="#">1 . 我的购物车</a></li>
-                    <li class="cur2"><a href="#">2 . 填写核对订单</a></li>
-                    <li class="cur"><a href="#">3 . 成功提交订单</a></li>
+                    <li class="cur2"><a href="javascript:void(0)">1 . 我的购物车</a></li>
+                    <li class="cur2"><a href="javascript:void(0)">2 . 填写核对订单</a></li>
+                    <li class="cur"><a href="javascript:void(0)">3 . 成功提交订单</a></li>
                 </ul>
             </div>
         </div>
@@ -118,15 +129,18 @@
                 </div>
                 <div class="pc-line"></div>
                 <div class="pc-order-text">
-                    <p>商品名称: 
-                    @for (int i = 0; i < Model.OrderItems.Count(); i++) {
-                        var orderItems = @Model.OrderItems.ToList();
-                        AirShopp.Domain.OrderItem orderItem = orderItems[i] as AirShopp.Domain.OrderItem;
-                        <label>@orderItem.Product.ProductName</label>
-                        if (i < Model.OrderItems.Count() - 1)
-                        { <label>,</label>}
+                    <p>
+                        商品名称:
+                        @for (int i = 0; i < Model.OrderItems.Count(); i++)
+                        {
+                            var orderItems = @Model.OrderItems.ToList();
+                            AirShopp.Domain.OrderItem orderItem = orderItems[i] as AirShopp.Domain.OrderItem;
+                            <label>@orderItem.Product.ProductName</label>
+                            if (i < Model.OrderItems.Count() - 1)
+                            { <label>,</label>}
 
-                    }</p>
+                        }
+                    </p>
                     <p>收货地址：@Model.Address.DeliveryAddress 收货人：@Model.Address.ReceiverName @Model.Address.ReceiverPhone</p>
                 </div>
             </div>
@@ -139,9 +153,9 @@
             <div class="time-title">
                 <span class="pc-order-price">总价：￥@Model.TotalAmount</span>
             </div>
-                <div class="pc-order-go" style="float:right"><a href="/Order/Topayment?orderId=@Model.Id">去支付</a></div>
-            </div>
+            <div class="pc-order-go" style="float:right"><a href="/Order/Topayment?orderId=@Model.Id">去支付</a></div>
         </div>
+    </div>
     </div>
 
     <!--- footer begin-->

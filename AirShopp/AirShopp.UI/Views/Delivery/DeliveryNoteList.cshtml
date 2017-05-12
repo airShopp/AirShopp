@@ -112,8 +112,8 @@
 <div class="member-right fr">
     <div class="member-head">
         <div class="member-heels fl"><h2>派送单</h2></div>
-        <div class="member-backs member-icons fr"><a href="javascript:void(0)">搜索</a></div>
-        <div class="member-about fr"><input type="text" placeholder="派送单编号"></div>
+        <div class="member-backs member-icons fr"><a href="@Url.Action("DeliveryNoteList", "Delivery")" class="search">搜索</a></div>
+        <div class="member-about fr"><input type="text" placeholder="派送单编号" id="num" value="@Model.searchDeliveryNoteNum"></div>
     </div>
     <div class="member-border">
         <div class="member-return H-over">
@@ -169,7 +169,7 @@
                 {
                     if (pageNum == Model.PageIndex)
                     {
-                        @Html.ActionLink(pageNum.ToString(), "DeliveryNoteList", "Delivery", new { @class = "current", indexNum = pageNum });
+                        <a class="search current" href="javascript:void(0)">@pageNum.ToString()</a>
                     }
                     else if (pageNum == 0)
                     {
@@ -177,7 +177,7 @@
                     }
                     else
                     {
-                        @Html.ActionLink(pageNum.ToString(), "DeliveryNoteList", "Delivery", new { indexNum = pageNum }, new { Target = "_self" });
+                        <a class="search" href="/Delivery/DeliveryNoteList?indexNum=@pageNum">@pageNum.ToString()</a>
                     }
                 }
             </div>

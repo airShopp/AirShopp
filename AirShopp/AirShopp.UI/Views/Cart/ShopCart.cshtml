@@ -52,8 +52,8 @@
                 </tr>
             </table>
         </div>
-        <div class="page" style="padding:0 0 5px 0;">
-            <div class="pagination">
+        <div class="page" style="padding:0 0 5px 0;width:100%;margin:0">
+            <div class="pagination" style="margin:0 auto;">
                 @foreach (var pageNum in Model.pageBar)
                 {
                     if (pageNum == Model.PageIndex)
@@ -84,4 +84,11 @@
         var totalAmount = $("#total").html();
         window.location.href = "/Order/CheckOrder?cartItemStr=" + cartItemStr + "&totalAmount=" + totalAmount ;
     }
+    $(function () {
+        var width = 0;
+        $(".pagination").children().each(function () {
+            width += $(this).outerWidth();
+        });
+        $(".pagination").width(width+ ($(".pagination").children().length * 2) + 2);
+    });
 </script>

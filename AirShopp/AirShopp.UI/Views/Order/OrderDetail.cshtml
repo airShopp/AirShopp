@@ -42,7 +42,7 @@
                     AirShopp.Domain.OrderItem orderItem = orderItems[i] as AirShopp.Domain.OrderItem;
                     <li class="clearfix">
                         <div class="No1">@orderItem.Product.Id</div>
-                        <div class="No2"><a href="#">@orderItem.Product.ProductName</a> </div>
+                        <div class="No2"><a href="/Product/getProduct?productId=@orderItem.Product.Id">@orderItem.Product.ProductName</a> </div>
                         <div class="No3">@orderItem.Quantity</div>
                         <div class="No4">@orderItem.UnitPrice</div>
                         <div class="No5">@orderItem.DiscountPrice</div>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AirShopp.Common.Page;
 
 namespace AirShopp.UI.Controllers
 {
@@ -22,18 +23,36 @@ namespace AirShopp.UI.Controllers
             _readFromDb = readFromDb;
         }
         // GET: Comment
-        public ActionResult Index(long? orderId)
+        public ActionResult Index(long? orderId, int? indexNum = 1, int? pageSize = 2)
         {
             Customer customer = Session[Constants.SESSION_USER] as Customer;
             List<Comment> comments = _commentRepository.GetAllComment(customer.Id);
+
+            var commentDataModellList = (from c in _readFromDb.Comments
+                                              where c.Order.CustomerId == customer.Id
+                                              select new CommentDataModel()
+                                              {
+                                                  ProductId = c.ProductId,
+                                                  ProductName = c.Product.ProductName,
+                                                  CommentDate = c.CommentDate,
+                                                  Comments = c.Comments,
+                                                  ProductUrl = c.Product.Url
+                                              }).OrderByDescending(x => x.CommentDate).ToPagedList(indexNum, pageSize);
+            var commentList = commentDataModellList.ToList();
+
             CommentViewModel commentViewModel = new CommentViewModel();
-            commentViewModel.CommentList = comments;
+            commentViewModel.CommentList = commentList;
             OrderItem OrderItem = _readFromDb.OrderItems.Where(x => x.Id == orderId).FirstOrDefault();
             commentViewModel.OrderItem = OrderItem;
             if (OrderItem != null)
             {
                 commentViewModel.OrderDate = _readFromDb.Orders.Where(x => x.Id == OrderItem.OrderId).First().OrderDate;
             }
+
+            commentViewModel.pageBar = commentDataModellList.getPageBar();
+            commentViewModel.TotalCount = commentDataModellList.TotalCount;
+            commentViewModel.TotalPage = commentDataModellList.TotalPage;
+            commentViewModel.PageIndex = commentDataModellList.PageIndex;
             return View("AddComment", commentViewModel);
         }
 

@@ -24,8 +24,8 @@
             <ul>
                 <li class="clearfix">
                     <div class="sp1">
-                        <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="@Model.OrderItem.Product.Url"></a></span>
-                        <span class="gr2"><a href="#">@Model.OrderItem.Product.ProductName</a></span>
+                        <span class="gr1"><a href="/Product/getProduct?productId=@Model.OrderItem.Product.Id"><img width="60" height="60" about="" title="" src="@Model.OrderItem.Product.Url"></a></span>
+                        <span class="gr2"><a href="/Product/getProduct?productId=@Model.OrderItem.Product.Id">@Model.OrderItem.Product.ProductName</a></span>
                         <span class="gr3">X @Model.OrderItem.Quantity</span>
                     </div>
                     <div class="sp2">@Model.OrderDate</div>
@@ -41,17 +41,6 @@
                         <textarea maxlength="200" name="commentStr"></textarea>
                     </div>
                 </li>
-                @*<li class="clearfix">
-                    <div class="member-score fl">晒单：</div>
-                    <div class="member-star fl">
-                        <a href="#"><img src="~/Content/img/pd/m2.png"></a>
-                        <a href="#"><img src="~/Content/img/pd/m2.png"></a>
-                        <a href="#"><img src="~/Content/img/pd/m2.png"></a>
-                    </div>
-                </li>
-                <li class="clearfix">
-                    <div style="padding-left:85px;">最多可以增加<i class="reds">3</i>张</div>
-                </li>*@
             </ul>
         </div>
         }
@@ -62,34 +51,32 @@
                 {
                     <li class="clearfix">
                         <div class="sp1">
-                            <span class="gr1"><a href="#"><img width="60" height="60" about="" title="" src="@Model.CommentList[i].Product.Url"></a></span>
-                            <span class="gr2"><a href="#">@Model.CommentList[i].Product.ProductName</a></span>
-                            @*<span class="gr3">X @Model.CommentList[i].</span>*@
+                            <span class="gr1"><a href="/Product/getProduct?productId=@Model.CommentList[i].ProductId"><img width="60" height="60" about="" title="" src="@Model.CommentList[i].ProductUrl"></a></span>
+                            <span class="gr2"><a href="/Product/getProduct?productId=@Model.CommentList[i].ProductId">@Model.CommentList[i].ProductName</a></span>
                         </div>
                         <div class="sp2">@Model.CommentList[i].CommentDate</div>
-                        <div class="sp3"><label>@Model.CommentList[i].Comments</label></div>
+                        <div class="sp3" style="position:relative"><div style="position:absolute;left: 50%;top: 50%; transform: translate(-50%,-50%);"><label>@Model.CommentList[i].Comments</label></div></div>
                     </li>
                 }
             </ul>
         </div>
-        <div class="member-pages clearfix">
-            <div class="fr pc-search-g">
-                <a class="fl pc-search-f" href="#">上一页</a>
-                <a href="#" class="current">1</a>
-                <a href="javascript:;">2</a>
-                <a href="javascript:;">3</a>
-                <a href="javascript:;">4</a>
-                <a href="javascript:;">5</a>
-                <a href="javascript:;">6</a>
-                <a href="javascript:;">7</a>
-                <span class="pc-search-di">…</span>
-                <a title="使用方向键右键也可翻到下一页哦！" class="pc-search-n" href="javascript:;" onClick="SEARCH.page(3, true)">下一页</a>
-                <span class="pc-search-y">
-                    <em>  共20页    到第</em>
-                    <input type="text" class="pc-search-j" placeholder="1">
-                    <em>页</em>
-                    <a href="#" class="confirm">确定</a>
-                </span>
+        <div class="clearfix" style="padding:30px 20px;">
+            <div class="fr pc-search-g pc-search-gs">
+                @foreach (var pageNum in Model.pageBar)
+            {
+                if (pageNum == Model.PageIndex)
+                {
+                        @Html.ActionLink(pageNum.ToString(), "Index", "Comment", new { @class = "current", indexNum = pageNum });
+                }
+                else if (pageNum == 0)
+                {
+                        <span class="pc-search-di">…</span>
+                    }
+                    else
+                    {
+                        @Html.ActionLink(pageNum.ToString(), "Index", "Comment", new { indexNum = pageNum }, new { Target = "_self" });
+                }
+            }
             </div>
         </div>
     </div>

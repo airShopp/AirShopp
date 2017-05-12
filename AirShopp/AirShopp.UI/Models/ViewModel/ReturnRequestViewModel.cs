@@ -8,7 +8,7 @@ namespace AirShopp.UI.Models.ViewModel
 {
     public class ReturnRequestViewModel
     {
-        public Return ReturnOrder { get; set; }
+        public ReturnRequestDataModel ReturnOrder { get; set; }
         public Order Ordrer { get; set; }
         public OrderItem OrderItem{ get; set; }
         public Customer Customer { get; set; }

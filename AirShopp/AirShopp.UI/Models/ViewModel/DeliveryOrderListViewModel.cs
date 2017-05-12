@@ -9,6 +9,7 @@ namespace AirShopp.UI.Models.ViewModel
     public class DeliveryOrderListViewModel : PageListBaseModel
     {
         public List<DeliveryOrderDataModel> DeliveryOrderDataModelList { get; set; }
+        public string searchDeliveryOrderNum { get; set; }
     }
 
     public class DeliveryOrderDataModel
