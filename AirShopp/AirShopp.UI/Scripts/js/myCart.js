@@ -82,7 +82,17 @@ function selectSingle(){
 
 /*删除单行商品*/
 function deleteRow(rowId){
-  c
+    $.ajax({
+        type: "Get",
+        url: "/Cart/DeleteCarts",
+        data: {
+            "CartIdStr": rowId
+        },
+        success: function (result) {
+            productCount();
+            location.reload();
+        }
+    });
     }
 
 /*删除选中行的商品*/
