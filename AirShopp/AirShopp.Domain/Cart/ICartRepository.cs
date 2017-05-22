@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AirShopp.Domain
+﻿namespace AirShopp.Domain
 {
     public interface ICartRepository
     {
         long AddCart(Cart cart);
+        void DeleteCartProduct(long cartId);
     }
 }
