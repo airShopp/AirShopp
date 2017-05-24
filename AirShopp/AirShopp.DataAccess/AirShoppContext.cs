@@ -52,6 +52,7 @@ namespace AirShopp.DataAccess
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
             modelBuilder.Configurations.Add(new CustomerMapping());
             modelBuilder.Configurations.Add(new AddressMapping());

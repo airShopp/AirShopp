@@ -193,10 +193,12 @@
     <Compile Include="Models\Common\PageListBaseModel.cs" />
     <Compile Include="Models\CustomerCommentDataModel.cs" />
     <Compile Include="Models\Enum\OrderStatusEnumType.cs" />
+    <Compile Include="Models\InventoryProductDataModel.cs" />
     <Compile Include="Models\InventoryProductListDataModel.cs" />
     <Compile Include="Models\LocationDataModel.cs" />
     <Compile Include="Models\ProductDataModel.cs" />
     <Compile Include="Models\ProductOutDataModel.cs" />
+    <Compile Include="Models\request\ModifyProductRequestModel.cs" />
     <Compile Include="Models\request\ProductRequestModel.cs" />
     <Compile Include="Models\ShopCartDataModel.cs" />
     <Compile Include="Models\ViewModel\AddressListViewModel.cs" />
@@ -206,6 +208,7 @@
     <Compile Include="Models\ViewModel\DeliveryOrderListViewModel.cs" />
     <Compile Include="Models\ViewModel\DeliveryStationListViewModel.cs" />
     <Compile Include="Models\ViewModel\InventoryProductListViewModel.cs" />
+    <Compile Include="Models\ViewModel\InventoryProductViewModel.cs" />
     <Compile Include="Models\ViewModel\OrderConfirmViewModel.cs" />
     <Compile Include="Models\ViewModel\ReturnManageListViewModel.cs" />
     <Compile Include="Models\ViewModel\ReturnRequestListViewModel.cs" />
@@ -336,6 +339,8 @@
     <Content Include="Content\img\cart\taobao_relation.jpg" />
     <Content Include="Content\img\cart\taobao_subtn.jpg" />
     <Content Include="Content\img\cart\说明.htm" />
+    <Content Include="Content\img\delete.png" />
+    <Content Include="Content\img\modify.png" />
     <Content Include="Content\img\pd\bar1.png" />
     <Content Include="Content\img\pd\bar2.png" />
     <Content Include="Content\img\pd\bar3.png" />
@@ -420,6 +425,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\checkcode.js" />
     <Content Include="Scripts\js\index.js" />
+    <Content Include="Scripts\js\Inventory.js" />
     <Content Include="Scripts\js\jcarousellite.js" />
     <Content Include="Scripts\js\jquery-3.1.1.min.js" />
     <Content Include="Scripts\js\jquery.easing.js" />

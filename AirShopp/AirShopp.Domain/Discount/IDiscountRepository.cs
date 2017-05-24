@@ -9,5 +9,6 @@ namespace AirShopp.Domain
     public interface IDiscountRepository
     {
         void AddProductDiscount(Discount discount);
+        void UpdateProductDiscount(long productId, decimal discounts);
     }
 }

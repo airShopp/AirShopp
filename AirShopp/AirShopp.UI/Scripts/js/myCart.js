@@ -102,26 +102,24 @@ function deleteSelectRow(){
     var IndexStr;
     for (var i = oInput.length - 1; i >= 0; i--) {
         var tdValue = oInput[i].value;
-       if(oInput[i].checked==true){
-           var Index = $("#p" + tdValue).parents("tr").index(); /*获取选中行的索引号*/
-           var yyyy = oInput[i].value;
-         //$("#shopping").find("tr:eq(" + Index + ")").remove();
-           //document.getElementById("shopping").deleteRow(Index-1);
-         if (CartIdStr == undefined)
-         {
-             CartIdStr = tdValue;
-         }
-         else
-         {
-             CartIdStr = CartIdStr + "," + oInput[i].value;
-         }
+        if (oInput[i].checked == true) {
+            var Index = $("#p" + tdValue).parents("tr").index(); /*获取选中行的索引号*/
+            var yyyy = oInput[i].value;
+            //$("#shopping").find("tr:eq(" + Index + ")").remove();
+            //document.getElementById("shopping").deleteRow(Index-1);
+            if (CartIdStr == undefined) {
+                CartIdStr = tdValue;
+            }
+            else {
+                CartIdStr = CartIdStr + "," + oInput[i].value;
+            }
 
-         if (IndexStr == undefined) {
-             IndexStr = Index;
-         }
-         else {
-             IndexStr = IndexStr + "," + Index;
-         }
+            if (IndexStr == undefined) {
+                IndexStr = Index;
+            }
+            else {
+                IndexStr = IndexStr + "," + Index;
+            }
         }
     }
     $.ajax({
@@ -135,5 +133,6 @@ function deleteSelectRow(){
             location.reload();
         }
     });
-    }
+}
+
 

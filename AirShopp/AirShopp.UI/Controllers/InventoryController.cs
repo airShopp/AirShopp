@@ -45,7 +45,8 @@ namespace AirShopp.UI.Controllers
             _inventoryRepository = inventoryRepository;
             _discountRepository = discountRepository;
         }
-        public ActionResult GetProductOutList(int? indexNum, int? pageSize = 8)
+
+        public ActionResult GetProductOutList(int? indexNum, int? pageSize = 6)
         {
             var productOutList = (from ia in _readFromDb.InventoryActions
                                   join i in _readFromDb.Inventories on ia.InventoryId equals i.Id
@@ -148,8 +149,8 @@ namespace AirShopp.UI.Controllers
                 EndTime = DateTime.UtcNow
             };
             _discountRepository.AddProductDiscount(discount);
-            InventoryProductListViewModel productViewModel = GetInventoryProducts(null,null);
-            return View("InventoryProductList", productViewModel);
+            //InventoryProductListViewModel productViewModel = GetInventoryProducts(null,null);
+            return RedirectToAction("getAllInventoryProduct","Inventory");
         }
 
         //Get Inventory Product View Data
@@ -217,6 +218,62 @@ namespace AirShopp.UI.Controllers
                                         ParentId = category.ParentId
                                     }).ToList();
             return secondCategories;
+        }
+
+        //Get InventoryProductDetail
+        [HttpGet]
+        public ActionResult GetInventoryProductDetail(long productId)
+        {
+            var inventoryProduct = (from d in _readFromDb.Discounts
+                                    join p in _readFromDb.Products on d.ProductId equals p.Id
+                                    where p.Id == productId
+                                    select new InventoryProductDataModel()
+                                    {
+                                        ProductId = p.Id,
+                                        ProductName = p.ProductName,
+                                        Price = p.Price,
+                                        ProductUrl = p.Url,
+                                        IsOnSale = p.IsOnSale,
+                                        Discounts = d.Discounts
+                                    });
+            InventoryProductViewModel productViewModel = new InventoryProductViewModel();
+            productViewModel.productDataModel = inventoryProduct.FirstOrDefault();
+            return Json(productViewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        //POST Update product
+        [HttpGet]
+        public ActionResult UpdateProduct(ModifyProductRequestModel product)
+        {
+            try
+            {
+                _discountRepository.UpdateProductDiscount(product.productId, product.discounts);
+                _productRepository.UpdateProductInfo(product.productId, product.productName, product.productUrl, product.isOnSale, product.price);
+                var msg = "更新成功";
+                return Json(msg, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                var msg = "更新失败";
+                return Json(msg, JsonRequestBehavior.AllowGet);
+                throw;
+            }
+        }
+
+        [HttpGet]
+        public ActionResult DeleteProdct(long productId)
+        {
+            try
+            {
+                _productRepository.DeleteProduct(productId);
+                return RedirectToAction("getAllInventoryProduct", "Inventory");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
     }
 }
