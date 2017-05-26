@@ -308,13 +308,33 @@ namespace AirShopp.UI.Controllers
         }
 
         //POST Update product
-        [HttpGet]
-        public ActionResult UpdateProduct(ModifyProductRequestModel product)
+        [HttpPost]
+        public ActionResult UpdateProduct(ModifyProductRequestModel product, HttpPostedFileBase image)
         {
+            if (image != null)
+            {
+                var path = Request.MapPath("~/Content/" + product.productId);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                var filePath = Path.Combine(path, Path.GetFileName(image.FileName));
+
+                try
+                {
+                    image.SaveAs(filePath);
+                }
+                catch
+                {
+                    throw new Exception();
+                }
+                string imgPath = filePath.Substring(path.IndexOf("\\Content"));
+                string RealPath = imgPath.Replace("\\", "/");
+            }
             try
             {
                 _discountRepository.UpdateProductDiscount(product.productId, product.discounts);
-                _productRepository.UpdateProductInfo(product.productId, product.productName, product.productUrl, product.isOnSale, product.price);
+                _productRepository.UpdateProductInfo(product.productId, product.productName, RealPath, product.isOnSale, product.price);
                 var msg = "更新成功";
                 return Json(msg, JsonRequestBehavior.AllowGet);
             }

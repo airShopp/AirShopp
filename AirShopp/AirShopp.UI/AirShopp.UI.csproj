@@ -431,6 +431,7 @@
     <Content Include="Scripts\js\jcarousellite.js" />
     <Content Include="Scripts\js\jquery-3.1.1.min.js" />
     <Content Include="Scripts\js\jquery.easing.js" />
+    <Content Include="Scripts\js\jquery.form.js" />
     <Content Include="Scripts\js\jquery.js" />
     <Content Include="Scripts\js\js-tab.js" />
     <Content Include="Scripts\js\LuShu.js" />

@@ -197,7 +197,7 @@
             <div class="hint22">修改商品</div>
             <div class="hint3333"></div>
         </div>
-  
+        @using(Html.BeginForm("UpdateProduct", "Inventory",FormMethod.Post,new { @id="FormSub", enctype = "multipart/form-data" })) {
         <dl class="clearfix" id="inventoryP" style="margin-top:25px;">
             <dt style="display:none;"><input type="hidden" name="product.productId" id="pId" /></dt>
             <dt>商品名：</dt>
@@ -207,16 +207,17 @@
             <dd><input type="text" name="product.price" id="price" style="margin-right:12px;height:25px;line-height:25px" />元</dd>
 
             <dt>选择图片：</dt>
-            <dd><input type="file" name="image" style="margin-left:60px;height:25px;line-height:25px" /></dd>
+            <dd><input type="file" name="image" id="pictureUrl" style="margin-left:60px;height:25px;line-height:25px" /></dd>
             
             <dt>折扣：</dt>
-            <dd><input id="discounts" type="text" name="discounts" style="margin-right:12px;height:25px;line-height:25px" />折</dd>
+            <dd><input id="discounts" type="text" name="product.discounts" style="margin-right:12px;height:25px;line-height:25px" />折</dd>
             
             <dt>是否上架：</dt>
             <dd><select name="product.isOnsale" id="IsOnSale" style="margin-left:60px;margin-top:10px; height:25px;line-height:25px"></select></dd>
            
              <dt><input type="button" value="提交修改" onclick="updateProduct()" style="width:60px;height:25px;margin-left:270px;cursor:pointer" /></dt>
         </dl>
+        }
     </div>
 </div>
 

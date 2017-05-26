@@ -120,7 +120,10 @@ namespace AirShopp.DataAccess
                     if (product != null)
                     {
                         product.ProductName = productName;
-                        product.Url = productUrl;
+                        if (productUrl != null)
+                        {
+                            product.Url = productUrl;
+                        }
                         product.IsOnSale = isOnSale;
                         product.Price = price;
                         _context.Entry(product).State = System.Data.Entity.EntityState.Modified;

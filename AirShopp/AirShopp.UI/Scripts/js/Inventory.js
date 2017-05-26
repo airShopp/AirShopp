@@ -66,25 +66,38 @@ function updateProduct()
     var price = $("#price").val();
     var discounts = $("#discounts").val();
     var isOnSale = $("#IsOnSale").val();
-    $.ajax({
-        type: "Get",
-        url: "/Inventory/UpdateProduct",
-        dataType:"Json",
-        data: {
-            "product.productId": productId,
-            "product.productName": productName,
-            "product.price": price,
-            "product.discounts": discounts,
-            "product.isOnSale":isOnSale
-        },
+    var image = $("#pictureUrl").val();
+
+    $("#FormSub").ajaxSubmit({
         success: function (result) {
             $("#msg").html(result);
             $("#flashBox").css({ "display": "block" });
             $("#flashBox").delay(1000).hide(0);
             $(".box111").css({ "display": "none" });
             $(".hint111").css({ "display": "none" });
+            location.reload();
         }
     });
+    //$.ajax({
+    //    type: "Get",
+    //    url: "/Inventory/UpdateProduct",
+    //    dataType:"Json",
+    //    data: {
+    //        "product.productId": productId,
+    //        "product.productName": productName,
+    //        "product.price": price,
+    //        "product.discounts": discounts,
+    //        "product.isOnSale": isOnSale,
+    //        "image": 
+    //    },
+    //    success: function (result) {
+    //        $("#msg").html(result);
+    //        $("#flashBox").css({ "display": "block" });
+    //        $("#flashBox").delay(1000).hide(0);
+    //        $(".box111").css({ "display": "none" });
+    //        $(".hint111").css({ "display": "none" });
+    //    }
+    //});
 }
 
 function deleteProduct(id)
