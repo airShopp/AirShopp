@@ -45,7 +45,7 @@ namespace AirShopp.UI.Controllers
             _inventoryRepository = inventoryRepository;
             _discountRepository = discountRepository;
         }
-
+        //Get product out factory
         public ActionResult GetProductOutList(int? indexNum, int? pageSize = 6)
         {
             var productOutList = (from ia in _readFromDb.InventoryActions
@@ -92,6 +92,47 @@ namespace AirShopp.UI.Controllers
 
             return View("ProductOut", outFactoryViewModel);
         }
+        //Get product in factory
+        public ActionResult GetProductInList(int? indexNum, int? pageSize)
+        {
+            var productInList = (from ia in _readFromDb.InventoryActions
+                                  join i in _readFromDb.Inventories on ia.InventoryId equals i.Id
+                                  join pif in _readFromDb.ProductInFactories on ia.ProductInFactoryId equals pif.Id
+                                  join p in _readFromDb.Products on i.ProductId equals p.Id
+                                  join w in _readFromDb.Warehouses on i.WarehouseId equals w.Id
+                                  select new ProductInDataModel()
+                                  {
+                                      Amount = pif.Amount,
+                                      Price = p.Price,
+                                      ProductId = p.Id,
+                                      ProductInDate = pif.InDate,
+                                      ProductName = p.ProductName,
+                                      warehouseName = w.Name,
+                                      ProductUrl = p.Url
+                                  }).OrderBy(x => x.ProductInDate).ToPagedList(indexNum, pageSize);
+            List<ProductInDataModel> productDataList = new List<ProductInDataModel>();
+            productInList.ForEach(x => {
+                productDataList.Add(new ProductInDataModel()
+                {
+                    ProductId = x.ProductId,
+                    ProductName = x.ProductName,
+                    warehouseName = x.warehouseName,
+                    ProductInDate = x.ProductInDate,
+                    Price = x.Price,
+                    Amount = x.Amount,
+                    ProductUrl = x.ProductUrl
+                });
+            });
+            ProductInViewModel productInViewModel = new ProductInViewModel()
+            {
+                ProductDataList = productDataList,
+                pageBar = productInList.getPageBar(),
+                PageIndex = productInList.PageIndex,
+                TotalCount = productInList.TotalCount,
+                TotalPage = productInList.TotalPage
+            };
+            return View("ProductIn", productInViewModel);
+        }
 
         public ActionResult getAllInventoryProduct(int? indexNum, int? pageSize = 6)
         {
@@ -133,13 +174,37 @@ namespace AirShopp.UI.Controllers
                 ProductName = product.productName
             };
             long productId = _productRepository.AddProduct(p);
+
+            //Add to ProductInFactory table
+            ProductInFactory productInFactory = new ProductInFactory()
+            {
+                Amount = product.productCount,
+                InDate = DateTime.UtcNow,
+                Price = Convert.ToString(p.Price),
+            };
+            long productInFactoryId = _inventoryRepository.AddProductInFactory(productInFactory);
+
+            //Add to Inventory table 
             Inventory inventory = new Inventory()
             {
                 Amount = product.productCount,
                 ProductId = productId,
                 WarehouseId = product.warehouse,
+
             };
             long inventoryId = _inventoryRepository.AddInventory(inventory);
+
+
+            //Add InventoryAction
+            InventoryAction inventoryAction = new InventoryAction()
+            {
+                InventoryId = inventoryId,
+                ProductInFactoryId = productInFactoryId
+            };
+            _inventoryRepository.AddInventoryAction(inventoryAction); 
+
+
+            //Add to Discount table
             Discount discount = new Discount()
             {
                 Discounts = Constants.DEFAULTDISCOUNT,
@@ -148,6 +213,7 @@ namespace AirShopp.UI.Controllers
                 StartTime = DateTime.UtcNow,
                 EndTime = DateTime.UtcNow
             };
+            
             _discountRepository.AddProductDiscount(discount);
             //InventoryProductListViewModel productViewModel = GetInventoryProducts(null,null);
             return RedirectToAction("getAllInventoryProduct","Inventory");

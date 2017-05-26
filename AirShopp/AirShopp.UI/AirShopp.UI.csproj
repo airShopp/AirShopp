@@ -197,6 +197,7 @@
     <Compile Include="Models\InventoryProductListDataModel.cs" />
     <Compile Include="Models\LocationDataModel.cs" />
     <Compile Include="Models\ProductDataModel.cs" />
+    <Compile Include="Models\ProductInDataModel.cs" />
     <Compile Include="Models\ProductOutDataModel.cs" />
     <Compile Include="Models\request\ModifyProductRequestModel.cs" />
     <Compile Include="Models\request\ProductRequestModel.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="Models\ViewModel\InventoryProductListViewModel.cs" />
     <Compile Include="Models\ViewModel\InventoryProductViewModel.cs" />
     <Compile Include="Models\ViewModel\OrderConfirmViewModel.cs" />
+    <Compile Include="Models\ViewModel\ProductInViewModel.cs" />
     <Compile Include="Models\ViewModel\ReturnManageListViewModel.cs" />
     <Compile Include="Models\ViewModel\ReturnRequestListViewModel.cs" />
     <Compile Include="Models\ViewModel\ReturnRequestViewModel.cs" />
@@ -482,6 +484,7 @@
     <Content Include="Views\Order\ReturnManage.cshtml" />
     <Content Include="Views\Inventory\ProductOut.cshtml" />
     <Content Include="Views\Inventory\InventoryProductList.cshtml" />
+    <Content Include="Views\Inventory\ProductIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_homePageLayout.cshtml" />

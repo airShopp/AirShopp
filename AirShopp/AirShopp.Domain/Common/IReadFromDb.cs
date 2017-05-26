@@ -31,5 +31,6 @@ namespace AirShopp.Domain
         IQueryable<DeliveryNote> DeliveryNotes { get; }
         IQueryable<Warehouse> Warehouses { get; }
         IQueryable<Provider> Providers { get; }
+        IQueryable<ProductInFactory> ProductInFactories { get; }
     }
 }
