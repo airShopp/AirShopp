@@ -31,10 +31,15 @@ namespace AirShopp.DataAccess
                         _context.ProductSales.Remove(productSales);
                         _context.SaveChanges();
                     }
-
+                    
                     var inventory = _context.Inventory.Where(i => i.ProductId == productId).FirstOrDefault();
+                    var inventoryAction = _context.InventoryAction.Where(ia => ia.InventoryId == inventory.Id).FirstOrDefault();
                     if (inventory != null)
                     {
+                        if (inventoryAction != null)
+                        {
+                            _context.InventoryAction.Remove(inventoryAction);
+                        }
                         _context.Inventory.Remove(inventory);
                         _context.SaveChanges();
                     }

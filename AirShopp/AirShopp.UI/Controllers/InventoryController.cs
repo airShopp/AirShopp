@@ -311,6 +311,7 @@ namespace AirShopp.UI.Controllers
         [HttpPost]
         public ActionResult UpdateProduct(ModifyProductRequestModel product, HttpPostedFileBase image)
         {
+            string realPath = null;
             if (image != null)
             {
                 var path = Request.MapPath("~/Content/" + product.productId);
@@ -329,12 +330,12 @@ namespace AirShopp.UI.Controllers
                     throw new Exception();
                 }
                 string imgPath = filePath.Substring(path.IndexOf("\\Content"));
-                string RealPath = imgPath.Replace("\\", "/");
+                realPath = imgPath.Replace("\\", "/");
             }
             try
             {
                 _discountRepository.UpdateProductDiscount(product.productId, product.discounts);
-                _productRepository.UpdateProductInfo(product.productId, product.productName, RealPath, product.isOnSale, product.price);
+                _productRepository.UpdateProductInfo(product.productId, product.productName, realPath, product.isOnSale, product.price);
                 var msg = "更新成功";
                 return Json(msg, JsonRequestBehavior.AllowGet);
             }

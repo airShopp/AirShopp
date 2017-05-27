@@ -70,12 +70,12 @@ function updateProduct()
 
     $("#FormSub").ajaxSubmit({
         success: function (result) {
+            setTimeout(function () { window.location.reload(); }, 1500);
             $("#msg").html(result);
-            $("#flashBox").css({ "display": "block" });
-            $("#flashBox").delay(1000).hide(0);
             $(".box111").css({ "display": "none" });
             $(".hint111").css({ "display": "none" });
-            location.reload();
+            $("#flashBox").css({ "display": "block" });
+            $("#flashBox").delay(2000).hide(0);
         }
     });
     //$.ajax({
@@ -99,21 +99,43 @@ function updateProduct()
     //    }
     //});
 }
-
+var productId;;
 function deleteProduct(id)
 {
+    productId = id;
+    $("#pop").css("display", "block");
+
+    //$.ajax({
+    //    type: "Get",
+    //    url: "/Inventory/DeleteProdct",
+    //    data: {
+    //        "productId":id
+    //    },
+    //    success: function ()
+    //    {
+    //        $("#msg").html("删除成功");
+    //        $("#flashBox").css({ "display": "block" });
+    //        $("#flashBox").delay(1000).hide(0);
+    //        location.reload();
+    //    }
+    //});
+}
+function CancelDelete() {
+    $("#pop").css("display", "none");
+}
+function ConfirmDelete() {
     $.ajax({
         type: "Get",
         url: "/Inventory/DeleteProdct",
         data: {
-            "productId":id
+            "productId": productId
         },
-        success: function ()
-        {
+        success: function () {
+            setTimeout(function () { window.location.reload(); }, 1500);
+            $("#pop").css("display", "none");
             $("#msg").html("删除成功");
             $("#flashBox").css({ "display": "block" });
-            $("#flashBox").delay(1000).hide(0);
-            location.reload();
+            $("#flashBox").delay(1600).hide(0);
         }
     });
 }
