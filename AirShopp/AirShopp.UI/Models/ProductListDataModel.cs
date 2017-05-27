@@ -8,6 +8,7 @@ namespace AirShopp.UI.Models
     public class ProductListDataModel
     {
         public long ProductId { get; set; }
+        public long CategoryId { get; set; }
         public string ProductName { get; set; }
         public double Price { get; set; }
         public double DiscountPrice { get; set; }

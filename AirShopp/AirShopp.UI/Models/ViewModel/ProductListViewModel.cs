@@ -5,7 +5,8 @@ namespace AirShopp.UI.Models.ViewModel
 {
     public class ProductListViewModel : PageListBaseModel
     {
-        public long CategoryId { get; set; }
+        public long? CategoryId { get; set; }
+        public string queryStr { get; set; }
         public List<ProductListDataModel> productList { get; set; }
     }
 }

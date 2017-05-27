@@ -47,10 +47,11 @@
         <div class="container clearfix">
             <div class="header-logo fl"><h1><a href="@Url.Action("Index", "Home")"><img src="~/Content/icon/AirShoppLogo.png"></a> </h1></div>
             <div class="head-form fl">
-                <form class="clearfix">
-                    <input type="text" class="search-text" accesskey="" id="key" autocomplete="off" placeholder="洗衣机">
-                    <button class="button" onclick="search('key');return false;">搜索</button>
-                </form>
+                @using (Html.BeginForm("GetProducts", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="text" name="queryStr" class="search-text" accesskey="" id="key" autocomplete="off" placeholder="蛋糕" />
+                    <input type="submit" class="button" value="搜索"/>
+                }
             </div>
             <div class="header-cart fr">
                 <a href="/Cart/LoadCartList">
