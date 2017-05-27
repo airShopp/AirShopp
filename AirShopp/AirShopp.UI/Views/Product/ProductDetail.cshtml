@@ -85,6 +85,12 @@
                                <input type="hidden" name="quanlity" id="qlt"value=""/>
                                <input type="hidden" name="pricePerProduct" value="@Model.Price"/>
                            }
+                            @using (Html.BeginForm("ImmediatelyBuy", "Order", FormMethod.Post, new { @id = "immediatelyBuyForm" }))
+                            {
+                                <input type="hidden" name="productId" value="@Model.ProductId" />
+                                <input type="hidden" name="quanlity" id="qltBuy" value="" />
+                                <input type="hidden" name="pricePerProduct" value="@Model.Price" />
+                            }
                     </div>
                     <div class="pc-product-t">
                         <div class="pc-name-info">
@@ -139,7 +145,7 @@
                             <div class="pc-number clearfix"><span class="fl">商品编号：@Model.ProductId  </span> <span class="fr">分享 收藏</span></div>
                         </div>
                         <div class="pc-emption">
-                            <a href="#">立即购买</a>
+                            <a id="immediatelyBuy">立即购买</a>
                             <a class="join" id="cartSub"  style="cursor:pointer">加入购物车</a>
                         </div>
                     </div>
@@ -567,6 +573,10 @@
             
             $("#qlt").val($("#subnum").val());
             $("#addCartForm").submit();
+        });
+        $("#immediatelyBuy").click(function () {
+            $("#qltBuy").val($("#subnum").val());
+            $("#immediatelyBuyForm").submit();
         });
     });
     //function AddCart() {

@@ -123,7 +123,7 @@
                 <ul>
                     <li>详细地址：</li>
                     <li>
-                        @Html.TextBoxFor(m => m.Address, new {id = "Address", tabindex = "4", autocomplete = "off", placeholder = "建议您如实填写详细收货地址，例如街道名称，门牌号码，楼层和房间号等信息" })
+                        @Html.TextBoxFor(m => m.Address, new {id = "Address", style = "width:300px", tabindex = "4", autocomplete = "off", placeholder = "建议您如实填写详细收货地址，例如街道名称，门牌号码，楼层和房间号等信息" })
                     </li>
                 </ul>
                 <ul>
@@ -177,14 +177,57 @@
                         <div class="pc-event">
                             @if (!@Model.AddressList[i].IsDefault)
                             {
-                                <a href="/Address/SetDefaultAddress?addressId=@Model.AddressList[i].Id">设为默认地址</a>
+                                <a href="/Address/SetDefaultAddress?addressId=@Model.AddressList[i].Id&OrderId=@Model.OrderId">设为默认地址</a>
                             }
-                            <a href="#">编辑 </a>
+                            <a href="javascript:void(0)" value="edit @i" class="editAddress">编辑 </a>
                             <a href="/Address/DeleteAddress?addressId=@Model.AddressList[i].Id">删除</a>
                         </div>
                     </li>
-                }
+                    using (Html.BeginForm("UpdateAddress", "Address", FormMethod.Post, new { id = "EditForm "+i }))
+                    {
+                    <li class="clearfix" id="address @i" style="display:none">
+                        <div class="default fl" style="visibility:hidden"><a href="javascript:void(0)">默认地址</a> </div>
+                        <div class="user-info1 fl clearfix">
+                            <div style="visibility:hidden">@Html.TextBoxFor(m => m.Id, new { Value = Model.AddressList[i].Id })</div>
+                            <div class="user-info">
+                                <span class="info1">收货人：</span>
+                                <span class="info2">
+                                @Html.TextBoxFor(m => m.ReceiverName, new { Value = Model.AddressList[i].ReceiverName })
+                                </span>
+                            </div>
+                            <div class="user-info">
+                                <span class="info1">地址：</span>
+                                <span class="info2">
+                                @Html.TextBoxFor(m => m.Address, new { style = "width:300px", Value = Model.AddressList[i].DeliveryAddress })
+                                </span>
+                            </div>
+                            <div class="user-info">
+                                <span class="info1">手机：</span>
+                                <span class="info2">
+                                @Html.TextBoxFor(m => m.ReceiverPhone, new { Value = Model.AddressList[i].ReceiverPhone })
+                                </span>
+                            </div>
+                        </div>
+                        <div class="pc-event">
+                            <a class="saveEdit" href="javascript:void(0)">保存修改</a>
+                        </div>
+                    </li>
+                        }
+                    }
             </ul>
         </div>
     </div>
 </div>
+<script>
+    var str = "";
+    $('.editAddress').click(function(){
+        str = $(this).attr("value").replace('edit','address');
+        document.getElementById(str).style.display = "block";
+    });
+    $(".saveEdit").click(function(){
+        document.getElementById(str).style.display = "none";
+        str = str.replace('address','EditForm');
+        document.getElementById(str).submit();
+        str = "";
+    });
+</script>

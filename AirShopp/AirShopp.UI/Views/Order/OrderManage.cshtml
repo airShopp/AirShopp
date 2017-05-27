@@ -95,8 +95,8 @@
                                         var orderItems = @Model.AllStatusViewModel.AllOrder[i].OrderItems.ToList();
                                         AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
                                         <div class="ci7 clearfix">
-                                            <span class="gr1"><a href="/Product/getProduct?productId=@orderItem.Product.Id"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
-                                            <span class="gr2" style="width:260px"><a href="/Product/getProduct?productId=@orderItem.Product.Id">@orderItem.Product.ProductName</a></span>
+                                            <span class="gr1"><a href="javascript:void(0)"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
+                                            <span class="gr2" style="width:260px"><a href="javascript:void(0)">@orderItem.Product.ProductName</a></span>
                                             <span class="gr3">X @orderItem.Quantity</span>
                                         </div>
                                     }
@@ -130,30 +130,30 @@
                                                         </table>
                                                     </div>
                                                 </div>
-                                                <a href="/Order/OrderDetail?orderId=@Model.AllStatusViewModel.AllOrder[i].Id">订单详情</a>
+                                                @*<a href="/Order/OrderDetail?orderId=@Model.AllStatusViewModel.AllOrder[i].Id">订单详情</a>*@
                                             </div>
                                         </div>
                                     }
                                     if (Model.AllStatusViewModel.AllOrder[i].OrderStatus.Equals("OBLIGATION"))
                                     {
-                                        <div class="cci5 amanda1"><div><p>等待买家付款</p> <p><a href="/Order/OrderDetail?orderId=@Model.AllStatusViewModel.AllOrder[i].Id">订单详情</a></p></div></div>
+                                        <div class="cci5 amanda1"><div><p>等待买家付款</p> <p>@*<a href="/Order/OrderDetail?orderId=@Model.AllStatusViewModel.AllOrder[i].Id">订单详情</a>*@</p></div></div>
                                     }
                                     if (Model.AllStatusViewModel.AllOrder[i].OrderStatus.Equals("TRANSFER"))
                                     {
-                                        <div class="cci5 amanda1"><div><p>买家已付款</p> <p><a href="/Order/OrderDetail?orderId=@Model.AllStatusViewModel.AllOrder[i].Id">订单详情</a></p></div></div>
+                                        <div class="cci5 amanda1"><div><p>买家已付款</p> <p>@*<a href="/Order/OrderDetail?orderId=@Model.AllStatusViewModel.AllOrder[i].Id">订单详情</a>*@</p></div></div>
                                     }
                                     if (Model.AllStatusViewModel.AllOrder[i].OrderStatus.Equals("DELIVERY"))
                                     {
-                                        <div class="cci5 amanda1"><div><p>物流运输中</p> <p><a href="/Order/OrderDetail?orderId=@Model.AllStatusViewModel.AllOrder[i].Id">订单详情</a></p><p><a href="@Url.Action("Index", "BMapRoutePlanning", new { orderId = @Model.AllStatusViewModel.AllOrder[i].Id })">查看物流</a></p></div></div>
+                                        <div class="cci5 amanda1"><div><p>物流运输中</p> <p>@*<a href="/Order/OrderDetail?orderId=@Model.AllStatusViewModel.AllOrder[i].Id">订单详情</a>*@</p><p><a href="@Url.Action("Index", "BMapRoutePlanning", new { orderId = @Model.AllStatusViewModel.AllOrder[i].Id })">查看物流</a></p></div></div>
                                     }
                                     if (Model.AllStatusViewModel.AllOrder[i].OrderStatus.Equals("CANCELED"))
                                     {
-                                        <div class="cci5 amanda1"><div><p>交易关闭</p> <p><a href="/Order/OrderDetail?orderId=@Model.AllStatusViewModel.AllOrder[i].Id">订单详情</a></p></div></div>
+                                        <div class="cci5 amanda1"><div><p>交易关闭</p> <p>@*<a href="/Order/OrderDetail?orderId=@Model.AllStatusViewModel.AllOrder[i].Id">订单详情</a>*@</p></div></div>
                                     }
                                 }
                                 else
                                 {
-                                    <div class="cci5 amanda1"><div><p>买家已付款</p> <p><a href="/Order/OrderDetail?orderId=@Model.AllStatusViewModel.AllOrder[i].Id">订单详情</a></p></div></div>
+                                    <div class="cci5 amanda1"><div><p>买家已付款</p> <p>@*<a href="/Order/OrderDetail?orderId=@Model.AllStatusViewModel.AllOrder[i].Id">订单详情</a>*@</p></div></div>
                                 }
                             </div>
                         </li>
@@ -205,8 +205,8 @@
                                         var orderItems = @Model.PendingPaymentStatusViewModel.PendingPaymentOrder[i].OrderItems.ToList();
                                         AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
                                         <div class="ci7 clearfix">
-                                            <span class="gr1"><a href="/Product/getProduct?productId=@orderItem.Product.Id"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
-                                            <span class="gr2" style="width:260px"><a href="/Product/getProduct?productId=@orderItem.Product.Id">@orderItem.Product.ProductName</a></span>
+                                            <span class="gr1"><a href="javascript:void(0)"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
+                                            <span class="gr2" style="width:260px"><a href="javascript:void(0)">@orderItem.Product.ProductName</a></span>
                                             <span class="gr3">X @orderItem.Quantity</span>
                                         </div>
                                     }
@@ -214,7 +214,7 @@
                                 <div class="cci2 amanda1"><div>@Model.PendingPaymentStatusViewModel.PendingPaymentOrder[i].Customer.CustomerName</div></div>
                                 <div class="cci3 amanda1"><div><b>￥@Model.PendingPaymentStatusViewModel.PendingPaymentOrder[i].TotalAmount.ToString()</b></div></div>
                                 <div class="cci4 amanda1"><div><p>@Model.PendingPaymentStatusViewModel.PendingPaymentOrder[i].OrderDate.ToShortDateString()</p></div></div>
-                                <div class="cci5 amanda1"><div><p>等待买家付款</p> <p><a href="/Order/OrderDetail?orderId=@Model.PendingPaymentStatusViewModel.PendingPaymentOrder[i].Id">订单详情</a></p></div></div>
+                                <div class="cci5 amanda1"><div><p>等待买家付款</p> <p>@*<a href="/Order/OrderDetail?orderId=@Model.PendingPaymentStatusViewModel.PendingPaymentOrder[i].Id">订单详情</a>*@</p></div></div>
                             </div>
                         </li>
                     }
@@ -265,8 +265,8 @@
                                         var orderItems = @Model.PendingDeliveryStatusViewModel.PendingDeliveryOrder[i].OrderItems.ToList();
                                         AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
                                         <div class="ci7 clearfix">
-                                            <span class="gr1"><a href="/Product/getProduct?productId=@orderItem.Product.Id"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
-                                            <span class="gr2" style="width:260px"><a href="/Product/getProduct?productId=@orderItem.Product.Id">@orderItem.Product.ProductName</a></span>
+                                            <span class="gr1"><a href="javascript:void(0)"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
+                                            <span class="gr2" style="width:260px"><a href="javascript:void(0)">@orderItem.Product.ProductName</a></span>
                                             <span class="gr3">X @orderItem.Quantity</span>
                                         </div>
                                     }
@@ -274,7 +274,7 @@
                                 <div class="cci2 amanda1"><div>@Model.PendingDeliveryStatusViewModel.PendingDeliveryOrder[i].Customer.CustomerName</div></div>
                                 <div class="cci3 amanda1"><div><b>￥@Model.PendingDeliveryStatusViewModel.PendingDeliveryOrder[i].TotalAmount.ToString()</b></div></div>
                                 <div class="cci4 amanda1"><div><p>@Model.PendingDeliveryStatusViewModel.PendingDeliveryOrder[i].OrderDate.ToShortDateString()</p></div></div>
-                                <div class="cci5 amanda1"><div><p>买家已付款</p> <p><a href="/Order/OrderDetail?orderId=@Model.PendingDeliveryStatusViewModel.PendingDeliveryOrder[i].Id">订单详情</a></p></div></div>
+                                <div class="cci5 amanda1"><div><p>买家已付款</p> <p>@*<a href="/Order/OrderDetail?orderId=@Model.PendingDeliveryStatusViewModel.PendingDeliveryOrder[i].Id">订单详情</a>*@</p></div></div>
                             </div>
                         </li>
                     }
@@ -325,8 +325,8 @@
                                         var orderItems = @Model.PendingReceivedStatusViewModel.PendingReceivedOrder[i].OrderItems.ToList();
                                         AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
                                         <div class="ci7 clearfix">
-                                            <span class="gr1"><a href="/Product/getProduct?productId=@orderItem.Product.Id"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
-                                            <span class="gr2" style="width:260px"><a href="/Product/getProduct?productId=@orderItem.Product.Id">@orderItem.Product.ProductName</a></span>
+                                            <span class="gr1"><a href="javascript:void(0)"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
+                                            <span class="gr2" style="width:260px"><a href="javascript:void(0)">@orderItem.Product.ProductName</a></span>
                                             <span class="gr3">X @orderItem.Quantity</span>
                                         </div>
                                     }
@@ -334,7 +334,7 @@
                                 <div class="cci2 amanda1"><div>@Model.PendingReceivedStatusViewModel.PendingReceivedOrder[i].Customer.CustomerName</div></div>
                                 <div class="cci3 amanda1"><div><b>￥@Model.PendingReceivedStatusViewModel.PendingReceivedOrder[i].TotalAmount.ToString()</b></div></div>
                                 <div class="cci4 amanda1"><div><p>@Model.PendingReceivedStatusViewModel.PendingReceivedOrder[i].OrderDate.ToShortDateString()</p></div></div>
-                                <div class="cci5 amanda1"><div><p>物流运输中</p> <p><a href="/Order/OrderDetail?orderId=@Model.PendingReceivedStatusViewModel.PendingReceivedOrder[i].Id">订单详情</a></p><p><a href="@Url.Action("Index", "BMapRoutePlanning", new { orderId = @Model.PendingReceivedStatusViewModel.PendingReceivedOrder[i].Id })">查看物流</a></p></div></div>
+                                <div class="cci5 amanda1"><div><p>物流运输中</p> <p>@*<a href="/Order/OrderDetail?orderId=@Model.PendingReceivedStatusViewModel.PendingReceivedOrder[i].Id">订单详情</a>*@</p><p><a href="@Url.Action("Index", "BMapRoutePlanning", new { orderId = @Model.PendingReceivedStatusViewModel.PendingReceivedOrder[i].Id })">查看物流</a></p></div></div>
                             </div>
                         </li>
                     }
@@ -385,8 +385,8 @@
                                         var orderItems = @Model.PendingCommentStatusViewModel.PendingComment[i].OrderItems.ToList();
                                         AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
                                         <div class="ci7 clearfix">
-                                            <span class="gr1"><a href="/Product/getProduct?productId=@orderItem.Product.Id"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
-                                            <span class="gr2" style="width:260px"><a href="/Product/getProduct?productId=@orderItem.Product.Id">@orderItem.Product.ProductName</a></span>
+                                            <span class="gr1"><a href="javascript:void(0)"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
+                                            <span class="gr2" style="width:260px"><a href="javascript:void(0)">@orderItem.Product.ProductName</a></span>
                                             <span class="gr3">X @orderItem.Quantity</span>
                                         </div>
                                     }
