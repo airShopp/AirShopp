@@ -39,5 +39,17 @@ namespace AirShopp.DataAccess
             }
         }
 
+        public void DeleteCartProduct(long cartItemId)
+        {
+            using (AirShoppContext _context = new AirShoppContext())
+            {
+                var cartItem = _context.CartItem.Find(cartItemId);
+                if (cartItem != null)
+                {
+                    _context.CartItem.Remove(cartItem);
+                    _context.SaveChanges();
+                }
+            }
+        }
     }
 }

@@ -68,8 +68,9 @@ namespace AirShopp.UI.Controllers
                     ProductId = productId
                 };
                 _cartItemRepository.AddCartItem(cartItem);
-                ShopCartViewModel shopCartViewModel = GetCartPageViewData(null, null);
-                return View("ShopCart", shopCartViewModel);
+                return RedirectToAction("LoadCartList", "Cart");
+                //ShopCartViewModel shopCartViewModel = GetCartPageViewData(null, null);
+                //return View("ShopCart", shopCartViewModel);
             }
             catch (System.Exception)
             {
@@ -77,7 +78,6 @@ namespace AirShopp.UI.Controllers
             }
             
         }
-
 
         public ShopCartViewModel GetCartPageViewData(int? indexNum, int? pageSize)
         {
@@ -121,6 +121,17 @@ namespace AirShopp.UI.Controllers
                 ShopCart = shopCartList,
                 pageBar = cartPagination.getPageBar()
             };
+        }
+        public ActionResult DeleteCarts(string cartIdStr)
+        {
+            var CartIdArr = cartIdStr.Split(',');
+            foreach (var cartId in CartIdArr)
+            {
+                _cartRepository.DeleteCartProduct(long.Parse(cartId));
+            }
+            return RedirectToAction("LoadCartList", "Cart");
+            //ShopCartViewModel shopCartViewModel = GetCartPageViewData(null, null);
+            //return View("ShopCart", shopCartViewModel);
         }
     }
 }

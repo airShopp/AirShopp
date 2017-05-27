@@ -1,0 +1,159 @@
+﻿@model AirShopp.UI.Models.ViewModel.ProductInViewModel
+@{
+    Layout = "~/Views/Shared/_backEndLayout.cshtml";
+}
+@Styles.Render("~/bundles/AirShopp/Inventory/Css")
+@Scripts.Render("~/bundles/AirShopp/Inventory/js")
+<!-- 商城快讯 begin -->
+<style>
+    .be11 {
+        width: 115px;
+        text-align: center;
+        float: left;
+        height: 40px;
+        line-height: 48px;
+        color: #a3a3a3;
+    }
+
+    .be22 {
+        width: 84px;
+        text-align: center;
+        float: left;
+        height: 40px;
+        line-height: 48px;
+        color: #a3a3a3;
+    }
+
+    .be33 {
+        width: 294px;
+        text-align: center;
+        float: left;
+        height: 40px;
+        line-height: 48px;
+        color: #a3a3a3;
+    }
+
+    .be44 {
+        width: 120px;
+        text-align: center;
+        float: left;
+        height: 40px;
+        line-height: 48px;
+        color: #a3a3a3;
+    }
+
+    .ci11 {
+        width: 115px;
+        text-align: center;
+        float: left;
+        height: 60px;
+        line-height: 60px;
+        border-right: 1px solid #e0e0e0;
+    }
+
+    .ci22 {
+        width: 84px;
+        text-align: center;
+        float: left;
+        height: 60px;
+        line-height: 60px;
+        border-right: 1px solid #e0e0e0;
+    }
+
+    .ci33 {
+        width: 294px;
+        text-align: center;
+        float: left;
+        height: 60px;
+        line-height: 60px;
+        border-right: 1px solid #e0e0e0;
+    }
+
+    .ci44 {
+        width: 120px;
+        text-align: center;
+        float: left;
+        height: 60px;
+        line-height: 60px;
+        border-right: 1px solid #e0e0e0;
+    }
+
+    .ci55 {
+        width: 84px;
+        text-align: center;
+        float: left;
+        height: 60px;
+        line-height: 60px;
+        border-right: 1px 1px 1px 0 solid #e0e0e0;
+    }
+</style>
+<div class="member-right fr">
+    <div class="member-head">
+        <div class="member-heels fl"><h2>入库单</h2></div>
+        @*<div class="member-backs member-icons fr"><a href="javascript:void(0)">搜索</a></div>
+        <div class="member-about fr"><input type="text" placeholder="出库单编号"></div>*@
+    </div>
+    <div class="member-border">
+        <div class="member-return H-over">
+            <div class="member-cancel clearfix">
+                <span class="be22">编号</span>
+                <span class="be11">图片</span>
+                <span class="be33">商品名</span>
+                <span class="be11">入库数量</span>
+                <span class="be44">价格</span>
+                <span class="be11">入库时间</span>
+                <span class="be11">仓库</span>
+            </div>
+            <div class="member-sheet clearfix">
+                <ul>
+                    @{ var i = 1;}
+                    @foreach (var item in Model.ProductDataList)
+                    {
+                        <li>
+                            <div class="member-circle clearfix">
+                                <div class="ci22">
+                                    @i
+                                </div>
+                                <div class="ci11"><img src="@item.ProductUrl" style="width:48px;height:48px;position:relative;top:5px;" /></div>
+                                @if (item.ProductName.Length > 20)
+                                {
+                                     <div class="ci33" title="@item.ProductName">@item.ProductName.Substring(0, 20) ···</div>
+                                }
+                                else
+                                {
+                                    <div class="ci33" title="@item.ProductName">@item.ProductName</div>
+                                }
+                                <div class="ci11">@item.Amount</div>
+                                <div class="ci44">￥@item.Price</div>
+                                <div class="ci11">@item.ProductInDate.ToString().Substring(0, 9)</div>
+                                <div class="ci11" style="border-right:none">@item.warehouseName</div>
+   
+                            </div>
+                        </li>
+                        i++;
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="clearfix" style="padding:30px 20px;">
+            <div class="fr pc-search-g pc-search-gs">
+                @foreach (var pageNum in Model.pageBar)
+                {
+                    if (pageNum == Model.PageIndex)
+                    {
+                        @Html.ActionLink(pageNum.ToString(), "GetProductInList", "Inventory", new { indexNum = pageNum }, new { @class = "current", Target = "_self" });
+                    }
+                    else if (pageNum == 0)
+                    {
+                        <span class="pc-search-di">…</span>
+                    }
+                    else
+                    {
+                        @Html.ActionLink(pageNum.ToString(), "GetProductInList", "Inventory", new { indexNum = pageNum }, new { Target = "_self" });
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 商城快讯 End -->

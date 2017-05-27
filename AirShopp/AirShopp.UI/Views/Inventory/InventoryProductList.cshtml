@@ -4,6 +4,8 @@
 }
 @Styles.Render("~/bundles/AirShopp/Inventory/Css")
 @Scripts.Render("~/bundles/AirShopp/Inventory/js")
+<meta http-equiv="pragma" content="no-cache"/>
+<meta http-equiv="cache-control" content="no-cache"/>
 <!-- 商城快讯 begin -->
 <style>
     .be11 {
@@ -14,7 +16,6 @@
         line-height: 48px;
         color: #a3a3a3;
     }
-
     .be22 {
         width: 74px;
         text-align: center;
@@ -23,7 +24,6 @@
         line-height: 48px;
         color: #a3a3a3;
     }
-
     .be33 {
         width: 234px;
         text-align: center;
@@ -32,7 +32,6 @@
         line-height: 48px;
         color: #a3a3a3;
     }
-
     .be44 {
         width: 120px;
         text-align: center;
@@ -57,7 +56,6 @@
         line-height: 60px;
         border-right: 1px solid #e0e0e0;
     }
-
     .ci22 {
         width: 74px;
         text-align: center;
@@ -66,7 +64,6 @@
         line-height: 60px;
         border-right: 1px solid #e0e0e0;
     }
-
     .ci33 {
         width: 234px;
         text-align: center;
@@ -75,7 +72,6 @@
         line-height: 60px;
         border-right: 1px solid #e0e0e0;
     }
-
     .ci44 {
         width: 120px;
         text-align: center;
@@ -84,7 +80,7 @@
         line-height: 60px;
         border-right: 1px solid #e0e0e0;
     }
-    .ci55{
+    .ci55 {
         width: 35px;
         text-align: center;
         float: left;
@@ -92,13 +88,239 @@
         line-height: 60px;
         border-right: 1px solid #e0e0e0;
     }
+    .hint11 dt{
+    width:35%;
+    height:50px;
+    line-height:50px;
+    text-align:right;
+    float:left;
+    }
+    .hint11 dd{
+    width:35%;
+    height:50px;
+    line-height:50px;
+    text-align:right;
+    float:left;
+}
+    .hint11 select{
+    width:50%;
+    height:30px;
+    text-align:right;
+    float:left;
+}
+    .hint111 dt{
+    width:35%;
+    height:50px;
+    line-height:50px;
+    text-align:right;
+    float:left;
+    }
+    .hint111 dd{
+    width:240px;
+    height:50px;
+    line-height:50px;
+    text-align:right;
+    float:left;
+}
+    .hint111 select{
+    width:50%;
+    height:30px;
+    text-align:right;
+    float:left;
+}
+.box111{width:100%;height:100%;background:rgba(0,0,0,0.3);position:fixed;z-index:100;display:none;}
+.hint111{width:600px;height:460px; text-align:center; margin:0 auto;background:#fff;position:fixed;top:50%;left:50%;margin-left:-300px;margin-top:-230px;z-index:111;display:none;  border-radius:4px 4px 0 0;}
+.hint-in1111{width:600px;height:42px;line-height:42px; font-size:16px; background:#f5f5f5;position:relative; background-image:-moz-linear-gradient(center top , #fafafa, #ededed); border-radius:4px 4px 0 0; text-align:center;}
+.hint3333{width:15px;height:15px;background:url("../Content/icon/col.png") no-repeat;position:absolute;top:13px;right:15px;cursor:pointer;}
+.oper img {
+    width:15px;
+    height:15px;
+}
+.oper img:hover {
+    width:20px;
+    height:20px;
+}
+
+#flashBox {
+    width: 260px;
+    height: 60px;
+    margin-left: 600px;
+    margin-top: 100px;
+    display: none;
+    z-index: 99;
+    position: fixed;
+    background-color: #482338;
+    float: left;
+}
+#msg {
+    display:block;
+    width: 260px;
+    height: 60px;
+    text-align:center;
+    line-height:60px;
+    color:white;
+    font-family:Arial;
+    font-size:14px;
+}
+
+#pop {
+width:400px;
+height:200px;
+margin-left:550px;
+margin-top:150px;
+float:left;
+ background-color: #EEEEEE;
+display:none;
+position:fixed;
+z-index:102;
+}
+    #pop span {
+    display:block;
+    width:390px;
+    margin-top:30px;
+    text-align:center;
+    font-size:16px;
+    font-family:Arial bold;
+    }
+    #benDel {
+     padding:1px;
+     width:40px;
+     margin-top:100px;
+     margin-left:90px;
+    }
+    #canDel {
+    padding:1px;
+    margin-top:40px;
+     width:40px;
+    margin-left:130px;
+    }
 </style>
+
+<script type="text/javascript">
+    $(function() {
+        $(".btn1").click(function (event) {
+            $(".box11").css({ "display": "block" });
+            $(".hint11").css({ "display": "block" });
+        });
+        $(".hint-in3").click(function (event) {
+            $(".hint11").css({ "display": "none" });
+            $(".box11").css({ "display": "none" });
+        });
+
+        $(".hint333").click(function (event) {
+            $(this).parent().parent().css({ "display": "none" });
+            $(".box11").css({ "display": "none" });
+        });
+
+        $(".hint3333").click(function (event) {
+            $(this).parent().parent().css({ "display": "none" });
+            $(".box111").css({ "display": "none" });
+        });
+    });
+</script>
+
+<div id="pop">
+    <span>是否确认删除该商品？</span>
+    <input type="button" id="benDel" onclick="ConfirmDelete()" value="是"/>
+    <input type="button" id="canDel" onclick="CancelDelete()" value="否"/>
+</div>
+
+ <div id="flashBox"><label id="msg"></label></div>
+
+
+<div class="box111">
+    <div class="hint111" style="height:580px;">
+        <div class="hint-in1111">
+            <div class="hint22">修改商品</div>
+            <div class="hint3333"></div>
+        </div>
+        @using(Html.BeginForm("UpdateProduct", "Inventory",FormMethod.Post,new { @id="FormSub", enctype = "multipart/form-data" })) {
+        <dl class="clearfix" id="inventoryP" style="margin-top:25px;">
+            <dt style="display:none;"><input type="hidden" name="product.productId" id="pId" /></dt>
+            <dt>商品名：</dt>
+            <dd><input type="text" name="product.productName" id="productName" style="margin-right:12px;height:25px;line-height:25px" /></dd>
+
+            <dt>商品价格：</dt>
+            <dd><input type="text" name="product.price" id="price" style="margin-right:12px;height:25px;line-height:25px" />元</dd>
+
+            <dt>选择图片：</dt>
+            <dd><input type="file" name="image" id="pictureUrl" style="margin-left:60px;height:25px;line-height:25px" /></dd>
+            
+            <dt>折扣：</dt>
+            <dd><input id="discounts" type="text" name="product.discounts" style="margin-right:12px;height:25px;line-height:25px" />折</dd>
+            
+            <dt>是否上架：</dt>
+            <dd><select name="product.isOnsale" id="IsOnSale" style="margin-left:60px;margin-top:10px; height:25px;line-height:25px"></select></dd>
+           
+             <dt><input type="button" value="提交修改" onclick="updateProduct()" style="width:60px;height:25px;margin-left:270px;cursor:pointer" /></dt>
+        </dl>
+        }
+    </div>
+</div>
+
+<div class="box11">
+    <div class="hint11" style="height:580px;">
+        <div class="hint-in111">
+            <div class="hint2">添加新商品</div>
+            <div class="hint333"></div>
+        </div>
+        @using (Html.BeginForm("AddNewProduct", "Inventory", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <dl class="clearfix">
+                <dt>商品名：</dt>
+                <dd><input type="text" name="product.productName" style="margin-left:60px;height:25px;line-height:25px" /></dd>
+                <dt>商品类别：</dt>
+                <dd>
+                    <select name="product.categoryId" id="category" style="margin-left:60px; margin-top:10px;width:150px; height:29px;line-height:25px">
+                        @foreach (var c in Model.categoryList)
+                        {
+                            <option value="@c.Id">@c.CategoryName</option>
+                        }
+                    </select>
+                </dd>
+                <dt>商家：</dt>
+                <dd>
+                    <select name="product.provider" id="provider" style="margin-left:60px; margin-top:10px;width:150px; height:29px;line-height:25px">
+                        @foreach (var p in Model.providerList)
+                        {
+                            <option value="@p.Id">@p.ProviderName</option>
+                        }
+                    </select>
+                </dd>
+
+                <dt>仓库：</dt>
+                <dd>
+                    <select name="product.warehouse" id="warehouse" style="margin-left:60px; margin-top:10px;width:150px; height:29px;line-height:25px">
+                        @foreach (var w in Model.warehouseList)
+                        {
+                            <option value="@w.Id">@w.Name</option>
+                        }
+                    </select>
+                </dd>
+                <dt>生产日期：</dt>
+                <dd><input type="date" name="product.productionTime" id="price" style="margin-left:15px;height:25px;line-height:25px" /></dd>
+                <dt>保质期：</dt>
+                <dd><input type="text" name="product.keepTime" id="price" style="margin-left:15px;height:25px;line-height:25px" /></dd>
+                <dt>商品价格：</dt>
+                <dd><input type="text" name="product.price" id="price" style="margin-left:15px;height:25px;line-height:25px" /></dd>
+                <dt>数量：</dt>
+                <dd><input type="text" name="product.productCount" id="price" style="margin-left:15px;height:25px;line-height:25px" /></dd>
+                <dt>选择图片：</dt>
+                <dd><input type="file" name="image" style="margin-left:60px;height:25px;line-height:25px" /></dd>
+                <dt><input type="submit" value="确定添加" /></dt>
+                @*<dt></dt>
+                <dd><span><a href="javascript:void(0);" class="hint-in3" onclick="addDeliveryStation()" style="margin:0;margin-left:15px;margin-top:30px;">保存收货地址</a></span></dd>*@
+            </dl>
+        }
+    </div>
+</div>
 <div class="member-right fr">
     <div class="member-head">
         <div class="member-heels fl"><h2>所有商品</h2></div>
         <div class="member-backs member-icons fr"><a href="javascript:void(0)">搜索</a></div>
         <div class="member-about fr"><input type="text" placeholder="出库单编号"></div>
     </div>
+    <span class="btn1">添加新商品</span>
     <div class="member-border">
         <div class="member-return H-over">
             <div class="member-cancel clearfix">
@@ -126,7 +348,14 @@
                                     @i
                                 </div>
                                 <div class="ci11"><img src="@item.ProductUrl" style="width:48px;height:48px;position:relative;top:5px;" /></div>
-                                <div class="ci33" title="@item.ProductName">@item.ProductName.Substring(0, 15) ···</div>
+                                @if (item.ProductName.Length > 15)
+                                {
+                                    <div class="ci33" title="@item.ProductName">@item.ProductName.Substring(0, 15) ···</div>
+                                }
+                                else
+                                {
+                                    <div class="ci33" title="@item.ProductName">@item.ProductName</div>
+                                }
                                 @if (item.IsOnSale == true)
                                 {
                                     <div class="ci22">已上架</div>
@@ -155,7 +384,8 @@
                                 {
                                     <div class="ci22" title="@item.WarehouseName">@item.WarehouseName</div>
                                 }
-                                <div class="ci22"><a href="#">编辑</a><a href="#">删除</a></div>
+                                <div class="ci22"><a style="cursor:pointer" onclick="editProduct(@item.ProductId)" class="oper"><img src="~/Content/img/modify.png"></a><a class="oper" id="delete" onclick="deleteProduct(@item.ProductId);" style="margin-left:5px;"><img src="~/Content/img/delete.png" ></a></div>
+                                
                             </div>
                         </li>
                         i++;

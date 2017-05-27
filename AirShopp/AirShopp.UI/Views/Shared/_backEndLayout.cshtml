@@ -30,6 +30,28 @@
          .hint dd span{
              padding-left:15px;
          }
+
+         .hint11 dt{
+            width:35%;
+            height:50px;
+            line-height:50px;
+            text-align:right;
+            float:left;
+         }
+
+         .hint11 dd{
+            width:35%;
+            height:50px;
+            line-height:50px;
+            text-align:right;
+            float:left;
+        }
+         .hint11 select{
+            width:50%;
+            height:30px;
+            text-align:right;
+            float:left;
+        }
     </style>
     <script>
         function addDeliveryStation(){
@@ -83,7 +105,6 @@
             }
         </div>
     </div>
-    <!--
     <div class="box1">
         <div class="hint1" style="height:580px;">
             <div class="hint-in11">
@@ -91,19 +112,10 @@
                 <div class="hint33"></div>
             </div>
         </div>
+
     </div>
 
-    <div class="box11">
-        <div class="hint11" style="height:580px;">
-            <div class="hint-in111">
-                <div class="hint2">Kenneth2</div>
-                <div class="hint333"></div>
-            </div>
-        </div>
-    </div>
-    -->
-
-    <!--- header begin-->
+  <!--- header begin-->
     <header id="pc-header">
         <div class="BHeader">
             <div class="yNavIndex">
@@ -137,9 +149,7 @@
                         <dt>选择操作</dt>
                         <dd><a href="@Url.Action("getAllInventoryProduct", "Inventory")">所有商品</a></dd>
                         <dd><a href="@Url.Action("GetProductOutList", "Inventory")">出库记录</a></dd>
-                        <dd><a href="#">入库记录</a></dd>
-                        <dd><a href="#">热销商品</a></dd>
-                        <dd><a href="#">待发货</a></dd>
+                        <dd><a href="@Url.Action("GetProductInList", "Inventory")">入库记录</a></dd>
                     </dl>
                     <dl>
                         <dt>物流管理</dt>

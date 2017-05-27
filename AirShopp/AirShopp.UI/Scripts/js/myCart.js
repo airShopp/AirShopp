@@ -82,23 +82,57 @@ function selectSingle(){
 
 /*删除单行商品*/
 function deleteRow(rowId){
-    var Index=document.getElementById(rowId).rowIndex; //获取当前行的索引号
-    document.getElementById("shopping").deleteRow(Index);
-    //document.getElementById("shopping").deleteRow(Index-1);
-    productCount();
+    $.ajax({
+        type: "Get",
+        url: "/Cart/DeleteCarts",
+        data: {
+            "CartIdStr": rowId
+        },
+        success: function (result) {
+            productCount();
+            location.reload();
+        }
+    });
     }
 
 /*删除选中行的商品*/
 function deleteSelectRow(){
     var oInput=document.getElementsByName("cartCheckBox");
-    var Index;
-     for (var i=oInput.length-1;i>=0;i--){
-       if(oInput[i].checked==true){
-         Index=document.getElementById(oInput[i].value).rowIndex; /*获取选中行的索引号*/
-         document.getElementById("shopping").deleteRow(Index);
-         //document.getElementById("shopping").deleteRow(Index-1);
+    var CartIdStr;
+    var IndexStr;
+    for (var i = oInput.length - 1; i >= 0; i--) {
+        var tdValue = oInput[i].value;
+        if (oInput[i].checked == true) {
+            var Index = $("#p" + tdValue).parents("tr").index(); /*获取选中行的索引号*/
+            var yyyy = oInput[i].value;
+            //$("#shopping").find("tr:eq(" + Index + ")").remove();
+            //document.getElementById("shopping").deleteRow(Index-1);
+            if (CartIdStr == undefined) {
+                CartIdStr = tdValue;
+            }
+            else {
+                CartIdStr = CartIdStr + "," + oInput[i].value;
+            }
+
+            if (IndexStr == undefined) {
+                IndexStr = Index;
+            }
+            else {
+                IndexStr = IndexStr + "," + Index;
+            }
         }
     }
-    productCount();
-    }
+    $.ajax({
+        type: "Get",
+        url: "/Cart/DeleteCarts",
+        data: {
+            "CartIdStr": CartIdStr
+        },
+        success: function (result) {
+            productCount();
+            location.reload();
+        }
+    });
+}
+
 

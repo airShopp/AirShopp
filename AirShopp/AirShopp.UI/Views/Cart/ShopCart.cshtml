@@ -26,8 +26,9 @@
                 {
                     var trId = "product" + i;
                     var tdClass = "select" + (i + 2);
+                    var tdId = "p" + cartProduct.Id;
                     <tr id="@trId" class="cartItem">
-                        <td class="cart_td_1"><input name="cartCheckBox" class="@tdClass" type="checkbox" id="@cartProduct.Id" value="@cartProduct.Id" onclick="selectSingle()" /></td>
+                        <td class="cart_td_1"><input name="cartCheckBox" class="@tdClass" type="checkbox" id="@tdId" value="@cartProduct.Id" onclick="selectSingle()" /></td>
                         <td class="cart_td_2"><img style="width:80px;height:80px;" src="@cartProduct.PictureUrl" alt="shopping" /></td>
                         <td class="cart_td_3">
                             <a href="#">@cartProduct.ProductName</a><br />
@@ -37,7 +38,7 @@
                         <td class="cart_td_5">@cartProduct.Price</td>
                         <td class="cart_td_6"><img src="~/Content/img/cart/taobao_minus.jpg" alt="minus" onclick="changeNum('num_@i','minus')" class="hand" /> <input id="num_@i" type="text" value="@cartProduct.ProductAmount" class="num_input" readonly="readonly" /> <img src="~/Content/img/cart/taobao_adding.jpg" alt="add" onclick="changeNum('num_@i','add')" class="hand" /></td>
                         <td class="cart_td_7"></td>
-                        <td class="cart_td_8"><a href="javascript:deleteRow('@trId');">删除</a></td>
+                        <td class="cart_td_8"><a href="javascript:deleteRow('@cartProduct.Id');">删除</a></td>
                     </tr>
                     i++;
                 }
@@ -95,4 +96,5 @@
         });
         $(".pagination").width(width+ ($(".pagination").children().length * 2) + 2);
     });
+
 </script>

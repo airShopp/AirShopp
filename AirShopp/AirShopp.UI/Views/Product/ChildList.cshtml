@@ -10,7 +10,14 @@
                 <li>
                     <a href="/Product/getProduct?productId=@Model.productList[index].ProductId">
                         <img src="@Model.productList[index].ProductUrl" style="width:230px;height:259px;">
-                        <p class="head-name">@Model.productList[index].ProductName.Substring(0, 15) </p>
+                        @if (Model.productList[index].ProductName.Length > 15)
+                        {
+                            <p class="head-name">@Model.productList[index].ProductName.Substring(0, 15) </p>
+                        }
+                        else
+                        {
+                            <p class="head-name">@Model.productList[index].ProductName </p>
+                        }
                     </a>
                     <p><span class="price">￥@Model.productList[index].DiscountPrice</span><span class="discount">￥@Model.productList[index].Price</span></p>
                     <p class="head-futi"> <span>@Model.productList[index].CommentAmount 人评价）</span></p>

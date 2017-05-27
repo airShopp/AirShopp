@@ -10,5 +10,8 @@ namespace AirShopp.Domain
     {
         List<Product> Products();
         Product GetProductById(long productId);
+        long AddProduct(Product product);
+        void UpdateProductInfo(long productId, string productName ,string productUrl, bool isOnSale,decimal price);
+        void DeleteProduct(long productId);
     }
 }
