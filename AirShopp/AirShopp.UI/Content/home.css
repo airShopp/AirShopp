@@ -312,7 +312,7 @@ body{min-width: 1200px; _width:expression(document.documentElement.clientWidth>1
 .menu_body{line-height:38px;border-left:1px solid #e0e0e0;backguound:#fff;border-right:1px solid #e0e0e0;}
 .menu_body a{display:block;height:38px;line-height:38px;padding-left:38px;color:#777777;background:#fff;text-decoration:none;border-bottom:1px solid #e0e0e0;}
 .menu_body a:hover{text-decoration:none;}
-.pc-info {width:1000px;}
+.pc-info {width:1200px;}
 .menu_list h2 {font-weight:normal; font-size:14px; background:#f7f7f7; border:1px solid #e0e0e0;  height:35px; line-height:35px; padding-left:10px; color:#333;}
 .pc-term {border:1px solid #e0e0e0; margin-bottom:15px; }
 .pc-term-dl { padding:10px;}
@@ -518,7 +518,7 @@ body{min-width: 1200px; _width:expression(document.documentElement.clientWidth>1
 .pc-percent dt {width:70px; float:left;}
 .pc-percent dd {width:100px; float:left; height:10px; background:#efefef; overflow:hidden; margin-top:4px;}
 .pc-percent dd div {background-color:#ed0000; background-image:linear-gradient(to bottom, #ed0000 0px, #a50000 100%); height:10px; overflow:hidden; transition:width 0.6s ease 0s;}
-.pc-overall ul li {height:37px; line-height:37px; }
+.pc-overall ul li {height:37px; line-height:37px; margin-left:210px;}
 .pc-overall ul li  a{height:35px; line-height:35px; display:block; font-size:14px;}
 .pc-overall ul li em { font-size:12px; font-style:normal; padding-left:4px;}
 
@@ -539,17 +539,17 @@ body{min-width: 1200px; _width:expression(document.documentElement.clientWidth>1
 
 .pc-column {background:#f7f7f7; height:30px; line-height:30px; border-top:1px solid #e0e0e0; border-bottom:1px solid #e0e0e0; margin-top:10px}
 .pc-column .column1  { width:500px; text-align:center; float:left; font-weight:600;}
-.pc-column .column2  { width:149px; text-align:left; float:left; font-weight:600; padding-left:30px;}
+.pc-column .column2  { width:200px; text-align:center; float:left; font-weight:600; padding-left:30px;}
 .pc-column .column3  { width:120px; text-align:left; float:left; font-weight:600; padding-left:30px;}
-.pc-column .column4  { width:135px; text-align:center; float:left; font-weight:600; padding-left:1px;}
+.pc-column .column4  { width:300px; text-align:center; float:left; font-weight:600; padding-left:1px;}
 
 
 .pc-comments ul li {float:left; height:100px; line-height:22px; width:96%; border-top:1px solid #e0e0e0;overflow:hidden; padding:30px 20px; margin-top:-1px;}
 
-.pc-comments .column1 {width:500px; float:left; text-align:left;}
-.pc-comments .column2 {width:149px; float:left; text-align:left; line-height:100px; padding-left:10px;}
+.pc-comments .column1 {width:500px; float:left; text-align:center;}
+.pc-comments .column2 {width:200px; float:left; text-align:center; line-height:100px; padding-left:50px;}
 .pc-comments .column3 {width:120px; float:left; text-align:left; line-height:100px; padding-left:30px; color:#999;}
-.pc-comments .column4 {width:145px; float:left; text-align:center; line-height:22px; padding-left:1px; color:#999;}
+.pc-comments .column4 {width:260px; float:left; text-align:center; line-height:22px; padding-left:1px; color:#999;}
 
 
 

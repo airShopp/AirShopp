@@ -15,12 +15,14 @@ namespace AirShopp.UI.Controllers
         private readonly IInventoryRepository _inventoryRepository;
         private readonly IProductRepository _productRepository;
         private readonly IOrderItemRepository _orderItemRepository;
+        private readonly ICategoryRepository _categoryRepository;
         private readonly IReadFromDb _readFromDb;
         public ProductController(
             ICommentRepository commentRepository,
             IInventoryRepository inventoryRepository,
             IProductRepository productRepository,
             IOrderItemRepository orderItemRepository,
+            ICategoryRepository categoryRepository,
             IReadFromDb readFromDb
             )
         {
@@ -28,11 +30,16 @@ namespace AirShopp.UI.Controllers
             _inventoryRepository = inventoryRepository;
             _productRepository = productRepository;
             _orderItemRepository = orderItemRepository;
+            _categoryRepository = categoryRepository;
             _readFromDb = readFromDb;
         }
         // GET: ProductList
         public ActionResult GetProducts(string queryStr,int? categoryId, int? indexNum, int? pageSize = 8)
         {
+            if (queryStr == null)
+            {
+                queryStr = string.Empty;
+            }
             var products = GetProductList(queryStr,categoryId, indexNum, pageSize );
             return View("ProductList", products);
         }
@@ -41,7 +48,7 @@ namespace AirShopp.UI.Controllers
         //public ActionResult GetPageProduct(int? indexNum, int? pageSize, int categoryId)
         //{
         //    var products = GetProductList(indexNum, pageSize, categoryId);
-        //    return PartialView("ChildList",products);
+        //    return PartialView("ChildList", products);
         //}
         public ActionResult getProduct(long productId)
         {
@@ -55,14 +62,20 @@ namespace AirShopp.UI.Controllers
 
             var product = _productRepository.GetProductById(productId);
             var comment = _commentRepository.GetCommentsByProductId(productId);
+            string categoryName = _categoryRepository.GetCategoryNameByProductId(productId);
+
             List<CustomerCommentDataModel> commentList = new List<CustomerCommentDataModel>();
             foreach (var c in comment)
             {
                 CustomerCommentDataModel customerComment = new CustomerCommentDataModel();
                 customerComment.Comment = c;
+                commentList.Add(customerComment);
             }
+
             ProductDetailViewModel detailViewModel = new ProductDetailViewModel
             {
+                CategoryName = categoryName,
+                comments = commentList,
                 ProductId = product.Id,
                 ProductName = product.ProductName,
                 Description = product.Description,
@@ -81,10 +94,11 @@ namespace AirShopp.UI.Controllers
             var productList = (from p in _readFromDb.Products
                                join d in _readFromDb.Discounts on p.Id equals d.ProductId
                                join c in _readFromDb.Categories on p.CategoryId equals c.Id
-                               where c.Id == categoryId || c.ParentId == categoryId || p.ProductName.Contains(queryStr)  && p.IsOnSale == true
+                               where p.IsOnSale == true
                                let cm = _readFromDb.Comments.Where(c => c.ProductId == p.Id)
                                select new ProductListDataModel
                                {
+                                   CategoryId = c.Id,
                                    ProductId = p.Id,
                                    ProductName = p.ProductName,
                                    Price = Math.Round((double)p.Price, 2),
@@ -93,7 +107,15 @@ namespace AirShopp.UI.Controllers
                                    CommentAmount = cm.Count(),
                                    ProductUrl = p.Url
                                });
-
+            if (categoryId != null)
+            {
+                productList = productList.Where(c => (c.CategoryId == categoryId) || (c.ProductId == categoryId));
+            }
+            if (!string.IsNullOrEmpty(queryStr))
+            {
+                productList = productList.Where(plt => plt.ProductName.Contains(queryStr));
+            }
+            
             List<ProductListDataModel> pl = new List<ProductListDataModel>();
             var paginationList = productList.OrderBy(x => x.ProductId).ToPagedList(indexNum, pageSize);
 
