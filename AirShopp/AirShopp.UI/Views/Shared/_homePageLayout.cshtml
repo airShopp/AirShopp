@@ -49,7 +49,7 @@
             <div class="head-form fl">
                 @using (Html.BeginForm("GetProducts", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
-                    <input type="text" name="queryStr" class="search-text" accesskey="" id="key" autocomplete="off" placeholder="蛋糕" />
+                    <input type="text" name="queryStr" class="search-text" accesskey="" id="key" autocomplete="off" placeholder="请输入商品关键字···" />
                     <input type="submit" class="button" value="搜索"/>
                 }
             </div>

@@ -48,6 +48,6 @@ namespace AirShopp.Common
         public const string RETURNING = "RETURNING";
 
 
-        public const decimal DEFAULTDISCOUNT = 1;
+        public const decimal DEFAULTDISCOUNT = 10;
     }
 }

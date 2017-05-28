@@ -18,6 +18,7 @@ namespace AirShopp.UI.Models.ViewModel
         public int ProductAmount { get; set; }
         public DateTime BuyTime { get; set; } //OrderItem => OrderDate
         public List<CustomerCommentDataModel> comments { get; set; }
+        public string CategoryName { get; set; }
 
     }
 }
