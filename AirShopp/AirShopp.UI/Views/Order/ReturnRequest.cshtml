@@ -25,8 +25,8 @@
                     <div class="member-circle clearfix">
                         <div class="member-apply clearfix">
                             <div class="ap1 fl">
-                                <span class="gr1"><a href="/Product/getProduct?productId=>@Model.ReturnRequestViewModelList[i].OrderItem.Product.Id"><img width="60" height="60" about="" title="" src="@Model.ReturnRequestViewModelList[i].OrderItem.Product.Url"></a></span>
-                                <span class="gr2"><a href="/Product/getProduct?productId=>@Model.ReturnRequestViewModelList[i].OrderItem.Product.Id">@Model.ReturnRequestViewModelList[i].OrderItem.Product.ProductName</a></span>
+                                <span class="gr1"><a href="/Product/getProduct?productId=@Model.ReturnRequestViewModelList[i].OrderItem.Product.Id"><img width="60" height="60" about="" title="" src="@Model.ReturnRequestViewModelList[i].OrderItem.Product.Url"></a></span>
+                                <span class="gr2"><a href="/Product/getProduct?productId=@Model.ReturnRequestViewModelList[i].OrderItem.Product.Id">@Model.ReturnRequestViewModelList[i].OrderItem.Product.ProductName</a></span>
                                 <span class="gr3">X @Model.ReturnRequestViewModelList[i].OrderItem.Quantity</span>
                             </div>
                             <div class="ap2 fl"><a href="/Order/OrderDetail?orderId=@Model.ReturnRequestViewModelList[i].ReturnOrder.OrderId">订单详情</a></div>

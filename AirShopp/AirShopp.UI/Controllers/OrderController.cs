@@ -274,71 +274,77 @@ namespace AirShopp.UI.Controllers
             Order order = new Order();
             OrderConfirmViewModel orderConfirmViewModel = new OrderConfirmViewModel();
             long customerId = (Session[Constants.SESSION_USER] as Customer).Id;
+            Address address = _readFromDb.Address.Where(x => x.CustomerId == customerId && x.IsDefault).FirstOrDefault();
 
-            if (OrderId == null)
+            if (address == null)
             {
-                string[] cartItemsIdList = cartItemStr.Split(';');
-                List<OrderItem> orderItems = new List<OrderItem>();
-                for (int i = 0; i < cartItemsIdList.Length - 1; i++)
-                {
-                    if (!string.IsNullOrEmpty(cartItemsIdList[i]))
-                    {
-                        long cartItemsId = Convert.ToInt64(cartItemsIdList[i]);
-                        CartItem cartItem = _readFromDb.CartItems.Where(x => x.Id == cartItemsId).FirstOrDefault();
-                        OrderItem orderItem = new OrderItem();
-                        orderItem.ProductId = cartItem.ProductId;
-                        orderItem.Quantity = cartItem.Quantity;
-                        orderItem.UnitPrice = cartItem.PricePerProduct;
-                        orderItem.DiscountPrice = cartItem.PricePerProduct;
-                        orderItems.Add(orderItem);
-
-                        _cartItemRepository.UpdateCartItem(cartItem.Id);
-                    }
-                }
-
-                Address address = _readFromDb.Address.Where(x => x.CustomerId == customerId && x.IsDefault).FirstOrDefault();
-
-                order.CustomerId = customerId;
-                order.TotalAmount = Convert.ToDecimal(totalAmount);
-                order.OrderStatus = Constants.OBLIGATION;
-                order.OrderDate = DateTime.Now;
-                order.DeliveryDate = Convert.ToDateTime("1970-01-01 00:00:00.000");
-                order.OrderItems = orderItems;
-                order.AddressId = address.Id;
-                order.IsSpecialOrder = false;
-                order.SpecialType = string.Empty;
-                try
-                {
-                    order = _orderService.AddOrder(order);
-                    order = _readFromDb.Orders.Where(x => x.Id == order.Id).FirstOrDefault();
-                }
-                catch (System.Exception) { }
+                return Content("<script>alert('请添加收货地址。');location.href='/Address/GetAddress'</script>");
             }
             else
             {
-                order = _orderRepository.GetOrderByOrderId((long)OrderId);
-                order.AddressId = _readFromDb.Address.Where(x => x.CustomerId == customerId && x.IsDefault).FirstOrDefault().Id;
-                _orderRepository.UpdateOrder(order);
-                order = _readFromDb.Orders.Where(x => x.Id == OrderId).FirstOrDefault();
-            }
-
-            try
-            {
-                decimal actuallyAmount = 0;
-                foreach (OrderItem orderItem in order.OrderItems)
+                if (OrderId == null)
                 {
-                    actuallyAmount += orderItem.Product.Price * orderItem.Quantity;
+                    string[] cartItemsIdList = cartItemStr.Split(';');
+                    List<OrderItem> orderItems = new List<OrderItem>();
+                    for (int i = 0; i < cartItemsIdList.Length - 1; i++)
+                    {
+                        if (!string.IsNullOrEmpty(cartItemsIdList[i]))
+                        {
+                            long cartItemsId = Convert.ToInt64(cartItemsIdList[i]);
+                            CartItem cartItem = _readFromDb.CartItems.Where(x => x.Id == cartItemsId).FirstOrDefault();
+                            OrderItem orderItem = new OrderItem();
+                            orderItem.ProductId = cartItem.ProductId;
+                            orderItem.Quantity = cartItem.Quantity;
+                            orderItem.UnitPrice = cartItem.PricePerProduct;
+                            orderItem.DiscountPrice = cartItem.PricePerProduct;
+                            orderItems.Add(orderItem);
+
+                            _cartItemRepository.UpdateCartItem(cartItem.Id);
+                        }
+                    }
+
+                    order.CustomerId = customerId;
+                    order.TotalAmount = Convert.ToDecimal(totalAmount);
+                    order.OrderStatus = Constants.OBLIGATION;
+                    order.OrderDate = DateTime.Now;
+                    order.DeliveryDate = Convert.ToDateTime("1970-01-01 00:00:00.000");
+                    order.OrderItems = orderItems;
+                    order.AddressId = address.Id;
+                    order.IsSpecialOrder = false;
+                    order.SpecialType = string.Empty;
+                    try
+                    {
+                        order = _orderService.AddOrder(order);
+                        order = _readFromDb.Orders.Where(x => x.Id == order.Id).FirstOrDefault();
+                    }
+                    catch (System.Exception) { }
                 }
-                orderConfirmViewModel.ActuallyAmount = actuallyAmount;
-                orderConfirmViewModel.DisCountAmount = actuallyAmount - order.TotalAmount;
-                orderConfirmViewModel.order = order;
-                orderConfirmViewModel.OrderId = order.Id;
-                orderConfirmViewModel.ProvinceList = _provinceRepository.GetProvince();
-                orderConfirmViewModel.CityList = _cityRepository.GetCity();
-                orderConfirmViewModel.AreaList = _areaRepository.GetArea();
+                else
+                {
+                    order = _orderRepository.GetOrderByOrderId((long)OrderId);
+                    order.AddressId = _readFromDb.Address.Where(x => x.CustomerId == customerId && x.IsDefault).FirstOrDefault().Id;
+                    _orderRepository.UpdateOrder(order);
+                    order = _readFromDb.Orders.Where(x => x.Id == OrderId).FirstOrDefault();
+                }
+
+                try
+                {
+                    decimal actuallyAmount = 0;
+                    foreach (OrderItem orderItem in order.OrderItems)
+                    {
+                        actuallyAmount += orderItem.Product.Price * orderItem.Quantity;
+                    }
+                    orderConfirmViewModel.ActuallyAmount = actuallyAmount;
+                    orderConfirmViewModel.DisCountAmount = actuallyAmount - order.TotalAmount;
+                    orderConfirmViewModel.order = order;
+                    orderConfirmViewModel.OrderId = order.Id;
+                    orderConfirmViewModel.ProvinceList = _provinceRepository.GetProvince();
+                    orderConfirmViewModel.CityList = _cityRepository.GetCity();
+                    orderConfirmViewModel.AreaList = _areaRepository.GetArea();
+                }
+                catch (Exception ex) { }
+                return View(orderConfirmViewModel);
             }
-            catch (Exception ex){}
-            return View(orderConfirmViewModel);
         }
         public ActionResult SubmitOrder(long orderId)
         {
@@ -729,6 +735,13 @@ namespace AirShopp.UI.Controllers
         {
             long customerId = (Session[Constants.SESSION_USER] as Customer).Id;
             Address address = _readFromDb.Address.Where(x => x.CustomerId == customerId && x.IsDefault).FirstOrDefault();
+
+            if (address == null)
+            {
+
+                return Content("<script>alert('请添加收货地址。');location.href='/Address/GetAddress'</script>");
+            }else { 
+
             var product = (from p in _readFromDb.Products
                                join d in _readFromDb.Discounts on p.Id equals d.ProductId
                            where p.Id == productId
@@ -785,6 +798,7 @@ namespace AirShopp.UI.Controllers
 
             }
             return View("CheckOrder", orderConfirmViewModel);
+            }
         }
     }
 }

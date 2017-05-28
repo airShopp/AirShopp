@@ -142,7 +142,7 @@
                                 <div class="ci4 amanda1"><div><p>@Model.AllStatusViewModel.AllOrder[i].OrderDate.ToShortDateString()</p></div></div>
                                 @if (Model.AllStatusViewModel.AllOrder[i].Returns.Count() == 0)
                                 {
-                                    if (Model.AllStatusViewModel.AllOrder[i].OrderStatus.Equals("FINISHED"))
+                                    if (Model.AllStatusViewModel.AllOrder[i].OrderStatus.Equals("FINISHED")|| Model.AllStatusViewModel.AllOrder[i].OrderStatus.Equals("COMMENTED"))
                                     {
                                         <div class="ci5 amanda1">
                                             <div>
@@ -170,11 +170,23 @@
                                         </div>
                                         <div class="ci5 ci8 amanda1">
                                             <div>
-                                                @for (int k = 0; k < @Model.AllStatusViewModel.AllOrder[i].OrderItems.Count(); k++)
+                                                @if (Model.AllStatusViewModel.AllOrder[i].OrderStatus == "COMMENTED")
                                                 {
-                                                    var orderItems = @Model.AllStatusViewModel.AllOrder[i].OrderItems.ToList();
-                                                    AirShopp.Domain.OrderItem orderItem = orderItems[k] as AirShopp.Domain.OrderItem;
+                                                    for (int k = 0; k < @Model.AllStatusViewModel.AllOrder[i].OrderItems.Count(); k++)
+                                                    {
+                                                        var orderItems = @Model.AllStatusViewModel.AllOrder[i].OrderItems.ToList();
+                                                        AirShopp.Domain.OrderItem orderItem = orderItems[k] as AirShopp.Domain.OrderItem;
+                                                        <p><a href="/Comment/Index">查看评价</a></p> <p><a href="/Product/getProduct?productId=@Model.AllStatusViewModel.AllOrder[i]" class="member-touch">再次购买</a> </p>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    for (int k = 0; k < @Model.AllStatusViewModel.AllOrder[i].OrderItems.Count(); k++)
+                                                    {
+                                                        var orderItems = @Model.AllStatusViewModel.AllOrder[i].OrderItems.ToList();
+                                                        AirShopp.Domain.OrderItem orderItem = orderItems[k] as AirShopp.Domain.OrderItem;
                                                     <p><a href="/Comment/Index?orderId=@Model.AllStatusViewModel.AllOrder[i].Id">评价</a></p> <p><a href="/Product/getProduct?productId=@Model.AllStatusViewModel.AllOrder[i]" class="member-touch">再次购买</a> </p>
+                                                    }
                                                 }
                                             </div>
                                         </div>
@@ -258,7 +270,6 @@
                                                 </div>
                                 }
                             </div>
-
                         </li>
                     }
                 </ul>
@@ -541,9 +552,7 @@
                                         {
                                             var orderItems = @Model.PendingCommentStatusViewModel.PendingComment[i].OrderItems.ToList();
                                             AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
-                                            <div class="ci7 clearfix">
                                                 <p><a href="/Comment/Index?orderId=@orderItem.Id">评价</a></p>
-                                            </div>
                                         }
                                     </div>
                                 </div>

@@ -78,7 +78,7 @@ namespace AirShopp.UI.Controllers
 
             _addressService.AddAddress(DeliveryAddress);
 
-            if (OrderId == 0)
+            if (OrderId == 0 || OrderId==null)
             {
                 return RedirectToAction("GetAddress");
             }
