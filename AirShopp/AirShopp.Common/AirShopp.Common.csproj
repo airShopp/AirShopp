@@ -51,9 +51,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChineseNameHelper.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="BaseException.cs" />
     <Compile Include="PictureHelper.cs" />
+    <Compile Include="TelHelper.cs" />
     <Compile Include="WebClientHelper.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="MathHelper.cs" />

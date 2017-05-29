@@ -17,6 +17,7 @@ namespace AirShopp.UI.Controllers
         private IOrderRepository _orderRepository;
         private IDeliveryNoteRepository _deliveryNoteRepository;
         private IDeliveryStationRepository _deliveryStationRepository;
+        private ICourierRepository _courierRepository;
         private IProvinceRepository _provinceRepository;
         private ICityRepository _cityRepository;
         private IAreaRepository _areaRepository;
@@ -27,6 +28,7 @@ namespace AirShopp.UI.Controllers
             IOrderRepository orderRepository,
             IDeliveryNoteRepository deliveryNoteRepository,
             IDeliveryStationRepository deliveryStationRepository,
+            ICourierRepository courierRepository,
             IProvinceRepository provinceRepository,
             ICityRepository cityRepository,
             IAreaRepository areaRepository,
@@ -36,6 +38,7 @@ namespace AirShopp.UI.Controllers
             _orderRepository = orderRepository;
             _deliveryNoteRepository = deliveryNoteRepository;
             _deliveryStationRepository = deliveryStationRepository;
+            _courierRepository = courierRepository;
             _provinceRepository = provinceRepository;
             _cityRepository = cityRepository;
             _areaRepository = areaRepository;
@@ -264,7 +267,31 @@ namespace AirShopp.UI.Controllers
         public ActionResult DeliveryStationListDetail(long deliveryStationId)
         {
             DeliveryStation deliveryStation = _deliveryStationRepository.GetDeliveryStation(deliveryStationId);
+            if (deliveryStationId == 1)
+            {
+                deliveryStation.DeliveryStations.Remove(deliveryStation);
+            }
             return View(deliveryStation);
+        }
+
+        [HttpGet]
+        public ActionResult AddCourier(long deliveryStationId)
+        {
+            Courier courier = new Courier();
+            courier.Name = ChineseNameHelper.getRandomName();
+            courier.Phone = TelHelper.getRandomTel();
+            courier.DeliveryStationId = deliveryStationId;
+
+            _courierRepository.AddCourier(courier);
+
+            return RedirectToAction("DeliveryStationListDetail", new { deliveryStationId = deliveryStationId });
+        }
+
+        [HttpGet]
+        public ActionResult DeleteCourier(long courierId, long deliveryStationId)
+        {
+            _courierRepository.DeleteCourier(courierId);
+            return RedirectToAction("DeliveryStationListDetail", new { deliveryStationId = deliveryStationId });
         }
     }
 }

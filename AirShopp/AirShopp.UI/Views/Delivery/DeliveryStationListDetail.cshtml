@@ -34,6 +34,21 @@
         width: 53px;
     }
 
+    .be66 {
+        width:250px;
+    }
+
+    .be77 {
+        width:300px;
+    }
+
+    .be88 {
+        width:235px;
+    }
+    .member-circle .be88{
+        border-right:none;
+    }
+
     .member-circle div {
         text-align: center;
         float: left;
@@ -79,37 +94,44 @@
     {
 
         <div class="member-head">
-            <div class="member-heels fl"><h2>派送员</h2></div>
+            <div class="member-heels fl"><h2>@Model.Name 的派送员</h2></div>
+            <div class="member-backs fr">
+                @Html.ActionLink("新增配送员", "AddCourier", "Delivery", new { deliveryStationId = Model.Id }, new { style = "color:#FFFFFF" })
+            </div>
         </div>
         <div class="member-border">
             <div class="member-return H-over">
                 <div class="member-cancel clearfix">
-                    <span class="be22">区域</span>
-                    <span class="be33">名称</span>
-                    <span class="be11">地址</span>
-                    <span class="be44">经度</span>
-                    <span class="be44">纬度</span>
-                    <span class="be55">等级</span>
+                    <span class="be22">序号</span>
+                    <span class="be66">姓名</span>
+                    <span class="be77">电话</span>
+                    <span class="be88">操作</span>
                 </div>
                 <div class="member-sheet clearfix">
                     <ul>
-                        @foreach(var item in Model.Couriers) {
+                        @if (Model.Couriers.Count == 0)
+                        {
                             <li>
-                                <div class="member-circle clearfix">
-                                    <div class="ci22">1</div>
-                                    <div class="ci33">2</div>
-                                    <div class="ci11">3</div>
-                                    <div class="ci44">4</div>
-                                    <div class="ci44">5</div>
-                                    <div class="ci55" style="border:none;">6</div>
+                                <div class="member-circle clearfix" style="text-align:center;height:35px;line-height:35px;">
+                                    该派送点还没有派送员
                                 </div>
                             </li>
                         }
+                        else
+                        {
+                            for (var i = 0; i < Model.Couriers.ToList().Count; i++)
+                            {
+                                <li>
+                                    <div class="member-circle clearfix">
+                                        <div class="ci22">@(i+1)</div>
+                                        <div class="be66">@Model.Couriers.ToList()[i].Name</div>
+                                        <div class="be77">@Model.Couriers.ToList()[i].Phone</div>
+                                        <div class="be88">@Html.ActionLink("删除", "DeleteCourier", "Delivery", new { courierId = Model.Couriers.ToList()[i].Id, deliveryStationId = Model.Id }, new { style = "color:#a3a3a3;text-decoration:underline;" })</div>
+                                    </div>
+                                </li>
+                            }
+                        }
                     </ul>
-                </div>
-            </div>
-            <div class="clearfix" style="padding:30px 20px;">
-                <div class="fr pc-search-g pc-search-gs">
                 </div>
             </div>
         </div>
@@ -117,12 +139,12 @@
     else
     {
         <div class="member-head">
-            <div class="member-heels fl"><h2>子级派送点</h2></div>
+            <div class="member-heels fl"><h2>@Model.Name 的子级派送点</h2></div>
         </div>
         <div class="member-border">
             <div class="member-return H-over">
                 <div class="member-cancel clearfix">
-                    <span class="be22">区域</span>
+                    <span class="be22">序号</span>
                     <span class="be33">名称</span>
                     <span class="be11">地址</span>
                     <span class="be44">经度</span>
@@ -131,24 +153,32 @@
                 </div>
                 <div class="member-sheet clearfix">
                     <ul>
-                        @foreach (var item in Model.DeliveryStations)
+                        @if (Model.DeliveryStations.Count == 0)
                         {
                             <li>
-                                <div class="member-circle clearfix">
-                                    <div class="ci22">XXX</div>
-                                    <div class="ci33">@Html.ActionLink(@item.Name, "DeliveryStationListDetail", new { deliveryOrderId = @item.Id })</div>
-                                    <div class="ci11">@item.Address</div>
-                                    <div class="ci44">@item.Latitude</div>
-                                    <div class="ci44">@item.Longitude</div>
-                                    <div class="ci55" style="border:none;">@item.StationLevel</div>
+                                <div class="member-circle clearfix" style="text-align:center;height:35px;line-height:35px;">
+                                    该派送点还没有子级派送点
                                 </div>
                             </li>
                         }
+                        else
+                        {
+
+                            for (var i = 0; i < Model.DeliveryStations.ToList().Count; i++)
+                            {
+                                <li>
+                                    <div class="member-circle clearfix">
+                                        <div class="ci22">@(i + 1)</div>
+                                        <div class="ci33">@Html.ActionLink(@Model.DeliveryStations.ToList()[i].Name, "DeliveryStationListDetail", new { deliveryStationId = @Model.DeliveryStations.ToList()[i].Id })</div>
+                                        <div class="ci11">@Model.DeliveryStations.ToList()[i].Address</div>
+                                        <div class="ci44">@Model.DeliveryStations.ToList()[i].Latitude</div>
+                                        <div class="ci44">@Model.DeliveryStations.ToList()[i].Longitude</div>
+                                        <div class="ci55" style="border:none;">@Model.DeliveryStations.ToList()[i].StationLevel</div>
+                                    </div>
+                                </li>
+                            }
+                        }
                     </ul>
-                </div>
-            </div>
-            <div class="clearfix" style="padding:30px 20px;">
-                <div class="fr pc-search-g pc-search-gs">
                 </div>
             </div>
         </div>

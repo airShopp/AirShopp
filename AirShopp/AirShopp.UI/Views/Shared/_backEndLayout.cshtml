@@ -122,6 +122,8 @@
                 <ul class="BHeaderl">
                     <li>@Html.ActionLink(user.Account, "GetUser", "User", null, new { style = "color:#ea4949" })</li>
                     <li class="headerul">|</li>
+                    <li>@Html.ActionLink("退出", "Logout", "User")</li>
+                    <li class="headerul">|</li>
                     <li>@Html.ActionLink("回到首页", "Index", "Home")</li>
                     <li class="headerul">|</li>
                     <li>@Html.ActionLink("订单查询", "Index", "Order")</li>
