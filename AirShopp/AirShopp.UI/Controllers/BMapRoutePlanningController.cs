@@ -39,16 +39,24 @@ namespace AirShopp.UI.Controllers
                 return Content("<script>alert('订单已派送结束');location.href='/Order/OrderDetail?orderId=" + orderId + "'</script>");
             }
 
-            Address address = _addressService.GetAddress(orderId).FirstOrDefault();
+            Address address = _addressService.GetAddress(order.CustomerId).FirstOrDefault();
 
             // Current area second level delivery station
             DeliveryStation deliveryStation = _deliveryStationService.GetDeliveryStations(address.AreaId, 2).FirstOrDefault();
 
             // Get Third level delivery station to destination in current area
             Dictionary<double, DeliveryStation> distanceMap = new Dictionary<double, DeliveryStation>();
-            foreach (var obj in deliveryStation.DeliveryStations)
+
+            if (deliveryStation.DeliveryStations.Count == 0)
             {
-                distanceMap.Add(MathHelper.GetDistance(obj.Longitude, obj.Latitude, address.Longitude, address.Latitude), obj);
+                return Content("<script>alert('当前地址下无子级派送点');location.href='/Order/OrderDetail?orderId=" + orderId + "'</script>");
+            }
+            else
+            {
+                foreach (var obj in deliveryStation.DeliveryStations)
+                {
+                    distanceMap.Add(MathHelper.GetDistance(obj.Longitude, obj.Latitude, address.Longitude, address.Latitude), obj);
+                }
             }
 
             // Order by distance
