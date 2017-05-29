@@ -46,5 +46,6 @@ namespace AirShopp.UI.Models.ViewModel
     {
         public List<OriginPointViewModel> OriginPoints { get; set; }
         public List<DeliveryInfoViewModel> DeliveryInfos { get; set; }
+        public Order Order { get; set; }
     }
 }

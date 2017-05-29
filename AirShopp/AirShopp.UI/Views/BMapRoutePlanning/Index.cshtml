@@ -9,7 +9,7 @@
 
 <div class="member-right fr">
     <div class="member-head">
-        <div class="member-heels fl"><h2>订单号：1</h2></div>
+        <div class="member-heels fl"><h2>订单号：@Model.Order.Id</h2></div>
         <div class="member-backs fr" style="padding-top:0;">
             <a href="javascript:void(0)" id="beginBtn" style="color:#FFFFFF;display:inline-block">开始配送</a>
             @Html.ActionLink("返回订单首页", "Index", "Order", new { customerId = (Session["customer"] as AirShopp.Domain.Customer).Id }, new { style = "color:#FFFFFF;display:inline-block;" })
@@ -140,7 +140,7 @@
                 point: JSON.stringify(point),
                 index: index,
                 nextPoint: JSON.stringify(nextPoint),
-                orderId: 1
+                orderId: @Model.Order.Id
             },
             function(data){
                 fillInDeliveryInfo(data);

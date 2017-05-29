@@ -257,7 +257,7 @@ namespace AirShopp.UI.Controllers
                 return Content("<script>alert('添加出错，请联系IT');location.href='/Delivery/AddDeliveryStation'</script>");
             }
 
-            return View("DeliveryStationList");
+            return RedirectToAction("DeliveryStationList");
         }
     }
 }

@@ -20,9 +20,14 @@ namespace AirShopp.Domain
             _addressRepository.DeleteAddress(addressId);
         }
 
-        public List<Address> GetAddress(long customerId)
+        public List<Address> GetAddresses(long customerId)
         {
-            return _addressRepository.GetAddress(customerId);
+            return _addressRepository.GetAddresses(customerId);
+        }
+
+        public Address GetAddress(long addressId)
+        {
+            return _addressRepository.GetAddress(addressId);
         }
 
         public void UpdateAddress(Address address)

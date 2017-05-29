@@ -48,7 +48,7 @@ namespace AirShopp.UI.Controllers
 
             if (isDefault)
             {
-                List<Address> addressList = _addressService.GetAddress(customerId);
+                List<Address> addressList = _addressService.GetAddresses(customerId);
                 Address defaultAddress = addressList.Where(x => x.IsDefault == isDefault).ToList().FirstOrDefault();
                 if (defaultAddress != null)
                 {
@@ -92,7 +92,7 @@ namespace AirShopp.UI.Controllers
         public ActionResult GetAddress(long? OrderId)
         {
             Customer customer = Session[Constants.SESSION_USER] as Customer;
-            List<Address> addressList = _addressService.GetAddress(customer.Id);
+            List<Address> addressList = _addressService.GetAddresses(customer.Id);
             AddressListViewModel addressListViewModel = new AddressListViewModel();
             addressListViewModel.ProvinceList = _provinceRepository.GetProvince();
             addressListViewModel.CityList = _cityRepository.GetCity();

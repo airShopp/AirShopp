@@ -15,9 +15,14 @@ namespace AirShopp.DataAccess
             _context.SaveChanges();
         }
 
-        public List<Address> GetAddress(long customerId)
+        public List<Address> GetAddresses(long customerId)
         {
             return _context.Address.Where(x => x.CustomerId == customerId).ToList();
+        }
+        
+        public Address GetAddress(long addressId)
+        {
+            return _context.Address.Where(x => x.Id == addressId).ToList().FirstOrDefault();
         }
 
         public void UpdateAddress(Address address)

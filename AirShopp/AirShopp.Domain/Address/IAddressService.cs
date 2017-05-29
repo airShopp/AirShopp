@@ -5,7 +5,8 @@ namespace AirShopp.Domain
     public interface IAddressService
     {
         void AddAddress(Address address);
-        List<Address> GetAddress(long customerId);
+        List<Address> GetAddresses(long customerId);
+        Address GetAddress(long addressId);
         void UpdateAddress(Address address);
         void DeleteAddress(long addressId);
     }

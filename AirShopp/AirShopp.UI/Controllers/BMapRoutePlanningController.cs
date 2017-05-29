@@ -39,7 +39,7 @@ namespace AirShopp.UI.Controllers
                 return Content("<script>alert('订单已派送结束');location.href='/Order/OrderDetail?orderId=" + orderId + "'</script>");
             }
 
-            Address address = _addressService.GetAddress(order.CustomerId).FirstOrDefault();
+            Address address = _addressService.GetAddress(order.AddressId);
 
             // Current area second level delivery station
             DeliveryStation deliveryStation = _deliveryStationService.GetDeliveryStations(address.AreaId, 2).FirstOrDefault();
@@ -55,7 +55,11 @@ namespace AirShopp.UI.Controllers
             {
                 foreach (var obj in deliveryStation.DeliveryStations)
                 {
-                    distanceMap.Add(MathHelper.GetDistance(obj.Longitude, obj.Latitude, address.Longitude, address.Latitude), obj);
+                    double key = MathHelper.GetDistance(obj.Longitude, obj.Latitude, address.Longitude, address.Latitude);
+                    if (!distanceMap.ContainsKey(key))
+                    {
+                        distanceMap.Add(key, obj);
+                    }
                 }
             }
 
@@ -66,7 +70,7 @@ namespace AirShopp.UI.Controllers
             int index = 1;
             foreach (var o in tempMap.Keys)
             {
-                if ((index == tempMap.Keys.Count && tempMap.Keys.Count <= 20) || index == 21)
+                if ((index == tempMap.Keys.Count && tempMap.Keys.Count <= 15) || index == 16)
                 {
                     break;
                 }
@@ -128,7 +132,8 @@ namespace AirShopp.UI.Controllers
                     secondPoint,
                     thirdPoint,
                     endPoint
-                }
+                },
+                Order = order
             };
 
             return View(bMapViewModel);
