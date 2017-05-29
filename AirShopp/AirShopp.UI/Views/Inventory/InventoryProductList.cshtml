@@ -400,7 +400,7 @@ z-index:102;
                 {
                     if (pageNum == Model.PageIndex)
                     {
-                        @Html.ActionLink(pageNum.ToString(), "getAllInventoryProduct","Inventory", new { indexNum = pageNum}, new { @class = "current", Target ="_self"} );
+                        @Html.ActionLink(pageNum.ToString(), "GetAllInventoryProduct","Inventory", new { indexNum = pageNum}, new { @class = "current", Target ="_self"} );
                     }
                     else if (pageNum == 0)
                     {
@@ -408,7 +408,7 @@ z-index:102;
                     }
                     else
                     {
-                        @Html.ActionLink(pageNum.ToString(), "getAllInventoryProduct", "Inventory", new {indexNum = pageNum},new { Target = "_self"});
+                        @Html.ActionLink(pageNum.ToString(), "GetAllInventoryProduct", "Inventory", new {indexNum = pageNum},new { Target = "_self"});
                     }
                 }
                 @*<a title="使用方向键右键也可翻到下一页哦！" class="" href="javascript:;">下一页</a>*@

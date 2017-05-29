@@ -183,6 +183,10 @@
     <Compile Include="Migrations\201705110820210_ModifyReturnModel.Designer.cs">
       <DependentUpon>201705110820210_ModifyReturnModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705290822558_UpdataAdminTable.cs" />
+    <Compile Include="Migrations\201705290822558_UpdataAdminTable.Designer.cs">
+      <DependentUpon>201705290822558_UpdataAdminTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AddressRepository.cs" />
@@ -302,6 +306,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705110820210_ModifyReturnModel.resx">
       <DependentUpon>201705110820210_ModifyReturnModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705290822558_UpdataAdminTable.resx">
+      <DependentUpon>201705290822558_UpdataAdminTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

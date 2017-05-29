@@ -5,6 +5,7 @@ using AirShopp.Domain;
 using AirShopp.UI.Models.ViewModel;
 using AirShopp.Common;
 using System.Web;
+using System.Web.Routing;
 
 namespace AirShopp.UI.Controllers
 {
@@ -16,6 +17,7 @@ namespace AirShopp.UI.Controllers
         public UserController(
             IAdminService adminService,
             ICustomerRepository customerRepository
+
             )
         {
             _adminService = adminService;
@@ -37,8 +39,9 @@ namespace AirShopp.UI.Controllers
         [HttpPost]
         public ActionResult Login(UserViewModel user)
         {
+            string skipAction = string.Empty;
+            string skipController = string.Empty;
             HttpCookie AccountCookie = WebClientHelper.GetCookie(Constants.USER_NAME);
-
             HttpCookie PwdCookie = WebClientHelper.GetCookie(Constants.PASSWORD);
             if (AccountCookie != null && PwdCookie != null && user.Password.Equals(PwdCookie.Value))
             {
@@ -49,11 +52,9 @@ namespace AirShopp.UI.Controllers
             {
                 user.Password = MathHelper.MD5(user.Password);
             }
-
             try
             {
                 Customer customer = _customerRepository.GetCustomer(user.UserName, user.Password);
-
                 if (user.RememberPwd)
                 {
                     WebClientHelper.SetCookie(Constants.USER_NAME, Constants.USER_NAME, customer.Account, DateTime.Now.AddDays(1));
@@ -64,17 +65,39 @@ namespace AirShopp.UI.Controllers
                     WebClientHelper.RemoveCookie(Constants.USER_NAME, null);
                     WebClientHelper.RemoveCookie(Constants.PASSWORD, null);
                 }
-
-                // Clear password for security
                 customer.Password = null;
                 Session.Add(Constants.SESSION_USER, customer);
 
+                skipAction = "Index";
+                skipController = "Home";
+                // Clear password for security
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
-                TempData["ErrMsg"] = ex.Message;
-                return View();
+                try
+                {
+                    var admin = _adminService.UserLogin(user.UserName, user.Password);
+                    if (user.RememberPwd)
+                    {
+                        WebClientHelper.SetCookie(Constants.USER_NAME, Constants.USER_NAME, admin.Account, DateTime.Now.AddDays(1));
+                        WebClientHelper.SetCookie(Constants.PASSWORD, Constants.PASSWORD, admin.Password, DateTime.Now.AddDays(1));
+                    }
+                    else
+                    {
+                        WebClientHelper.RemoveCookie(Constants.USER_NAME, null);
+                        WebClientHelper.RemoveCookie(Constants.PASSWORD, null);
+                    }
+                    admin.Password = null;
+                    Session.Add(Constants.SESSION_ADMIN, admin);
+                    return RedirectToAction("Index", "Inventory" );
+                }
+                catch (Exception e)
+                {
+                    TempData["ErrMsg"] = Constants.ERROR_MSG;
+                    return View();
+                    throw;
+                }
             }
         }
 

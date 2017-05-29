@@ -195,5 +195,12 @@ namespace AirShopp.DataAccess
                 return _context.ProductInFactory;
             }
         }
+        public IQueryable<Admin> Admins
+        {
+            get
+            {
+                return _context.Admin;
+            }
+        }
     }
 }

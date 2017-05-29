@@ -31,6 +31,7 @@ namespace AirShopp.Common
         public const string USER_NAME = "UserName";
         public const string PASSWORD = "Password";
         public const string SESSION_USER = "CUSTOMER";
+        public const string SESSION_ADMIN = "ADMIN";
         public const string IP = "IP";
         public const string TIME = "TIME";
 
@@ -38,6 +39,8 @@ namespace AirShopp.Common
         public const string TRANSFER = "TRANSFER";
         public const string DELIVERY = "DELIVERY";
         public const string FINISHED = "FINISHED";
+
+        public const string ERROR_MSG = "用户名或者密码错误";
         //PENDING DELETE BOUGHT
 
         public const string PENDING = "PENDING";

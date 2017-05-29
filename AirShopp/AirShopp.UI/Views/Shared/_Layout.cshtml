@@ -19,7 +19,7 @@
                     @if (Session["customer"] != null)
                     {
                         var user = Session["customer"] as AirShopp.Domain.Customer;
-                        <li>@Html.ActionLink(user.Account, "GetUser", "User", null, new { style = "color:#ea4949" })</li>
+                        <li>@Html.ActionLink(user.CustomerName, "GetUser", "User", null, new { style = "color:#ea4949" })</li>
                     }
                     else
                     {

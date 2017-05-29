@@ -1,5 +1,5 @@
 ﻿@{
-    var user = Session["customer"] as AirShopp.Domain.Customer;
+    var user = Session["ADMIN"] as AirShopp.Domain.Admin;
 }
 <!doctype html>
 <html>
@@ -108,7 +108,7 @@
     <div class="box1">
         <div class="hint1" style="height:580px;">
             <div class="hint-in11">
-                <div class="hint2">Kenneth1</div>
+                <div class="hint2">@user.Account</div>
                 <div class="hint33"></div>
             </div>
         </div>
@@ -147,7 +147,7 @@
                 <div class="member-lists">
                     <dl>
                         <dt>选择操作</dt>
-                        <dd><a href="@Url.Action("getAllInventoryProduct", "Inventory")">所有商品</a></dd>
+                        <dd><a href="@Url.Action("GetAllInventoryProduct", "Inventory")">所有商品</a></dd>
                         <dd><a href="@Url.Action("GetProductOutList", "Inventory")">出库记录</a></dd>
                         <dd><a href="@Url.Action("GetProductInList", "Inventory")">入库记录</a></dd>
                     </dl>

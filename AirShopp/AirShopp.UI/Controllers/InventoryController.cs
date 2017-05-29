@@ -134,14 +134,22 @@ namespace AirShopp.UI.Controllers
             return View("ProductIn", productInViewModel);
         }
 
-        public ActionResult getAllInventoryProduct(int? indexNum, int? pageSize = 6)
+        public ActionResult GetAllInventoryProduct(int? indexNum, int? pageSize = 6)
         {
 
             InventoryProductListViewModel productViewModel = GetInventoryProducts(indexNum, pageSize);
 
             return View("InventoryProductList", productViewModel);
         }
-       
+
+        [HttpGet]
+        public ActionResult Index(int? indexNum, int? pageSize = 6)
+        {
+            return RedirectToAction("GetAllInventoryProduct", "Inventory");
+        }
+
+
+
         [HttpPost]
         public ActionResult AddNewProduct(ProductRequestModel product, HttpPostedFileBase image)
         {
@@ -216,7 +224,7 @@ namespace AirShopp.UI.Controllers
             
             _discountRepository.AddProductDiscount(discount);
             //InventoryProductListViewModel productViewModel = GetInventoryProducts(null,null);
-            return RedirectToAction("getAllInventoryProduct","Inventory");
+            return RedirectToAction("GetAllInventoryProduct","Inventory");
         }
 
         //Get Inventory Product View Data
@@ -353,7 +361,7 @@ namespace AirShopp.UI.Controllers
             try
             {
                 _productRepository.DeleteProduct(productId);
-                return RedirectToAction("getAllInventoryProduct", "Inventory");
+                return RedirectToAction("GetAllInventoryProduct", "Inventory");
             }
             catch (Exception)
             {
