@@ -55,10 +55,11 @@
         <div class="container clearfix">
             <div class="header-logo fl"><h1><a href="首页.html"><img src="~/Content/icon/AirShoppLogo.png"></a> </h1></div>
             <div class="head-form fl">
-                <form class="clearfix">
-                    <input type="text" class="search-text" accesskey="" id="key" autocomplete="off" placeholder="洗衣机">
-                    <button class="button" onClick="search('key');return false;">搜索</button>
-                </form>
+                @using (Html.BeginForm("GetProducts", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="text" name="queryStr" class="search-text" accesskey="" id="key" autocomplete="off" placeholder="请输入商品关键字···" />
+                    <input type="submit" class="button" value="搜索" />
+                }
             </div>
             <div class="header-cart fr"><a href="/Product/ShopCart"><img src="~/Content/icon/car.png"></a> <i class="head-amount">@Session["CARTPRODUCTCOUNT"]</i></div>
             <div class="head-mountain"></div>
@@ -76,7 +77,7 @@
                         var category = Session["Category"] as List<AirShopp.Domain.Category>;
                         for(var i = 0; i < category.Count(); i++ )
                         {
-                            <li><a href="/Product/GetProducts?categoryId=@category[i].Id" target="_blank">@category[i].CategoryName</a></li>
+                            <li><a href="/Product/GetProducts?categoryId=@category[i].Id">@category[i].CategoryName</a></li>
                         }
                     }
                 </ul>

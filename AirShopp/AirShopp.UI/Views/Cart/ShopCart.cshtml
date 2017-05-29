@@ -47,7 +47,6 @@
                     <td colspan="5" class="shopend">
                         商品总价（不含运费）：<label id="total" class="yellow"></label> 元<br />
                         可获积分 <label class="yellow" id="integral"></label> 点<br />
-                        @*@Html.ActionLink("立即购买", "CheckOrder", new { Controller = "Order"}, new { style = "color:#ea4949" })*@
                         <input name="" type="image" src="~/Content/img/cart/taobao_subtn.jpg" onclick="CheckOrder()"/>
                     </td>
                 </tr>
@@ -83,7 +82,12 @@
             cartItemStr += ";";
         })
         var totalAmount = $("#total").html();
-        window.location.href = "/Order/CheckOrder?cartItemStr=" + cartItemStr + "&totalAmount=" + totalAmount ;
+        if (totalAmount != 0) {
+             window.location.href = "/Order/CheckOrder?cartItemStr=" + cartItemStr + "&totalAmount=" + totalAmount ;
+        } else
+        {
+            alert("请选择要购买的商品！");
+        }
     }
     $(function () {
         var width = 0;

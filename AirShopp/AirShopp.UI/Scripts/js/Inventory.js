@@ -99,6 +99,8 @@ function updateProduct()
     //    }
     //});
 }
+
+//Delete Product
 var productId;;
 function deleteProduct(id)
 {

@@ -20,6 +20,7 @@ namespace AirShopp.UI.Models.ViewModel
         public string ReceiverName { get; set; }
         public string ReceiverPhone { get; set; }
         public bool IsDefault { get; set; }
+        public long OrderId { get; set; }
         public OrderConfirmViewModel()
         {
             ProvinceList = new List<Province>();

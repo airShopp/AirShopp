@@ -71,6 +71,7 @@
         <div class="member-heels fl"><h2>退货管理</h2></div>
         <div class="member-backs member-icons fr"><a href="@Url.Action("ReturnManageList", "Order")" class="search">搜索</a></div>
         <div class="member-about fr"><input type="text" placeholder="订单编号" id="num" value="@Model.searchDeliveryNoteNum"></div>
+    </div>
     <div class="member-whole clearfix">
         <ul id="H-table" class="H-table">
             <li class="cur" id="Tab1"><a href="javascript:void(0)">退货申请<em>(@Model.RequestingListViewModel.TotalCount)</em></a></li>
@@ -82,11 +83,11 @@
         <div class="member-return H-over">
             <div class="member-cancel clearfix">
                 <span class="be1">订单信息</span>
-                <span class="be2">收货人</span>
-                <span class="be2">订单金额</span>
-                <span class="be2">订单时间</span>
+                <span class="be2" style="width:80px">收货人</span>
+                <span class="be2" style="width:80px">订单金额</span>
+                <span class="be2" style="width:192px">退货原因</span>
                 <span class="be2">订单状态</span>
-                <span class="be2">订单操作</span>
+                <span class="be2" style="width:100px">订单操作</span>
             </div>
             <div class="member-sheet clearfix">
                 <ul>
@@ -104,15 +105,33 @@
                                         var orderItems = @Model.RequestingListViewModel.RequestingList[i].OrderItems.ToList();
                                         AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
                                         <div class="ci7 clearfix">
-                                            <span class="gr1"><a href="/Product/getProduct?productId=@orderItem.Product.Id"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
-                                            <span class="gr2" style="width:260px"><a href="/Product/getProduct?productId=@orderItem.Product.Id">@orderItem.Product.ProductName</a></span>
+                                            <span class="gr1"><a href="javascript:void(0)"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
+                                            <span class="gr2" style="width:260px"><a href="javascript:void(0)">@orderItem.Product.ProductName</a></span>
                                             <span class="gr3">X @orderItem.Quantity</span>
                                         </div>
                                     }
                                 </div>
-                                <div class="ci2 amanda1"><div>@Model.RequestingListViewModel.RequestingList[i].Customer.CustomerName</div></div>
-                                <div class="ci3 amanda1"><div><b>￥@Model.RequestingListViewModel.RequestingList[i].TotalAmount.ToString()</b></div></div>
-                                <div class="ci4 amanda1"><div><p>@Model.RequestingListViewModel.RequestingList[i].OrderDate.ToShortDateString()</p></div></div>
+                                <div class="ci2 amanda1"  style="width:80px"><div>@Model.RequestingListViewModel.RequestingList[i].Customer.CustomerName</div></div>
+                                <div class="ci3 amanda1" style="width:80px"><div><b>￥@Model.RequestingListViewModel.RequestingList[i].TotalAmount.ToString()</b></div></div>
+                                <div class="ci4 amanda1"  style="width:192px">
+                                    <div>
+                                        @for (int k = 0; k < @Model.RequestingListViewModel.RequestingList[i].OrderItems.Count(); k++)
+                                        {
+                                            var orderItems = @Model.RequestingListViewModel.RequestingList[i].OrderItems.ToList();
+                                            AirShopp.Domain.OrderItem orderItem = orderItems[k] as AirShopp.Domain.OrderItem;
+                                            <p>
+                                                @if (Model.RequestingListViewModel.RequestingList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault() != null)
+                                                {
+                                                    @Model.RequestingListViewModel.RequestingList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault().ReturnReason
+                                                }
+                                                else
+                                                {
+                                                    <label style="width:20px">未退货</label>
+                                                }
+                                            </p>
+                                        }
+                                    </div>
+                                </div>
                                 @if (Model.RequestingListViewModel.RequestingList[i].OrderStatus.Equals("FINISHED"))
                                 {
                                     <div class="ci5 amanda1">
@@ -136,7 +155,7 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                            <a href="/Order/OrderDetail?orderId=@Model.RequestingListViewModel.RequestingList[i].Id">订单详情</a>
+                                            @*<a href="/Order/OrderDetail?orderId=@Model.RequestingListViewModel.RequestingList[i].Id">订单详情</a>*@
                                         </div>
                                    </div>
                                 }
@@ -152,10 +171,10 @@
                                                 <label>已发货</label>
                                             }
                                         </p>
-                                        <p><a href="/Order/OrderDetail?orderId=@Model.RequestingListViewModel.RequestingList[i].Id">订单详情</a></p>
+                                        <p>@*<a href="/Order/OrderDetail?orderId=@Model.RequestingListViewModel.RequestingList[i].Id">订单详情</a>*@</p>
                                     </div>
                                 </div>
-                                <div class="ci6 amanda1">
+                                <div class="ci6 amanda1" style="width:100px">
                                     <div>
                                     @for (int k = 0; k < @Model.RequestingListViewModel.RequestingList[i].OrderItems.Count(); k++)
                                     {
@@ -213,11 +232,11 @@
         <div class="member-return H-over" style="display:none;">
             <div class="member-cancel clearfix">
                 <span class="be1">订单信息</span>
-                <span class="be2">收货人</span>
-                <span class="be2">订单金额</span>
-                <span class="be2">订单时间</span>
+                <span class="be2" style="width:80px">收货人</span>
+                <span class="be2" style="width:80px">订单金额</span>
+                <span class="be2" style="width:192px">退货原因</span>
                 <span class="be2">订单状态</span>
-                <span class="be2">订单操作</span>
+                <span class="be2" style="width:100px">订单操作</span>
             </div>
             <div class="member-sheet clearfix">
                 <ul>
@@ -235,15 +254,33 @@
                                         var orderItems = @Model.ReturningListViewModel.ReturningList[i].OrderItems.ToList();
                                         AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
                                         <div class="ci7 clearfix">
-                                            <span class="gr1"><a href="/Product/getProduct?productId=@orderItem.Product.Id"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
-                                            <span class="gr2" style="width:260px"><a href="/Product/getProduct?productId=@orderItem.Product.Id">@orderItem.Product.ProductName</a></span>
+                                            <span class="gr1"><a href="javascript:void(0)"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
+                                            <span class="gr2" style="width:260px"><a href="javascript:void(0)">@orderItem.Product.ProductName</a></span>
                                             <span class="gr3">X @orderItem.Quantity</span>
                                         </div>
                                     }
                                 </div>
-                                <div class="ci2 amanda1"><div>@Model.ReturningListViewModel.ReturningList[i].Customer.CustomerName</div></div>
-                                <div class="ci3 amanda1"><div><b>￥@Model.ReturningListViewModel.ReturningList[i].TotalAmount.ToString()</b></div></div>
-                                <div class="ci4 amanda1"><div><p>@Model.ReturningListViewModel.ReturningList[i].OrderDate.ToShortDateString()</p></div></div>
+                                <div class="ci2 amanda1" style="width:80px"><div>@Model.ReturningListViewModel.ReturningList[i].Customer.CustomerName</div></div>
+                                <div class="ci3 amanda1" style="width:80px"><div><b>￥@Model.ReturningListViewModel.ReturningList[i].TotalAmount.ToString()</b></div></div>
+                                <div class="ci4 amanda1"  style="width:192px">
+                                    <div>
+                                        @for (int k = 0; k < @Model.ReturningListViewModel.ReturningList[i].OrderItems.Count(); k++)
+                                        {
+                                            var orderItems = @Model.ReturningListViewModel.ReturningList[i].OrderItems.ToList();
+                                            AirShopp.Domain.OrderItem orderItem = orderItems[k] as AirShopp.Domain.OrderItem;
+                                            <p>
+                                                @if (Model.ReturningListViewModel.ReturningList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault() != null)
+                                                {
+                                                    @Model.ReturningListViewModel.ReturningList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault().ReturnReason;
+                                                }
+                                                else
+                                                {
+                                                    <label style="width:20px">未退货</label>
+                                                }
+                                            </p>
+                                        }
+                                    </div>
+                                </div>
                                 <div class="ci5 amanda1">
                                     <div>
                                         <p>
@@ -256,10 +293,10 @@
                                                 <label>已发货</label>
                                             }
                                         </p>
-                                        <p><a href="/Order/OrderDetail?orderId=@Model.ReturningListViewModel.ReturningList[i].Id">订单详情</a></p>
+                                        <p>@*<a href="/Order/OrderDetail?orderId=@Model.ReturningListViewModel.ReturningList[i].Id">订单详情</a>*@</p>
                                     </div>
                                 </div>
-                                <div class="ci6 amanda1">
+                                <div class="ci6 amanda1" style="width:100px">
                                     <div>
                                         @for (int k = 0; k < @Model.ReturningListViewModel.ReturningList[i].OrderItems.Count(); k++)
                                         {
@@ -312,11 +349,11 @@
         <div class="H-over" style="display:none;">
             <div class="member-cancel clearfix">
                 <span class="be1">订单信息</span>
-                <span class="be2">收货人</span>
-                <span class="be2">订单金额</span>
-                <span class="be2">订单时间</span>
+                <span class="be2" style="width:80px">收货人</span>
+                <span class="be2" style="width:80px">订单金额</span>
+                <span class="be2" style="width:192px">退货原因</span>
                 <span class="be2">订单状态</span>
-                <span class="be2">订单操作</span>
+                <span class="be2" style="width:100px">订单操作</span>
             </div>
             <div class="member-sheet clearfix">
                 <ul>
@@ -334,17 +371,35 @@
                                         var orderItems = @Model.ReturnFinishedListViewModel.ReturnFinishedList[i].OrderItems.ToList();
                                         AirShopp.Domain.OrderItem orderItem = orderItems[j] as AirShopp.Domain.OrderItem;
                                         <div class="ci7 clearfix">
-                                            <span class="gr1"><a href="/Product/getProduct?productId=@orderItem.Product.Id"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
-                                            <span class="gr2" style="width:260px"><a href="/Product/getProduct?productId=@orderItem.Product.Id">@orderItem.Product.ProductName</a></span>
+                                            <span class="gr1"><a href="javascript:void(0)"><img src="@orderItem.Product.Url" width="60" height="60" title="" about=""></a></span>
+                                            <span class="gr2" style="width:260px"><a href="javascript:void(0)">@orderItem.Product.ProductName</a></span>
                                             <span class="gr3">X @orderItem.Quantity</span>
                                         </div>
                                     }
                                 </div>
-                                <div class="ci2 amanda1"><div>@Model.ReturnFinishedListViewModel.ReturnFinishedList[i].Customer.CustomerName</div></div>
-                                <div class="ci3 amanda1"><div><b>￥@Model.ReturnFinishedListViewModel.ReturnFinishedList[i].TotalAmount.ToString()</b></div></div>
-                                <div class="ci4 amanda1"><div><p>@Model.ReturnFinishedListViewModel.ReturnFinishedList[i].OrderDate.ToShortDateString()</p></div></div>
-                                <div class="ci5 amanda1"><div><p>买家已付款</p> <p><a href="/Order/OrderDetail?orderId=@Model.ReturnFinishedListViewModel.ReturnFinishedList[i].Id">订单详情</a></p></div></div>
-                                <div class="ci6 amanda1">
+                                <div class="ci2 amanda1" style="width:80px"><div>@Model.ReturnFinishedListViewModel.ReturnFinishedList[i].Customer.CustomerName</div></div>
+                                <div class="ci3 amanda1" style="width:80px"><div><b>￥@Model.ReturnFinishedListViewModel.ReturnFinishedList[i].TotalAmount.ToString()</b></div></div>
+                                <div class="ci4 amanda1" style="width:192px">
+                                    <div>
+                                        @for (int k = 0; k < @Model.ReturnFinishedListViewModel.ReturnFinishedList[i].OrderItems.Count(); k++)
+                                        {
+                                            var orderItems = @Model.ReturnFinishedListViewModel.ReturnFinishedList[i].OrderItems.ToList();
+                                            AirShopp.Domain.OrderItem orderItem = orderItems[k] as AirShopp.Domain.OrderItem;
+                                            <p>
+                                                @if (Model.ReturnFinishedListViewModel.ReturnFinishedList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault() != null)
+                                                {
+                                                    @Model.ReturnFinishedListViewModel.ReturnFinishedList[i].Returns.Where(x => x.OrderItemId == orderItem.Id).FirstOrDefault().ReturnReason;
+                                                }
+                                                else
+                                                {
+                                                    <label style="width:20px">未退货</label>
+                                                }
+                                            </p>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="ci5 amanda1"><div><p>买家已付款</p> <p>@*<a href="/Order/OrderDetail?orderId=@Model.ReturnFinishedListViewModel.ReturnFinishedList[i].Id">订单详情</a>*@</p></div></div>
+                                <div class="ci6 amanda1" style="width:100px">
                                     <div>
                                         @for (int k = 0; k < @Model.ReturnFinishedListViewModel.ReturnFinishedList[i].OrderItems.Count(); k++)
                                         {

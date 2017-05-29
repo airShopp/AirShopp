@@ -16,7 +16,7 @@
                 {
                     if (pageNum == Model.PageIndex)
                     {
-                        @Html.ActionLink(pageNum.ToString(), "GetProducts", "Product", new { indexNum = pageNum, categoryId = Model.CategoryId }, new { @class = "current", Target = "_self" });
+                        @Html.ActionLink(pageNum.ToString(), "GetProducts", "Product", new { indexNum = pageNum, categoryId = Model.CategoryId, queryStr = Model.queryStr }, new { @class = "current", Target = "_self" });
                     }
                     else if (pageNum == 0)
                     {
@@ -24,7 +24,7 @@
                     }
                     else
                     {
-                        @Html.ActionLink(pageNum.ToString(), "GetProducts", "Product", new { indexNum = pageNum, categoryId = Model.CategoryId }, new { Target = "_self" });
+                        @Html.ActionLink(pageNum.ToString(), "GetProducts", "Product", new { indexNum = pageNum, categoryId = Model.CategoryId, queryStr = Model.queryStr }, new { Target = "_self" });
                     }
                 }
             </div>

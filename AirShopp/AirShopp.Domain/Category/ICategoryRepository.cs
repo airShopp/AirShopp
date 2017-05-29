@@ -6,5 +6,6 @@ namespace AirShopp.Domain
     {
         List<Category> GetCategories();
         string GetCategoryNameByChildcategoryId(long childCategoryid);
+        string GetCategoryNameByProductId(long productId);
     }
 }

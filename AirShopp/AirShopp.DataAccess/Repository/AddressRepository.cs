@@ -22,7 +22,11 @@ namespace AirShopp.DataAccess
 
         public void UpdateAddress(Address address)
         {
-            _context.Entry<Address>(address).State = EntityState.Modified;
+            Address addressFromDb  = _context.Address.Find(address.Id);
+            addressFromDb.DeliveryAddress = address.DeliveryAddress;
+            addressFromDb.ReceiverName = address.ReceiverName;
+            addressFromDb.ReceiverPhone = address.ReceiverPhone;
+            _context.Entry<Address>(addressFromDb).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
@@ -43,7 +47,8 @@ namespace AirShopp.DataAccess
         public void SetDefaultAddress(long addressId)
         {
             var address = _context.Address.Find(addressId);
-            Address addressDefault = _context.Address.Where(x => x.CustomerId == address.CustomerId && x.IsDefault).FirstOrDefault();
+            Address addressDefault = _context.Address.Where
+                (x => x.CustomerId == address.CustomerId && x.IsDefault).FirstOrDefault();
             if (addressDefault != null)
             {
                 addressDefault.IsDefault = false;

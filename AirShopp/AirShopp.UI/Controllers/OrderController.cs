@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AirShopp.Common.Page;
+using AirShopp.UI.Models;
 
 namespace AirShopp.UI.Controllers
 {
@@ -61,7 +62,7 @@ namespace AirShopp.UI.Controllers
                                       OrderDate = o.OrderDate,
                                       OrderStatus = o.OrderStatus,
                                       DeliveryDate = o.DeliveryDate,
-                                  }).OrderBy(x => x.DeliveryDate).ToPagedList(indexNum, pageSize);
+                                  }).OrderByDescending(x => x.OrderDate).ToPagedList(indexNum, pageSize);
             var pendingPaymentList = pendingPaymentOrderDataModel.ToList();
 
             List<Order> PendingPaymentList = new List<Order>();
@@ -87,7 +88,7 @@ namespace AirShopp.UI.Controllers
                                                     OrderDate = o.OrderDate,
                                                     OrderStatus = o.OrderStatus,
                                                     DeliveryDate = o.DeliveryDate,
-                                                }).OrderBy(x => x.DeliveryDate).ToPagedList(indexNum, pageSize);
+                                                }).OrderByDescending(x => x.OrderDate).ToPagedList(indexNum, pageSize);
             var pendingDeliveryList = pendingDeliveryOrderDataModel.ToList();
 
             List<Order> PendingDeliveryList = new List<Order>();
@@ -113,7 +114,7 @@ namespace AirShopp.UI.Controllers
                                                      OrderDate = o.OrderDate,
                                                      OrderStatus = o.OrderStatus,
                                                      DeliveryDate = o.DeliveryDate,
-                                                 }).OrderBy(x => x.DeliveryDate).ToPagedList(indexNum, pageSize);
+                                                 }).OrderByDescending(x => x.OrderDate).ToPagedList(indexNum, pageSize);
             var pendingReceivedList = pendingReceivedOrderDataModel.ToList();
 
             List<Order> PendingReceivedList = new List<Order>();
@@ -139,7 +140,7 @@ namespace AirShopp.UI.Controllers
                                                      OrderDate = o.OrderDate,
                                                      OrderStatus = o.OrderStatus,
                                                      DeliveryDate = o.DeliveryDate,
-                                                 }).OrderBy(x => x.DeliveryDate).ToPagedList(indexNum, pageSize);
+                                                 }).OrderByDescending(x => x.OrderDate).ToPagedList(indexNum, pageSize);
             var finishedList = finishedOrderDataModel.ToList();
 
             List<Order> FinishedList = new List<Order>();
@@ -164,7 +165,7 @@ namespace AirShopp.UI.Controllers
                                                      OrderDate = o.OrderDate,
                                                      OrderStatus = o.OrderStatus,
                                                      DeliveryDate = o.DeliveryDate,
-                                                 }).OrderByDescending(x => x.DeliveryDate).ToPagedList(indexNum, pageSize);
+                                                 }).OrderByDescending(x => x.OrderDate).ToPagedList(indexNum, pageSize);
             var allList = allOrderDataModel.ToList();
 
             List<Order> AllList = new List<Order>();
@@ -204,7 +205,8 @@ namespace AirShopp.UI.Controllers
             Customer customer = Session[Constants.SESSION_USER] as Customer;
 
             var returnRequestDataModelList = (from r in _readFromDb.Returns
-                                              where r.CustomerName == customer.CustomerName && r.ReturnStatus == Constants.FINISHED
+                                              where r.CustomerName == customer.CustomerName 
+                                              && r.ReturnStatus == Constants.FINISHED
                                               select new ReturnRequestDataModel()
                                               {
                                                   Id = r.Id,
@@ -236,7 +238,8 @@ namespace AirShopp.UI.Controllers
             Customer customer = Session[Constants.SESSION_USER] as Customer;
 
             var returnRequestDataModelList = (from r in _readFromDb.Returns
-                                              where r.CustomerName == customer.CustomerName && r.ReturnStatus == Constants.REQUESTING
+                                              where r.CustomerName == customer.CustomerName 
+                                              && r.ReturnStatus == Constants.REQUESTING
                                               select new ReturnRequestDataModel()
                                               {
                                                   Id = r.Id,
@@ -266,65 +269,82 @@ namespace AirShopp.UI.Controllers
             return View("ReturnRequest", returnRequestListViewModel);
             
         }
-        public ActionResult CheckOrder(string cartItemStr, string totalAmount)
+        public ActionResult CheckOrder(long? OrderId,string cartItemStr="", string totalAmount="")
         {
-            string[] cartItemsIdList = cartItemStr.Split(';');
+            Order order = new Order();
             OrderConfirmViewModel orderConfirmViewModel = new OrderConfirmViewModel();
-
-            List<OrderItem> orderItems = new List<OrderItem>();
-            for (int i = 0; i < cartItemsIdList.Length-1; i++)
-            {
-                if (!string.IsNullOrEmpty(cartItemsIdList[i]))
-                {
-                    long cartItemsId = Convert.ToInt64(cartItemsIdList[i]);
-                    CartItem cartItem = _readFromDb.CartItems.Where(x => x.Id == cartItemsId).FirstOrDefault();
-                    OrderItem orderItem = new OrderItem();
-                    orderItem.ProductId = cartItem.ProductId;
-                    orderItem.Quantity = cartItem.Quantity;
-                    orderItem.UnitPrice = cartItem.PricePerProduct;
-                    orderItem.DiscountPrice = cartItem.PricePerProduct;
-                    orderItems.Add(orderItem);
-
-                    _cartItemRepository.UpdateCartItem(cartItem.Id);
-                }
-            }
-
             long customerId = (Session[Constants.SESSION_USER] as Customer).Id;
             Address address = _readFromDb.Address.Where(x => x.CustomerId == customerId && x.IsDefault).FirstOrDefault();
 
-            Order order = new Order();
-            order.CustomerId = customerId;
-            order.TotalAmount = Convert.ToDecimal(totalAmount);
-            order.OrderStatus = Constants.OBLIGATION;
-            order.OrderDate = DateTime.Now;
-            order.DeliveryDate = Convert.ToDateTime("1970-01-01 00:00:00.000");
-            order.OrderItems = orderItems;
-            order.AddressId = address.Id;
-            order.IsSpecialOrder = false;
-            order.SpecialType = string.Empty;
-
-            try
+            if (address == null)
             {
-                order = _orderService.AddOrder(order);
-                order = _readFromDb.Orders.Where(x => x.Id == order.Id).FirstOrDefault();
-
-                decimal actuallyAmount = 0;
-                foreach (OrderItem orderItem in order.OrderItems)
+                return Content("<script>alert('请添加收货地址。');location.href='/Address/GetAddress'</script>");
+            }
+            else
+            {
+                if (OrderId == null)
                 {
-                    actuallyAmount += orderItem.Product.Price * orderItem.Quantity;
-                }
-                orderConfirmViewModel.ActuallyAmount = actuallyAmount;
-                orderConfirmViewModel.DisCountAmount = actuallyAmount - order.TotalAmount;
-                orderConfirmViewModel.order = order;
-                orderConfirmViewModel.ProvinceList = _provinceRepository.GetProvince();
-                orderConfirmViewModel.CityList = _cityRepository.GetCity();
-                orderConfirmViewModel.AreaList = _areaRepository.GetArea();
-            }
-            catch (Exception ex)
-            {
+                    string[] cartItemsIdList = cartItemStr.Split(';');
+                    List<OrderItem> orderItems = new List<OrderItem>();
+                    for (int i = 0; i < cartItemsIdList.Length - 1; i++)
+                    {
+                        if (!string.IsNullOrEmpty(cartItemsIdList[i]))
+                        {
+                            long cartItemsId = Convert.ToInt64(cartItemsIdList[i]);
+                            CartItem cartItem = _readFromDb.CartItems.Where(x => x.Id == cartItemsId).FirstOrDefault();
+                            OrderItem orderItem = new OrderItem();
+                            orderItem.ProductId = cartItem.ProductId;
+                            orderItem.Quantity = cartItem.Quantity;
+                            orderItem.UnitPrice = cartItem.PricePerProduct;
+                            orderItem.DiscountPrice = cartItem.PricePerProduct;
+                            orderItems.Add(orderItem);
 
+                            _cartItemRepository.UpdateCartItem(cartItem.Id);
+                        }
+                    }
+
+                    order.CustomerId = customerId;
+                    order.TotalAmount = Convert.ToDecimal(totalAmount);
+                    order.OrderStatus = Constants.OBLIGATION;
+                    order.OrderDate = DateTime.Now;
+                    order.DeliveryDate = Convert.ToDateTime("1970-01-01 00:00:00.000");
+                    order.OrderItems = orderItems;
+                    order.AddressId = address.Id;
+                    order.IsSpecialOrder = false;
+                    order.SpecialType = string.Empty;
+                    try
+                    {
+                        order = _orderService.AddOrder(order);
+                        order = _readFromDb.Orders.Where(x => x.Id == order.Id).FirstOrDefault();
+                    }
+                    catch (System.Exception) { }
+                }
+                else
+                {
+                    order = _orderRepository.GetOrderByOrderId((long)OrderId);
+                    order.AddressId = _readFromDb.Address.Where(x => x.CustomerId == customerId && x.IsDefault).FirstOrDefault().Id;
+                    _orderRepository.UpdateOrder(order);
+                    order = _readFromDb.Orders.Where(x => x.Id == OrderId).FirstOrDefault();
+                }
+
+                try
+                {
+                    decimal actuallyAmount = 0;
+                    foreach (OrderItem orderItem in order.OrderItems)
+                    {
+                        actuallyAmount += orderItem.Product.Price * orderItem.Quantity;
+                    }
+                    orderConfirmViewModel.ActuallyAmount = actuallyAmount;
+                    orderConfirmViewModel.DisCountAmount = actuallyAmount - order.TotalAmount;
+                    orderConfirmViewModel.order = order;
+                    orderConfirmViewModel.OrderId = order.Id;
+                    orderConfirmViewModel.ProvinceList = _provinceRepository.GetProvince();
+                    orderConfirmViewModel.CityList = _cityRepository.GetCity();
+                    orderConfirmViewModel.AreaList = _areaRepository.GetArea();
+                }
+                catch (Exception ex) { }
+                return View(orderConfirmViewModel);
             }
-            return View(orderConfirmViewModel);
         }
         public ActionResult SubmitOrder(long orderId)
         {
@@ -455,7 +475,7 @@ namespace AirShopp.UI.Controllers
                                                     OrderDate = o.OrderDate,
                                                     OrderStatus = o.OrderStatus,
                                                     DeliveryDate = o.DeliveryDate,
-                                                }).OrderBy(x => x.DeliveryDate).ToPagedList(indexNum, pageSize);
+                                                }).OrderByDescending(x => x.OrderDate).ToPagedList(indexNum, pageSize);
             var pendingPaymentList = pendingPaymentOrderDataModel.ToList();
 
             List<Order> PendingPaymentList = new List<Order>();
@@ -479,7 +499,7 @@ namespace AirShopp.UI.Controllers
                                                      OrderDate = o.OrderDate,
                                                      OrderStatus = o.OrderStatus,
                                                      DeliveryDate = o.DeliveryDate,
-                                                 }).OrderBy(x => x.DeliveryDate).ToPagedList(indexNum, pageSize);
+                                                 }).OrderByDescending(x => x.OrderDate).ToPagedList(indexNum, pageSize);
             var pendingDeliveryList = pendingPaymentOrderDataModel.ToList();
 
             List<Order> PendingDeliveryList = new List<Order>();
@@ -503,7 +523,7 @@ namespace AirShopp.UI.Controllers
                                                      OrderDate = o.OrderDate,
                                                      OrderStatus = o.OrderStatus,
                                                      DeliveryDate = o.DeliveryDate,
-                                                 }).OrderBy(x => x.DeliveryDate).ToPagedList(indexNum, pageSize);
+                                                 }).OrderByDescending(x => x.OrderDate).ToPagedList(indexNum, pageSize);
             var pendingReceivedList = pendingReceivedOrderDataModel.ToList();
 
             List<Order> PendingReceivedList = new List<Order>();
@@ -527,7 +547,7 @@ namespace AirShopp.UI.Controllers
                                               OrderDate = o.OrderDate,
                                               OrderStatus = o.OrderStatus,
                                               DeliveryDate = o.DeliveryDate,
-                                          }).OrderBy(x => x.DeliveryDate).ToPagedList(indexNum, pageSize);
+                                          }).OrderByDescending(x => x.OrderDate).ToPagedList(indexNum, pageSize);
             var finishedList = finishedOrderDataModel.ToList();
 
             List<Order> FinishedList = new List<Order>();
@@ -551,7 +571,7 @@ namespace AirShopp.UI.Controllers
                                          OrderDate = o.OrderDate,
                                          OrderStatus = o.OrderStatus,
                                          DeliveryDate = o.DeliveryDate,
-                                     }).OrderBy(x => x.DeliveryDate).ToPagedList(indexNum, pageSize);
+                                     }).OrderByDescending(x => x.OrderDate).ToPagedList(indexNum, pageSize);
             var allList = allOrderDataModel.ToList();
 
             List<Order> AllList = new List<Order>();
@@ -698,7 +718,8 @@ namespace AirShopp.UI.Controllers
                     //退货物流规划 结束后  returnItem.ReturnStatus = Constants.FINISHED;
                 }
 
-                if (_orderRepository.GetReturnListByOrderId(orderId).Where(x => x.ReturnStatus == Constants.FINISHED).Count() == order.OrderItems.Count())
+                if (_orderRepository.GetReturnListByOrderId(orderId).Where
+                    (x => x.ReturnStatus == Constants.FINISHED).Count() == order.OrderItems.Count())
                 {
                     order.OrderStatus = Constants.FINISHED;
                     _orderRepository.UpdateOrder(order);
@@ -708,6 +729,76 @@ namespace AirShopp.UI.Controllers
             {
             }
             return RedirectToAction("ReturnManageList");
+        }
+
+        public ActionResult ImmediatelyBuy(long productId, int quanlity, decimal pricePerProduct)
+        {
+            long customerId = (Session[Constants.SESSION_USER] as Customer).Id;
+            Address address = _readFromDb.Address.Where(x => x.CustomerId == customerId && x.IsDefault).FirstOrDefault();
+
+            if (address == null)
+            {
+
+                return Content("<script>alert('请添加收货地址。');location.href='/Address/GetAddress'</script>");
+            }else { 
+
+            var product = (from p in _readFromDb.Products
+                               join d in _readFromDb.Discounts on p.Id equals d.ProductId
+                           where p.Id == productId
+                               select new ProductListDataModel
+                               {
+                                   ProductId = p.Id,
+                                   ProductName = p.ProductName,
+                                   Price = Math.Round((double)p.Price, 2),
+                                   Discounts = d.Discounts,
+                                   DiscountPrice = Math.Round((double)((p.Price * d.Discounts) / 10), 2),
+                                   ProductUrl = p.Url
+                               });
+
+            OrderConfirmViewModel orderConfirmViewModel = new OrderConfirmViewModel();
+            List<OrderItem> orderItems = new List<OrderItem>();
+            orderItems.Add(new OrderItem()
+            {
+                Quantity = quanlity,
+                ProductId = productId,
+                UnitPrice = pricePerProduct,
+                DiscountPrice = (decimal)product.FirstOrDefault().DiscountPrice,
+            });
+
+            Order order = new Order();
+            order.CustomerId = customerId;
+            order.TotalAmount = quanlity * orderItems.FirstOrDefault().DiscountPrice;
+            order.OrderStatus = Constants.OBLIGATION;
+            order.OrderDate = DateTime.Now;
+            order.DeliveryDate = Convert.ToDateTime("1970-01-01 00:00:00.000");
+            order.OrderItems = orderItems;
+            order.AddressId = address.Id;
+            order.IsSpecialOrder = false;
+            order.SpecialType = string.Empty;
+
+            try
+            {
+                order = _orderService.AddOrder(order);
+                order = _readFromDb.Orders.Where(x => x.Id == order.Id).FirstOrDefault();
+
+                decimal actuallyAmount = 0;
+                foreach (OrderItem orderItem in order.OrderItems)
+                {
+                    actuallyAmount += orderItem.Product.Price * orderItem.Quantity;
+                }
+                orderConfirmViewModel.ActuallyAmount = actuallyAmount;
+                orderConfirmViewModel.DisCountAmount = actuallyAmount - order.TotalAmount;
+                orderConfirmViewModel.order = order;
+                orderConfirmViewModel.ProvinceList = _provinceRepository.GetProvince();
+                orderConfirmViewModel.CityList = _cityRepository.GetCity();
+                orderConfirmViewModel.AreaList = _areaRepository.GetArea();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View("CheckOrder", orderConfirmViewModel);
+            }
         }
     }
 }

@@ -33,7 +33,7 @@ namespace AirShopp.UI.Controllers
             return View();
         }
 
-        public ActionResult AddAddress(string areaId, string address, string receiverName, string receiverPhone, bool isDefault)
+        public ActionResult AddAddress(string areaId, string address, string receiverName, string receiverPhone, bool isDefault, long? OrderId)
         {
 
             Area area = _areaRepository.GetAreaById(int.Parse(areaId));
@@ -41,6 +41,10 @@ namespace AirShopp.UI.Controllers
             Province province = _provinceRepository.GetProvinceById(city.ProvinceId);
 
             long customerId = (Session[Constants.SESSION_USER] as Customer).Id;
+            if (OrderId!=0)
+            {
+                isDefault = true;
+            }
 
             if (isDefault)
             {
@@ -74,10 +78,18 @@ namespace AirShopp.UI.Controllers
 
             _addressService.AddAddress(DeliveryAddress);
 
-            return RedirectToAction("GetAddress");
+            if (OrderId == 0 || OrderId==null)
+            {
+                return RedirectToAction("GetAddress");
+            }
+            else
+            {
+                return RedirectToRoute(new { controller = "Order", action = "CheckOrder", orderId = OrderId });
+            }
         }
 
-        public ActionResult GetAddress()
+        [HttpGet]
+        public ActionResult GetAddress(long? OrderId)
         {
             Customer customer = Session[Constants.SESSION_USER] as Customer;
             List<Address> addressList = _addressService.GetAddress(customer.Id);
@@ -86,13 +98,24 @@ namespace AirShopp.UI.Controllers
             addressListViewModel.CityList = _cityRepository.GetCity();
             addressListViewModel.AreaList = _areaRepository.GetArea();
             addressListViewModel.AddressList = addressList;
+            if (OrderId != null)
+            {
+                addressListViewModel.OrderId = (long)OrderId;
+            }
             return View("AddressList", addressListViewModel);
         }
 
-        public ActionResult UpdateAddress(Address address)
+        public ActionResult UpdateAddress(long Id, string address, string receiverName, string receiverPhone)
         {
-            _addressService.UpdateAddress(address);
-            return View();
+            Address editAddress = new Address()
+            {
+                Id = Id,
+                DeliveryAddress = address,
+                ReceiverName = receiverName,
+                ReceiverPhone = receiverPhone
+            };
+            _addressRepository.UpdateAddress(editAddress);
+            return RedirectToAction("GetAddress");
         }
 
         public ActionResult DeleteAddress(long addressId)
@@ -108,10 +131,17 @@ namespace AirShopp.UI.Controllers
             return RedirectToAction("GetAddress");
         }
 
-        public ActionResult SetDefaultAddress(long addressId)
+        public ActionResult SetDefaultAddress(long addressId, long OrderId)
         {
             _addressRepository.SetDefaultAddress(addressId);
-            return RedirectToAction("GetAddress");
+            if (OrderId != 0)
+            {
+                return RedirectToRoute(new { controller = "Order", action = "CheckOrder", orderId = OrderId });
+            }
+            else
+            {
+                return RedirectToAction("GetAddress");
+            }
         }
     }
 }

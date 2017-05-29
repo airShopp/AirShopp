@@ -150,6 +150,7 @@
             @using (Html.BeginForm("AddAddress", "Address", FormMethod.Post, new { @id = "form" }))
             {
                 <div class="pc-label"><label><i class="reds ">*</i>收货人:</label>@Html.TextBoxFor(m => m.ReceiverName, new { id = "ReceiverName", tabindex = "5", autocomplete = "off", placeholder = "长度不超过25个字符" })</div>
+                <div class="pc-label" style="display:none">@Html.TextBoxFor(m => m.OrderId, new { Value = Model.order.Id })</div>
                 <div id="sjld" style="margin-top:10px; padding-left:40px; position:relative;" class="clearfix">
 
                     <div class="clearfix" style="padding-bottom:5px;"><i class="reds fl">*</i><p class="fl">所在地区:</p></div>
@@ -240,7 +241,9 @@
     <section>
         <div class="containers">
             <div class="pc-space">
-                <div class="pc-order-title clearfix"><h3 class="fl">收货人信息</h3> <a href="javascript:void(0)" class="fr pc-order-add btn1">新增收货地址</a> <a href="/Address/GetAddress" style="float:right; background:url('../Content/icon/jia.png') no-repeat left; padding-left:16px; color:#c81623">更改地址</a></div>
+                <div class="pc-order-title clearfix"><h3 class="fl">收货人信息</h3> 
+                <a href="javascript:void(0)" class="fr pc-order-add btn1">新增收货地址</a>
+                <a href="/Address/GetAddress?OrderId=@Model.OrderId" style="float:right; background:url('../Content/icon/jia.png') no-repeat left; padding-left:16px; color:#c81623">更改地址</a></div>
                 <div class="pc-border">
                     <div class="pc-order-text clearfix">
                         <ul class=" clearfix">
@@ -266,7 +269,7 @@
             </div>
             <div class="pc-space clearfix">
                 <div class="fl ">
-                    <div class="pc-order-title clearfix"><h3 class="fl">收货人信息</h3></div>
+                    <div class="pc-order-title clearfix"><h3 class="fl">快递信息</h3></div>
                     <div class="fr pc-border">
                         <div class="pc-order-text pc-order-l clearfix">
                             <ul id="H-table" class="clearfix H-table">

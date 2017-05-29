@@ -14,10 +14,12 @@ namespace AirShopp.UI.Controllers
     {
         private ICommentService _commentService;
         private ICommentRepository _commentRepository;
+        private IOrderRepository _orderRepository;
         private IReadFromDb _readFromDb;
 
-        public CommentController(ICommentService commentService, ICommentRepository commentRepository, IReadFromDb readFromDb)
+        public CommentController(IOrderRepository orderRepository, ICommentService commentService, ICommentRepository commentRepository, IReadFromDb readFromDb)
         {
+            _orderRepository = orderRepository;
             _commentService = commentService;
             _commentRepository = commentRepository;
             _readFromDb = readFromDb;
@@ -64,6 +66,9 @@ namespace AirShopp.UI.Controllers
             comment.Comments = commentStr;
             comment.CommentDate = DateTime.Now;
             _commentRepository.AddComment(comment);
+            Order order = _orderRepository.GetOrderByOrderId(comment.OrderId);
+            order.OrderStatus = "COMMENTED";
+            _orderRepository.UpdateOrder(order);
             return RedirectToAction("Index");
         }
     }

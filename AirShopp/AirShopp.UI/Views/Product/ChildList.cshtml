@@ -1,11 +1,11 @@
 ﻿@model AirShopp.UI.Models.ViewModel.ProductListViewModel
-@{ var index = 0;}
-@for (int i = 0; i < (Model.productList.Count() / 4); i++)
+@{ var index = 0;double a = Math.Ceiling(((double)Model.productList.Count()) / (double)4);}
+@for (int i = 0; i < (Math.Ceiling(((double)Model.productList.Count())/(double)4)); i++)
 {
     <ul>
-        @if (index < Model.productList.Count())
+        @for (int j = 0; j < 4; j++)
         {
-            for (int j = 0; j < 4; j++)
+            if (index < Model.productList.Count())
             {
                 <li>
                     <a href="/Product/getProduct?productId=@Model.productList[index].ProductId">
