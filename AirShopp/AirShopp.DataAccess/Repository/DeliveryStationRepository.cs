@@ -17,9 +17,9 @@ namespace AirShopp.DataAccess
             return _context.DeliveryStation.Where(x => (x.AreaId == areaId && x.StationLevel == stationLevel)).ToList();
         }
 
-        public List<DeliveryStation> GetInitDeliveryStations()
+        public DeliveryStation GetDeliveryStation(long deliveryStationId)
         {
-            return null;
+            return _context.DeliveryStation.Where(x => x.Id == deliveryStationId).ToList().FirstOrDefault();
         }
 
         public List<DeliveryStation> GetDeliveryStation(double lng, double lat)

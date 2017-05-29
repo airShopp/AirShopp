@@ -486,6 +486,7 @@
     <Content Include="Views\Inventory\ProductOut.cshtml" />
     <Content Include="Views\Inventory\InventoryProductList.cshtml" />
     <Content Include="Views\Inventory\ProductIn.cshtml" />
+    <Content Include="Views\Delivery\DeliveryStationListDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_homePageLayout.cshtml" />

@@ -259,5 +259,12 @@ namespace AirShopp.UI.Controllers
 
             return RedirectToAction("DeliveryStationList");
         }
+        
+        [HttpGet]
+        public ActionResult DeliveryStationListDetail(long deliveryStationId)
+        {
+            DeliveryStation deliveryStation = _deliveryStationRepository.GetDeliveryStation(deliveryStationId);
+            return View(deliveryStation);
+        }
     }
 }

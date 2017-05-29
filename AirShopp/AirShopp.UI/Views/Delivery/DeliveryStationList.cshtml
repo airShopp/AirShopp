@@ -170,7 +170,7 @@
                         <li>
                             <div class="member-circle clearfix">
                                 <div class="ci22">@item.Location</div>
-                                <div class="ci33">@item.Name</div>
+                                <div class="ci33">@Html.ActionLink(@item.Name, "DeliveryStationListDetail", new { deliveryOrderId = @item.Id })</div>
                                 <div class="ci11">@item.Address</div>
                                 <div class="ci44">@item.Latitude</div>
                                 <div class="ci44">@item.Longitude</div>
