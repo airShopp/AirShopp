@@ -39,6 +39,7 @@ namespace AirShopp.DataAccess
                         if (inventoryAction != null)
                         {
                             _context.InventoryAction.Remove(inventoryAction);
+                            _context.SaveChanges();
                         }
                         _context.Inventory.Remove(inventory);
                         _context.SaveChanges();

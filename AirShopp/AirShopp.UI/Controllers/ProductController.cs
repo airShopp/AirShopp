@@ -98,6 +98,7 @@ namespace AirShopp.UI.Controllers
                                let cm = _readFromDb.Comments.Where(c => c.ProductId == p.Id)
                                select new ProductListDataModel
                                {
+                                   ParentId = c.ParentId,
                                    CategoryId = c.Id,
                                    ProductId = p.Id,
                                    ProductName = p.ProductName,
@@ -109,7 +110,7 @@ namespace AirShopp.UI.Controllers
                                });
             if (categoryId != null)
             {
-                productList = productList.Where(c => (c.CategoryId == categoryId) || (c.ProductId == categoryId));
+                productList = productList.Where(c => (c.CategoryId == categoryId) || (c.ParentId == categoryId));
             }
             if (!string.IsNullOrEmpty(queryStr))
             {
