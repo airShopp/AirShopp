@@ -67,17 +67,36 @@ function updateProduct()
     var discounts = $("#discounts").val();
     var isOnSale = $("#IsOnSale").val();
     var image = $("#pictureUrl").val();
-
-    $("#FormSub").ajaxSubmit({
-        success: function (result) {
-            setTimeout(function () { window.location.reload(); }, 1500);
-            $("#msg").html(result);
-            $(".box111").css({ "display": "none" });
-            $(".hint111").css({ "display": "none" });
-            $("#flashBox").css({ "display": "block" });
-            $("#flashBox").delay(2000).hide(0);
+    if (productName == "" || price == "" || discounts == "" || isOnSale == "") {
+        if (productName == "") {
+            window.alert("商品名不能为空");
+            $("#productName").css('border-color', 'red');
         }
-    });
+        if (price == "") {
+            window.alert("价格不能为空");
+            $("#price").css("border-color", "Red");
+        }
+        if (discounts == "") {
+            window.alert("商品折扣不能为空");
+            $("#discounts").css("border-color", "Red");
+        }
+        if (isOnSale == "") {
+            window.alert("请选择商品是否上架");
+            $("#discounts").css("border-color", "Red");
+        }
+    }
+    else {
+        $("#FormSub").ajaxSubmit({
+            success: function (result) {
+                setTimeout(function () { window.location.reload(); }, 1500);
+                $("#msg").html(result);
+                $(".box111").css({ "display": "none" });
+                $(".hint111").css({ "display": "none" });
+                $("#flashBox").css({ "display": "block" });
+                $("#flashBox").delay(2000).hide(0);
+            }
+        });
+    }
     //$.ajax({
     //    type: "Get",
     //    url: "/Inventory/UpdateProduct",
@@ -140,4 +159,28 @@ function ConfirmDelete() {
             $("#flashBox").delay(1600).hide(0);
         }
     });
+}
+
+function AddProduct() {
+    var productName = $("#pt").val();
+    var productionTime = $("#ppt").val();
+    var keepData = $("#pkt").val();
+    var productAmount = $("#ppc").val();
+    if (productName == "" || productionTime == "" || keepData == "" || productAmount == "") {
+        if (productName == "") {
+            $("#pt").css("border-color", "Red");
+        }
+        if (productName == "") {
+            $("#ppt").css("border-color", "Red");
+        }
+        if (productName == "") {
+            $("#pkt").css("border-color", "Red");
+        }
+        if (productName == "") {
+            $("#ppc").css("border-color", "Red");
+        }
+    }
+    else {
+        $("#AddForm").submit();
+    }
 }

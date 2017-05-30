@@ -238,19 +238,19 @@ z-index:102;
         <dl class="clearfix" id="inventoryP" style="margin-top:25px;">
             <dt style="display:none;"><input type="hidden" name="product.productId" id="pId" /></dt>
             <dt>商品名：</dt>
-            <dd><input type="text" name="product.productName" id="productName" style="margin-right:12px;height:25px;line-height:25px" /></dd>
+            <dd><input type="text" name="product.productName" id="productName" onclick="checkIsNull()" style="margin-right:12px;height:25px;line-height:25px" /></dd>
 
             <dt>商品价格：</dt>
-            <dd><input type="text" name="product.price" id="price" style="margin-right:12px;height:25px;line-height:25px" />元</dd>
+            <dd><input type="text" name="product.price" onfocus="checkIsNull()" id="price" style="margin-right:12px;height:25px;line-height:25px" />元</dd>
 
             <dt>选择图片：</dt>
             <dd><input type="file" name="image" id="pictureUrl" style="margin-left:60px;height:25px;line-height:25px" /></dd>
             
             <dt>折扣：</dt>
-            <dd><input id="discounts" type="text" name="product.discounts" style="margin-right:12px;height:25px;line-height:25px" />折</dd>
+            <dd><input id="discounts" type="text" onfocus="checkIsNull()" name="product.discounts" style="margin-right:12px;height:25px;line-height:25px" />折</dd>
             
             <dt>是否上架：</dt>
-            <dd><select name="product.isOnsale" id="IsOnSale" style="margin-left:60px;margin-top:10px; height:25px;line-height:25px"></select></dd>
+            <dd><select name="product.isOnsale" onfocus="checkIsNull()" id="IsOnSale" style="margin-left:60px;margin-top:10px; height:25px;line-height:25px"></select></dd>
            
              <dt><input type="button" value="提交修改" onclick="updateProduct()" style="width:60px;height:25px;margin-left:270px;cursor:pointer" /></dt>
         </dl>
@@ -264,11 +264,11 @@ z-index:102;
             <div class="hint2">添加新商品</div>
             <div class="hint333"></div>
         </div>
-        @using (Html.BeginForm("AddNewProduct", "Inventory", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("AddNewProduct", "Inventory", FormMethod.Post, new { @id = "AddForm", enctype = "multipart/form-data" }))
         {
             <dl class="clearfix">
                 <dt>商品名：</dt>
-                <dd><input type="text" name="product.productName" style="margin-left:60px;height:25px;line-height:25px" /></dd>
+                <dd><input type="text" id="pt" name="product.productName" style="margin-left:60px;height:25px;line-height:25px" /></dd>
                 <dt>商品类别：</dt>
                 <dd>
                     <select name="product.categoryId" id="category" style="margin-left:60px; margin-top:10px;width:150px; height:29px;line-height:25px">
@@ -298,16 +298,16 @@ z-index:102;
                     </select>
                 </dd>
                 <dt>生产日期：</dt>
-                <dd><input type="date" name="product.productionTime" id="price" style="margin-left:15px;height:25px;line-height:25px" /></dd>
+                <dd><input type="date" name="product.productionTime" id="ppt" style="margin-left:15px;height:25px;line-height:25px" /></dd>
                 <dt>保质期：</dt>
-                <dd><input type="text" name="product.keepTime" id="price" style="margin-left:15px;height:25px;line-height:25px" /></dd>
+                <dd><input type="text" name="product.keepTime" id="pkt" style="margin-left:15px;height:25px;line-height:25px" /></dd>
                 <dt>商品价格：</dt>
-                <dd><input type="text" name="product.price" id="price" style="margin-left:15px;height:25px;line-height:25px" /></dd>
+                <dd><input type="text" name="product.price" id="pp" style="margin-left:15px;height:25px;line-height:25px" /></dd>
                 <dt>数量：</dt>
-                <dd><input type="text" name="product.productCount" id="price" style="margin-left:15px;height:25px;line-height:25px" /></dd>
+                <dd><input type="text" name="product.productCount" id="ppc" style="margin-left:15px;height:25px;line-height:25px" /></dd>
                 <dt>选择图片：</dt>
                 <dd><input type="file" name="image" style="margin-left:60px;height:25px;line-height:25px" /></dd>
-                <dt><input type="submit" value="确定添加" /></dt>
+                <dt><input type="button" onclick="AddProduct()" value="确定添加" /></dt>
                 @*<dt></dt>
                 <dd><span><a href="javascript:void(0);" class="hint-in3" onclick="addDeliveryStation()" style="margin:0;margin-left:15px;margin-top:30px;">保存收货地址</a></span></dd>*@
             </dl>

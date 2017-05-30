@@ -47,6 +47,7 @@ namespace AirShopp.UI.Controllers
             var hotProducts = (from P in _readFromDb.Products
                               join PS in _readFromDb.ProductSales on P.Id equals PS.ProductId
                               join D in _readFromDb.Discounts on P.Id equals D.ProductId
+                              where P.IsOnSale == true
                               select new ProductDataModel
                               {
                                   ProductId = P.Id,
@@ -84,6 +85,7 @@ namespace AirShopp.UI.Controllers
             var hotProducts = (from P in _readFromDb.Products
                                join PS in _readFromDb.ProductSales on P.Id equals PS.ProductId
                                join D in _readFromDb.Discounts on P.Id equals D.ProductId
+                               where P.IsOnSale == true
                                select new ProductDataModel
                                {
                                    ProductId = P.Id,
@@ -108,7 +110,7 @@ namespace AirShopp.UI.Controllers
         {
             var products = (from P in _readFromDb.Products
                             join D in _readFromDb.Discounts on P.Id equals D.ProductId
-                            where P.Url != "待定项" && D.Discounts < 10 && D.EndTime > DateTime.Now 
+                            where P.IsOnSale == true && P.Url != "待定项" && D.Discounts < 10 && D.EndTime > DateTime.Now 
                             select new ProductDataModel
                             {
                                 ProductId = P.Id,

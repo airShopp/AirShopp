@@ -365,8 +365,8 @@ namespace AirShopp.UI.Controllers
             }
             catch (Exception)
             {
-
-                throw;
+                return Content("<scirpt>window.alert('删除失败')</script>");
+                //throw;
             }
             
         }
