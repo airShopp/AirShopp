@@ -17,7 +17,7 @@ namespace AirShopp.DataAccess
 
         public List<Address> GetAddresses(long customerId)
         {
-            return _context.Address.Where(x => x.CustomerId == customerId).ToList();
+            return _context.Address.Where(x => x.CustomerId == customerId).OrderByDescending(x => x.Id).ToList();
         }
         
         public Address GetAddress(long addressId)

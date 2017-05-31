@@ -176,7 +176,7 @@
                                                     {
                                                         var orderItems = @Model.AllStatusViewModel.AllOrder[i].OrderItems.ToList();
                                                         AirShopp.Domain.OrderItem orderItem = orderItems[k] as AirShopp.Domain.OrderItem;
-                                                        <p><a href="/Comment/Index">查看评价</a></p> <p><a href="/Product/getProduct?productId=@Model.AllStatusViewModel.AllOrder[i]" class="member-touch">再次购买</a> </p>
+                                                        <p><a href="/Comment/Index">查看评价</a></p> <p><a href="/Product/getProduct?productId=@orderItem.ProductId" class="member-touch">再次购买</a> </p>
                                                     }
                                                 }
                                                 else
@@ -185,7 +185,7 @@
                                                     {
                                                         var orderItems = @Model.AllStatusViewModel.AllOrder[i].OrderItems.ToList();
                                                         AirShopp.Domain.OrderItem orderItem = orderItems[k] as AirShopp.Domain.OrderItem;
-                                                    <p><a href="/Comment/Index?orderId=@Model.AllStatusViewModel.AllOrder[i].Id">评价</a></p> <p><a href="/Product/getProduct?productId=@Model.AllStatusViewModel.AllOrder[i]" class="member-touch">再次购买</a> </p>
+                                                    <p><a href="/Comment/Index?orderId=@Model.AllStatusViewModel.AllOrder[i].Id">评价</a></p> <p><a href="/Product/getProduct?productId=@orderItem.ProductId" class="member-touch">再次购买</a> </p>
                                                     }
                                                 }
                                             </div>

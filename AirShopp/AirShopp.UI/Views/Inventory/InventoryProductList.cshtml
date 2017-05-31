@@ -268,7 +268,7 @@ z-index:102;
         {
             <dl class="clearfix">
                 <dt>商品名：</dt>
-                <dd><input type="text" id="pt" name="product.productName" style="margin-left:60px;height:25px;line-height:25px" /></dd>
+                <dd><input type="text" id="pt" name="product.productName" style="margin-left:60px;height:25px;line-height:25px" placeholder="商品名" /></dd>
                 <dt>商品类别：</dt>
                 <dd>
                     <select name="product.categoryId" id="category" style="margin-left:60px; margin-top:10px;width:150px; height:29px;line-height:25px">
@@ -300,11 +300,11 @@ z-index:102;
                 <dt>生产日期：</dt>
                 <dd><input type="date" name="product.productionTime" id="ppt" style="margin-left:15px;height:25px;line-height:25px" /></dd>
                 <dt>保质期：</dt>
-                <dd><input type="text" name="product.keepTime" id="pkt" style="margin-left:15px;height:25px;line-height:25px" /></dd>
+                <dd><input type="text" name="product.keepTime" id="pkt" style="margin-left:15px;height:25px;line-height:25px" placeholder="保质期（年）" /></dd>
                 <dt>商品价格：</dt>
-                <dd><input type="text" name="product.price" id="pp" style="margin-left:15px;height:25px;line-height:25px" /></dd>
+                <dd><input type="text" name="product.price" id="pp" style="margin-left:15px;height:25px;line-height:25px" placeholder="商品价格（元）" /></dd>
                 <dt>数量：</dt>
-                <dd><input type="text" name="product.productCount" id="ppc" style="margin-left:15px;height:25px;line-height:25px" /></dd>
+                <dd><input type="text" name="product.productCount" id="ppc" style="margin-left:15px;height:25px;line-height:25px" placeholder="商品数量" /></dd>
                 <dt>选择图片：</dt>
                 <dd><input type="file" name="image" style="margin-left:60px;height:25px;line-height:25px" /></dd>
                 <dt><input type="button" onclick="AddProduct()" value="确定添加" /></dt>
@@ -320,7 +320,7 @@ z-index:102;
         @*<div class="member-backs member-icons fr"><a href="javascript:void(0)">搜索</a></div>
         <div class="member-about fr"><input type="text" placeholder="出库单编号"></div>*@
     </div>
-    <span class="btn1">添加新商品</span>
+    <span class="btn1" style="cursor:pointer;font-weight:bold;border:solid 1px rgba(0,0,0,0.3);padding:2px;">添加入库商品</span>
     <div class="member-border">
         <div class="member-return H-over">
             <div class="member-cancel clearfix">
