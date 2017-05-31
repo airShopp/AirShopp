@@ -470,10 +470,13 @@
                                         </div>
                                     }
                                 </div>
-                                <div class="ci2 amanda1"><div>@Model.PendingReceivedStatusViewModel.PendingReceivedOrder[i].Customer.CustomerName</div></div>
-                                <div class="ci3 amanda1"><div><b>￥@Model.PendingReceivedStatusViewModel.PendingReceivedOrder[i].TotalAmount.ToString()</b></div></div>
-                                <div class="ci4 amanda1"><div><p>@Model.PendingReceivedStatusViewModel.PendingReceivedOrder[i].OrderDate.ToShortDateString()</p></div></div>
-                                <div class="ci5 amanda1"><div><p>物流运输中</p> <p><a href="/Order/OrderDetail?orderId=@Model.PendingDeliveryStatusViewModel.PendingDeliveryOrder[i].Id">订单详情</a></p><p><a href="@Url.Action("Index", "BMapRoutePlanning", new { orderId = @Model.PendingDeliveryStatusViewModel.PendingDeliveryOrder[i].Id })">查看物流</a></p></div></div>
+                                @*@if (i < Model.PendingReceivedStatusViewModel.PendingReceivedOrder.Count())
+                                {*@
+                                    <div class="ci2 amanda1"><div> @Model.PendingReceivedStatusViewModel.PendingReceivedOrder[i].Customer.CustomerName </div></div>
+                                    <div class="ci3 amanda1"><div><b> ￥@Model.PendingReceivedStatusViewModel.PendingReceivedOrder[i].TotalAmount </b></div></div>
+                                    <div class="ci4 amanda1"><div><p> @Model.PendingReceivedStatusViewModel.PendingReceivedOrder[i].OrderDate </p></div></div>
+                                    <div class="ci5 amanda1"><div><p>物流运输中</p> </div></div>
+                                @*}*@
                                 <div class="ci6 amanda1">
                                     <div>
                                     @for (int k = 0; k < @Model.PendingReceivedStatusViewModel.PendingReceivedOrder[i].OrderItems.Count(); k++)

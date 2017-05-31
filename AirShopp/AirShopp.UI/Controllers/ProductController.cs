@@ -110,7 +110,7 @@ namespace AirShopp.UI.Controllers
                                });
             if (categoryId != null)
             {
-                productList = productList.Where(c => (c.CategoryId == categoryId) || (c.ParentId == categoryId));
+                productList = productList.Where(c => (c.CategoryId == categoryId || c.ParentId == categoryId));
             }
             if (!string.IsNullOrEmpty(queryStr))
             {

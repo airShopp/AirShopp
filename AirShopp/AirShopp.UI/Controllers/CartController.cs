@@ -86,14 +86,15 @@ namespace AirShopp.UI.Controllers
                                    join c in _readFromDb.Carts on ci.CartId equals c.Id
                                    join ct in _readFromDb.Customers on c.CustomerId equals ct.Id
                                    join p in _readFromDb.Products on ci.ProductId equals p.Id
-                                   where ct.Id == customer.Id
+                                   join d in _readFromDb.Discounts on p.Id equals d.ProductId
+                                   where ct.Id == customer.Id && ci.ItemStatus == Constants.PENDING
                                    select new ShopCartDataModel()
                                    {
                                        Id = ci.Id,
                                        ProductId = p.Id,
                                        ProductName = p.ProductName,
                                        PictureUrl = p.Url,
-                                       Price = p.Price,
+                                       Price = p.Price * (d.Discounts/10),
                                        ProductAmount = ci.Quantity,
                                        ProductCredit = (int)Math.Floor(p.Price / 10),
                                        TotalPrice = (int)(p.Price * ci.Quantity)

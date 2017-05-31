@@ -35,7 +35,7 @@
                             保障：<img src="~/Content/img/cart/taobao_icon_01.jpg" alt="icon" />
                         </td>
                         <td class="cart_td_4">@cartProduct.ProductCredit</td>
-                        <td class="cart_td_5">@cartProduct.Price</td>
+                        <td class="cart_td_5">@Math.Round(cartProduct.Price, 2).ToString()</td>
                         <td class="cart_td_6"><img src="~/Content/img/cart/taobao_minus.jpg" alt="minus" onclick="changeNum('num_@i','minus')" class="hand" /> <input id="num_@i" type="text" value="@cartProduct.ProductAmount" class="num_input" readonly="readonly" /> <img src="~/Content/img/cart/taobao_adding.jpg" alt="add" onclick="changeNum('num_@i','add')" class="hand" /></td>
                         <td class="cart_td_7"></td>
                         <td class="cart_td_8"><a href="javascript:deleteRow('@cartProduct.Id');">删除</a></td>

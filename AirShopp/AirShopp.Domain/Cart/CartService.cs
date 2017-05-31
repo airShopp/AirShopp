@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirShopp.Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace AirShopp.Domain
             {
                 cartProductAmount = (from cartItem in _readFromDb.CartItems
                                      join cart in _readFromDb.Carts on cartItem.CartId equals cart.Id
-                                     where cart.CustomerId == customerId
+                                     where cart.CustomerId == customerId && cartItem.ItemStatus == Constants.PENDING
                                      select cartItem.Id
                          ).Count();
             }

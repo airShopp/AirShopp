@@ -11,7 +11,7 @@
             '<dt>选择图片：</dt>'+
             '<dd><input type="file" name="image" style="margin-left:65px;height:25px;line-height:25px" /></dd>'+
             '<dt>折扣：</dt>'+
-            '<dd><input id="discounts" type="text" name="discounts" style="margin-right:12px;height:25px;line-height:25px" />折</dd>'+
+            '<dd><input name="product.discounts" id="discounts" type="text" style="margin-right:12px;height:25px;line-height:25px" />折</dd>' +
             '<dt>是否上架：</dt>'+
             '<dd><select name="product.isOnsale" id="IsOnSale" style="margin-left:65px;margin-top:10px; height:25px;line-height:25px"></select></dd>'+
             '<dt><input type="button" value="提交修改" onclick="updateProduct()" style="width:60px;height:25px;margin-left:275px;" /></dt>');

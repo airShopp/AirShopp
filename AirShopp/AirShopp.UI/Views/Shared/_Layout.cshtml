@@ -15,45 +15,36 @@
         <div class="BHeader">
             <div class="yNavIndex">
                 <ul class="BHeaderl">
-                    <li style="display:none;"><a href="#" style="float:left;">嘻哈杂货铺</a> <a href="#" style="float:left;">退出</a> </li>
-                    @if (Session["customer"] != null)
+                    @if (Session["CUSTOMER"] != null)
                     {
-                        var user = Session["customer"] as AirShopp.Domain.Customer;
-                        <li>@Html.ActionLink(user.CustomerName, "GetUser", "User", null, new { style = "color:#ea4949" })</li>
+                        var user = Session["CUSTOMER"] as AirShopp.Domain.Customer;
+                        <li>@Html.ActionLink(user.CustomerName, "UserInfo", "User")</li>
+                        <li>@Html.ActionLink("退出", "Logout", "User")</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("请登录", "Login", "User", null, new { style = "color:#ea4949" })</li>
+                        <li>@Html.ActionLink("您好，请登录", "Login", "User", null, new { style = "color:#ea4949" })</li>
+                        <li class="headerul">|</li>
+                        <li>@Html.ActionLink("免费注册", "Register", "User")</li>
                     }
                     <li class="headerul">|</li>
-                    <li><a href="register.html">免费注册</a> </li>
-                    <li class="headerul">|</li>
-                    <li>@Html.ActionLink("订单查询", "Index", "Order", null)</li>
-                    <li class="headerul">|</li>
-                    <li><a href="my-s.html">我的收藏</a> </li>
+                    <li>
+                        @Html.ActionLink("订单查询", "Index", "Order")
                     <li class="headerul">|</li>
                     <li id="pc-nav" class="menu">
                         <a href="my-user.html" class="tit">我的商城</a>
                         <div class="subnav">
-                            @Html.ActionLink("我的订单", "Index", "Order")
-                            <a href="my-s.html">我的收藏</a>
+                            @Html.ActionLink("订单查询", "Index", "Order")
                             <a href="my-user.html">账户安全</a>
                             @Html.ActionLink("地址管理", "GetAddress", "Address")
                             <a href="my-p.html">我要评价</a>
-                        </div>
-                    </li>
-                    <li class="headerul">|</li>
-                    <li id="pc-nav1" class="menu">
-                        <a href="#" class="tit M-iphone">手机悦商城</a>
-                        <div class="subnav">
-                            <a href="#"><img src="~/Content/icon/ewm.png" width="115" height="115" title="扫一扫，有惊喜！"></a>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="container clearfix">
-            <div class="header-logo fl"><h1><a href="首页.html"><img src="~/Content/icon/AirShoppLogo.png"></a> </h1></div>
+            <div class="header-logo fl"><h1><a href="@Url.Action("Index", "Home")"><img src="~/Content/icon/AirShoppLogo.png"></a> </h1></div>
             <div class="head-form fl">
                 @using (Html.BeginForm("GetProducts", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
@@ -61,7 +52,7 @@
                     <input type="submit" class="button" value="搜索" />
                 }
             </div>
-            <div class="header-cart fr"><a href="/Product/ShopCart"><img src="~/Content/icon/car.png"></a> <i class="head-amount">@Session["CARTPRODUCTCOUNT"]</i></div>
+            <div class="header-cart fr"><a href="/Cart/LoadCartList"><img src="~/Content/icon/car.png"></a> <i class="head-amount">@Session["CARTPRODUCTCOUNT"]</i></div>
             <div class="head-mountain"></div>
         </div>
         <div class="yHeader">

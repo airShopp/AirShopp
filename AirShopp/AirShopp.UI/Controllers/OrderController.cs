@@ -435,6 +435,7 @@ namespace AirShopp.UI.Controllers
             try
             {
                 _orderRepository.ToPayment(orderId);
+                return Content("<script>window.alert('支付成功');location.href='/Order/Index';</script>");
             }
             catch (Exception ex)
             {
